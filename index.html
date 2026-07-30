@@ -3469,12 +3469,14 @@
       }
     }
 
-    window.addEventListener('load', () => {
+    window.addEventListener('load', async () => {
       setTimeout(() => {
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
-      // ☁️ 初始化云端同步（后台拉取，不阻塞渲染，完成后自动重新渲染）
-      if (window.CloudSync) CloudSync.init();
+      // ☁️ 关键修复：先等待云端同步完成，再初始化页面
+      // 否则新设备上 localStorage 为空，页面用空数据渲染，
+      // 等云端数据到了再 _rerender 时内存状态未更新，导致同步失效
+      if (window.CloudSync) await CloudSync.init();
       // 重要顺序：先 roll 再 load 再 restore
       // 1. rollTasksToNewDay() 先读取 localStorage 中昨天的勾选状态（或滚未完成任务）
       // 2. loadData() 用飞书数据覆盖 tasks（done 都变成 false）

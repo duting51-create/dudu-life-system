@@ -398,7 +398,20 @@
     },
 
     // ── 重新渲染 UI ──
+    // ★ 关键修复：先同步内存状态，再渲染，否则 render 函数读到的仍是旧数据
     _rerender: function () {
+      // 同步 tasks 内存状态
+      try {
+        if (window.TASKS_DATA) {
+          var saved = localStorage.getItem('dudu_tasks');
+          if (saved) window.TASKS_DATA.tasks = JSON.parse(saved);
+        }
+      } catch (e) {}
+
+      // 同步 exercise 内存状态（checked_days 从 localStorage 读取）
+      // renderCalendar 内部会从 localStorage 读取 exercise_checked_*，
+      // 所以只要 localStorage 已更新，调用 renderCalendar 即可
+
       try {
         if (typeof renderInspirations === 'function') renderInspirations();
       } catch (e) {}
@@ -409,6 +422,11 @@
         if (typeof renderCalendar === 'function' && window.EXERCISE_DATA) {
           renderCalendar(window.EXERCISE_DATA);
         }
+      } catch (e) {}
+
+      // 同步待办进度条
+      try {
+        if (typeof updateTodoProgress === 'function') updateTodoProgress();
       } catch (e) {}
     }
   };

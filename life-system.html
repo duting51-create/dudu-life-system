@@ -3520,9 +3520,11 @@
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
       // 等待 Gist 数据加载完成后初始化
-      DATA_READY.then(() => {
-        // ☁️ 初始化云端同步（后台拉取，不阻塞渲染，完成后自动重新渲染）
-        if (window.CloudSync) CloudSync.init();
+      DATA_READY.then(async () => {
+        // ☁️ 关键修复：先等待云端同步完成，再初始化页面
+        // 否则新设备上 localStorage 为空，页面用空数据渲染，
+        // 等云端数据到了再 _rerender 时内存状态未更新，导致同步失效
+        if (window.CloudSync) await CloudSync.init();
         // 立即用 localStorage 缓存数据渲染（CloudSync 完成后会自动更新 UI）
         // 重要顺序：先 load 再 roll 再 restore
         // 1. loadData() 先设置 window.TASKS_DATA（从飞书加载）
