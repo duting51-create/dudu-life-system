@@ -15,6 +15,7 @@
     'dudu_raw_tasks',
     'dudu_jots',
     'dudu_inspire_done',
+    'dudu_inspire_done_meta',
     'dudu_deleted_feishu'
   ];
   var SYNC_PREFIXES = ['exercise_checked_'];
@@ -224,7 +225,47 @@
         }
 
         if (key === 'dudu_inspire_done') {
-          merged[key] = Object.assign({}, cloudValue || {}, localValue || {});
+          var cloudDone = cloudValue || {};
+          var localDone = localValue || {};
+          var cloudDoneMeta = cloud.dudu_inspire_done_meta || {};
+          var localDoneMeta = local.dudu_inspire_done_meta || {};
+          var doneIds = {};
+          Object.keys(cloudDone)
+            .concat(Object.keys(localDone))
+            .concat(Object.keys(cloudDoneMeta))
+            .concat(Object.keys(localDoneMeta))
+            .forEach(function (id) { doneIds[id] = true; });
+          merged[key] = {};
+          Object.keys(doneIds).forEach(function (id) {
+            var cloudTime = Number(cloudDoneMeta[id] || 0);
+            var localTime = Number(localDoneMeta[id] || 0);
+            if (localTime > cloudTime) {
+              merged[key][id] = localDone[id] === true;
+            } else if (cloudTime > localTime) {
+              merged[key][id] = cloudDone[id] === true;
+            } else if (localDone[id] !== undefined) {
+              merged[key][id] = localDone[id] === true;
+            } else {
+              merged[key][id] = cloudDone[id] === true;
+            }
+          });
+          return;
+        }
+
+        if (key === 'dudu_inspire_done_meta') {
+          var cloudMeta = cloudValue || {};
+          var localMeta = localValue || {};
+          var metaIds = {};
+          Object.keys(cloudMeta)
+            .concat(Object.keys(localMeta))
+            .forEach(function (id) { metaIds[id] = true; });
+          merged[key] = {};
+          Object.keys(metaIds).forEach(function (id) {
+            merged[key][id] = Math.max(
+              Number(cloudMeta[id] || 0),
+              Number(localMeta[id] || 0)
+            );
+          });
           return;
         }
 
@@ -379,6 +420,12 @@
         live.items = Array.isArray(live.items) ? live.items : [];
         if (payload.action === 'create' && data.item) {
           live.items.push(data.item);
+          var doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
+          var doneMeta = JSON.parse(localStorage.getItem('dudu_inspire_done_meta') || '{}');
+          doneMap[data.item.id] = false;
+          doneMeta[data.item.id] = Date.now();
+          localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
+          localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
         } else if (payload.action === 'delete') {
           live.items = live.items.filter(function (item) { return item.id !== payload.id; });
         } else if (payload.action === 'update') {

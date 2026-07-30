@@ -2457,7 +2457,7 @@
 
       container.innerHTML = '<div class="inspire-check-list">' +
         items.map(item => {
-          const isDone = doneMap[item.id] || false;
+          const isDone = doneMap[item.id] === true;
           const typeLabel = typeLabelMap[item.type] || '💭 情绪';
           return `<div class="inspire-check-item" data-id="${item.id}" data-type="${item.type}">
             <div class="inspire-check ${isDone ? 'done' : ''}" onclick="toggleInspireCheck('${item.id}')"></div>
@@ -2480,12 +2480,11 @@
 
     function toggleInspireCheck(id) {
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
-      if (doneMap[id]) {
-        delete doneMap[id];
-      } else {
-        doneMap[id] = true;
-      }
+      const doneMeta = JSON.parse(localStorage.getItem('dudu_inspire_done_meta') || '{}');
+      doneMap[id] = doneMap[id] !== true;
+      doneMeta[id] = Date.now();
       localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
+      localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
       renderInspirations();
     }
 
