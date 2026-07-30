@@ -5,8 +5,8 @@ const MAX_STATE_BYTES = 100 * 1024;
 
 const TYPE_CONFIG = {
   inspiration: { column: "D", index: 3, marker: "💡" },
-  harvest: { column: "E", index: 4, marker: "" },
-  task: { column: "F", index: 5, marker: "" },
+  task: { column: "E", index: 4, marker: "" },
+  harvest: { column: "F", index: 5, marker: "" },
   mood: { column: "G", index: 6, marker: "" },
 };
 
