@@ -1911,6 +1911,7 @@
         total_read_hours: totalData.total_read_hours ?? totalData.totalReadHours ?? null,
         total_read_books: totalData.total_read_books ?? totalData.totalReadBooks ?? null,
         total_finished_books: totalData.total_finished_books ?? totalData.totalFinishedBooks ?? null,
+        currently_reading: rawReading.currently_reading || rawReading.recent_books || [],
         medals: rawReading.medals || [],
         last_synced: rawReading.last_updated || ''
       };
