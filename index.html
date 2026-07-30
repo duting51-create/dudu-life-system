@@ -1831,6 +1831,7 @@
   </section>
 
   <script src="feishu_data/dashboard_data.js"></script>
+  <script src="cloud-sync.js"></script>
   <script>
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
@@ -3472,6 +3473,8 @@
       setTimeout(() => {
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
+      // ☁️ 初始化云端同步（后台拉取，不阻塞渲染，完成后自动重新渲染）
+      if (window.CloudSync) CloudSync.init();
       // 重要顺序：先 roll 再 load 再 restore
       // 1. rollTasksToNewDay() 先读取 localStorage 中昨天的勾选状态（或滚未完成任务）
       // 2. loadData() 用飞书数据覆盖 tasks（done 都变成 false）

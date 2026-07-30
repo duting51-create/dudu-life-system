@@ -1841,6 +1841,7 @@
         window.DASHBOARD_DATA = {};
       });
   </script>
+  <script src="cloud-sync.js"></script>
   <script>
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
@@ -3520,6 +3521,9 @@
       }, 150);
       // 等待 Gist 数据加载完成后初始化
       DATA_READY.then(() => {
+        // ☁️ 初始化云端同步（后台拉取，不阻塞渲染，完成后自动重新渲染）
+        if (window.CloudSync) CloudSync.init();
+        // 立即用 localStorage 缓存数据渲染（CloudSync 完成后会自动更新 UI）
         // 重要顺序：先 load 再 roll 再 restore
         // 1. loadData() 先设置 window.TASKS_DATA（从飞书加载）
         // 2. rollTasksToNewDay() 此时 TASKS_DATA 有值，正常恢复/滚动任务
