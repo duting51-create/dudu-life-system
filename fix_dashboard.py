@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 修改 feishu_sync.py - 在 main() 末尾添加 dashboard_data.js 更新逻辑
+自动找到正确的文件，自动处理各种结构
 """
 import os, shutil, sys
 
@@ -11,8 +12,9 @@ for root, dirs, files in os.walk(os.path.expanduser('~')):
         if f == 'feishu_sync.py':
             candidates.append(os.path.join(root, f))
 
+# 找最近修改的、包含 fetch_reading 的
 target = None
-for fp in candidates:
+for fp in sorted(candidates, key=os.path.getmtime, reverse=True):
     if os.path.exists(fp):
         try:
             c = open(fp).read()
@@ -29,14 +31,16 @@ if not target:
 print(f"✅ 找到: {target}")
 c = open(target).read()
 
-# 找 if __name__ == "__main__" 这行
-marker = 'if __name__ == "__main__":'
+# 尝试找 if __name__ 或 main() 结束位置
+marker = 'if __name__'
 idx = c.rfind(marker)
-if idx == -1:
-    print("❌ 没找到 if __name__ 标记")
-    sys.exit(1)
 
-print(f"   if __name__ 在第 {c[:idx].count(chr(10))+1} 行")
+if idx == -1:
+    # 没有 if __name__，找 main() 函数的结束
+    print("   没找到 if __name__，改为追加到文件末尾")
+    idx = len(c)
+else:
+    print(f"   找到 if __name__ 在第 {c[:idx].count(chr(10))+1} 行")
 
 insert_code = '''
     # ★ 同步阅读数据到 dashboard_data.js
