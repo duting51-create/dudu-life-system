@@ -37,5 +37,14 @@
     "last_updated": "2026-07-30T13:30:00.000Z",
     "version": 2,
     "heartbeat": true
-  }
+  },
+  "dudu_jots": [
+    {
+      "id": "test_1",
+      "text": "买山药粉",
+      "type": "task",
+      "ts": "2026-07-30T05:00:00.000Z"
+    }
+  ],
+  "dudu_last_tasks_date": "2026-07-30"
 }
