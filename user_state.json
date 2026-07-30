@@ -37,51 +37,35 @@
   "dudu_tasks": [
     {
       "text": "1.搞清楚GitHub的界面和使用方法",
-      "done": true,
-      "cancelled": false,
-      "priority": "low"
+      "done": true
     },
     {
       "text": "2.研究一下flova",
-      "done": false,
-      "cancelled": false,
-      "priority": "low"
+      "done": false
     },
     {
       "text": "3.安装workbuddy的教程，把ima 知识库打通做小程序",
-      "done": false,
-      "cancelled": false,
-      "priority": "low"
+      "done": false
     },
     {
       "text": "4.润色&定稿：6篇小红书笔记",
-      "done": false,
-      "cancelled": false,
-      "priority": "low"
+      "done": false
     },
     {
       "text": "5.下载小红书数据，让 AI分析数据做下一步运营方向",
-      "done": false,
-      "cancelled": false,
-      "priority": "low"
+      "done": false
     },
     {
       "text": "6.参考胡楚靓的个人工作台做法，做孕期工作台，做完分享在账号上看看反馈",
-      "done": false,
-      "cancelled": false,
-      "priority": "low"
+      "done": false
     },
     {
       "text": "7.把已经装的skills整理到文档做备份",
-      "done": false,
-      "cancelled": false,
-      "priority": "mid"
+      "done": false
     },
     {
       "text": "8.继续完善人生系统工作台",
-      "done": false,
-      "cancelled": false,
-      "priority": "low"
+      "done": false
     }
   ],
   "dudu_jots": [
@@ -113,7 +97,7 @@
     "local_1785393537337_0": true
   },
   "_meta": {
-    "last_updated": "2026-07-30T06:41:06.468Z",
+    "last_updated": "2026-07-30T06:47:09.182Z",
     "version": 2
   }
 }
