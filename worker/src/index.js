@@ -200,6 +200,50 @@ function findTodayRow(rows) {
   throw new Error("飞书 Sheet 中没有找到今天的日期行");
 }
 
+function shanghaiDateKey(date) {
+  return `${date.year}-${String(date.month).padStart(2, "0")}-${String(date.day).padStart(2, "0")}`;
+}
+
+function dateCellKey(value, today) {
+  if (typeof value === "number") {
+    const date = new Date(Date.UTC(1899, 11, 30 + Math.trunc(value)));
+    return date.toISOString().slice(0, 10);
+  }
+
+  const text = cellText(value);
+  let match = text.match(/(\d{4})[-/年](\d{1,2})[-/月](\d{1,2})日?/);
+  let year;
+  let month;
+  let day;
+  if (match) {
+    year = Number(match[1]);
+    month = Number(match[2]);
+    day = Number(match[3]);
+  } else {
+    match = text.match(/(\d{1,2})月(\d{1,2})日|(\d{1,2})\/(\d{1,2})/);
+    if (!match) return "";
+    year = today.year;
+    month = Number(match[1] || match[3]);
+    day = Number(match[2] || match[4]);
+    const tentative = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    if (tentative > shanghaiDateKey(today)) year -= 1;
+  }
+  return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+function findPreviousRow(rows, today) {
+  const todayKey = shanghaiDateKey(today);
+  let previous = null;
+  for (let index = 0; index < rows.length; index += 1) {
+    const key = dateCellKey(rows[index]?.[0], today);
+    if (!key || key >= todayKey) continue;
+    if (!previous || key > previous.dateKey) {
+      previous = { rowNumber: index + 1, row: rows[index], dateKey: key };
+    }
+  }
+  return previous;
+}
+
 function parseLines(value) {
   return cellText(value)
     .split("\n")
@@ -227,7 +271,7 @@ function storedText(type, value) {
   return type === "inspiration" ? `💡 ${clean}` : clean;
 }
 
-function listItems(rowNumber, row) {
+function listItems(rowNumber, row, date = shanghaiToday()) {
   const items = [];
   for (const [type, config] of Object.entries(TYPE_CONFIG)) {
     const lines = parseLines(row[config.index]);
@@ -235,7 +279,7 @@ function listItems(rowNumber, row) {
       if (type === "inspiration" && !line.startsWith(config.marker)) return;
       items.push({
         id: `live_${rowNumber}_${config.column}_${sourceIndex}`,
-        date: `${shanghaiToday().month}月${shanghaiToday().day}日`,
+        date: `${date.month}月${date.day}日`,
         type,
         text: displayText(type, line),
         sourceIndex,
@@ -245,14 +289,71 @@ function listItems(rowNumber, row) {
   return items;
 }
 
+async function rollInspirationsToToday(env, token, rows, current) {
+  const markerKey = `dudu-inspiration-rollover:${shanghaiDateKey(current.today)}`;
+  let marker = await env.DUDU_STATE.get(markerKey, "json");
+  if (marker?.complete) return { changed: false, count: marker.count || 0 };
+
+  const previous = findPreviousRow(rows, current.today);
+  if (!previous) {
+    await env.DUDU_STATE.put(markerKey, JSON.stringify({ complete: true, count: 0 }));
+    return { changed: false, count: 0 };
+  }
+
+  const state = await env.DUDU_STATE.get(STATE_KEY, "json") || {};
+  const doneMap = state.dudu_inspire_done || {};
+  marker = marker || { sourceRow: previous.rowNumber, completedColumns: [], count: 0 };
+  const completedColumns = new Set(marker.completedColumns || []);
+  let changed = false;
+
+  for (const [type, config] of Object.entries(TYPE_CONFIG)) {
+    if (completedColumns.has(config.column)) continue;
+    const previousLines = parseLines(previous.row[config.index]);
+    const carryLines = [];
+    previousLines.forEach((line, sourceIndex) => {
+      if (type === "inspiration" && !line.startsWith(config.marker)) return;
+      const id = `live_${previous.rowNumber}_${config.column}_${sourceIndex}`;
+      if (doneMap[id] !== true) carryLines.push(line);
+    });
+
+    if (carryLines.length) {
+      const todayLines = parseLines(current.row[config.index]);
+      await updateCell(
+        env,
+        token,
+        config.column,
+        current.rowNumber,
+        serializeLines(todayLines.concat(carryLines)),
+      );
+      current.row[config.index] = serializeLines(todayLines.concat(carryLines));
+      marker.count += carryLines.length;
+      changed = true;
+    }
+
+    completedColumns.add(config.column);
+    marker.completedColumns = Array.from(completedColumns);
+    await env.DUDU_STATE.put(markerKey, JSON.stringify(marker));
+  }
+
+  marker.complete = true;
+  await env.DUDU_STATE.put(markerKey, JSON.stringify(marker));
+  return { changed, count: marker.count };
+}
+
 async function readTodayInspirations(env) {
   const token = await getTenantToken(env);
-  const rows = await readSheet(env, token);
-  const { rowNumber, row, today } = findTodayRow(rows);
+  let rows = await readSheet(env, token);
+  let current = findTodayRow(rows);
+  const rollover = await rollInspirationsToToday(env, token, rows, current);
+  if (rollover.changed) {
+    rows = await readSheet(env, token);
+    current = findTodayRow(rows);
+  }
   return {
-    date: `${today.month}月${today.day}日`,
-    row: rowNumber,
-    items: listItems(rowNumber, row),
+    date: `${current.today.month}月${current.today.day}日`,
+    row: current.rowNumber,
+    rolled: rollover.count,
+    items: listItems(current.rowNumber, current.row, current.today),
   };
 }
 

@@ -105,6 +105,15 @@
     return SYNC_PREFIXES.some(function (prefix) { return key.indexOf(prefix) === 0; });
   }
 
+  function canonicalExerciseDate(value, monthKey) {
+    var text = String(value || '');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+    if (/^\d{1,2}$/.test(text)) {
+      return monthKey + '-' + text.padStart(2, '0');
+    }
+    return '';
+  }
+
   var CloudSync = {
     _loading: false,
     _batchWrite: false,
@@ -203,12 +212,64 @@
         var cloudValue = cloud[key];
         var localValue = local[key];
 
+        if (key.indexOf('exercise_checked_meta_') === 0) {
+          var cloudExerciseMeta = cloudValue || {};
+          var localExerciseMeta = localValue || {};
+          var exerciseMetaDates = {};
+          Object.keys(cloudExerciseMeta)
+            .concat(Object.keys(localExerciseMeta))
+            .forEach(function (date) { exerciseMetaDates[date] = true; });
+          merged[key] = {};
+          Object.keys(exerciseMetaDates).forEach(function (date) {
+            var cloudEntry = cloudExerciseMeta[date];
+            var localEntry = localExerciseMeta[date];
+            var cloudTime = Number(cloudEntry && cloudEntry.updatedAt || 0);
+            var localTime = Number(localEntry && localEntry.updatedAt || 0);
+            merged[key][date] = localTime >= cloudTime && localEntry
+              ? localEntry
+              : cloudEntry;
+          });
+          return;
+        }
+
         if (key.indexOf('exercise_checked_') === 0) {
-          var days = {};
-          (Array.isArray(cloudValue) ? cloudValue : [])
-            .concat(Array.isArray(localValue) ? localValue : [])
-            .forEach(function (day) { days[day] = true; });
-          merged[key] = Object.keys(days);
+          var monthKey = key.replace('exercise_checked_', '');
+          var metaKey = 'exercise_checked_meta_' + monthKey;
+          var cloudMeta = cloud[metaKey] || {};
+          var localMeta = local[metaKey] || {};
+          var cloudChecked = {};
+          var localChecked = {};
+          var exerciseDates = {};
+
+          (Array.isArray(cloudValue) ? cloudValue : []).forEach(function (value) {
+            var date = canonicalExerciseDate(value, monthKey);
+            if (date) {
+              cloudChecked[date] = true;
+              exerciseDates[date] = true;
+            }
+          });
+          (Array.isArray(localValue) ? localValue : []).forEach(function (value) {
+            var date = canonicalExerciseDate(value, monthKey);
+            if (date) {
+              localChecked[date] = true;
+              exerciseDates[date] = true;
+            }
+          });
+          Object.keys(cloudMeta)
+            .concat(Object.keys(localMeta))
+            .forEach(function (date) { exerciseDates[date] = true; });
+
+          merged[key] = Object.keys(exerciseDates).filter(function (date) {
+            var cloudEntry = cloudMeta[date];
+            var localEntry = localMeta[date];
+            var cloudTime = Number(cloudEntry && cloudEntry.updatedAt || 0);
+            var localTime = Number(localEntry && localEntry.updatedAt || 0);
+            if (localTime > cloudTime) return localEntry.checked === true;
+            if (cloudTime > localTime) return cloudEntry.checked === true;
+            if (localEntry) return localEntry.checked === true;
+            if (cloudEntry) return cloudEntry.checked === true;
+            return cloudChecked[date] === true || localChecked[date] === true;
+          }).sort();
           return;
         }
 
@@ -311,7 +372,7 @@
         merged[key] = localValue !== undefined ? localValue : cloudValue;
       });
 
-      merged._meta = { last_updated: new Date().toISOString(), version: 4 };
+      merged._meta = { last_updated: new Date().toISOString(), version: 5 };
       return merged;
     },
 

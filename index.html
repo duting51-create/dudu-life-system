@@ -1837,7 +1837,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=20260730-3"></script>
+  <script src="cloud-sync.js?v=20260730-4"></script>
   <script src="feishu_data/dashboard_data.js?v=20260730-sync3"></script>
   <script>
     // ====== DATA LOADING ======
@@ -2034,7 +2034,7 @@
       const container = document.getElementById('memo-display-list');
       if (!container) return;
 
-      // 从 MEMOS_DATA 读取（飞书表格 E 列备忘提醒）
+      // 从 MEMOS_DATA 读取（飞书表格 D 列备忘提醒）
       const rawMemos = MEMOS_DATA?.items || [];
 
       // 每条备忘的 text 字段可能含有多行（用换行/序号分隔）
@@ -2045,17 +2045,16 @@
         const lines = item.text.split('\n');
         for (const line of lines) {
           let clean = line.trim();
-          if (!clean || clean.length < 4) continue;
+          if (!clean) continue;
           // 过滤飞书已划掉的内容：✅ 开头 / 含 ✅ / ~~删除~~ 格式
           if (clean.startsWith('✅')) continue;
           if (clean.includes('✅')) continue;
           if (clean.startsWith('~~') && clean.endsWith('~~')) continue;
-          if (/^[🌿📌📍🎯📌]/.test(clean)) continue;
+          clean = clean.replace(/^\d+[.、）)]\s*/, '');
           clean = clean.replace(/^[○◦▪●❖◆🔹🔸1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟]+\s*/, '');
           clean = clean.replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, '');
-          clean = clean.replace(/^\d+[.、）)]\s*/, '');
           clean = clean.trim();
-          if (!clean || clean.length < 5) continue;
+          if (!clean || clean.startsWith('🌿全部待做事项')) continue;
           memos.push({
             id: item.date + '_' + memos.length,
             text: clean
@@ -2492,6 +2491,7 @@
       doneMeta[id] = Date.now();
       localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
       localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
+      if (window.CloudSync) window.CloudSync.saveNow();
       renderInspirations();
     }
 
@@ -3155,6 +3155,7 @@
           const date = el.dataset.date;
           const day = el.dataset.day;
           const storageKey = 'exercise_checked_' + (EXERCISE_DATA.month_key || '2026-07');
+          const metaKey = 'exercise_checked_meta_' + (EXERCISE_DATA.month_key || '2026-07');
 
           // 从 localStorage 读取当前用户打卡记录（唯一权威）
           let userChecked = [];
@@ -3164,19 +3165,27 @@
           } catch(e) {}
           const checkedSet = new Set(userChecked);
 
-          // 切换打卡状态
-          el.classList.toggle('checked');
-          if (el.classList.contains('checked')) {
-            checkedSet.add(day); checkedSet.add(date);
+          const nextChecked = !(checkedSet.has(day) || checkedSet.has(date));
+          el.classList.toggle('checked', nextChecked);
+          if (nextChecked) {
+            checkedSet.add(date);
           } else {
             checkedSet.delete(day); checkedSet.delete(date);
           }
 
-          // 只更新 localStorage，不动 EXERCISE_DATA（让服务器数据与用户操作脱钩）
+          let operationMeta = {};
+          try {
+            operationMeta = JSON.parse(localStorage.getItem(metaKey) || '{}');
+          } catch(e) {}
+          operationMeta[date] = { checked: nextChecked, updatedAt: Date.now() };
+
+          // 记录每个日期的最后操作，取消打卡也会同步到其他设备。
           localStorage.setItem(storageKey, JSON.stringify([...checkedSet]));
+          localStorage.setItem(metaKey, JSON.stringify(operationMeta));
+          if (window.CloudSync) window.CloudSync.saveNow();
 
           // 更新 cell 显示
-          if (el.classList.contains('checked')) {
+          if (nextChecked) {
             el.innerHTML = '✓';
           } else {
             el.innerHTML = el.dataset.day;
@@ -3211,9 +3220,11 @@
       // Progress: checked days / total days so far
       const today = new Date();
       const todayDay = today.getDate();
+      const monthKey = data.month_key || '2026-07';
       let checkedCount = 0;
       for (let d = 1; d <= todayDay; d++) {
-        if (checkedSet.has(String(d))) checkedCount++;
+        const dateStr = `${monthKey}-${String(d).padStart(2, '0')}`;
+        if (checkedSet.has(String(d)) || checkedSet.has(dateStr)) checkedCount++;
       }
       const progressEl = document.getElementById('ex-cal-progress');
       if (progressEl) progressEl.textContent = `${checkedCount}/${todayDay}`;
@@ -3463,93 +3474,115 @@
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // ====== INIT ======
-    // ====== 每日任务滚动：未完成任务自动滚到第二天 ======
-    function rollTasksToNewDay() {
-      if (!window.TASKS_DATA) return;
-      const today = new Date().toISOString().slice(0, 10);
-      const lastDate = localStorage.getItem('dudu_last_tasks_date');
-      const saved = localStorage.getItem('dudu_tasks');
-
-      // 同一天：直接恢复 localStorage 状态
-      if (lastDate === today && saved) {
-        try {
-          window.TASKS_DATA.tasks = JSON.parse(saved);
-          renderTasks();
-        } catch(e) {}
-        return;
-      }
-
-      // 第二天：把昨天 done:false 的任务滚到今日
-      if (lastDate && lastDate !== today && saved) {
-        try {
-          const undone = JSON.parse(saved).filter(t => !t.done);
-          if (undone.length > 0) {
-            const combined = [...(window.TASKS_DATA.tasks || []), ...undone];
-            window.TASKS_DATA.tasks = combined;
-            localStorage.setItem('dudu_tasks', JSON.stringify(combined));
-            localStorage.setItem('dudu_last_tasks_date', today);
-            setTimeout(() => showToast(`📋 ${undone.length} 条未完成任务已滚动到今日`), 800);
-            renderTasks();
-            return;
-          }
-        } catch(e) {}
-      }
-
-      // 首次访问或无历史：直接用飞书数据，写入日期
-      localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.tasks || []));
-      localStorage.setItem('dudu_last_tasks_date', today);
-      renderTasks();
+    // ====== 每日任务滚动：保留未完成项，并补入当天飞书任务 ======
+    function localDateKey() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     }
 
-    // ====== 修复：loadData() 覆盖 TASKS_DATA 后，重新恢复勾选状态 ======
-    function restoreTaskDoneStates() {
-      const today = new Date().toISOString().slice(0, 10);
-      const lastDate = localStorage.getItem('dudu_last_tasks_date');
-      // 只在同一天才恢复（不同天直接用飞书的新数据）
-      if (lastDate !== today) return;
+    function cleanTaskText(text) {
+      return String(text || '').trim().replace(/^\d+[.、：:）)\-\s]+/, '').trim();
+    }
 
-      const saved = localStorage.getItem('dudu_tasks');
-      if (!saved || !window.TASKS_DATA?.tasks) return;
+    function taskTextKey(task) {
+      return cleanTaskText(task?.text).toLocaleLowerCase('zh-CN');
+    }
+
+    function prepareFeedTasks(tasks, today) {
+      return (Array.isArray(tasks) ? tasks : []).map((task, index) => ({
+        ...task,
+        text: cleanTaskText(task.text),
+        done: Boolean(task.done),
+        sourceId: task.sourceId || `feishu:${today}:${index}`
+      }));
+    }
+
+    function initializeTasksForToday(feedTasks) {
+      if (!window.TASKS_DATA) window.TASKS_DATA = { tasks: [] };
+      const today = localDateKey();
+      const todayLabel = `${new Date().getMonth() + 1}月${new Date().getDate()}日`;
+      const lastDate = localStorage.getItem('dudu_last_tasks_date');
+      const preparedFeed = prepareFeedTasks(feedTasks, today);
+      let savedTasks = [];
 
       try {
-        const savedTasks = JSON.parse(saved);
-        if (!Array.isArray(savedTasks)) return;
+        savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
+        if (!Array.isArray(savedTasks)) savedTasks = [];
+      } catch(e) {}
 
-        // 按索引 + 文本匹配来恢复 done 状态
-        window.TASKS_DATA.tasks.forEach((task, i) => {
-          if (savedTasks[i] && savedTasks[i].text === task.text) {
-            task.done = savedTasks[i].done;
+      let nextTasks = [];
+      let rolledCount = 0;
+
+      if (lastDate === today && savedTasks.length) {
+        const usedFeedIndexes = new Set();
+        nextTasks = savedTasks.map((task) => {
+          const normalized = { ...task, text: cleanTaskText(task.text), done: Boolean(task.done) };
+          if (normalized.sourceId) {
+            const sourceIndex = preparedFeed.findIndex(item => item.sourceId === normalized.sourceId);
+            if (sourceIndex >= 0) usedFeedIndexes.add(sourceIndex);
+            return normalized;
           }
+          const matchIndex = preparedFeed.findIndex((item, index) =>
+            !usedFeedIndexes.has(index) && taskTextKey(item) === taskTextKey(normalized)
+          );
+          if (matchIndex >= 0) {
+            usedFeedIndexes.add(matchIndex);
+            normalized.sourceId = preparedFeed[matchIndex].sourceId;
+          }
+          return normalized;
         });
-
-        // 写回 localStorage 保持同步
-        localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.tasks));
-        renderTasks();
-      } catch(e) {
-        console.warn('恢复勾选状态失败:', e);
+        preparedFeed.forEach((task, index) => {
+          if (!usedFeedIndexes.has(index)) nextTasks.push(task);
+        });
+      } else if (lastDate && lastDate < today && savedTasks.length) {
+        const todayTaskKeys = new Set(preparedFeed.map(taskTextKey));
+        const carried = savedTasks
+          .filter(task => !task.done && !task.cancelled)
+          .map(task => ({ ...task, text: cleanTaskText(task.text), done: false }))
+          .filter(task => !todayTaskKeys.has(taskTextKey(task)));
+        rolledCount = carried.length;
+        nextTasks = [...preparedFeed, ...carried];
+      } else {
+        nextTasks = preparedFeed;
       }
+
+      window.TASKS_DATA.tasks = nextTasks;
+      window.TASKS_DATA.date = todayLabel;
+      const previousJson = JSON.stringify(savedTasks);
+      const nextJson = JSON.stringify(nextTasks);
+      const shouldPersist = lastDate !== today || previousJson !== nextJson;
+
+      if (shouldPersist) {
+        localStorage.setItem('dudu_tasks', nextJson);
+        localStorage.setItem('dudu_last_tasks_date', today);
+        localStorage.setItem('dudu_tasks_updated_at', String(Date.now()));
+        if (window.CloudSync) window.CloudSync.saveNow();
+      }
+      if (rolledCount > 0) {
+        setTimeout(() => showToast(`📋 ${rolledCount} 条未完成任务已滚动到今日`), 800);
+      }
+      renderTasks();
     }
 
     window.addEventListener('load', async () => {
       setTimeout(() => {
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
-      // ☁️ 关键修复：先等待云端同步完成，再初始化页面
-      // 否则新设备上 localStorage 为空，页面用空数据渲染，
-      // 等云端数据到了再 _rerender 时内存状态未更新，导致同步失效
+      // 先保留当天飞书任务，再加载云端状态，最后执行跨天合并。
+      loadData();
+      const now = new Date();
+      const todayLabel = `${now.getMonth() + 1}月${now.getDate()}日`;
+      const feedDate = String(window.TASKS_DATA?.date || '');
+      const feedTasks = feedDate.includes(todayLabel)
+        ? JSON.parse(JSON.stringify(window.TASKS_DATA?.tasks || []))
+        : [];
       if (window.CloudSync) await CloudSync.init();
       if (window.FeishuSync) {
         await FeishuSync.refresh(false).catch(error => {
           console.warn('首次读取飞书失败:', error);
         });
       }
-      // 重要顺序：先 roll 再 load 再 restore
-      // 1. rollTasksToNewDay() 先读取 localStorage 中昨天的勾选状态（或滚未完成任务）
-      // 2. loadData() 用飞书数据覆盖 tasks（done 都变成 false）
-      // 3. restoreTaskDoneStates() 再把 localStorage 中的勾选状态合并回来 ← 关键修复
-      rollTasksToNewDay();
-      loadData();
-      restoreTaskDoneStates();
+      initializeTasksForToday(feedTasks);
       initExercise();
       const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');
       if (firstNav) firstNav.classList.add('active');
