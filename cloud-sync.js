@@ -128,14 +128,23 @@
           self.save();
         }
 
-        // 定时刷新（每30秒检查其他设备的更新）
-        setInterval(function () { self._refresh(); }, 30000);
+        // 定时刷新：每10秒检查其他设备的更新（缩短到10秒以加快双向同步）
+        setInterval(function () { self._refresh(); }, 10000);
 
         // 页面关闭前保存
         window.addEventListener('beforeunload', function () {
           if (self._saveTimer) {
             clearTimeout(self._saveTimer);
             self.save();
+          }
+        });
+
+        // ★ 关键修复：页面从后台切回前台时立即拉取云端更新
+        // 解决手机端 webview 切到后台再回来时不同步的问题
+        document.addEventListener('visibilitychange', function () {
+          if (!document.hidden && self._initialized) {
+            console.log('☁️ 页面回到前台，立即拉取云端');
+            self._refresh(true);
           }
         });
 
@@ -369,10 +378,11 @@
     },
 
     // ── 定时刷新：检查其他设备的更新 ──
-    _refresh: function () {
+    // force=true: 强制刷新（页面回到前台时调用），即使有待保存的变更也跑
+    _refresh: function (force) {
       var self = this;
-      // 有未保存的更改时跳过（避免冲突）
-      if (this._saveTimer) return;
+      // 有未保存的更改时跳过（避免冲突），除非强制刷新
+      if (this._saveTimer && !force) return;
 
       this._fetchCloud().then(function (cloudState) {
         if (!cloudState) return;

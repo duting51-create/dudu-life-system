@@ -2354,10 +2354,11 @@
         INSPIRATIONS_DATA.items.forEach((i, di) => {
           if (i.date && i.date.includes(todayStr)) {
             // harvest（今日收获）：放入灵感宝箱
+            // ★ 关键修复：ID 去掉 todayStr，跨天稳定，否则删除状态会失效
             if (i.harvest) {
               const harvestParts = splitNumberedText(i.harvest);
               harvestParts.forEach((t, hi) => {
-                const id = `feishu_h_${di}_${todayStr}_${hi}`;
+                const id = `feishu_h_${di}_${hi}`;
                 if (!deletedFeishuIds.includes(id)) {
                   items.push({ id, date: i.date, type: 'harvest', text: t });
                 }
@@ -2367,7 +2368,7 @@
             if (i.mood) {
               const moodParts = splitNumberedText(i.mood);
               moodParts.forEach((t, mi) => {
-                const id = `feishu_md_${di}_${todayStr}_${mi}`;
+                const id = `feishu_md_${di}_${mi}`;
                 if (!deletedFeishuIds.includes(id)) {
                   items.push({ id, date: i.date, type: 'mood', text: t });
                 }
@@ -2377,7 +2378,7 @@
             if (i.task) {
               const taskParts = splitNumberedText(i.task);
               taskParts.forEach((t, ti) => {
-                const id = `feishu_tk_${di}_${todayStr}_${ti}`;
+                const id = `feishu_tk_${di}_${ti}`;
                 if (!deletedFeishuIds.includes(id)) {
                   items.push({ id, date: i.date, type: 'task', text: t });
                 }
