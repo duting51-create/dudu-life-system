@@ -35,7 +35,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+    html { scroll-behavior: smooth; scroll-snap-type: y proximity; scroll-padding-top: 72px; }
 
     body {
       font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;
@@ -165,6 +165,7 @@
       min-height: 100vh;
       width: 100%;
       scroll-snap-align: start;
+      scroll-margin-top: 72px;
       scroll-snap-stop: always;
       display: flex;
       flex-direction: column;
@@ -1330,6 +1331,8 @@
       .card-grid-2 { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
+      html { scroll-snap-type: none; }
+      .full-section { scroll-margin-top: 88px; }
       .full-section { padding: 3.5rem 1.2rem 2rem; }
       .side-nav { display: none; }
       .hero-stats { gap: 1.5rem; }
@@ -1865,7 +1868,9 @@
     </div>
   </section>
 
-  <script src="feishu_data/data_latest.js"></script>
+  <script>
+    document.write('<script src="feishu_data/data_latest.js?v=' + Date.now() + '"><\\/script>');
+  </script>
   <script>
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
@@ -1894,16 +1899,18 @@
       window.INSPIRATIONS_DATA = DASHBOARD_DATA.inspirations || { items: [] };
       // 阅读挑战
       const rawReading = DASHBOARD_DATA.reading || {};
+      const weeklyData = rawReading.weekly_data || rawReading.week_data || rawReading;
+      const totalData = rawReading.total_data || rawReading.total_stats || rawReading;
       window.READING_DATA = {
         total_days: rawReading.challenge_days || rawReading.total_days || 0,
         target_days: rawReading.challenge_target || rawReading.target_days || 365,
         challenge_streak: rawReading.challenge_days || 0,
         rolling_day: rawReading.rolling_day || 0,
-        weekly_read_time: rawReading.weekly_read_time || null,
-        yesterday_read_time: rawReading.yesterday_read_time || null,
-        total_read_hours: rawReading.total_read_hours || null,
-        total_read_books: rawReading.total_read_books || null,
-        total_finished_books: rawReading.total_finished_books || null,
+        weekly_read_time: weeklyData.weekly_read_time ?? weeklyData.weeklyReadTime ?? null,
+        yesterday_read_time: weeklyData.yesterday_read_time ?? weeklyData.yesterdayReadTime ?? null,
+        total_read_hours: totalData.total_read_hours ?? totalData.totalReadHours ?? null,
+        total_read_books: totalData.total_read_books ?? totalData.totalReadBooks ?? null,
+        total_finished_books: totalData.total_finished_books ?? totalData.totalFinishedBooks ?? null,
         medals: rawReading.medals || [],
         last_synced: rawReading.last_updated || ''
       };
@@ -2945,7 +2952,11 @@
     document.querySelectorAll('.side-nav-item').forEach(btn => {
       btn.addEventListener('click', () => {
         const target = document.getElementById(btn.dataset.tab);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) {
+          const headerOffset = topHeader ? topHeader.offsetHeight + 12 : 0;
+          const targetTop = window.pageYOffset + target.getBoundingClientRect().top - headerOffset;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
         showSideNav();
         scheduleHide();
       });
