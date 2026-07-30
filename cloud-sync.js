@@ -75,6 +75,7 @@
     _initialized: false,    // 初始化完成
     _lastSaveContent: '',   // 上次保存的内容（避免重复提交）
     _queuedChanges: false,  // 初始化过程中是否有待保存的变更
+    _pendingDeletes: {},    // ★ 待删除记录 { key: [id1, id2, ...] }
 
     // ── 拦截器：立即设置，不等待 init ──
     // ★ 关键设计：脚本加载完毕立刻挂钩子。
@@ -248,13 +249,18 @@
           merged[key] = Object.keys(set);
 
         } else if (key === 'dudu_jots') {
-          // 灵感：按 ID 去重合并
+          // 灵感：按 ID 去重合并，并应用待删除列表
           var cj = Array.isArray(cv) ? cv : [];
           var lj = Array.isArray(lv) ? lv : [];
           var map = {};
           cj.concat(lj).forEach(function (j) {
             var id = j.id || ('local_' + j.ts);
             if (!map[id]) map[id] = j;
+          });
+          // ★ 应用待删除列表：这些 ID 已被用户删除，即使云端还有也要移除
+          var pending = self._pendingDeletes[key] || [];
+          pending.forEach(function (delId) {
+            delete map[delId];
           });
           merged[key] = Object.keys(map).map(function (k) { return map[k]; });
 
@@ -318,6 +324,23 @@
       }, 3000);
     },
 
+    // ★ 立即保存（跳过防抖，用于删除等需要即时同步的操作）
+    saveNow: function () {
+      if (this._saveTimer) {
+        clearTimeout(this._saveTimer);
+        this._saveTimer = null;
+      }
+      this.save();
+    },
+
+    // ★ 标记某条记录为待删除（save / _refresh 时会从合并结果中移除）
+    markDeleted: function (key, id) {
+      if (!this._pendingDeletes[key]) this._pendingDeletes[key] = [];
+      if (this._pendingDeletes[key].indexOf(id) === -1) {
+        this._pendingDeletes[key].push(id);
+      }
+    },
+
     // ── 保存到 GitHub ──
     save: function () {
       var self = this;
@@ -369,6 +392,9 @@
             self._loading = true;
             self._writeLocal(merged);
             self._loading = false;
+
+            // ★ 保存成功后清空待删除列表
+            self._pendingDeletes = {};
           }
         });
       }).catch(function (e) {

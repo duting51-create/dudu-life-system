@@ -671,6 +671,10 @@
     .inspire-right-card #inspirationContainer {
       flex: 1;
       overflow-y: auto;
+      min-height: 280px;
+      max-height: 50vh;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* 灵感宝箱 - 右侧复选框列表 */
@@ -2291,12 +2295,18 @@
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const filtered = jotData.filter(j => (j.id || `local_${j.ts}`) !== id);
         localStorage.setItem('dudu_jots', JSON.stringify(filtered));
+        // ★ 关键修复：标记为待删除并立即同步到云端，避免刷新后恢复
+        if (window.CloudSync) {
+          window.CloudSync.markDeleted('dudu_jots', id);
+          window.CloudSync.saveNow();
+        }
       } else if (id.startsWith('feishu_')) {
         // 用 localStorage 标记飞书条目为已删除，下次渲染时过滤掉
         const deleted = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
         if (!deleted.includes(id)) {
           deleted.push(id);
           localStorage.setItem('dudu_deleted_feishu', JSON.stringify(deleted));
+          if (window.CloudSync) window.CloudSync.saveNow();
         }
       }
       renderInspirations();
