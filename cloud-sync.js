@@ -57,13 +57,46 @@
     return btoa(unescape(encodeURIComponent(str)));
   }
 
+  // ── Toast 通知（如果页面有 showToast 就用，没有就 fallback）──
+  function syncToast(msg) {
+    try {
+      if (typeof window.showToast === 'function') {
+        window.showToast(msg);
+      }
+    } catch (e) {}
+  }
+
   // ── CloudSync 模块 ──
   var CloudSync = {
-    _loading: false,       // 正在从云端加载（禁止触发保存）
-    _saveTimer: null,      // 防抖定时器
-    _sha: null,            // GitHub 文件的 SHA（更新时需要）
-    _initialized: false,   // 初始化完成
-    _lastSaveContent: '',  // 上次保存的内容（避免重复提交）
+    _loading: false,        // 正在从云端加载（禁止触发保存）
+    _batchWrite: false,     // 内部批量写入（禁止触发保存）
+    _saveTimer: null,       // 防抖定时器
+    _sha: null,             // GitHub 文件的 SHA（更新时需要）
+    _initialized: false,    // 初始化完成
+    _lastSaveContent: '',   // 上次保存的内容（避免重复提交）
+    _queuedChanges: false,  // 初始化过程中是否有待保存的变更
+
+    // ── 拦截器：立即设置，不等待 init ──
+    // ★ 关键设计：脚本加载完毕立刻挂钩子。
+    //   无论用户何时调用 localStorage.setItem，都会被捕获。
+    //   - init 完成前：标记 _queuedChanges，init 完成后自动保存
+    //   - init 完成后：正常防抖保存
+    //   - _batchWrite 期间：忽略（CloudSync 内部批量写入不需要触发自身）
+    _interceptLocalStorage: function () {
+      var self = this;
+      var original = localStorage.setItem.bind(localStorage);
+      localStorage.setItem = function (key, value) {
+        original(key, value); // 实际写入
+        if (!shouldSync(key)) return;
+        if (self._batchWrite) return;  // 内部批量写入，忽略
+        if (self._initialized) {
+          if (!self._loading) self.scheduleSave();
+        } else {
+          // init 还没完成：用户有变更，打标记
+          self._queuedChanges = true;
+        }
+      };
+    },
 
     // ── 初始化：页面加载时调用，返回 Promise ──
     init: function () {
@@ -78,20 +111,20 @@
         var localState = self._readLocal();
         var merged = self._merge(cloudState || {}, localState);
 
-        // 写入 localStorage（不触发保存）
+        // 写入 localStorage（不触发保存，因为 _loading == true）
         self._writeLocal(merged);
 
         self._loading = false;
         self._initialized = true;
-        self._setupAutoSave();
 
         // 用云端数据重新渲染 UI
         self._rerender();
 
-        // 如果云端为空，立即上传本地数据
+        // 立即上传：如果云端为空，或者初始化过程中有用户变更
         var hasCloudData = cloudState && Object.keys(cloudState).filter(function (k) { return k.indexOf('_') !== 0; }).length > 0;
-        if (!hasCloudData) {
-          console.log('☁️ 云端为空，上传本地数据...');
+        if (!hasCloudData || self._queuedChanges) {
+          self._queuedChanges = false;
+          console.log('☁️ 上传本地数据...');
           self.save();
         }
 
@@ -111,13 +144,16 @@
         console.warn('☁️ Cloud sync init failed:', e);
         self._loading = false;
         self._initialized = true;
-        self._setupAutoSave();
+        // 即使 init 失败，也尝试上传 pending 的变更
+        if (self._queuedChanges) {
+          self._queuedChanges = false;
+          self.save();
+        }
       });
     },
 
     // ── 从 GitHub 读取云端状态 ──
     _fetchCloud: function () {
-      var self = this;
       var url = RAW_URL + '?v=' + Date.now();
       return fetch(url, { cache: 'no-cache' }).then(function (resp) {
         if (!resp.ok) return null;
@@ -131,11 +167,11 @@
       return fetch(API_URL, {
         headers: { Authorization: 'token ' + TOKEN }
       }).then(function (resp) {
-        if (!resp.ok) return;
+        if (!resp.ok) throw new Error('SHA fetch: ' + resp.status);
         return resp.json();
       }).then(function (data) {
-        if (data) self._sha = data.sha;
-      }).catch(function () {});
+        if (data && data.sha) self._sha = data.sha;
+      });
     },
 
     // ── 读取 localStorage 中所有需要同步的数据 ──
@@ -162,15 +198,16 @@
       return state;
     },
 
-    // ── 将状态写入 localStorage（不触发保存）──
+    // ── 将状态写入 localStorage（不触发自动保存）──
     _writeLocal: function (state) {
-      var self = this;
+      this._batchWrite = true;
       Object.keys(state).forEach(function (key) {
         if (key.indexOf('_') === 0) return;
         var val = state[key];
         var str = typeof val === 'string' ? val : JSON.stringify(val);
         localStorage.setItem(key, str);
       });
+      this._batchWrite = false;
     },
 
     // ── 合并云端和本地状态（防止数据丢失）──
@@ -255,18 +292,6 @@
       return merged;
     },
 
-    // ── 设置自动保存：监听 localStorage.setItem ──
-    _setupAutoSave: function () {
-      var self = this;
-      var original = localStorage.setItem.bind(localStorage);
-      localStorage.setItem = function (key, value) {
-        original(key, value);
-        if (!self._loading && self._initialized && shouldSync(key)) {
-          self.scheduleSave();
-        }
-      };
-    },
-
     // ── 防抖保存（3秒内只保存一次）──
     scheduleSave: function () {
       var self = this;
@@ -314,7 +339,7 @@
             return self._fetchSha();
           } else {
             return resp.json().then(function (d) {
-              throw new Error('GitHub API ' + resp.status + ': ' + (d.message || ''));
+              throw new Error(d.message || 'HTTP ' + resp.status);
             });
           }
         }).then(function (data) {
@@ -322,6 +347,7 @@
             self._sha = data.content.sha;
             self._lastSaveContent = mergedStr;
             console.log('☁️ Saved to cloud');
+            syncToast('☁️ 已同步到云端');
 
             // 同步本地（确保本地与云端一致）
             self._loading = true;
@@ -331,6 +357,7 @@
         });
       }).catch(function (e) {
         console.warn('☁️ Save failed:', e.message || e);
+        syncToast('⚠️ 云同步失败');
       });
     },
 
@@ -340,32 +367,26 @@
       // 有未保存的更改时跳过（避免冲突）
       if (this._saveTimer) return;
 
-      this._loading = true;
       this._fetchCloud().then(function (cloudState) {
-        if (!cloudState) {
-          self._loading = false;
-          return;
-        }
+        if (!cloudState) return;
         return self._fetchSha().then(function () {
           var localState = self._readLocal();
           var merged = self._merge(cloudState, localState);
 
-          // 检查是否有新数据
-          var localStr = JSON.stringify(localState);
+          // 对比：localState vs merged → 如果不同说明云端有新增数据
+          var localStr = JSON.stringify(self._stripMeta(localState));
           var mergedStr = JSON.stringify(self._stripMeta(merged));
-          var cloudStr = JSON.stringify(self._stripMeta(cloudState));
 
-          if (mergedStr !== localStr && mergedStr !== cloudStr) {
-            // 有新数据，更新本地
+          if (mergedStr !== localStr) {
+            // 有新数据，更新本地并重新渲染
+            self._loading = true;
             self._writeLocal(merged);
+            self._loading = false;
             self._rerender();
             console.log('☁️ Refreshed from cloud');
           }
-          self._loading = false;
         });
-      }).catch(function () {
-        self._loading = false;
-      });
+      }).catch(function () {});
     },
 
     _stripMeta: function (state) {
@@ -391,6 +412,15 @@
       } catch (e) {}
     }
   };
+
+  // ═══════════════════════════════════════════════
+  // ★ 关键修复：拦截器在脚本加载时立即设置 ★
+  // 不需要等 init() 完成，这样用户在任何时候的
+  // localStorage.setItem 操作都会被捕获。
+  // init() 完成前 _initialized==false，
+  // 变更会被标记为 _queuedChanges，init 完成后自动上传。
+  // ═══════════════════════════════════════════════
+  CloudSync._interceptLocalStorage();
 
   window.CloudSync = CloudSync;
 })();

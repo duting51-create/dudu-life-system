@@ -1,16 +1,24 @@
 {
   "items": [
     {
+      "date": "6月24日",
+      "harvest": "",
+      "task": "",
+      "mood": "test full range"
+    },
+    {
       "date": "7月27日",
-      "harvest": "让AI直接读取我的飞书选题表格，做好排期后，让它一键写笔记，不用我再一个个选题发给它们了",
+      "harvest": "",
+      "task": "让AI直接读取我的飞书选题表格，做好排期后，让它一键写笔记，不用我再一个个选题发给它们了",
       "mood": ""
     },
     {
       "date": "7月28日",
-      "harvest": "1.学会了借助skill优化网站\n2.发现了飞书字段有一个【字段捷径中心】，可以把现有字段转换为其他想要的字段形式，比如日期变成年月\n3.把做人生系统个人网站的经验封装成了life-dashboard-builder Skill",
+      "harvest": "",
+      "task": "1.学会了借助skill优化网站\n2.发现了飞书字段有一个【字段捷径中心】，可以把现有字段转换为其他想要的字段形式，比如日期变成年月\n3.把做人生系统个人网站的经验封装成了life-dashboard-builder Skill",
       "mood": ""
     }
   ],
-  "last_updated": "7月27日",
+  "last_updated": "6月24日",
   "today_updated": false
 }

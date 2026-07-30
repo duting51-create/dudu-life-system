@@ -56,131 +56,154 @@
       "hotness": "🎧"
     },
     {
-      "title": "🎙 【当个事儿】最新节目",
+      "title": "🎙 当个事儿 | 怎么无痛的出血，反而更要命啊？！｜有点小事60",
       "url": "https://www.xiaoyuzhoufm.com/podcast/60d2d172afc14743da181066",
       "source": "当个事儿",
       "category": "播客",
-      "hotness": "🎧"
+      "hotness": "🎧",
+      "time_ago": "昨天"
     },
     {
-      "title": "🎙 【嗨咻】最新节目",
+      "title": "🎙 嗨咻 | 100. 为什么越想表现自己，越容易在社交中露怯？",
       "url": "https://www.xiaoyuzhoufm.com/podcast/631812fe43274df80456d001",
       "source": "嗨咻",
       "category": "播客",
-      "hotness": "🎧"
+      "hotness": "🎧",
+      "time_ago": "今天"
     },
     {
-      "title": "🎙 【头回当妈】最新节目",
+      "title": "🎙 头回当妈 | 100. 特别节目｜头回当妈的101问 第一弹",
       "url": "https://www.xiaoyuzhoufm.com/podcast/6484fbe126fd9f4b4347ad04",
       "source": "头回当妈",
       "category": "播客",
-      "hotness": "🎧"
+      "hotness": "🎧",
+      "time_ago": "昨天"
     },
     {
-      "title": "🎙 【畅所育言】最新节目",
+      "title": "🎙 畅所育言 | 110把感激误认为爱情，把健身练成疲劳，把AI当成答案｜最近想分享的6期播客",
       "url": "https://www.xiaoyuzhoufm.com/podcast/64d25bd580c9ec4c5fbb0da4",
       "source": "畅所育言",
       "category": "播客",
-      "hotness": "🎧"
+      "hotness": "🎧",
+      "time_ago": "1周前"
     },
     {
-      "title": "🎙 【Alison Yu心理频道】最新节目",
+      "title": "🎙 Alison Yu心理 | ep90 | 边界：主体性的表达，真实关系的开始",
       "url": "https://www.xiaoyuzhoufm.com/podcast/67c8dd34d6c2a59e23f2d932",
-      "source": "Alison Yu心理频道",
+      "source": "Alison Yu心理",
       "category": "播客",
-      "hotness": "🎧"
+      "hotness": "🎧",
+      "time_ago": "1周前"
     }
   ],
   "ai_news": [
     {
-      "title": "华辰芯光完成超亿元融资，全栈技术能力突破高端激光芯片封锁",
-      "url": "https://36kr.com/p/3916108853521792?f=rss",
-      "published": "2026-07-29 13:38:46  +0800",
-      "source": "36氪",
-      "time_ago": "07-29"
-    },
-    {
-      "title": "在大模型的下一阶段议题上，我们找到了一家做持续学习的中国Neo Lab",
-      "url": "https://36kr.com/p/3916202023660929?f=rss",
-      "published": "2026-07-29 12:10:36  +0800",
-      "source": "36氪",
-      "time_ago": "07-29"
-    },
-    {
-      "title": "柔性触觉感知企业获新一轮融资，预计2026年公司营收翻10倍｜硬氪首发",
-      "url": "https://36kr.com/p/3915175290901889?f=rss",
-      "published": "2026-07-29 09:30:00  +0800",
-      "source": "36氪",
-      "time_ago": "07-29"
-    },
-    {
-      "title": "自研SNN类脑芯片、做医疗设备的“上游大脑”，「米能科技」获数千万元融资｜36氪首发",
-      "url": "https://36kr.com/p/3878652674715905?f=rss",
-      "published": "2026-07-29 08:15:00  +0800",
-      "source": "36氪",
-      "time_ago": "07-29"
-    },
-    {
-      "title": "8点1氪丨韩国考虑为“借钱炒股”封顶20%；雷军打新长鑫科技浮盈7亿？小米高管回应；月之暗面Kimi K3正式开源",
-      "url": "https://36kr.com/p/3915953688604296?f=rss",
-      "published": "2026-07-29 07:54:15  +0800",
-      "source": "36氪",
-      "time_ago": "07-29"
-    },
-    {
-      "title": "36氪研究院 | 2026年中国智能硬件行业发展研究报告",
-      "url": "https://36kr.com/p/3915066350327176?f=rss",
-      "published": "2026-07-29 07:30:00  +0800",
-      "source": "36氪",
-      "time_ago": "07-29"
-    },
-    {
-      "title": "科氪 | 定义AI睡眠健康新赛道 东莞数字人体与智慧睡眠创新联合体落地慕思",
-      "url": "https://36kr.com/p/3915239611739781?f=rss",
-      "published": "2026-07-28 19:48:20  +0800",
-      "source": "36氪",
-      "time_ago": "07-28"
-    },
-    {
-      "title": "氪星晚报｜Meta宣布与贝莱德达成战略合作，将在埃尔帕索开发数据中心；“国科超导”完成超亿元融资；我国启动人工智能大模型IPv6能力提升专项行动",
-      "url": "https://36kr.com/p/3913321294369924?f=rss",
-      "published": "2026-07-28 19:39:56  +0800",
-      "source": "36氪",
-      "time_ago": "07-28"
-    },
-    {
-      "title": "首个鸿蒙PC开源AI统一工作台JiuwenSwarm，办公编程一站式搞定",
-      "url": "https://www.qbitai.com/2026/07/462065.html",
-      "published": "Wed, 29 Jul 2026 03:29:59 +0000",
-      "source": "量子位",
+      "title": "OpenAI 总裁布罗克曼承认新版 ChatGPT 桌面应用&quot;有点乱&quot;，目标年底实现&quot;零标签&quot;",
+      "url": "https://aihot.virxact.com/items/cms6xky2402xgrouqgudkfgsg",
+      "published": "Thu, 30 Jul 2026 02:49:47 GMT",
+      "source": "IT之家（RSS）",
       "time_ago": "今天"
     },
     {
-      "title": "周鸿祎发布纳米Work：新一代企业智能体工作平台，为企业而生",
-      "url": "https://www.qbitai.com/2026/07/462062.html",
-      "published": "Wed, 29 Jul 2026 01:53:15 +0000",
-      "source": "量子位",
+      "title": "腾讯混元Hyra破解50年数学难题",
+      "url": "https://aihot.virxact.com/items/cms6xa31u02nlrouq0wkhylfp",
+      "published": "Thu, 30 Jul 2026 02:33:16 GMT",
+      "source": "X：腾讯混元 (@TencentHunyuan)",
+      "time_ago": "今天"
+    },
+    {
+      "title": "揭秘 AI 智能体入侵 Hugging Face 全过程：4 天半执行 17600 次操作",
+      "url": "https://aihot.virxact.com/items/cms6r5fog0btjrohz9heu2c6f",
+      "published": "Wed, 29 Jul 2026 23:29:34 GMT",
+      "source": "IT之家（RSS）",
+      "time_ago": "今天"
+    },
+    {
+      "title": "Replit Design 发布：AI 赋能设计愿景",
+      "url": "https://aihot.virxact.com/items/cms6kdopf05tbrohzoim2kpeg",
+      "published": "Wed, 29 Jul 2026 20:45:42 GMT",
+      "source": "X：Replit (@Replit)",
+      "time_ago": "今天"
+    },
+    {
+      "title": "Claude Opus 5 在模拟售货机任务中展现欺骗与背叛，创下新纪录",
+      "url": "https://aihot.virxact.com/items/cms6g4nn502errohzoxo9al2o",
+      "published": "Wed, 29 Jul 2026 18:45:27 GMT",
+      "source": "TechCrunch：AI（RSS）",
+      "time_ago": "今天"
+    },
+    {
+      "title": "Miles 在 Blackwell 架构上实现端到端 MXFP8 与逐 token NVFP4 强化学习方案",
+      "url": "https://aihot.virxact.com/items/cms6drkj8001crohzuxf7kfy7",
+      "published": "Wed, 29 Jul 2026 17:50:30 GMT",
+      "source": "LMSYS：Blog（Chatbot Arena 团队）",
+      "time_ago": "今天"
+    },
+    {
+      "title": "OpenAI 为学术研究者免费提供前沿模型",
+      "url": "https://aihot.virxact.com/items/cms6cw5ha02sgrotzfmlr8p11",
+      "published": "Wed, 29 Jul 2026 17:22:02 GMT",
+      "source": "X：Sherwin Wu（@sherwinwu）",
+      "time_ago": "今天"
+    },
+    {
+      "title": "Perplexity 开源智能体检测层 Numbat",
+      "url": "https://aihot.virxact.com/items/cms6czboh031krotzmczxbw2v",
+      "published": "Wed, 29 Jul 2026 17:01:42 GMT",
+      "source": "X：Perplexity (@perplexity_ai)",
+      "time_ago": "今天"
+    },
+    {
+      "title": "开源引擎可在任何 M 系列 Mac 上以 2 GB 内存运行 Gemma 4 26B",
+      "url": "https://aihot.virxact.com/items/cms6arrc700rbrotzo1wseql3",
+      "published": "Wed, 29 Jul 2026 16:09:22 GMT",
+      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
+      "time_ago": "今天"
+    },
+    {
+      "title": "Google DeepMind 在 Flow Music 中推出 Lyria 3.5，提升音乐性、歌词、人声与创作控制",
+      "url": "https://aihot.virxact.com/items/cms6arrcb00rerotztt8cp1mv",
+      "published": "Wed, 29 Jul 2026 16:02:10 GMT",
+      "source": "Google DeepMind：Blog（RSS）",
       "time_ago": "今天"
     }
   ],
   "one_company_news": [
     {
-      "title": "【亏钱指南】最新节目",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a",
+      "title": "上半年美股复盘：存储芯片半导体，K线虐我如蝼蚁",
+      "url": "https://www.ximalaya.com/sound/1003587637",
+      "published": "Wed, 29 Jul 2026 23:30:00 GMT",
+      "author": "",
       "source": "亏钱指南",
-      "time_ago": "📱 点击在小宇宙App收听"
+      "time_ago": "今天",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
     },
     {
-      "title": "【天真不天真】最新节目",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8",
+      "title": "00后摆脱搞钱羞耻：做明星应援扇月入过万，摆摊穿戴甲日入五百",
+      "url": "https://www.ximalaya.com/sound/1002371330",
+      "published": "Wed, 22 Jul 2026 23:30:00 GMT",
+      "author": "",
+      "source": "亏钱指南",
+      "time_ago": "1周前",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
+    },
+    {
+      "title": "vol.53 对谈易立竞：折腾vs独处 极致对照组的两种活法答案",
+      "url": "https://www.xiaoyuzhoufm.com/episode/6a66487e6356eb2d9be8ca46?utm_source=rss",
+      "published": "Mon, 27 Jul 2026 00:00:00 GMT",
+      "author": "",
       "source": "天真不天真",
-      "time_ago": "📱 点击在小宇宙App收听"
+      "time_ago": "3天前",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
     },
     {
-      "title": "【搞钱女孩】最新节目",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/6428b5b9f24d790001e1e5f5",
-      "source": "搞钱女孩",
-      "time_ago": "📱 点击在小宇宙App收听"
+      "title": "vol.52 对谈王安宇：十年可以让一个人发生多少变化",
+      "url": "https://www.xiaoyuzhoufm.com/episode/6a4a7af02e335a35a80e7c18?utm_source=rss",
+      "published": "Mon, 06 Jul 2026 00:00:00 GMT",
+      "author": "",
+      "source": "天真不天真",
+      "time_ago": "3周前",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
     },
     {
       "title": "【截胡不截财】最新节目",
@@ -189,11 +212,23 @@
       "time_ago": "📱 点击在小宇宙App收听"
     },
     {
-      "title": "【乱翻书】最新节目",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86",
+      "title": "269. 卷规模 VS 卷创作：真人短剧的两种生存模式",
+      "url": "https://www.xiaoyuzhoufm.com/episode/6a4f777d1e32575f5eb3cbc1?utm_source=rss",
+      "published": "Thu, 09 Jul 2026 10:32:06 GMT",
+      "author": "",
       "source": "乱翻书",
-      "time_ago": "📱 点击在小宇宙App收听"
+      "time_ago": "3周前",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
+    },
+    {
+      "title": "268.AI时代，个人工作台会重新回到手机吗？",
+      "url": "https://www.xiaoyuzhoufm.com/episode/6a3bdd319d2f5743683d4841?utm_source=rss",
+      "published": "Wed, 24 Jun 2026 13:49:54 GMT",
+      "author": "",
+      "source": "乱翻书",
+      "time_ago": "1月前",
+      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
     }
   ],
-  "last_updated": "2026-07-29"
+  "last_updated": "2026-07-30"
 }

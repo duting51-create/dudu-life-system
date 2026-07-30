@@ -1,26 +1,35 @@
 {
   "challenge_days": 1102,
   "challenge_target": 365,
-  "rolling_day": 143,
-  "total_days": 1102,
+  "rolling_day": 144,
+  "total_days": 1104,
   "weekly_read_time": 20,
   "yesterday_read_time": 4,
   "total_read_hours": 452,
   "total_read_books": 148,
+  "total_finished_books": 65,
   "currently_reading": [
+    {
+      "title": "他者中的华人：中国近现代移民史",
+      "author": "孔飞力",
+      "status": "在读",
+      "progress": 0,
+      "last_read": "2026-07-30",
+      "created": "2026-07-30"
+    },
+    {
+      "title": "你的夏天还好吗？",
+      "author": "金爱烂",
+      "status": "已读",
+      "progress": 50,
+      "last_read": "2026-07-30",
+      "created": "2026-07-30"
+    },
     {
       "title": "孽子",
       "author": "白先勇",
       "status": "已读",
       "progress": 50,
-      "last_read": "2026-07-28",
-      "created": "2026-07-28"
-    },
-    {
-      "title": "你的夏天还好吗？",
-      "author": "金爱烂",
-      "status": "在读",
-      "progress": 0,
       "last_read": "2026-07-28",
       "created": "2026-07-28"
     },
@@ -39,14 +48,6 @@
       "progress": 50,
       "last_read": "2026-07-27",
       "created": "2026-07-27"
-    },
-    {
-      "title": "毛泽东选集（全四卷）",
-      "author": "",
-      "status": "在读",
-      "progress": 0,
-      "last_read": "2026-07-26",
-      "created": "2026-07-26"
     }
   ],
   "medals": [
@@ -58,7 +59,7 @@
       "ctime": 1783829092,
       "atime": 1783839061,
       "rank": 644409,
-      "users": 648722,
+      "users": 649023,
       "hint": "想法发布 200 条",
       "renderItem": "07 / 12",
       "name": "想法发布",
@@ -77,13 +78,13 @@
       "ctime": 1778297612,
       "atime": 1778297636,
       "rank": 1894417,
-      "users": 1929502,
+      "users": 1929908,
       "hint": "连续阅读 90 天",
       "renderItem": "05 / 09",
       "name": "连续阅读",
       "index": 1,
       "availableCond": "累积达到90天",
-      "tip": "再连续阅读 73 天可得",
+      "tip": "再连续阅读 71 天可得",
       "title": "连续阅读",
       "rankText": "第1894417位获得此勋章的书友",
       "displayText": "连续阅读 90 天"
@@ -118,7 +119,7 @@
       "ctime": 1776347296,
       "atime": 1776347477,
       "rank": 1755752,
-      "users": 1802788,
+      "users": 1803229,
       "hint": "阅读 1000 天",
       "renderItem": "04 / 16",
       "name": "阅读天数",
@@ -137,7 +138,7 @@
       "ctime": 1774972748,
       "atime": 1774972748,
       "rank": 697853,
-      "users": 790149,
+      "users": 790783,
       "hint": "21天阅读挑战",
       "renderItem": "03 / 31",
       "name": "21天阅读挑战",
@@ -149,5 +150,5 @@
       "displayText": "21天阅读挑战"
     }
   ],
-  "last_updated": "2026-07-29"
+  "last_updated": "2026-07-30"
 }

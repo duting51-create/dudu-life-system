@@ -33,6 +33,8 @@
       "expense": 27747.77
     }
   ],
-  "yesterday_expense": "¥--",
-  "last_updated": "2026-07-29"
+  "yesterday_expense": "¥12.00",
+  "last_updated": "2026-07-30",
+  "last_month_expense": "¥27,747.77",
+  "last_month_income": "¥33,091.87"
 }

@@ -1,42 +1,54 @@
 {
-  "date": "7月29日",
-  "items": [
+  "date": "7月30日",
+  "tasks": [
     {
-      "text": "1.润色&定稿：写10篇笔记",
+      "text": "1.搞清楚GitHub的界面和使用方法",
       "done": false,
       "cancelled": false,
       "priority": "low"
     },
     {
-      "text": "2.研究微信小程序部署，参考分享狗狗喂养指南的那个博主的分享",
+      "text": "2.研究一下flova",
       "done": false,
       "cancelled": false,
       "priority": "low"
     },
     {
-      "text": "3.用Obsidian和ChatGPT live搭建英语学习语料库，再用workbuddy搭建一个英语学习网站",
+      "text": "3.安装workbuddy的教程，把ima 知识库打通做小程序",
       "done": false,
       "cancelled": false,
       "priority": "low"
     },
     {
-      "text": "4.用 workbuddy 把电脑上的 skill 处理一下",
+      "text": "4.润色&定稿：6篇小红书笔记",
       "done": false,
       "cancelled": false,
       "priority": "low"
     },
     {
-      "text": "5.安装一下发现的几个不错的 skill",
+      "text": "5.下载小红书数据，让 AI分析数据做下一步运营方向",
       "done": false,
       "cancelled": false,
       "priority": "low"
     },
     {
-      "text": "6.研究一下 Claude 账号，可以买个 poe 会员，这样就可以用各种模型，看看不同模型的效果了",
+      "text": "6.参考胡楚靓的个人工作台做法，做孕期工作台，做完分享在账号上看看反馈",
+      "done": false,
+      "cancelled": false,
+      "priority": "low"
+    },
+    {
+      "text": "7.把已经装的skills整理到文档做备份",
+      "done": false,
+      "cancelled": false,
+      "priority": "mid"
+    },
+    {
+      "text": "8.继续完善人生系统工作台",
       "done": false,
       "cancelled": false,
       "priority": "low"
     }
   ],
-  "raw_text": "1.润色&定稿：写10篇笔记\n2.研究微信小程序部署，参考分享狗狗喂养指南的那个博主的分享\n3.用Obsidian和ChatGPT live搭建英语学习语料库，再用workbuddy搭建一个英语学习网站\n4.用 workbuddy 把电脑上的 skill 处理一下\n5.安装一下发现的几个不错的 skill \n6.研究一下 Claude 账号，可以买个 poe 会员，这样就可以用各种模型，看看不同模型的效果了"
+  "raw_tasks_text": "1.搞清楚GitHub的界面和使用方法\n2.研究一下flova\n3.安装workbuddy的教程，把ima 知识库打通做小程序\n4.润色&定稿：6篇小红书笔记\n5.下载小红书数据，让 AI分析数据做下一步运营方向\n6.参考胡楚靓的个人工作台做法，做孕期工作台，做完分享在账号上看看反馈\n7.把已经装的skills整理到文档做备份\n8.继续完善人生系统工作台"
 }
