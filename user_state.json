@@ -98,14 +98,6 @@
       "text": "买山药粉",
       "type": "task",
       "ts": "2026-07-30T05:00:00.000Z"
-    },
-    {
-      "id": "local_1785389976629_0",
-      "date": "7月30日",
-      "type": "task",
-      "text": "workbuddy 积分问题",
-      "done": false,
-      "ts": "2026-07-30T05:39:36.629Z"
     }
   ],
   "dudu_inspire_done": {
@@ -113,7 +105,7 @@
     "local_1785393537337_0": true
   },
   "_meta": {
-    "last_updated": "2026-07-30T06:40:02.550Z",
+    "last_updated": "2026-07-30T06:40:10.954Z",
     "version": 2
   }
 }
