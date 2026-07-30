@@ -2124,20 +2124,27 @@
       renderLatestMemos();
     }
 
+    function persistTaskOperation() {
+      localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA?.tasks || []));
+      localStorage.setItem('dudu_tasks_updated_at', String(Date.now()));
+      if (window.CloudSync) window.CloudSync.saveNow();
+    }
+
     function toggleTask(el, index) {
       if (!window.TASKS_DATA?.tasks?.[index]) return;
-      el.classList.toggle('done');
-      window.TASKS_DATA.tasks[index].done = !window.TASKS_DATA.tasks[index].done;
+      const task = window.TASKS_DATA.tasks[index];
+      task.done = !task.done;
+      el.classList.toggle('done', task.done);
       const textEl = el.closest('.todo-item')?.querySelector('.todo-text');
-      if (textEl) textEl.classList.toggle('done');
-      localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.tasks));
+      if (textEl) textEl.classList.toggle('done', task.done);
+      persistTaskOperation();
       updateTodoProgress();
     }
 
     function saveTaskText(index, text) {
       if (window.TASKS_DATA?.tasks?.[index]) {
         window.TASKS_DATA.tasks[index].text = text.trim();
-        localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.tasks));
+        persistTaskOperation();
       }
     }
 
@@ -2185,8 +2192,8 @@
       if (!window.TASKS_DATA) window.TASKS_DATA = {};
       window.TASKS_DATA.tasks = newTasks;
       window.TASKS_DATA.raw_tasks_text = ta.value;
-      localStorage.setItem('dudu_tasks', JSON.stringify(newTasks));
       localStorage.setItem('dudu_raw_tasks', ta.value);
+      persistTaskOperation();
       document.getElementById('task-editor-modal')?.remove();
       renderTasks();
     }

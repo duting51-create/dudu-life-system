@@ -11,6 +11,7 @@
   var KEY_STORAGE = 'dudu_sync_key';
   var SYNC_KEYS = [
     'dudu_tasks',
+    'dudu_tasks_updated_at',
     'dudu_last_tasks_date',
     'dudu_raw_tasks',
     'dudu_jots',
@@ -282,19 +283,23 @@
           var cloudDate = cloud.dudu_last_tasks_date || '';
           var localDate = local.dudu_last_tasks_date || '';
           if (cloudDate === localDate && cloudDate) {
-            var cloudTasks = Array.isArray(cloudValue) ? cloudValue : [];
-            var localTasks = Array.isArray(localValue) ? localValue : [];
-            var source = localTasks.length ? localTasks : cloudTasks;
-            merged[key] = source.map(function (task, index) {
-              var peer = cloudTasks[index];
-              if (peer && peer.text === task.text) {
-                return Object.assign({}, task, { done: Boolean(task.done || peer.done) });
-              }
-              return task;
-            });
+            var cloudTaskTime = Number(cloud.dudu_tasks_updated_at || 0);
+            var localTaskTime = Number(local.dudu_tasks_updated_at || 0);
+            if (localTaskTime > cloudTaskTime) {
+              merged[key] = localValue;
+            } else if (cloudTaskTime > localTaskTime) {
+              merged[key] = cloudValue;
+            } else {
+              merged[key] = localValue !== undefined ? localValue : cloudValue;
+            }
           } else {
             merged[key] = localDate >= cloudDate ? (localValue || cloudValue) : (cloudValue || localValue);
           }
+          return;
+        }
+
+        if (key === 'dudu_tasks_updated_at') {
+          merged[key] = Math.max(Number(cloudValue || 0), Number(localValue || 0));
           return;
         }
 
@@ -306,7 +311,7 @@
         merged[key] = localValue !== undefined ? localValue : cloudValue;
       });
 
-      merged._meta = { last_updated: new Date().toISOString(), version: 3 };
+      merged._meta = { last_updated: new Date().toISOString(), version: 4 };
       return merged;
     },
 
