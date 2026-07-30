@@ -1,0 +1,345 @@
+const FEISHU_API = "https://open.feishu.cn/open-apis";
+const SHEET_RANGE = "A1:G125";
+const STATE_KEY = "dudu-user-state";
+const MAX_STATE_BYTES = 100 * 1024;
+
+const TYPE_CONFIG = {
+  inspiration: { column: "D", index: 3, marker: "💡" },
+  harvest: { column: "E", index: 4, marker: "" },
+  task: { column: "F", index: 5, marker: "" },
+  mood: { column: "G", index: 6, marker: "" },
+};
+
+export default {
+  async fetch(request, env) {
+    const origin = request.headers.get("Origin") || "";
+    const cors = corsHeaders(origin, env);
+
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: cors });
+    }
+
+    const url = new URL(request.url);
+    if (url.pathname === "/health") {
+      return json({ status: "ok" }, 200, cors);
+    }
+
+    if (!isAuthorized(request, env)) {
+      return json({ status: "error", message: "同步口令无效" }, 401, cors);
+    }
+
+    try {
+      if (url.pathname === "/api/state" && request.method === "GET") {
+        const state = await env.DUDU_STATE.get(STATE_KEY, "json");
+        return json(state || {}, 200, cors);
+      }
+
+      if (url.pathname === "/api/state" && request.method === "PUT") {
+        const raw = await request.text();
+        if (new TextEncoder().encode(raw).byteLength > MAX_STATE_BYTES) {
+          return json({ status: "error", message: "同步数据过大" }, 413, cors);
+        }
+        const state = JSON.parse(raw || "{}");
+        state._server_updated_at = new Date().toISOString();
+        await env.DUDU_STATE.put(STATE_KEY, JSON.stringify(state));
+        return json({ status: "ok", updated_at: state._server_updated_at }, 200, cors);
+      }
+
+      if (url.pathname === "/api/inspirations" && request.method === "GET") {
+        const result = await readTodayInspirations(env);
+        return json({ status: "ok", ...result }, 200, cors);
+      }
+
+      if (url.pathname === "/api/inspirations" && request.method === "POST") {
+        const body = await request.json();
+        const result = await mutateInspiration(env, body);
+        return json({ status: "ok", ...result }, 200, cors);
+      }
+
+      return json({ status: "error", message: "Not found" }, 404, cors);
+    } catch (error) {
+      console.error(error);
+      return json(
+        { status: "error", message: error.message || "服务器处理失败" },
+        500,
+        cors,
+      );
+    }
+  },
+};
+
+function corsHeaders(origin, env) {
+  const allowed = new Set([
+    env.SITE_ORIGIN,
+    "http://localhost:3847",
+    "http://127.0.0.1:3847",
+  ]);
+  return {
+    "Access-Control-Allow-Origin": allowed.has(origin) ? origin : env.SITE_ORIGIN,
+    "Access-Control-Allow-Headers": "Content-Type, X-Dudu-Sync-Key",
+    "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
+    "Access-Control-Max-Age": "86400",
+    Vary: "Origin",
+    "Cache-Control": "no-store",
+  };
+}
+
+function json(value, status, headers) {
+  return new Response(JSON.stringify(value), {
+    status,
+    headers: { ...headers, "Content-Type": "application/json; charset=utf-8" },
+  });
+}
+
+function isAuthorized(request, env) {
+  const supplied = request.headers.get("X-Dudu-Sync-Key") || "";
+  return supplied.length >= 16 && supplied === env.SYNC_KEY;
+}
+
+async function getTenantToken(env) {
+  const response = await fetch(`${FEISHU_API}/auth/v3/tenant_access_token/internal`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    body: JSON.stringify({
+      app_id: env.FEISHU_APP_ID,
+      app_secret: env.FEISHU_APP_SECRET,
+    }),
+  });
+  const data = await response.json();
+  if (!response.ok || data.code !== 0) {
+    throw new Error(`飞书授权失败：${data.msg || response.status}`);
+  }
+  return data.tenant_access_token;
+}
+
+async function readSheet(env, token) {
+  const range = `${env.SHEET_ID}!${SHEET_RANGE}`;
+  const response = await fetch(
+    `${FEISHU_API}/sheets/v2/spreadsheets/${env.SPREADSHEET_TOKEN}/values/${range}`,
+    { headers: { Authorization: `Bearer ${token}` } },
+  );
+  const data = await response.json();
+  if (!response.ok || data.code !== 0) {
+    throw new Error(`读取飞书 Sheet 失败：${data.msg || response.status}`);
+  }
+  return data.data?.valueRange?.values || [];
+}
+
+async function updateCell(env, token, column, rowNumber, value) {
+  const range = `${env.SHEET_ID}!${column}${rowNumber}:${column}${rowNumber}`;
+  const response = await fetch(
+    `${FEISHU_API}/sheets/v2/spreadsheets/${env.SPREADSHEET_TOKEN}/values`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify({
+        valueRange: { range, values: [[value]] },
+      }),
+    },
+  );
+  const data = await response.json();
+  if (!response.ok || data.code !== 0) {
+    throw new Error(`写入飞书 Sheet 失败：${data.msg || response.status}`);
+  }
+}
+
+function shanghaiToday() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return {
+    year: Number(values.year),
+    month: Number(values.month),
+    day: Number(values.day),
+  };
+}
+
+function cellText(value) {
+  if (value == null) return "";
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) {
+    return value
+      .map((segment) => (typeof segment === "object" ? segment.text || "" : segment))
+      .join("");
+  }
+  return String(value);
+}
+
+function dateCellMatches(value, today) {
+  if (typeof value === "number") {
+    const date = new Date(Date.UTC(1899, 11, 30 + Math.trunc(value)));
+    return (
+      date.getUTCFullYear() === today.year &&
+      date.getUTCMonth() + 1 === today.month &&
+      date.getUTCDate() === today.day
+    );
+  }
+  const text = cellText(value);
+  return [
+    `${today.month}月${today.day}日`,
+    `${today.month}/${today.day}`,
+    `${today.year}-${String(today.month).padStart(2, "0")}-${String(today.day).padStart(2, "0")}`,
+    `${today.year}/${today.month}/${today.day}`,
+  ].some((pattern) => text.includes(pattern));
+}
+
+function findTodayRow(rows) {
+  const today = shanghaiToday();
+  for (let index = 0; index < rows.length; index += 1) {
+    if (rows[index]?.length && dateCellMatches(rows[index][0], today)) {
+      return { rowNumber: index + 1, row: rows[index], today };
+    }
+  }
+  throw new Error("飞书 Sheet 中没有找到今天的日期行");
+}
+
+function parseLines(value) {
+  return cellText(value)
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) =>
+      line
+        .replace(/^\d+[.、）)\-\s]+/, "")
+        .replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, "")
+        .trim(),
+    );
+}
+
+function serializeLines(lines) {
+  return lines.map((line, index) => `${index + 1}.${line}`).join("\n");
+}
+
+function displayText(type, value) {
+  if (type !== "inspiration") return value;
+  return value.replace(/^💡\s*/, "").trim();
+}
+
+function storedText(type, value) {
+  const clean = value.trim();
+  return type === "inspiration" ? `💡 ${clean}` : clean;
+}
+
+function listItems(rowNumber, row) {
+  const items = [];
+  for (const [type, config] of Object.entries(TYPE_CONFIG)) {
+    const lines = parseLines(row[config.index]);
+    lines.forEach((line, sourceIndex) => {
+      if (type === "inspiration" && !line.startsWith(config.marker)) return;
+      items.push({
+        id: `live_${rowNumber}_${config.column}_${sourceIndex}`,
+        date: `${shanghaiToday().month}月${shanghaiToday().day}日`,
+        type,
+        text: displayText(type, line),
+        sourceIndex,
+      });
+    });
+  }
+  return items;
+}
+
+async function readTodayInspirations(env) {
+  const token = await getTenantToken(env);
+  const rows = await readSheet(env, token);
+  const { rowNumber, row, today } = findTodayRow(rows);
+  return {
+    date: `${today.month}月${today.day}日`,
+    row: rowNumber,
+    items: listItems(rowNumber, row),
+  };
+}
+
+function assertType(type) {
+  if (!TYPE_CONFIG[type]) throw new Error(`不支持的分类：${type}`);
+}
+
+function parseItemId(id) {
+  const match = /^live_(\d+)_([DEFG])_(\d+)$/.exec(id || "");
+  if (!match) throw new Error("记录标识无效，请刷新后重试");
+  return {
+    rowNumber: Number(match[1]),
+    column: match[2],
+    sourceIndex: Number(match[3]),
+  };
+}
+
+async function mutateInspiration(env, body) {
+  const action = body.action || "create";
+  const token = await getTenantToken(env);
+  const rows = await readSheet(env, token);
+  const { rowNumber, row, today } = findTodayRow(rows);
+
+  if (action === "create") {
+    const type = body.type || "inspiration";
+    const text = String(body.text || "").trim();
+    assertType(type);
+    if (!text) throw new Error("内容不能为空");
+    const config = TYPE_CONFIG[type];
+    const lines = parseLines(row[config.index]);
+    lines.push(storedText(type, text));
+    await updateCell(env, token, config.column, rowNumber, serializeLines(lines));
+    return {
+      item: {
+        id: `live_${rowNumber}_${config.column}_${lines.length - 1}`,
+        date: `${today.month}月${today.day}日`,
+        type,
+        text,
+        sourceIndex: lines.length - 1,
+      },
+    };
+  }
+
+  const target = parseItemId(body.id);
+  if (target.rowNumber !== rowNumber) {
+    throw new Error("只能修改今天的记录");
+  }
+  const oldType = Object.keys(TYPE_CONFIG).find(
+    (type) => TYPE_CONFIG[type].column === target.column,
+  );
+  if (!oldType) throw new Error("记录分类无效");
+  const oldConfig = TYPE_CONFIG[oldType];
+  const oldLines = parseLines(row[oldConfig.index]);
+  if (target.sourceIndex >= oldLines.length) {
+    throw new Error("记录已经变化，请刷新后重试");
+  }
+
+  if (action === "delete") {
+    oldLines.splice(target.sourceIndex, 1);
+    await updateCell(env, token, oldConfig.column, rowNumber, serializeLines(oldLines));
+    return { deleted: body.id };
+  }
+
+  if (action === "update") {
+    const text = String(body.text || "").trim();
+    if (!text) throw new Error("内容不能为空");
+    oldLines[target.sourceIndex] = storedText(oldType, text);
+    await updateCell(env, token, oldConfig.column, rowNumber, serializeLines(oldLines));
+    return { updated: body.id };
+  }
+
+  if (action === "reclassify") {
+    const newType = body.type;
+    assertType(newType);
+    if (newType === oldType) return { updated: body.id };
+    const text = displayText(oldType, oldLines[target.sourceIndex]);
+    oldLines.splice(target.sourceIndex, 1);
+    await updateCell(env, token, oldConfig.column, rowNumber, serializeLines(oldLines));
+
+    const newConfig = TYPE_CONFIG[newType];
+    const freshRows = await readSheet(env, token);
+    const freshRow = freshRows[rowNumber - 1] || [];
+    const newLines = parseLines(freshRow[newConfig.index]);
+    newLines.push(storedText(newType, text));
+    await updateCell(env, token, newConfig.column, rowNumber, serializeLines(newLines));
+    return { updated: body.id };
+  }
+
+  throw new Error(`不支持的操作：${action}`);
+}

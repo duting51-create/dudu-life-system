@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dudu-life-sync",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-30",
+  "workers_dev": true,
+  "kv_namespaces": [
+    {
+      "binding": "DUDU_STATE",
+      "id": "89c10c62c82643caa78da65022cdce26"
+    }
+  ],
+  "vars": {
+    "SITE_ORIGIN": "https://duting51-create.github.io",
+    "SPREADSHEET_TOKEN": "TnOCsqGGVhgjRyt5Jj3cV9FFnhg",
+    "SHEET_ID": "e7d0c4"
+  }
+}

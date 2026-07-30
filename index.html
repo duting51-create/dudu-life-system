@@ -1837,10 +1837,8 @@
     </div>
   </section>
 
-  <script>
-    document.write('<script src="feishu_data/dashboard_data.js?v=' + Date.now() + '"><\\/script>');
-  </script>
   <script src="cloud-sync.js"></script>
+  <script src="feishu_data/dashboard_data.js?v=20260730-sync3"></script>
   <script>
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
@@ -2240,38 +2238,50 @@
       return (hasNumbered && items.length > 1) ? items : [text];
     }
 
-    function submitJot() {
+    async function submitJot() {
       const textarea = document.getElementById('jot-area');
       const text = textarea?.value.trim();
       if (!text) return;
-      const type = selectedJotType || 'memo';
+      const type = selectedJotType || 'inspiration';
       const now = new Date();
       const dateStr = `${now.getMonth()+1}月${now.getDate()}日`;
 
       // 按编号拆分，实现分条展示
       const parts = splitNumberedText(text);
+      const submitBtn = document.getElementById('jot-submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '正在写入飞书…';
 
-      // Save to localStorage for now (would sync to Feishu in production)
-      const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
-
-      // 倒序 unshift 以保证列表顺序：第一条在最前
-      const newItems = parts.map((t, idx) => ({
-        id: `local_${now.getTime()}_${idx}`,
-        date: dateStr,
-        type,
-        text: t,
-        done: false,
-        ts: now.toISOString()
-      }));
-      newItems.reverse().forEach(item => jotData.unshift(item));
-      localStorage.setItem('dudu_jots', JSON.stringify(jotData));
-
-      textarea.value = '';
-      document.querySelectorAll('.jot-tag').forEach(t => t.classList.remove('selected'));
-      selectedJotType = null;
-
-      // Re-render
-      renderInspirations();
+      try {
+        if (!window.FeishuSync) throw new Error('同步服务尚未加载');
+        for (const part of parts) {
+          await window.FeishuSync.mutate({ action: 'create', type, text: part });
+        }
+        textarea.value = '';
+        document.querySelectorAll('.jot-tag').forEach(t => t.classList.remove('selected'));
+        selectedJotType = null;
+        showToast('✅ 已写入飞书，手机和电脑将自动同步');
+      } catch (error) {
+        // 网络临时不可用时保留本地副本，避免用户刚输入的内容丢失。
+        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const newItems = parts.map((part, index) => ({
+          id: `local_${now.getTime()}_${index}`,
+          date: dateStr,
+          type,
+          text: part,
+          done: false,
+          ts: now.toISOString(),
+          syncPending: true
+        }));
+        newItems.reverse().forEach(item => jotData.unshift(item));
+        localStorage.setItem('dudu_jots', JSON.stringify(jotData));
+        textarea.value = '';
+        renderInspirations();
+        showToast('⚠️ 飞书暂时无法连接，内容已保存在本机');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '📤 提交';
+      }
     }
 
     // Reclassify jot note (手动重新分类)
@@ -2281,12 +2291,18 @@
       menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
     }
 
-    function reclassifyJot(id, newType) {
+    async function reclassifyJot(id, newType) {
       // Close all menus
       document.querySelectorAll('.reclassify-menu').forEach(m => m.style.display = 'none');
 
-      // If it's a local jot, update localStorage
-      if (id.startsWith('local_')) {
+      if (id.startsWith('live_')) {
+        try {
+          await window.FeishuSync.mutate({ action: 'reclassify', id, type: newType });
+          showToast('✅ 分类已同步到飞书');
+        } catch (error) {
+          showToast('❌ 分类同步失败：' + error.message);
+        }
+      } else if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
         if (jot) {
@@ -2298,9 +2314,16 @@
       renderInspirations();
     }
 
-    function saveJotText(id, newText) {
+    async function saveJotText(id, newText) {
       if (!newText.trim()) return;
-      if (id.startsWith('local_')) {
+      if (id.startsWith('live_')) {
+        try {
+          await window.FeishuSync.mutate({ action: 'update', id, text: newText.trim() });
+          showToast('✅ 修改已同步到飞书');
+        } catch (error) {
+          showToast('❌ 修改同步失败：' + error.message);
+        }
+      } else if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
         if (jot) {
@@ -2310,9 +2333,16 @@
       }
     }
 
-    function deleteJot(id) {
+    async function deleteJot(id) {
       if (!confirm('确定要删除这条记录吗？')) return;
-      if (id.startsWith('local_')) {
+      if (id.startsWith('live_')) {
+        try {
+          await window.FeishuSync.mutate({ action: 'delete', id });
+          showToast('✅ 已从飞书删除');
+        } catch (error) {
+          showToast('❌ 删除失败：' + error.message);
+        }
+      } else if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const filtered = jotData.filter(j => (j.id || `local_${j.ts}`) !== id);
         localStorage.setItem('dudu_jots', JSON.stringify(filtered));
@@ -2345,7 +2375,9 @@
       // 加载已删除的飞书条目 ID 列表
       const deletedFeishuIds = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
 
-      if (INSPIRATIONS_DATA?.items) {
+      if (window.LIVE_INSPIRATIONS_DATA?.items) {
+        window.LIVE_INSPIRATIONS_DATA.items.forEach(item => items.push(item));
+      } else if (INSPIRATIONS_DATA?.items) {
         INSPIRATIONS_DATA.items.forEach((i, di) => {
           if (i.date && i.date.includes(todayStr)) {
             // harvest（今日收获）：放入灵感宝箱
@@ -2369,7 +2401,22 @@
                 }
               });
             }
-            // 备忘提醒(urgent/task/inspiration)属于今日待办板块，不在灵感宝箱展示
+            if (i.task) {
+              splitNumberedText(i.task).forEach((t, ti) => {
+                const id = `feishu_t_${di}_${ti}`;
+                if (!deletedFeishuIds.includes(id)) {
+                  items.push({ id, date: i.date, type: 'task', text: t });
+                }
+              });
+            }
+            if (i.inspiration) {
+              splitNumberedText(i.inspiration).forEach((t, ii) => {
+                const id = `feishu_i_${di}_${ii}`;
+                if (!deletedFeishuIds.includes(id)) {
+                  items.push({ id, date: i.date, type: 'inspiration', text: t });
+                }
+              });
+            }
           }
         });
       }
@@ -2445,46 +2492,18 @@
     async function refreshInspiration() {
       const btn = document.getElementById('inspireRefreshBtn');
       const icon = document.getElementById('inspireRefreshIcon');
-      // 检测是否在本地服务环境（localhost / 127.0.0.1 / file://）
-      const isLocal = window.location.hostname === 'localhost' ||
-                      window.location.hostname === '127.0.0.1' ||
-                      window.location.protocol === 'file:';
-      if (!isLocal) {
-        icon.textContent = '💡';
-        btn.classList.remove('spinning');
-        showToast('💡 数据刷新需在本机操作，云端数据将在下次同步时自动更新');
-        setTimeout(() => { icon.textContent = '✦'; }, 2000);
-        return;
-      }
       btn.classList.add('spinning');
       icon.textContent = '⟳';
       try {
-        // 调用飞书数据刷新API（与今日待办共用同一个刷新逻辑）
-        const res = await fetch('http://localhost:3847/api/refresh');
-        if (!res.ok) throw new Error('Network response was not ok');
-        const resp = await res.json();
-        
-        if (resp.status === 'ok') {
-          // 合并最新数据
-          Object.assign(DASHBOARD_DATA, resp.data);
-          window.INSPIRATIONS_DATA = DASHBOARD_DATA.inspirations || { items: [] };
-          renderInspirations();
-          renderLatestMemos();
-          icon.textContent = '✅';
-          showToast('✅ 飞书数据已同步最新内容！');
-          setTimeout(() => { icon.textContent = '✦'; btn.classList.remove('spinning'); }, 2000);
-        } else if (resp.status === 'busy') {
-          icon.textContent = '⏳';
-          btn.classList.remove('spinning');
-          showToast('⏳ 同步进行中，请稍候…');
-        } else {
-          throw new Error(resp.message || '刷新失败');
-        }
+        if (!window.FeishuSync) throw new Error('同步服务尚未加载');
+        await window.FeishuSync.refresh(true);
+        icon.textContent = '✅';
+        setTimeout(() => { icon.textContent = '✦'; btn.classList.remove('spinning'); }, 2000);
       } catch(e) {
         console.error('刷新失败:', e);
         icon.textContent = '✗';
         btn.classList.remove('spinning');
-        showToast('❌ 刷新失败，请确保本地服务已启动（python3 server.py）');
+        showToast('❌ 飞书刷新失败：' + e.message);
         setTimeout(() => { icon.textContent = '✦'; }, 2000);
       }
     }
@@ -3513,6 +3532,11 @@
       // 否则新设备上 localStorage 为空，页面用空数据渲染，
       // 等云端数据到了再 _rerender 时内存状态未更新，导致同步失效
       if (window.CloudSync) await CloudSync.init();
+      if (window.FeishuSync) {
+        await FeishuSync.refresh(false).catch(error => {
+          console.warn('首次读取飞书失败:', error);
+        });
+      }
       // 重要顺序：先 roll 再 load 再 restore
       // 1. rollTasksToNewDay() 先读取 localStorage 中昨天的勾选状态（或滚未完成任务）
       // 2. loadData() 用飞书数据覆盖 tasks（done 都变成 false）
