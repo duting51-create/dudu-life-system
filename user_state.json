@@ -41,7 +41,7 @@
     },
     {
       "text": "2.研究一下flova",
-      "done": false
+      "done": true
     },
     {
       "text": "3.安装workbuddy的教程，把ima 知识库打通做小程序",
@@ -97,7 +97,7 @@
     "local_1785393537337_0": true
   },
   "_meta": {
-    "last_updated": "2026-07-30T06:53:20.802Z",
+    "last_updated": "2026-07-30T06:53:33.204Z",
     "version": 2
   }
 }
