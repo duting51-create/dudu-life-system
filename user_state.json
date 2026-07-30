@@ -108,8 +108,12 @@
       "ts": "2026-07-30T05:39:36.629Z"
     }
   ],
+  "dudu_inspire_done": {
+    "local_1785389976629_0": true,
+    "local_1785393537337_0": true
+  },
   "_meta": {
-    "last_updated": "2026-07-30T06:39:01.214Z",
+    "last_updated": "2026-07-30T06:39:40.497Z",
     "version": 2
   }
 }
