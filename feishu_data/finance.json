@@ -1,0 +1,38 @@
+{
+  "year_income": "¥551,774",
+  "year_expense": "¥212,782",
+  "monthly_data": [
+    {
+      "month": "2026年1月",
+      "income": 91873.0,
+      "expense": 32490.61
+    },
+    {
+      "month": "2026年2月",
+      "income": 39100.0,
+      "expense": 40569.82
+    },
+    {
+      "month": "2026年3月",
+      "income": 37290.86,
+      "expense": 40501.47
+    },
+    {
+      "month": "2026年4月",
+      "income": 39337.92,
+      "expense": 40216.34
+    },
+    {
+      "month": "2026年5月",
+      "income": 276369.07,
+      "expense": 31256.85
+    },
+    {
+      "month": "2026年6月",
+      "income": 33091.87,
+      "expense": 27747.77
+    }
+  ],
+  "yesterday_expense": "¥--",
+  "last_updated": "2026-07-29"
+}

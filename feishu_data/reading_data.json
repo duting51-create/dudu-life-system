@@ -1,0 +1,146 @@
+{
+  "total_days": 141,
+  "target_days": 365,
+  "currently_reading": [
+    {
+      "title": "认知觉醒：开启自我改变的原动力",
+      "author": "周岭",
+      "status": "在读",
+      "progress": 45,
+      "last_read": "2026-07-27",
+      "source": "微信读书",
+      "tags": [
+        "认知成长",
+        "自我管理"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "爱的五种语言",
+      "author": "盖瑞·查普曼",
+      "status": "在读",
+      "progress": 30,
+      "last_read": "2026-07-25",
+      "source": "微信读书",
+      "tags": [
+        "亲密关系",
+        "沟通表达"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "跃迁：成为高手的技术",
+      "author": "古典",
+      "status": "在读",
+      "progress": 55,
+      "last_read": "2026-07-20",
+      "source": "微信读书",
+      "tags": [
+        "职场成长",
+        "学习方法"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "在小山和小山之间",
+      "author": "陈行的",
+      "status": "在读",
+      "progress": 20,
+      "last_read": "2026-07-18",
+      "source": "微信读书",
+      "tags": [
+        "文学",
+        "散文"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "饥饿的女儿",
+      "author": "虹影",
+      "status": "在读",
+      "progress": 10,
+      "last_read": "2026-07-10",
+      "source": "微信读书",
+      "tags": [
+        "文学",
+        "成长"
+      ],
+      "created": "2026-07-03"
+    }
+  ],
+  "all_books": [
+    {
+      "title": "认知觉醒：开启自我改变的原动力",
+      "author": "周岭",
+      "status": "在读",
+      "progress": 45,
+      "source": "微信读书",
+      "tags": [
+        "认知成长",
+        "自我管理"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "爱的五种语言",
+      "author": "盖瑞·查普曼",
+      "status": "在读",
+      "progress": 30,
+      "source": "微信读书",
+      "tags": [
+        "亲密关系",
+        "沟通表达"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "跃迁：成为高手的技术",
+      "author": "古典",
+      "status": "在读",
+      "progress": 55,
+      "source": "微信读书",
+      "tags": [
+        "职场成长",
+        "学习方法"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "房思琪的初恋乐园",
+      "author": "林奕含",
+      "status": "已读",
+      "progress": 100,
+      "source": "微信读书",
+      "tags": [
+        "文学",
+        "经典"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "在小山和小山之间",
+      "author": "陈行的",
+      "status": "在读",
+      "progress": 20,
+      "source": "微信读书",
+      "tags": [
+        "文学",
+        "散文"
+      ],
+      "created": "2026-07-03"
+    },
+    {
+      "title": "饥饿的女儿",
+      "author": "虹影",
+      "status": "在读",
+      "progress": 10,
+      "source": "微信读书",
+      "tags": [
+        "文学",
+        "成长"
+      ],
+      "created": "2026-07-03"
+    }
+  ],
+  "last_synced": "2026-07-27"
+}

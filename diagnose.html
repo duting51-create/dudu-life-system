@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>数据加载诊断</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a2e; color: #eee; }
+        .ok { color: #4CAF50; }
+        .error { color: #f44336; }
+        .info { color: #2196F3; }
+        pre { background: #16213e; padding: 15px; border-radius: 8px; overflow-x: auto; max-height: 400px; }
+        h2 { color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 数据加载诊断</h1>
+    <div id="results"></div>
+    
+    <script src="feishu_data/data_latest.js"></script>
+    <script>
+        const results = document.getElementById('results');
+        function log(msg, type = 'info') {
+            results.innerHTML += `<p class="${type}">${msg}</p>`;
+        }
+        
+        log('<h2>1. 检查 DASHBOARD_DATA</h2>');
+        log('typeof DASHBOARD_DATA: ' + typeof DASHBOARD_DATA);
+        
+        if (typeof DASHBOARD_DATA !== 'undefined') {
+            log('✅ DASHBOARD_DATA 存在', 'ok');
+            
+            log('<h2>2. 检查 tasks 数据</h2>');
+            const tasks = DASHBOARD_DATA.tasks;
+            if (tasks) {
+                log('tasks.date: ' + (tasks.date || '无'));
+                log('tasks.tasks 数量: ' + (tasks.tasks?.length || 0), tasks.tasks?.length > 0 ? 'ok' : 'error');
+                if (tasks.tasks?.length > 0) {
+                    log('第一条任务: ' + tasks.tasks[0].text, 'ok');
+                }
+            } else {
+                log('❌ tasks 为空', 'error');
+            }
+            
+            log('<h2>3. 检查其他数据</h2>');
+            log('exercise: ' + (DASHBOARD_DATA.exercise ? '✅ 有数据' : '❌ 无'), DASHBOARD_DATA.exercise ? 'ok' : 'error');
+            log('memos: ' + (DASHBOARD_DATA.memos ? '✅ 有数据' : '❌ 无'), DASHBOARD_DATA.memos ? 'ok' : 'error');
+            log('reading: ' + (DASHBOARD_DATA.reading ? '✅ 有数据' : '❌ 无'), DASHBOARD_DATA.reading ? 'ok' : 'error');
+            log('finance: ' + (DASHBOARD_DATA.finance ? '✅ 有数据' : '❌ 无'), DASHBOARD_DATA.finance ? 'ok' : 'error');
+            
+            log('<h2>4. 检查全局变量赋值</h2>');
+            // 模拟 HTML 中的赋值
+            window.TASKS_DATA = DASHBOARD_DATA.tasks || { tasks: [] };
+            window.EXERCISE_DATA = DASHBOARD_DATA.exercise || {};
+            window.MEMOS_DATA = DASHBOARD_DATA.memos || {};
+            window.READING_DATA = DASHBOARD_DATA.reading || {};
+            window.HOT_TOPICS_DATA = DASHBOARD_DATA.hotTopics || {};
+            window.ONE_COMPANY_DATA = DASHBOARD_DATA.oneCompany || {};
+            
+            log('window.TASKS_DATA.tasks.length: ' + (window.TASKS_DATA.tasks?.length || 0), 
+                window.TASKS_DATA.tasks?.length > 0 ? 'ok' : 'error');
+            log('window.EXERCISE_DATA.month: ' + (window.EXERCISE_DATA.month || '无'), 
+                window.EXERCISE_DATA.month ? 'ok' : 'error');
+            log('window.MEMOS_DATA.total: ' + (window.MEMOS_DATA.total || 0), 
+                window.MEMOS_DATA.total > 0 ? 'ok' : 'error');
+            
+            log('<h2>5. 总结</h2>');
+            const allOk = tasks?.tasks?.length > 0 && 
+                          window.EXERCISE_DATA.month && 
+                          window.MEMOS_DATA.total > 0;
+            if (allOk) {
+                log('✅ 所有数据正常！如果主页仍不显示，可能是 CSS/HTML 结构问题', 'ok');
+            } else {
+                log('❌ 数据不完整，请截图此页面发送给开发者', 'error');
+            }
+        } else {
+            log('❌ DASHBOARD_DATA 未定义！可能是 JS 文件加载失败', 'error');
+            log('请检查网络请求中 feishu_data/data_latest.js 是否返回 404', 'error');
+        }
+    </script>
+</body>
+</html>

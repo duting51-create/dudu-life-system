@@ -1,0 +1,117 @@
+{
+  "days": ["周一","周二","周三","周四","周五","周六","周日"],
+  "day_calories": {
+    "0": "350",
+    "1": "380",
+    "2": "360",
+    "3": "310",
+    "4": "350",
+    "5": "300",
+    "6": "150"
+  },
+  "schedule": {
+    "0": {
+      "label": "周一 · 肩背训练",
+      "blocks": [
+        {
+          "emoji": "🧘",
+          "name": "体态训练",
+          "cals": "80",
+          "video": {
+            "title": "改善骨盆前倾",
+            "duration": "10:00",
+            "thumb": "https://img.youtube.com/vi/EXAMPLExx/maxresdefault.jpg",
+            "url": "https://www.youtube.com/watch?v=EXAMPLE"
+          }
+        },
+        {
+          "emoji": "🔥",
+          "name": "减脂",
+          "cals": "130",
+          "video": {
+            "title": "帕梅拉 · 20min全身燃脂",
+            "duration": "20:00",
+            "thumb": "https://img.youtube.com/vi/EXAMPLE2/maxresdefault.jpg",
+            "url": "https://www.youtube.com/watch?v=EXAMPLE2"
+          }
+        },
+        {
+          "emoji": "💪",
+          "name": "力量训练",
+          "cals": "100",
+          "video": {
+            "title": "蜜桃臀 · 31min跟练",
+            "duration": "31:00",
+            "thumb": "https://img.youtube.com/vi/EXAMPLE3/maxresdefault.jpg",
+            "url": "https://www.youtube.com/watch?v=EXAMPLE3"
+          }
+        },
+        {
+          "emoji": "🔄",
+          "name": "泡沫轴放松",
+          "cals": "50",
+          "video": {
+            "title": "10min腿部拉伸",
+            "duration": "10:00",
+            "thumb": "https://img.youtube.com/vi/EXAMPLE4/maxresdefault.jpg",
+            "url": "https://www.youtube.com/watch?v=EXAMPLE4"
+          }
+        }
+      ]
+    },
+    "1": {
+      "label": "周二 · 核心训练",
+      "blocks": [
+        { "emoji": "🧘", "name": "体态训练", "cals": "80", "video": { "title": "核心激活训练", "duration": "10:00", "thumb": "", "url": "" }},
+        { "emoji": "🔥", "name": "减脂", "cals": "150", "video": { "title": "Eleni Fit · 30min HIIT", "duration": "30:00", "thumb": "", "url": "" }},
+        { "emoji": "💪", "name": "力量训练", "cals": "130", "video": { "title": "腹部马甲线 30min", "duration": "30:00", "thumb": "", "url": "" }},
+        { "emoji": "🔄", "name": "泡沫轴放松", "cals": "50", "video": { "title": "全身泡沫轴放松 10min", "duration": "10:00", "thumb": "", "url": "" }}
+      ]
+    },
+    "2": {
+      "label": "周三 · 全身训练",
+      "blocks": [
+        { "emoji": "🧘", "name": "体态训练", "cals": "80", "video": { "title": "改善骨盆前倾", "duration": "10:00", "thumb": "", "url": "" }},
+        { "emoji": "🔥", "name": "减脂", "cals": "150", "video": { "title": "帕梅拉 · 20min全身燃脂", "duration": "20:00", "thumb": "", "url": "" }},
+        { "emoji": "💪", "name": "力量训练", "cals": "130", "video": { "title": "蜜桃臀 · 31min跟练", "duration": "31:00", "thumb": "", "url": "" }},
+        { "emoji": "🔄", "name": "泡沫轴放松", "cals": "50", "video": { "title": "10min腿部拉伸", "duration": "10:00", "thumb": "", "url": "" }}
+      ]
+    },
+    "3": {
+      "label": "周四 · 拉伸日",
+      "blocks": [
+        { "emoji": "🧘", "name": "体态训练", "cals": "80", "video": { "title": "肩颈放松 12min", "duration": "12:00", "thumb": "", "url": "" }},
+        { "emoji": "🔥", "name": "减脂", "cals": "120", "video": { "title": "Eleni Fit · 30min站立细腰", "duration": "30:00", "thumb": "", "url": "" }},
+        { "emoji": "💪", "name": "力量训练", "cals": "100", "video": { "title": "MIZI 2周瘦手臂+瘦背", "duration": "21:00", "thumb": "", "url": "" }},
+        { "emoji": "🔄", "name": "泡沫轴放松", "cals": "50", "video": { "title": "背部拉伸 10min", "duration": "10:00", "thumb": "", "url": "" }}
+      ]
+    },
+    "4": {
+      "label": "周五 · 塑形日",
+      "blocks": [
+        { "emoji": "🧘", "name": "体态训练", "cals": "80", "video": { "title": "欧阳春晓 · 15min丝滑肩背", "duration": "15:00", "thumb": "", "url": "" }},
+        { "emoji": "🔥", "name": "减脂", "cals": "120", "video": { "title": "Eleni Fit · 30min站立细腰", "duration": "30:00", "thumb": "", "url": "" }},
+        { "emoji": "💪", "name": "力量训练", "cals": "100", "video": { "title": "MIZI 2周瘦手臂+瘦背", "duration": "21:00", "thumb": "", "url": "" }},
+        { "emoji": "🔄", "name": "泡沫轴放松", "cals": "50", "video": { "title": "全身拉伸放松", "duration": "9:00", "thumb": "", "url": "" }}
+      ]
+    },
+    "5": {
+      "label": "周六 · 户外日",
+      "blocks": [
+        { "emoji": "🧘", "name": "体态训练", "cals": "80", "video": { "title": "肩颈放松 12min", "duration": "12:00", "thumb": "", "url": "" }},
+        { "emoji": "🔥", "name": "减脂", "cals": "130", "video": { "title": "帕梅拉 · 20min全身燃脂", "duration": "20:00", "thumb": "", "url": "" }},
+        { "emoji": "💪", "name": "力量训练", "cals": "120", "video": { "title": "14天瘦大腿 · 28min", "duration": "28:00", "thumb": "", "url": "" }},
+        { "emoji": "🔄", "name": "泡沫轴放松", "cals": "50", "video": { "title": "腿部拉伸 10min", "duration": "10:00", "thumb": "", "url": "" }}
+      ]
+    },
+    "6": {
+      "label": "周日 · 休息日",
+      "blocks": [
+        { "emoji": "🧘", "name": "晨间拉伸", "cals": "40", "video": { "title": "🌳 散步 30min", "duration": "30:00", "thumb": "", "url": "" }},
+        { "emoji": "🧘", "name": "阴瑜伽放松", "cals": "60", "video": { "title": "🧘 阴瑜伽放松 30min", "duration": "30:00", "thumb": "", "url": "" }},
+        { "emoji": "🌿", "name": "好好休息", "cals": "0", "video": { "title": "好好休息，明天继续", "duration": "—", "thumb": "", "url": "" }},
+        { "emoji": "🫶", "name": "放松恢复", "cals": "50", "video": { "title": "泡脚+拉伸", "duration": "20:00", "thumb": "", "url": "" }}
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "total_revenue": "¥179",
+  "total_orders": 9,
+  "products": [
+    {
+      "name": "孕期安心知识库",
+      "price": "¥39.9"
+    },
+    {
+      "name": "产后恢复指南",
+      "price": "¥9.9"
+    }
+  ],
+  "total_published_notes": 104,
+  "monthly_revenue": []
+}
