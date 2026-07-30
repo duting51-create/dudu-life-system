@@ -153,9 +153,16 @@
     },
 
     // ── 从 GitHub 读取云端状态 ──
+    // ★ 关键修复：改用 API + Accept: raw 绕过 raw.githubusercontent.com 的 CDN 缓存
+    // raw URL 即使加 ?v=时间戳，GitHub CDN 仍可能缓存数分钟，导致一端保存后另一端拉不到
     _fetchCloud: function () {
-      var url = RAW_URL + '?v=' + Date.now();
-      return fetch(url, { cache: 'no-cache' }).then(function (resp) {
+      return fetch(API_URL, {
+        headers: {
+          Authorization: 'token ' + TOKEN,
+          Accept: 'application/vnd.github.v3.raw'
+        },
+        cache: 'no-store'
+      }).then(function (resp) {
         if (!resp.ok) return null;
         return resp.json();
       }).catch(function () { return null; });
