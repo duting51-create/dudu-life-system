@@ -229,6 +229,7 @@
 
     // ── 合并云端和本地状态（防止数据丢失）──
     _merge: function (cloud, local) {
+      var self = this;
       var merged = {};
       var allKeys = {};
       Object.keys(cloud).forEach(function (k) { allKeys[k] = true; });
