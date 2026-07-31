@@ -1269,8 +1269,11 @@
     }
     .finance-big-label { font-family: 'Caveat', cursive; font-size: 0.9rem; color: var(--ink-faint); margin-bottom: 0.3rem; }
     .finance-big-num {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 600; color: var(--ink); line-height: 1.1;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--ink); line-height: 1.1;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+      letter-spacing: -0.02em;
     }
     .finance-big-num .change { display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; padding: 2px 8px; border-radius: 10px; margin-left: 10px; vertical-align: middle; }
     .finance-big-num .change.up   { background: rgba(168,213,186,0.2); color: #4A8A5C; }
@@ -1278,11 +1281,22 @@
     .finance-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1.2rem; margin-top: 2.2rem; }
     .finance-item { display: flex; flex-direction: column; padding: 0.9rem 1.1rem; border-radius: 12px; background: var(--cream); }
     .finance-item .fl { font-size: 0.75rem; color: var(--ink-light); }
-    .finance-item .fv { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1rem; margin-top: 2px; }
+    .finance-item .fv {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-weight: 700; font-size: 1rem; margin-top: 2px;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+      letter-spacing: -0.01em;
+    }
     .fin-rank-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
     .fin-rank-item:last-child { border-bottom: none; }
     .fin-rank-label { font-size: 0.82rem; }
-    .fin-rank-amount { font-family: 'Fraunces', serif; font-weight: 600; font-size: 0.9rem; }
+    .fin-rank-amount {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-weight: 700; font-size: 0.9rem;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
     .fin-rank-bar-bg { width: 100%; height: 4px; border-radius: 2px; background: rgba(45,45,58,0.06); margin-top: 6px; }
     .fin-rank-bar-fill { height: 100%; border-radius: 2px; }
     .finance-yesterday {
@@ -1295,7 +1309,13 @@
     }
     .finance-yesterday-card.income { margin-bottom: 1.5rem; border-left-color: var(--green); }
     .finance-yesterday-label { font-size: 0.7rem; color: var(--ink-faint); }
-    .finance-yesterday-num { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.2rem; color: var(--ink); margin-top: 2px; }
+    .finance-yesterday-num {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-weight: 700; font-size: 1.2rem; color: var(--ink); margin-top: 2px;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+      letter-spacing: -0.015em;
+    }
     .finance-yesterday-card.income .finance-yesterday-num { color: #4A8A5C; }
 
     /* ====== SCROLL HINT ====== */
