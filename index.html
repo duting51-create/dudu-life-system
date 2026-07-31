@@ -1863,7 +1863,7 @@
   </section>
 
   <script src="cloud-sync.js?v=20260730-4"></script>
-  <script src="feishu_data/dashboard_data.js?v=20260730-sync3"></script>
+  <script src="feishu_data/dashboard_data.js?v=20260731-sync4"></script>
   <script>
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
@@ -1905,7 +1905,12 @@
       window.MEMOS_DATA = DASHBOARD_DATA.memos || {};
     }
 
-    function loadData() {
+    async function loadData() {
+      try {
+        await fetchPublishedDashboardData({ force: true, silent: true });
+      } catch (error) {
+        console.warn('Initial published dashboard fetch failed, fallback to embedded data:', error);
+      }
       assignData();
       renderAll();
     }
@@ -3697,7 +3702,7 @@
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
       // 先保留当天飞书任务，再加载云端状态，最后执行跨天合并。
-      loadData();
+      await loadData();
       const now = new Date();
       const todayLabel = `${now.getMonth() + 1}月${now.getDate()}日`;
       const feedDate = String(window.TASKS_DATA?.date || '');
