@@ -1844,6 +1844,11 @@
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
     // This avoids fetch() which is blocked by file:// CORS policy
     // v=8 uses a timestamp so browser always fetches fresh copy after feishu_sync.py regenerates it
+    const DASHBOARD_SCRIPT_URL = 'feishu_data/data_latest.js';
+    const AUTO_REFRESH_INTERVAL_MS = 10 * 60 * 1000;
+    const WAKE_REFRESH_DELAY_MS = 11 * 60 * 1000;
+    let dashboardRefreshInFlight = null;
+    let wakeRefreshTimer = null;
 
     function assignData() {
       if (typeof DASHBOARD_DATA === 'undefined') {
@@ -1880,6 +1885,104 @@
       renderAll();
     }
 
+    function extractDashboardObjectFromScript(text) {
+      const startIndex = text.indexOf('{');
+      if (startIndex < 0) throw new Error('dashboard script missing JSON payload');
+      let depth = 0;
+      for (let index = startIndex; index < text.length; index += 1) {
+        const char = text[index];
+        if (char === '{') depth += 1;
+        if (char === '}') depth -= 1;
+        if (depth === 0) return JSON.parse(text.slice(startIndex, index + 1));
+      }
+      throw new Error('dashboard script JSON is incomplete');
+    }
+
+    async function fetchPublishedDashboardData(options) {
+      const opts = options || {};
+      if (dashboardRefreshInFlight && !opts.force) return dashboardRefreshInFlight;
+      dashboardRefreshInFlight = fetch(`${DASHBOARD_SCRIPT_URL}?ts=${Date.now()}`, { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.text();
+        })
+        .then(function (scriptText) {
+          const data = extractDashboardObjectFromScript(scriptText);
+          window.DASHBOARD_DATA = data || {};
+          return window.DASHBOARD_DATA;
+        })
+        .catch(function (error) {
+          if (!opts.silent) console.warn('Published dashboard refresh failed:', error);
+          throw error;
+        })
+        .finally(function () {
+          dashboardRefreshInFlight = null;
+        });
+      return dashboardRefreshInFlight;
+    }
+
+    function getTodayFeedTasks() {
+      const now = new Date();
+      const todayLabel = `${now.getMonth() + 1}月${now.getDate()}日`;
+      const feedDate = String(window.TASKS_DATA?.date || '');
+      return feedDate.includes(todayLabel)
+        ? JSON.parse(JSON.stringify(window.TASKS_DATA?.tasks || []))
+        : [];
+    }
+
+    async function refreshPublishedDashboard(reason, options) {
+      const opts = options || {};
+      try {
+        const previousSync = String(window.DASHBOARD_DATA?.last_sync || '');
+        await fetchPublishedDashboardData({ force: true, silent: opts.silent });
+        assignData();
+        renderAll();
+        initializeTasksForToday(getTodayFeedTasks());
+        const latestSync = String(window.DASHBOARD_DATA?.last_sync || '');
+        if (!opts.silent && latestSync && latestSync !== previousSync) {
+          showToast(`✅ 网站数据已更新（${latestSync}）`);
+        }
+      } catch (error) {
+        if (!opts.silent) {
+          console.warn(`refreshPublishedDashboard(${reason}) failed:`, error);
+          showToast('⚠️ 最新数据暂时拉取失败，稍后会自动重试');
+        }
+      }
+    }
+
+    function scheduleWakeFollowupRefresh() {
+      clearTimeout(wakeRefreshTimer);
+      wakeRefreshTimer = setTimeout(function () {
+        refreshPublishedDashboard('wake-delay', { silent: true });
+      }, WAKE_REFRESH_DELAY_MS);
+    }
+
+    function setupPublishedDataAutoRefresh() {
+      setInterval(function () {
+        if (!document.hidden) refreshPublishedDashboard('interval', { silent: true });
+      }, AUTO_REFRESH_INTERVAL_MS);
+
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) {
+          refreshPublishedDashboard('visibilitychange', { silent: true });
+          scheduleWakeFollowupRefresh();
+        }
+      });
+
+      window.addEventListener('focus', function () {
+        refreshPublishedDashboard('focus', { silent: true });
+      });
+
+      window.addEventListener('pageshow', function () {
+        refreshPublishedDashboard('pageshow', { silent: true });
+        scheduleWakeFollowupRefresh();
+      });
+
+      window.addEventListener('online', function () {
+        refreshPublishedDashboard('online', { silent: true });
+      });
+    }
+
     async function refreshTasks() {
       const btn = document.getElementById('refreshBtn');
       const icon = document.getElementById('refreshIcon');
@@ -1908,6 +2011,7 @@
           Object.assign(DASHBOARD_DATA, resp.data);
           assignData();
           renderAll();
+          initializeTasksForToday(getTodayFeedTasks());
           icon.textContent = '✅';
           showToast('✅ 飞书数据已同步最新内容！');
           setTimeout(() => { icon.textContent = '🔄'; btn.classList.remove('loading'); }, 2000);
@@ -2652,7 +2756,7 @@
       const weekTime = READING_DATA.weekly_read_time;
       const dayTime = READING_DATA.yesterday_read_time;
       const totalHours = READING_DATA.total_read_hours;
-      const totalBooks = READING_DATA.total_finished_books;
+      const totalBooks = READING_DATA.total_finished_books ?? null;
       const weekEl = document.getElementById('reading-week-time');
       const dayEl = document.getElementById('reading-day-time');
       const totalHoursEl = document.getElementById('reading-total-hours');
@@ -3511,7 +3615,6 @@
       } catch(e) {}
 
       let nextTasks = [];
-      let rolledCount = 0;
 
       if (lastDate === today && savedTasks.length) {
         const usedFeedIndexes = new Set();
@@ -3534,14 +3637,6 @@
         preparedFeed.forEach((task, index) => {
           if (!usedFeedIndexes.has(index)) nextTasks.push(task);
         });
-      } else if (lastDate && lastDate < today && savedTasks.length) {
-        const todayTaskKeys = new Set(preparedFeed.map(taskTextKey));
-        const carried = savedTasks
-          .filter(task => !task.done && !task.cancelled)
-          .map(task => ({ ...task, text: cleanTaskText(task.text), done: false }))
-          .filter(task => !todayTaskKeys.has(taskTextKey(task)));
-        rolledCount = carried.length;
-        nextTasks = [...preparedFeed, ...carried];
       } else {
         nextTasks = preparedFeed;
       }
@@ -3557,9 +3652,6 @@
         localStorage.setItem('dudu_last_tasks_date', today);
         localStorage.setItem('dudu_tasks_updated_at', String(Date.now()));
         if (window.CloudSync) window.CloudSync.saveNow();
-      }
-      if (rolledCount > 0) {
-        setTimeout(() => showToast(`📋 ${rolledCount} 条未完成任务已滚动到今日`), 800);
       }
       renderTasks();
     }
@@ -3583,6 +3675,8 @@
         });
       }
       initializeTasksForToday(feedTasks);
+      refreshPublishedDashboard('load', { silent: true });
+      setupPublishedDataAutoRefresh();
       initExercise();
       const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');
       if (firstNav) firstNav.classList.add('active');
