@@ -2679,7 +2679,7 @@
         col.innerHTML = '<div class="news-item-meta" style="padding:8px 0;color:var(--ink-faint);">暂无AI资讯（同步后显示）</div>';
         return;
       }
-      col.innerHTML = items.slice(0, 8).map(item => {
+      col.innerHTML = items.slice(0, 10).map(item => {
         const link = item.url || '#';
         const time = item.time_ago || '';
         // 标题截断：超过28字截断并加省略号
