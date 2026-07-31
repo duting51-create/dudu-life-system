@@ -135,7 +135,7 @@ const DASHBOARD_DATA = {
         "id": "memo_36_2"
       }
     ],
-    "total": 0
+    "total": 10
   },
   "inspirations": {
     "items": [
@@ -176,11 +176,11 @@ const DASHBOARD_DATA = {
       }
     ],
     "last_updated": "6月24日",
-    "today_updated": false
+    "today_updated": true
   },
   "finance": {
-    "year_income": "¥--",
-    "year_expense": "¥--",
+    "year_income": "¥551,774",
+    "year_expense": "¥212,782",
     "monthly_data": [
       {
         "month": "2026年1月",
@@ -213,7 +213,7 @@ const DASHBOARD_DATA = {
         "expense": 27747.77
       }
     ],
-    "yesterday_expense": "¥--",
+    "yesterday_expense": "¥81.90",
     "last_updated": "2026-07-31",
     "last_month_expense": "¥27,747.77",
     "last_month_income": "¥33,091.87"
@@ -384,7 +384,7 @@ const DASHBOARD_DATA = {
     }
   },
   "published_notes": {
-    "total": 0,
+    "total": 111,
     "last_updated": "2026-07-31"
   },
   "exercise": {
@@ -504,7 +504,7 @@ const DASHBOARD_DATA = {
         "price": "¥9.9"
       }
     ],
-    "total_published_notes": 0,
+    "total_published_notes": 111,
     "monthly_revenue": []
   },
   "hotTopics": {
@@ -565,39 +565,44 @@ const DASHBOARD_DATA = {
         "hotness": "🎧"
       },
       {
-        "title": "🎙 【当个事儿】最新节目",
+        "title": "🎙 当个事儿 | 我跟金钱的关系，被谁影响了？| Vol.173",
         "url": "https://www.xiaoyuzhoufm.com/podcast/60d2d172afc14743da181066",
         "source": "当个事儿",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "今天"
       },
       {
-        "title": "🎙 【嗨咻】最新节目",
+        "title": "🎙 嗨咻 | 100. 为什么越想表现自己，越容易在社交中露怯？",
         "url": "https://www.xiaoyuzhoufm.com/podcast/631812fe43274df80456d001",
         "source": "嗨咻",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "昨天"
       },
       {
-        "title": "🎙 【头回当妈】最新节目",
+        "title": "🎙 头回当妈 | 100. 特别节目｜头回当妈的101问 第一弹",
         "url": "https://www.xiaoyuzhoufm.com/podcast/6484fbe126fd9f4b4347ad04",
         "source": "头回当妈",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "2天前"
       },
       {
-        "title": "🎙 【畅所育言】最新节目",
+        "title": "🎙 畅所育言 | 110把感激误认为爱情，把健身练成疲劳，把AI当成答案｜最近想分享的6期播客",
         "url": "https://www.xiaoyuzhoufm.com/podcast/64d25bd580c9ec4c5fbb0da4",
         "source": "畅所育言",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "1周前"
       },
       {
-        "title": "🎙 【Alison Yu心理】最新节目",
+        "title": "🎙 Alison Yu心理 | ep90 | 边界：主体性的表达，真实关系的开始",
         "url": "https://www.xiaoyuzhoufm.com/podcast/67c8dd34d6c2a59e23f2d932",
         "source": "Alison Yu心理",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "1周前"
       }
     ],
     "keywords": [
@@ -648,59 +653,82 @@ const DASHBOARD_DATA = {
         "time_ago": "今天"
       },
       {
-        "title": "Google Earth 集成 Nano Banana 2 图像生成",
-        "url": "https://aihot.virxact.com/items/cms7w9p0p000fro20pyggbkmb",
-        "published": "Thu, 30 Jul 2026 18:53:09 GMT",
-        "source": "X：Google AI (@GoogleAI)",
-        "time_ago": "今天"
+        "title": "菜鸟CTO李强创业做Physical AI平台，获云启、商汤超亿元种子轮融资｜硬氪首发",
+        "url": "https://36kr.com/p/3917874427555457?f=rss",
+        "published": "2026-07-31 09:52:24  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-31"
       },
       {
-        "title": "OpenRouter 下调 GPT-5.6 Terra/Luna 价格",
-        "url": "https://aihot.virxact.com/items/cms7teqy003lfropbgykvnbjy",
-        "published": "Thu, 30 Jul 2026 17:32:59 GMT",
-        "source": "X：OpenRouter (@OpenRouter)",
-        "time_ago": "今天"
+        "title": "中层消失，Token狂热退潮，硅谷工程师眼里的「AI创业下半场」",
+        "url": "https://36kr.com/p/3918250549931394?f=rss",
+        "published": "2026-07-31 08:30:54  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-31"
       },
       {
-        "title": "GitHub Copilot 应用新增堆叠会话与拉取请求功能",
-        "url": "https://aihot.virxact.com/items/cms7t8vfu0365ropbxnkcx89n",
-        "published": "Thu, 30 Jul 2026 17:30:24 GMT",
-        "source": "GitHub Blog",
-        "time_ago": "今天"
+        "title": "8点1氪丨宇树科技：8月10日网下申购；字节跳动成立新的豆包产品团队；美股三大指数集体收涨，微软创近18年以来最大单日涨幅",
+        "url": "https://36kr.com/p/3918776472022402?f=rss",
+        "published": "2026-07-31 07:48:40  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-31"
       },
       {
-        "title": "Perplexity Computer 推出 Projects 功能",
-        "url": "https://aihot.virxact.com/items/cms7sw59802yyropbrio5ml9u",
-        "published": "Thu, 30 Jul 2026 16:54:48 GMT",
-        "source": "X：Aravind Srinivas（Perplexity CEO） (@AravSrinivas)",
-        "time_ago": "今天"
+        "title": "氪星晚报 ｜国家统计局：2026年上半年全国规模以上文化及相关产业企业营业收入增长4.6%；OpenAI承认AI模型失控入侵事件涉及多个平台",
+        "url": "https://36kr.com/p/3917972674735747?f=rss",
+        "published": "2026-07-30 21:56:03  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-30"
       },
       {
-        "title": "RadixArk 与 Google Cloud 合作，将完整 SGLang 功能引入 TPU",
-        "url": "https://aihot.virxact.com/items/cms7oxay30o4nro2e4t3r6ud2",
-        "published": "Thu, 30 Jul 2026 15:50:35 GMT",
-        "source": "LMSYS：Blog（Chatbot Arena 团队）",
-        "time_ago": "今天"
+        "title": "和我们同龄，却提前告别的人",
+        "url": "https://36kr.com/p/3918001898073737?f=rss",
+        "published": "2026-07-30 18:38:03  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-30"
       }
     ],
     "one_company_news": [
       {
-        "title": "【亏钱指南】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a",
+        "title": "上半年美股复盘：存储芯片半导体，K线虐我如蝼蚁",
+        "url": "https://www.ximalaya.com/sound/1003587637",
+        "published": "Wed, 29 Jul 2026 23:30:00 GMT",
+        "author": "",
         "source": "亏钱指南",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "time_ago": "昨天",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
       },
       {
-        "title": "【天真不天真】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8",
+        "title": "00后摆脱搞钱羞耻：做明星应援扇月入过万，摆摊穿戴甲日入五百",
+        "url": "https://www.ximalaya.com/sound/1002371330",
+        "published": "Wed, 22 Jul 2026 23:30:00 GMT",
+        "author": "",
+        "source": "亏钱指南",
+        "time_ago": "1周前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
+      },
+      {
+        "title": "vol.53 对谈易立竞：折腾vs独处 极致对照组的两种活法答案",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a66487e6356eb2d9be8ca46?utm_source=rss",
+        "published": "Mon, 27 Jul 2026 00:00:00 GMT",
+        "author": "",
         "source": "天真不天真",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "time_ago": "4天前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
       },
       {
-        "title": "【搞钱女孩】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6428b5b9f24d790001e1e5f5",
-        "source": "搞钱女孩",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "title": "vol.52 对谈王安宇：十年可以让一个人发生多少变化",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a4a7af02e335a35a80e7c18?utm_source=rss",
+        "published": "Mon, 06 Jul 2026 00:00:00 GMT",
+        "author": "",
+        "source": "天真不天真",
+        "time_ago": "3周前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
       },
       {
         "title": "【截胡不截财】最新节目",
@@ -709,10 +737,22 @@ const DASHBOARD_DATA = {
         "time_ago": "📱 点击在小宇宙App收听"
       },
       {
-        "title": "【乱翻书】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86",
+        "title": "269. 卷规模 VS 卷创作：真人短剧的两种生存模式",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a4f777d1e32575f5eb3cbc1?utm_source=rss",
+        "published": "Thu, 09 Jul 2026 10:32:06 GMT",
+        "author": "",
         "source": "乱翻书",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "time_ago": "3周前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
+      },
+      {
+        "title": "268.AI时代，个人工作台会重新回到手机吗？",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a3bdd319d2f5743683d4841?utm_source=rss",
+        "published": "Wed, 24 Jun 2026 13:49:54 GMT",
+        "author": "",
+        "source": "乱翻书",
+        "time_ago": "1月前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
       }
     ]
   },
@@ -837,39 +877,44 @@ const DASHBOARD_DATA = {
         "hotness": "🎧"
       },
       {
-        "title": "🎙 【当个事儿】最新节目",
+        "title": "🎙 当个事儿 | 我跟金钱的关系，被谁影响了？| Vol.173",
         "url": "https://www.xiaoyuzhoufm.com/podcast/60d2d172afc14743da181066",
         "source": "当个事儿",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "今天"
       },
       {
-        "title": "🎙 【嗨咻】最新节目",
+        "title": "🎙 嗨咻 | 100. 为什么越想表现自己，越容易在社交中露怯？",
         "url": "https://www.xiaoyuzhoufm.com/podcast/631812fe43274df80456d001",
         "source": "嗨咻",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "昨天"
       },
       {
-        "title": "🎙 【头回当妈】最新节目",
+        "title": "🎙 头回当妈 | 100. 特别节目｜头回当妈的101问 第一弹",
         "url": "https://www.xiaoyuzhoufm.com/podcast/6484fbe126fd9f4b4347ad04",
         "source": "头回当妈",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "2天前"
       },
       {
-        "title": "🎙 【畅所育言】最新节目",
+        "title": "🎙 畅所育言 | 110把感激误认为爱情，把健身练成疲劳，把AI当成答案｜最近想分享的6期播客",
         "url": "https://www.xiaoyuzhoufm.com/podcast/64d25bd580c9ec4c5fbb0da4",
         "source": "畅所育言",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "1周前"
       },
       {
-        "title": "🎙 【Alison Yu心理】最新节目",
+        "title": "🎙 Alison Yu心理 | ep90 | 边界：主体性的表达，真实关系的开始",
         "url": "https://www.xiaoyuzhoufm.com/podcast/67c8dd34d6c2a59e23f2d932",
         "source": "Alison Yu心理",
         "category": "播客",
-        "hotness": "🎧"
+        "hotness": "🎧",
+        "time_ago": "1周前"
       }
     ],
     "keywords": [
@@ -920,59 +965,82 @@ const DASHBOARD_DATA = {
         "time_ago": "今天"
       },
       {
-        "title": "Google Earth 集成 Nano Banana 2 图像生成",
-        "url": "https://aihot.virxact.com/items/cms7w9p0p000fro20pyggbkmb",
-        "published": "Thu, 30 Jul 2026 18:53:09 GMT",
-        "source": "X：Google AI (@GoogleAI)",
-        "time_ago": "今天"
+        "title": "菜鸟CTO李强创业做Physical AI平台，获云启、商汤超亿元种子轮融资｜硬氪首发",
+        "url": "https://36kr.com/p/3917874427555457?f=rss",
+        "published": "2026-07-31 09:52:24  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-31"
       },
       {
-        "title": "OpenRouter 下调 GPT-5.6 Terra/Luna 价格",
-        "url": "https://aihot.virxact.com/items/cms7teqy003lfropbgykvnbjy",
-        "published": "Thu, 30 Jul 2026 17:32:59 GMT",
-        "source": "X：OpenRouter (@OpenRouter)",
-        "time_ago": "今天"
+        "title": "中层消失，Token狂热退潮，硅谷工程师眼里的「AI创业下半场」",
+        "url": "https://36kr.com/p/3918250549931394?f=rss",
+        "published": "2026-07-31 08:30:54  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-31"
       },
       {
-        "title": "GitHub Copilot 应用新增堆叠会话与拉取请求功能",
-        "url": "https://aihot.virxact.com/items/cms7t8vfu0365ropbxnkcx89n",
-        "published": "Thu, 30 Jul 2026 17:30:24 GMT",
-        "source": "GitHub Blog",
-        "time_ago": "今天"
+        "title": "8点1氪丨宇树科技：8月10日网下申购；字节跳动成立新的豆包产品团队；美股三大指数集体收涨，微软创近18年以来最大单日涨幅",
+        "url": "https://36kr.com/p/3918776472022402?f=rss",
+        "published": "2026-07-31 07:48:40  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-31"
       },
       {
-        "title": "Perplexity Computer 推出 Projects 功能",
-        "url": "https://aihot.virxact.com/items/cms7sw59802yyropbrio5ml9u",
-        "published": "Thu, 30 Jul 2026 16:54:48 GMT",
-        "source": "X：Aravind Srinivas（Perplexity CEO） (@AravSrinivas)",
-        "time_ago": "今天"
+        "title": "氪星晚报 ｜国家统计局：2026年上半年全国规模以上文化及相关产业企业营业收入增长4.6%；OpenAI承认AI模型失控入侵事件涉及多个平台",
+        "url": "https://36kr.com/p/3917972674735747?f=rss",
+        "published": "2026-07-30 21:56:03  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-30"
       },
       {
-        "title": "RadixArk 与 Google Cloud 合作，将完整 SGLang 功能引入 TPU",
-        "url": "https://aihot.virxact.com/items/cms7oxay30o4nro2e4t3r6ud2",
-        "published": "Thu, 30 Jul 2026 15:50:35 GMT",
-        "source": "LMSYS：Blog（Chatbot Arena 团队）",
-        "time_ago": "今天"
+        "title": "和我们同龄，却提前告别的人",
+        "url": "https://36kr.com/p/3918001898073737?f=rss",
+        "published": "2026-07-30 18:38:03  +0800",
+        "author": "",
+        "source": "36氪",
+        "time_ago": "07-30"
       }
     ],
     "one_company_news": [
       {
-        "title": "【亏钱指南】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a",
+        "title": "上半年美股复盘：存储芯片半导体，K线虐我如蝼蚁",
+        "url": "https://www.ximalaya.com/sound/1003587637",
+        "published": "Wed, 29 Jul 2026 23:30:00 GMT",
+        "author": "",
         "source": "亏钱指南",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "time_ago": "昨天",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
       },
       {
-        "title": "【天真不天真】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8",
+        "title": "00后摆脱搞钱羞耻：做明星应援扇月入过万，摆摊穿戴甲日入五百",
+        "url": "https://www.ximalaya.com/sound/1002371330",
+        "published": "Wed, 22 Jul 2026 23:30:00 GMT",
+        "author": "",
+        "source": "亏钱指南",
+        "time_ago": "1周前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
+      },
+      {
+        "title": "vol.53 对谈易立竞：折腾vs独处 极致对照组的两种活法答案",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a66487e6356eb2d9be8ca46?utm_source=rss",
+        "published": "Mon, 27 Jul 2026 00:00:00 GMT",
+        "author": "",
         "source": "天真不天真",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "time_ago": "4天前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
       },
       {
-        "title": "【搞钱女孩】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6428b5b9f24d790001e1e5f5",
-        "source": "搞钱女孩",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "title": "vol.52 对谈王安宇：十年可以让一个人发生多少变化",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a4a7af02e335a35a80e7c18?utm_source=rss",
+        "published": "Mon, 06 Jul 2026 00:00:00 GMT",
+        "author": "",
+        "source": "天真不天真",
+        "time_ago": "3周前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
       },
       {
         "title": "【截胡不截财】最新节目",
@@ -981,10 +1049,22 @@ const DASHBOARD_DATA = {
         "time_ago": "📱 点击在小宇宙App收听"
       },
       {
-        "title": "【乱翻书】最新节目",
-        "url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86",
+        "title": "269. 卷规模 VS 卷创作：真人短剧的两种生存模式",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a4f777d1e32575f5eb3cbc1?utm_source=rss",
+        "published": "Thu, 09 Jul 2026 10:32:06 GMT",
+        "author": "",
         "source": "乱翻书",
-        "time_ago": "📱 点击在小宇宙App收听"
+        "time_ago": "3周前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
+      },
+      {
+        "title": "268.AI时代，个人工作台会重新回到手机吗？",
+        "url": "https://www.xiaoyuzhoufm.com/episode/6a3bdd319d2f5743683d4841?utm_source=rss",
+        "published": "Wed, 24 Jun 2026 13:49:54 GMT",
+        "author": "",
+        "source": "乱翻书",
+        "time_ago": "1月前",
+        "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
       }
     ]
   }
