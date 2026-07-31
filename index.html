@@ -3578,14 +3578,16 @@
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // ====== INIT ======
-    // ====== 每日任务滚动：保留未完成项，并补入当天飞书任务 ======
     function localDateKey() {
       const now = new Date();
       return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     }
 
     function cleanTaskText(text) {
-      return String(text || '').trim().replace(/^\d+[.、：:）)\-\s]+/, '').trim();
+      return String(text || '')
+        .replace(/^[✅❌]\s*/, '')
+        .replace(/^\d+[.、：:）)\-\s]+/, '')
+        .trim();
     }
 
     function taskTextKey(task) {
@@ -3617,25 +3619,29 @@
       let nextTasks = [];
 
       if (lastDate === today && savedTasks.length) {
-        const usedFeedIndexes = new Set();
-        nextTasks = savedTasks.map((task) => {
-          const normalized = { ...task, text: cleanTaskText(task.text), done: Boolean(task.done) };
-          if (normalized.sourceId) {
-            const sourceIndex = preparedFeed.findIndex(item => item.sourceId === normalized.sourceId);
-            if (sourceIndex >= 0) usedFeedIndexes.add(sourceIndex);
-            return normalized;
+        const savedNormalized = savedTasks.map(task => ({
+          ...task,
+          text: cleanTaskText(task.text),
+          done: Boolean(task.done)
+        }));
+        const usedSavedIndexes = new Set();
+        nextTasks = preparedFeed.map((task) => {
+          let matchedIndex = -1;
+          if (task.sourceId) {
+            matchedIndex = savedNormalized.findIndex((savedTask, index) =>
+              !usedSavedIndexes.has(index) && savedTask.sourceId === task.sourceId
+            );
           }
-          const matchIndex = preparedFeed.findIndex((item, index) =>
-            !usedFeedIndexes.has(index) && taskTextKey(item) === taskTextKey(normalized)
-          );
-          if (matchIndex >= 0) {
-            usedFeedIndexes.add(matchIndex);
-            normalized.sourceId = preparedFeed[matchIndex].sourceId;
+          if (matchedIndex < 0) {
+            matchedIndex = savedNormalized.findIndex((savedTask, index) =>
+              !usedSavedIndexes.has(index) && taskTextKey(savedTask) === taskTextKey(task)
+            );
           }
-          return normalized;
-        });
-        preparedFeed.forEach((task, index) => {
-          if (!usedFeedIndexes.has(index)) nextTasks.push(task);
+          if (matchedIndex >= 0) {
+            usedSavedIndexes.add(matchedIndex);
+            return { ...task, done: savedNormalized[matchedIndex].done };
+          }
+          return task;
         });
       } else {
         nextTasks = preparedFeed;
