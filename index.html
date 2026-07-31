@@ -1795,7 +1795,7 @@
           <div class="rank-item"><span class="rank-pos silver">2</span><span class="rank-name">产后恢复指南</span><span class="rank-sales">¥9.9</span></div>
         </div>
         <div class="bar-chart">
-          <h4>📈 月营收趋势</h4>
+          <h4>📈 周营收趋势</h4>
           <div class="bars" id="biz-revenue-bars">
             <!-- Dynamically populated -->
           </div>
@@ -2731,9 +2731,9 @@
       col.style.flexDirection = 'column';
       col.style.gap = '0.15rem';
       col.innerHTML = items.slice(0, 10).map(item => {
-        const isPodcast = item.category === '播客' || (item.url && item.url.includes('xiaoyuzhoufm'));
-        // 播客优先用播客主页链接（xiaoyuzhou_url），否则用 item.url
-        const link = (isPodcast && item.xiaoyuzhou_url) ? item.xiaoyuzhou_url : (item.url || '#');
+        const isPodcast = item.category === '播客' || !!item.xiaoyuzhou_url || (item.url && (item.url.includes('xiaoyuzhoufm') || item.url.includes('ximalaya.com')));
+        // 播客优先跳转具体节目链接；没有节目链接时再退回播客主页
+        const link = item.url || item.xiaoyuzhou_url || '#';
         const time = item.time_ago || '';
         const metaStyle = isPodcast ? 'color:var(--green);font-size:0.75rem;' : '';
         const titleText = isPodcast && item.title ? item.title : (item.title || '');
@@ -2888,15 +2888,20 @@
 
       // Render revenue bars
       const barsContainer = document.getElementById('biz-revenue-bars');
-      if (barsContainer && data.monthly_revenue) {
-        const maxRev = Math.max(...data.monthly_revenue.map(m => m.revenue), 1);
+      const revenueTrend = (Array.isArray(data.weekly_revenue) && data.weekly_revenue.length)
+        ? data.weekly_revenue
+        : (Array.isArray(data.monthly_revenue) ? data.monthly_revenue : []);
+      if (barsContainer && revenueTrend.length) {
+        const maxRev = Math.max(...revenueTrend.map(item => Number(item.revenue) || 0), 1);
         const colors = ['purple', 'purple', 'purple', 'pink', 'pink', 'green', 'yellow'];
-        barsContainer.innerHTML = data.monthly_revenue.map((m, i) => {
-          const h = Math.max(3, (m.revenue / maxRev) * 80);
+        barsContainer.innerHTML = revenueTrend.map((item, i) => {
+          const revenue = Number(item.revenue) || 0;
+          const label = item.label || item.week || item.month || '';
+          const h = Math.max(3, (revenue / maxRev) * 80);
           return `<div class="bar-col">
-            <span class="bar-val">¥${m.revenue}</span>
-            <div class="bar-fill ${colors[i]}" style="height:${h}px;"></div>
-            <span class="bar-label">${m.month}</span>
+            <span class="bar-val">¥${revenue}</span>
+            <div class="bar-fill ${colors[i % colors.length]}" style="height:${h}px;"></div>
+            <span class="bar-label">${label}</span>
           </div>`;
         }).join('');
       }

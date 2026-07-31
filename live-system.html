@@ -270,7 +270,7 @@
     .hero-stat-num {
       font-family: 'Fraunces', serif;
       font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 900;
+      font-weight: 600;
       line-height: 1;
       display: block;
     }
@@ -672,6 +672,10 @@
     .inspire-right-card #inspirationContainer {
       flex: 1;
       overflow-y: auto;
+      min-height: 280px;
+      max-height: 50vh;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* 灵感宝箱 - 右侧复选框列表 */
@@ -971,7 +975,7 @@
     .ex-cal-footer-icon { font-size: 1rem; }
     .ex-cal-footer-label { font-size: 0.62rem; color: var(--ink-faint); font-weight: 500; }
     .ex-cal-footer-value {
-      font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 700; color: var(--green);
+      font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 600; color: var(--green);
     }
     .ex-cal-footer-divider {
       width: 1px; height: 30px; background: var(--border); flex-shrink: 0;
@@ -1113,7 +1117,7 @@
     .ring-bg { fill: none; stroke: rgba(201,177,208,0.15); stroke-width: 8; }
     .ring-fg { fill: none; stroke: var(--purple); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 339.292; }
     .reading-ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .reading-ring-center .num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--ink); line-height: 1; }
+    .reading-ring-center .num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; color: var(--ink); line-height: 1; }
     .reading-ring-center .label { font-size: 0.62rem; color: var(--ink-faint); }
     .reading-stat-label { font-size: 0.75rem; color: var(--ink-faint); margin-top: 0.5rem; font-family: 'Caveat', cursive; }
     /* 阅读时长统计 */
@@ -1125,7 +1129,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 2px;
     }
     .reading-time-num {
-      font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 900; color: var(--purple); line-height: 1;
+      font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; color: var(--purple); line-height: 1;
     }
     .reading-time-unit { font-size: 0.65rem; color: var(--ink-faint); }
     .reading-time-label { font-size: 0.68rem; color: var(--ink-faint); margin-top: 2px; }
@@ -1200,7 +1204,7 @@
     .stat-card.yellow { border-top-color: var(--yellow); background: rgba(245,230,163,0.28); }
     .stat-card:not(.green):not(.pink):not(.yellow) { border-top-color: var(--purple); background: rgba(201,177,208,0.18); }
     .stat-card-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
-    .stat-card-num { font-family: 'Fraunces', serif; font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 900; line-height: 1.1; }
+    .stat-card-num { font-family: 'Fraunces', serif; font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 600; line-height: 1.1; }
     .stat-card-num.purple { color: var(--purple); }
     .stat-card-num.pink   { color: var(--pink); }
     .stat-card-num.green  { color: #6BA87A; }
@@ -1217,7 +1221,7 @@
     .rank-pos.silver { background: rgba(201,177,208,0.15); color: #8A6E9E; }
     .rank-pos.bronze { background: rgba(244,194,194,0.2); color: #C47070; }
     .rank-name { flex: 1; font-size: 0.82rem; }
-    .rank-sales { font-family: 'Fraunces', serif; font-size: 0.82rem; font-weight: 700; }
+    .rank-sales { font-family: 'Fraunces', serif; font-size: 0.82rem; font-weight: 600; }
     .bars { display: flex; align-items: flex-end; gap: 8px; height: 100px; padding-top: 0.5rem; }
     .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .bar-fill { width: 100%; border-radius: 4px 4px 0 0; min-height: 3px; transition: height 1s; }
@@ -1266,7 +1270,7 @@
     .finance-big-label { font-family: 'Caveat', cursive; font-size: 0.9rem; color: var(--ink-faint); margin-bottom: 0.3rem; }
     .finance-big-num {
       font-family: 'Fraunces', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: var(--ink); line-height: 1.1;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 600; color: var(--ink); line-height: 1.1;
     }
     .finance-big-num .change { display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; padding: 2px 8px; border-radius: 10px; margin-left: 10px; vertical-align: middle; }
     .finance-big-num .change.up   { background: rgba(168,213,186,0.2); color: #4A8A5C; }
@@ -1274,11 +1278,11 @@
     .finance-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1.2rem; margin-top: 2.2rem; }
     .finance-item { display: flex; flex-direction: column; padding: 0.9rem 1.1rem; border-radius: 12px; background: var(--cream); }
     .finance-item .fl { font-size: 0.75rem; color: var(--ink-light); }
-    .finance-item .fv { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; margin-top: 2px; }
+    .finance-item .fv { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1rem; margin-top: 2px; }
     .fin-rank-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
     .fin-rank-item:last-child { border-bottom: none; }
     .fin-rank-label { font-size: 0.82rem; }
-    .fin-rank-amount { font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.9rem; }
+    .fin-rank-amount { font-family: 'Fraunces', serif; font-weight: 600; font-size: 0.9rem; }
     .fin-rank-bar-bg { width: 100%; height: 4px; border-radius: 2px; background: rgba(45,45,58,0.06); margin-top: 6px; }
     .fin-rank-bar-fill { height: 100%; border-radius: 2px; }
     .finance-yesterday {
@@ -1291,7 +1295,7 @@
     }
     .finance-yesterday-card.income { margin-bottom: 1.5rem; border-left-color: var(--green); }
     .finance-yesterday-label { font-size: 0.7rem; color: var(--ink-faint); }
-    .finance-yesterday-num { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.2rem; color: var(--ink); margin-top: 2px; }
+    .finance-yesterday-num { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.2rem; color: var(--ink); margin-top: 2px; }
     .finance-yesterday-card.income .finance-yesterday-num { color: #4A8A5C; }
 
     /* ====== SCROLL HINT ====== */
@@ -1574,22 +1578,9 @@
       <div class="news-three">
         <div class="news-col reveal">
           <div class="news-col-label">🤖 AI 资讯</div>
-          <a class="news-item" href="https://mp.weixin.qq.com/s/nYh-PQqGxj8Xj-TN9s4g" target="_blank">
-            <div class="news-item-title">2026 AI Agent 元年开启 · 多款产品密集发布</div>
-            <div class="news-item-meta">微信公众号 · 3天前</div>
-          </a>
-          <a class="news-item" href="https://mp.weixin.qq.com/s/abc123def456" target="_blank">
-            <div class="news-item-title">GPT-5 发布，多模态能力再升级</div>
-            <div class="news-item-meta">36氪 · 昨天</div>
-          </a>
-          <a class="news-item" href="https://mp.weixin.qq.com/s/ghi789jkl012" target="_blank">
-            <div class="news-item-title">Claude Code 重大更新，支持自动化编码</div>
-            <div class="news-item-meta">机器之心 · 昨天</div>
-          </a>
-          <a class="news-item" href="https://sspai.com/post/abc123" target="_blank">
-            <div class="news-item-title">独立开发者必备 AI 工具清单（2026版）</div>
-            <div class="news-item-meta">少数派 · 2天前</div>
-          </a>
+          <div id="ai-news-col">
+            <!-- Dynamically populated -->
+          </div>
         </div>
         <div class="news-col reveal reveal-d1">
           <div class="news-col-label" style="color:#C47070;border-color:rgba(244,194,194,0.3);">💔 用户痛点</div>
@@ -1599,22 +1590,9 @@
         </div>
         <div class="news-col reveal reveal-d2">
           <div class="news-col-label" style="color:#6BA87A;border-color:rgba(168,213,186,0.3);">👩‍💼 一人公司</div>
-          <a class="news-item" href="https://mp.weixin.qq.com/s/naval-babies-wealth-logic" target="_blank">
-            <div class="news-item-title">纳瓦尔宝典 · 一人公司的财富逻辑</div>
-            <div class="news-item-meta">公众号 · 3天前</div>
-          </a>
-          <a class="news-item" href="https://www.xiaohongshu.com/search_result?keyword=Don%20Malito%20%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8" target="_blank">
-            <div class="news-item-title">Donaka · 超级个体的内容创业复盘</div>
-            <div class="news-item-meta">小红书 · 2天前</div>
-          </a>
-          <a class="news-item" href="https://sspai.com/post/independent-dev-ai" target="_blank">
-            <div class="news-item-title">独立开发者如何用 AI 把效率提升10倍</div>
-            <div class="news-item-meta">少数派 · 昨天</div>
-          </a>
-          <a class="news-item" href="https://www.xiaohongshu.com/search_result?keyword=%E4%B8%80%E4%BA%BA%E5%85%AC%E5%8F%B8AI%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F" target="_blank">
-            <div class="news-item-title">AI时代的个人商业模式 · 月入过万复盘</div>
-            <div class="news-item-meta">小红书 · 3天前</div>
-          </a>
+          <div id="one-company-col">
+            <!-- Dynamically populated -->
+          </div>
         </div>
       </div>
       <div class="ticker-wrap reveal">
@@ -1792,7 +1770,7 @@
           <div class="rank-item"><span class="rank-pos silver">2</span><span class="rank-name">产后恢复指南</span><span class="rank-sales">¥9.9</span></div>
         </div>
         <div class="bar-chart">
-          <h4>📈 月营收趋势</h4>
+          <h4>📈 周营收趋势</h4>
           <div class="bars" id="biz-revenue-bars">
             <!-- Dynamically populated -->
           </div>
@@ -1843,16 +1821,7 @@
       <div class="card-grid-2 reveal">
         <div class="product-rank">
           <h4>📊 支出分类排名（Top 7）</h4>
-          <div class="fin-rank-item"><span class="rank-pos gold">1</span><span class="fin-rank-label">🏠 房贷</span><span class="fin-rank-amount">¥23,782</span></div>
-          <div class="fin-rank-bar-bg"><div class="fin-rank-bar-fill" style="width:100%; background:var(--purple);"></div></div>
-          <div class="fin-rank-item"><span class="rank-pos silver">2</span><span class="fin-rank-label">👤 赵晗支出</span><span class="fin-rank-amount">¥13,876</span></div>
-          <div class="fin-rank-bar-bg"><div class="fin-rank-bar-fill" style="width:58%; background:var(--pink);"></div></div>
-          <div class="fin-rank-item"><span class="rank-pos bronze">3</span><span class="fin-rank-label">🎁 亲友礼物</span><span class="fin-rank-amount">¥13,789</span></div>
-          <div class="fin-rank-bar-bg"><div class="fin-rank-bar-fill" style="width:58%; background:var(--green);"></div></div>
-          <div class="fin-rank-item"><span class="rank-pos" style="background:rgba(245,230,163,0.2);color:#9A7A10;">4</span><span class="fin-rank-label">🚇 生活日常</span><span class="fin-rank-amount">¥9,450</span></div>
-          <div class="fin-rank-bar-bg"><div class="fin-rank-bar-fill" style="width:40%; background:var(--yellow);"></div></div>
-          <div class="fin-rank-item"><span class="rank-pos" style="background:rgba(168,213,186,0.15);color:#4A8A5C;">5</span><span class="fin-rank-label">🏥 医疗健康</span><span class="fin-rank-amount">¥6,320</span></div>
-          <div class="fin-rank-bar-bg"><div class="fin-rank-bar-fill" style="width:27%; background:var(--green);"></div></div>
+          <div id="expense-category-list"></div>
         </div>
         <div class="bar-chart">
           <h4>📈 月度支出趋势</h4>
@@ -1868,36 +1837,26 @@
     </div>
   </section>
 
-  <script>
-    document.write('<script src="feishu_data/data_latest.js?v=' + Date.now() + '"><\\/script>');
-  </script>
+  <script src="cloud-sync.js?v=20260730-4"></script>
+  <script src="feishu_data/dashboard_data.js?v=20260730-sync3"></script>
   <script>
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
     // This avoids fetch() which is blocked by file:// CORS policy
     // v=8 uses a timestamp so browser always fetches fresh copy after feishu_sync.py regenerates it
+    const DASHBOARD_SCRIPT_URL = 'feishu_data/data_latest.js';
+    const AUTO_REFRESH_INTERVAL_MS = 10 * 60 * 1000;
+    const WAKE_REFRESH_DELAY_MS = 11 * 60 * 1000;
+    let dashboardRefreshInFlight = null;
+    let wakeRefreshTimer = null;
 
     function assignData() {
       if (typeof DASHBOARD_DATA === 'undefined') {
         console.warn('DASHBOARD_DATA not found — dashboard_data.js may be missing');
         return;
       }
-      // 今日安排（计划任务）
-      const rawTasks = DASHBOARD_DATA.tasks || {};
-      window.TASKS_DATA = {
-        date: rawTasks.date || '',
-        tasks: rawTasks.items || rawTasks.tasks || [],
-        raw_tasks_text: rawTasks.raw_text || rawTasks.raw_tasks_text || ''
-      };
-      // 备忘提醒（最新10条）
-      const rawMemos = DASHBOARD_DATA.memos || {};
-      window.MEMOS_DATA = {
-        items: rawMemos.items || [],
-        total: rawMemos.total || 0
-      };
-      // 灵感宝箱（今日收获 + 情绪波动）
+      window.TASKS_DATA = DASHBOARD_DATA.tasks || { tasks: [] };
       window.INSPIRATIONS_DATA = DASHBOARD_DATA.inspirations || { items: [] };
-      // 阅读挑战
       const rawReading = DASHBOARD_DATA.reading || {};
       const weeklyData = rawReading.weekly_data || rawReading.week_data || rawReading;
       const totalData = rawReading.total_data || rawReading.total_stats || rawReading;
@@ -1915,24 +1874,113 @@
         medals: rawReading.medals || [],
         last_synced: rawReading.last_updated || ''
       };
-      // 热点资讯
-      window.HOT_TOPICS_DATA = DASHBOARD_DATA.hotTopics || DASHBOARD_DATA.hot_topics || {};
-      // 一人公司
+      window.HOT_TOPICS_DATA = DASHBOARD_DATA.hotTopics || {};
       window.ONE_COMPANY_DATA = DASHBOARD_DATA.oneCompany || {};
-      // 运动打卡
       window.EXERCISE_DATA = DASHBOARD_DATA.exercise || {};
-      // 已发布笔记
-      const rawNotes = DASHBOARD_DATA.published_notes || {};
-      window.PUBLISHED_NOTES_DATA = {
-        total: typeof rawNotes === 'number' ? rawNotes : (rawNotes.total || 0)
-      };
-      // 财务
-      window.FINANCE_DATA = DASHBOARD_DATA.finance || {};
+      window.MEMOS_DATA = DASHBOARD_DATA.memos || {};
     }
 
     function loadData() {
       assignData();
       renderAll();
+    }
+
+    function extractDashboardObjectFromScript(text) {
+      const startIndex = text.indexOf('{');
+      if (startIndex < 0) throw new Error('dashboard script missing JSON payload');
+      let depth = 0;
+      for (let index = startIndex; index < text.length; index += 1) {
+        const char = text[index];
+        if (char === '{') depth += 1;
+        if (char === '}') depth -= 1;
+        if (depth === 0) return JSON.parse(text.slice(startIndex, index + 1));
+      }
+      throw new Error('dashboard script JSON is incomplete');
+    }
+
+    async function fetchPublishedDashboardData(options) {
+      const opts = options || {};
+      if (dashboardRefreshInFlight && !opts.force) return dashboardRefreshInFlight;
+      dashboardRefreshInFlight = fetch(`${DASHBOARD_SCRIPT_URL}?ts=${Date.now()}`, { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.text();
+        })
+        .then(function (scriptText) {
+          const data = extractDashboardObjectFromScript(scriptText);
+          window.DASHBOARD_DATA = data || {};
+          return window.DASHBOARD_DATA;
+        })
+        .catch(function (error) {
+          if (!opts.silent) console.warn('Published dashboard refresh failed:', error);
+          throw error;
+        })
+        .finally(function () {
+          dashboardRefreshInFlight = null;
+        });
+      return dashboardRefreshInFlight;
+    }
+
+    function getTodayFeedTasks() {
+      const now = new Date();
+      const todayLabel = `${now.getMonth() + 1}月${now.getDate()}日`;
+      const feedDate = String(window.TASKS_DATA?.date || '');
+      return feedDate.includes(todayLabel)
+        ? JSON.parse(JSON.stringify(window.TASKS_DATA?.tasks || []))
+        : [];
+    }
+
+    async function refreshPublishedDashboard(reason, options) {
+      const opts = options || {};
+      try {
+        const previousSync = String(window.DASHBOARD_DATA?.last_sync || '');
+        await fetchPublishedDashboardData({ force: true, silent: opts.silent });
+        assignData();
+        renderAll();
+        initializeTasksForToday(getTodayFeedTasks());
+        const latestSync = String(window.DASHBOARD_DATA?.last_sync || '');
+        if (!opts.silent && latestSync && latestSync !== previousSync) {
+          showToast(`✅ 网站数据已更新（${latestSync}）`);
+        }
+      } catch (error) {
+        if (!opts.silent) {
+          console.warn(`refreshPublishedDashboard(${reason}) failed:`, error);
+          showToast('⚠️ 最新数据暂时拉取失败，稍后会自动重试');
+        }
+      }
+    }
+
+    function scheduleWakeFollowupRefresh() {
+      clearTimeout(wakeRefreshTimer);
+      wakeRefreshTimer = setTimeout(function () {
+        refreshPublishedDashboard('wake-delay', { silent: true });
+      }, WAKE_REFRESH_DELAY_MS);
+    }
+
+    function setupPublishedDataAutoRefresh() {
+      setInterval(function () {
+        if (!document.hidden) refreshPublishedDashboard('interval', { silent: true });
+      }, AUTO_REFRESH_INTERVAL_MS);
+
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) {
+          refreshPublishedDashboard('visibilitychange', { silent: true });
+          scheduleWakeFollowupRefresh();
+        }
+      });
+
+      window.addEventListener('focus', function () {
+        refreshPublishedDashboard('focus', { silent: true });
+      });
+
+      window.addEventListener('pageshow', function () {
+        refreshPublishedDashboard('pageshow', { silent: true });
+        scheduleWakeFollowupRefresh();
+      });
+
+      window.addEventListener('online', function () {
+        refreshPublishedDashboard('online', { silent: true });
+      });
     }
 
     async function refreshTasks() {
@@ -1963,6 +2011,7 @@
           Object.assign(DASHBOARD_DATA, resp.data);
           assignData();
           renderAll();
+          initializeTasksForToday(getTodayFeedTasks());
           icon.textContent = '✅';
           showToast('✅ 飞书数据已同步最新内容！');
           setTimeout(() => { icon.textContent = '🔄'; btn.classList.remove('loading'); }, 2000);
@@ -1988,6 +2037,8 @@
       renderInspirations();
       renderReading();
       renderHotTopics();
+      renderAINews();
+      renderOneCompanyNews();
       renderOneCompany();
       renderFinance();
     }
@@ -2082,23 +2133,51 @@
       }).join('');
     }
 
-    // ====== LATEST MEMOS (vertical list with checkboxes, like todo items) ======
+    // ====== LATEST MEMOS (vertical list, like todo items) ======
     function renderLatestMemos() {
       const container = document.getElementById('memo-display-list');
       if (!container) return;
 
-      // 直接从 MEMOS_DATA 获取最新10条备忘（来自飞书表格E列）
-      const rawItems = MEMOS_DATA?.items || [];
+      // 从 MEMOS_DATA 读取（飞书表格 D 列备忘提醒）
+      const rawMemos = MEMOS_DATA?.items || [];
 
-      if (!rawItems.length) {
+      // 每条备忘的 text 字段可能含有多行（用换行/序号分隔）
+      // 展开为独立条目，同时过滤掉 ✅ 标记完成的行
+      const memos = [];
+      for (const item of rawMemos) {
+        if (!item.text) continue;
+        const lines = item.text.split('\n');
+        for (const line of lines) {
+          let clean = line.trim();
+          if (!clean) continue;
+          // 过滤飞书已划掉的内容：✅ 开头 / 含 ✅ / ~~删除~~ 格式
+          if (clean.startsWith('✅')) continue;
+          if (clean.includes('✅')) continue;
+          if (clean.startsWith('~~') && clean.endsWith('~~')) continue;
+          clean = clean.replace(/^\d+[.、）)]\s*/, '');
+          clean = clean.replace(/^[○◦▪●❖◆🔹🔸1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟]+\s*/, '');
+          clean = clean.replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, '');
+          clean = clean.trim();
+          if (!clean || clean.startsWith('🌿全部待做事项')) continue;
+          memos.push({
+            id: item.date + '_' + memos.length,
+            text: clean
+          });
+        }
+      }
+
+      // 最多10条（MEMOS_DATA 已按日期倒序）
+      const top10 = memos.slice(0, 10);
+
+      if (!top10.length) {
         container.innerHTML = '<div style="color:var(--ink-faint);font-size:0.82rem;text-align:center;padding:1.5rem 0;">暂无备忘提醒 📝</div>';
         return;
       }
 
-      container.innerHTML = rawItems.slice(0, 10).map((m, i) => `
+      container.innerHTML = top10.map((m, i) => `
         <div class="memo-pink-item">
           <span class="memo-pink-num">${i + 1}</span>
-          <span class="memo-pink-text">${m.text || m}</span>
+          <span class="memo-pink-text">${m.text}</span>
         </div>
       `).join('');
     }
@@ -2148,33 +2227,40 @@
       renderLatestMemos();
     }
 
+    function persistTaskOperation() {
+      localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA?.tasks || []));
+      localStorage.setItem('dudu_tasks_updated_at', String(Date.now()));
+      if (window.CloudSync) window.CloudSync.saveNow();
+    }
+
     function toggleTask(el, index) {
-      if (!TASKS_DATA?.tasks?.[index]) return;
-      el.classList.toggle('done');
-      TASKS_DATA.tasks[index].done = !TASKS_DATA.tasks[index].done;
+      if (!window.TASKS_DATA?.tasks?.[index]) return;
+      const task = window.TASKS_DATA.tasks[index];
+      task.done = !task.done;
+      el.classList.toggle('done', task.done);
       const textEl = el.closest('.todo-item')?.querySelector('.todo-text');
-      if (textEl) textEl.classList.toggle('done');
-      localStorage.setItem('dudu_tasks', JSON.stringify(TASKS_DATA.tasks));
+      if (textEl) textEl.classList.toggle('done', task.done);
+      persistTaskOperation();
       updateTodoProgress();
     }
 
     function saveTaskText(index, text) {
-      if (TASKS_DATA?.tasks?.[index]) {
-        TASKS_DATA.tasks[index].text = text.trim();
-        localStorage.setItem('dudu_tasks', JSON.stringify(TASKS_DATA.tasks));
+      if (window.TASKS_DATA?.tasks?.[index]) {
+        window.TASKS_DATA.tasks[index].text = text.trim();
+        persistTaskOperation();
       }
     }
 
     function saveRawTaskText(text) {
-      if (TASKS_DATA) {
-        TASKS_DATA.raw_tasks_text = text.trim();
+      if (window.TASKS_DATA) {
+        window.TASKS_DATA.raw_tasks_text = text.trim();
         localStorage.setItem('dudu_raw_tasks', text.trim());
       }
     }
 
     function openTaskEditor() {
-      const tasks = TASKS_DATA?.tasks || [];
-      const rawText = TASKS_DATA?.raw_tasks_text || '';
+      const tasks = window.TASKS_DATA?.tasks || [];
+      const rawText = window.TASKS_DATA?.raw_tasks_text || '';
       const existingLines = tasks.map(t => t.text).join('\n') || rawText;
 
       const modal = document.createElement('div');
@@ -2206,11 +2292,11 @@
         const text = line.replace(/^✅\s*/, '').trim();
         return { text, done: isDone, priority: 'mid' };
       });
-      if (!TASKS_DATA) TASKS_DATA = {};
-      TASKS_DATA.tasks = newTasks;
-      TASKS_DATA.raw_tasks_text = ta.value;
-      localStorage.setItem('dudu_tasks', JSON.stringify(newTasks));
+      if (!window.TASKS_DATA) window.TASKS_DATA = {};
+      window.TASKS_DATA.tasks = newTasks;
+      window.TASKS_DATA.raw_tasks_text = ta.value;
       localStorage.setItem('dudu_raw_tasks', ta.value);
+      persistTaskOperation();
       document.getElementById('task-editor-modal')?.remove();
       renderTasks();
     }
@@ -2262,38 +2348,50 @@
       return (hasNumbered && items.length > 1) ? items : [text];
     }
 
-    function submitJot() {
+    async function submitJot() {
       const textarea = document.getElementById('jot-area');
       const text = textarea?.value.trim();
       if (!text) return;
-      const type = selectedJotType || 'memo';
+      const type = selectedJotType || 'inspiration';
       const now = new Date();
       const dateStr = `${now.getMonth()+1}月${now.getDate()}日`;
 
       // 按编号拆分，实现分条展示
       const parts = splitNumberedText(text);
+      const submitBtn = document.getElementById('jot-submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '正在写入飞书…';
 
-      // Save to localStorage for now (would sync to Feishu in production)
-      const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
-
-      // 倒序 unshift 以保证列表顺序：第一条在最前
-      const newItems = parts.map((t, idx) => ({
-        id: `local_${now.getTime()}_${idx}`,
-        date: dateStr,
-        type,
-        text: t,
-        done: false,
-        ts: now.toISOString()
-      }));
-      newItems.reverse().forEach(item => jotData.unshift(item));
-      localStorage.setItem('dudu_jots', JSON.stringify(jotData));
-
-      textarea.value = '';
-      document.querySelectorAll('.jot-tag').forEach(t => t.classList.remove('selected'));
-      selectedJotType = null;
-
-      // Re-render
-      renderInspirations();
+      try {
+        if (!window.FeishuSync) throw new Error('同步服务尚未加载');
+        for (const part of parts) {
+          await window.FeishuSync.mutate({ action: 'create', type, text: part });
+        }
+        textarea.value = '';
+        document.querySelectorAll('.jot-tag').forEach(t => t.classList.remove('selected'));
+        selectedJotType = null;
+        showToast('✅ 已写入飞书，手机和电脑将自动同步');
+      } catch (error) {
+        // 网络临时不可用时保留本地副本，避免用户刚输入的内容丢失。
+        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const newItems = parts.map((part, index) => ({
+          id: `local_${now.getTime()}_${index}`,
+          date: dateStr,
+          type,
+          text: part,
+          done: false,
+          ts: now.toISOString(),
+          syncPending: true
+        }));
+        newItems.reverse().forEach(item => jotData.unshift(item));
+        localStorage.setItem('dudu_jots', JSON.stringify(jotData));
+        textarea.value = '';
+        renderInspirations();
+        showToast('⚠️ 飞书暂时无法连接，内容已保存在本机');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '📤 提交';
+      }
     }
 
     // Reclassify jot note (手动重新分类)
@@ -2303,12 +2401,18 @@
       menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
     }
 
-    function reclassifyJot(id, newType) {
+    async function reclassifyJot(id, newType) {
       // Close all menus
       document.querySelectorAll('.reclassify-menu').forEach(m => m.style.display = 'none');
 
-      // If it's a local jot, update localStorage
-      if (id.startsWith('local_')) {
+      if (id.startsWith('live_')) {
+        try {
+          await window.FeishuSync.mutate({ action: 'reclassify', id, type: newType });
+          showToast('✅ 分类已同步到飞书');
+        } catch (error) {
+          showToast('❌ 分类同步失败：' + error.message);
+        }
+      } else if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
         if (jot) {
@@ -2320,9 +2424,16 @@
       renderInspirations();
     }
 
-    function saveJotText(id, newText) {
+    async function saveJotText(id, newText) {
       if (!newText.trim()) return;
-      if (id.startsWith('local_')) {
+      if (id.startsWith('live_')) {
+        try {
+          await window.FeishuSync.mutate({ action: 'update', id, text: newText.trim() });
+          showToast('✅ 修改已同步到飞书');
+        } catch (error) {
+          showToast('❌ 修改同步失败：' + error.message);
+        }
+      } else if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
         if (jot) {
@@ -2332,18 +2443,31 @@
       }
     }
 
-    function deleteJot(id) {
+    async function deleteJot(id) {
       if (!confirm('确定要删除这条记录吗？')) return;
-      if (id.startsWith('local_')) {
+      if (id.startsWith('live_')) {
+        try {
+          await window.FeishuSync.mutate({ action: 'delete', id });
+          showToast('✅ 已从飞书删除');
+        } catch (error) {
+          showToast('❌ 删除失败：' + error.message);
+        }
+      } else if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const filtered = jotData.filter(j => (j.id || `local_${j.ts}`) !== id);
         localStorage.setItem('dudu_jots', JSON.stringify(filtered));
+        // ★ 关键修复：标记为待删除并立即同步到云端，避免刷新后恢复
+        if (window.CloudSync) {
+          window.CloudSync.markDeleted('dudu_jots', id);
+          window.CloudSync.saveNow();
+        }
       } else if (id.startsWith('feishu_')) {
         // 用 localStorage 标记飞书条目为已删除，下次渲染时过滤掉
         const deleted = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
         if (!deleted.includes(id)) {
           deleted.push(id);
           localStorage.setItem('dudu_deleted_feishu', JSON.stringify(deleted));
+          if (window.CloudSync) window.CloudSync.saveNow();
         }
       }
       renderInspirations();
@@ -2361,14 +2485,17 @@
       // 加载已删除的飞书条目 ID 列表
       const deletedFeishuIds = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
 
-      if (INSPIRATIONS_DATA?.items) {
+      if (window.LIVE_INSPIRATIONS_DATA?.items) {
+        window.LIVE_INSPIRATIONS_DATA.items.forEach(item => items.push(item));
+      } else if (INSPIRATIONS_DATA?.items) {
         INSPIRATIONS_DATA.items.forEach((i, di) => {
           if (i.date && i.date.includes(todayStr)) {
             // harvest（今日收获）：放入灵感宝箱
+            // ★ 关键修复：ID 去掉 todayStr，跨天稳定，否则删除状态会失效
             if (i.harvest) {
               const harvestParts = splitNumberedText(i.harvest);
               harvestParts.forEach((t, hi) => {
-                const id = `feishu_h_${di}_${todayStr}_${hi}`;
+                const id = `feishu_h_${di}_${hi}`;
                 if (!deletedFeishuIds.includes(id)) {
                   items.push({ id, date: i.date, type: 'harvest', text: t });
                 }
@@ -2378,13 +2505,28 @@
             if (i.mood) {
               const moodParts = splitNumberedText(i.mood);
               moodParts.forEach((t, mi) => {
-                const id = `feishu_md_${di}_${todayStr}_${mi}`;
+                const id = `feishu_md_${di}_${mi}`;
                 if (!deletedFeishuIds.includes(id)) {
                   items.push({ id, date: i.date, type: 'mood', text: t });
                 }
               });
             }
-            // 备忘提醒(urgent/task/inspiration)属于今日待办板块，不在灵感宝箱展示
+            if (i.task) {
+              splitNumberedText(i.task).forEach((t, ti) => {
+                const id = `feishu_t_${di}_${ti}`;
+                if (!deletedFeishuIds.includes(id)) {
+                  items.push({ id, date: i.date, type: 'task', text: t });
+                }
+              });
+            }
+            if (i.inspiration) {
+              splitNumberedText(i.inspiration).forEach((t, ii) => {
+                const id = `feishu_i_${di}_${ii}`;
+                if (!deletedFeishuIds.includes(id)) {
+                  items.push({ id, date: i.date, type: 'inspiration', text: t });
+                }
+              });
+            }
           }
         });
       }
@@ -2425,7 +2567,7 @@
 
       container.innerHTML = '<div class="inspire-check-list">' +
         items.map(item => {
-          const isDone = doneMap[item.id] || false;
+          const isDone = doneMap[item.id] === true;
           const typeLabel = typeLabelMap[item.type] || '💭 情绪';
           return `<div class="inspire-check-item" data-id="${item.id}" data-type="${item.type}">
             <div class="inspire-check ${isDone ? 'done' : ''}" onclick="toggleInspireCheck('${item.id}')"></div>
@@ -2448,58 +2590,30 @@
 
     function toggleInspireCheck(id) {
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
-      if (doneMap[id]) {
-        delete doneMap[id];
-      } else {
-        doneMap[id] = true;
-      }
+      const doneMeta = JSON.parse(localStorage.getItem('dudu_inspire_done_meta') || '{}');
+      doneMap[id] = doneMap[id] !== true;
+      doneMeta[id] = Date.now();
       localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
+      localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
+      if (window.CloudSync) window.CloudSync.saveNow();
       renderInspirations();
     }
 
     async function refreshInspiration() {
       const btn = document.getElementById('inspireRefreshBtn');
       const icon = document.getElementById('inspireRefreshIcon');
-      // 检测是否在本地服务环境（localhost / 127.0.0.1 / file://）
-      const isLocal = window.location.hostname === 'localhost' ||
-                      window.location.hostname === '127.0.0.1' ||
-                      window.location.protocol === 'file:';
-      if (!isLocal) {
-        icon.textContent = '💡';
-        btn.classList.remove('spinning');
-        showToast('💡 数据刷新需在本机操作，云端数据将在下次同步时自动更新');
-        setTimeout(() => { icon.textContent = '✦'; }, 2000);
-        return;
-      }
       btn.classList.add('spinning');
       icon.textContent = '⟳';
       try {
-        // 调用飞书数据刷新API（与今日待办共用同一个刷新逻辑）
-        const res = await fetch('http://localhost:3847/api/refresh');
-        if (!res.ok) throw new Error('Network response was not ok');
-        const resp = await res.json();
-        
-        if (resp.status === 'ok') {
-          // 合并最新数据
-          Object.assign(DASHBOARD_DATA, resp.data);
-          window.INSPIRATIONS_DATA = DASHBOARD_DATA.inspirations || { items: [] };
-          renderInspirations();
-          renderLatestMemos();
-          icon.textContent = '✅';
-          showToast('✅ 飞书数据已同步最新内容！');
-          setTimeout(() => { icon.textContent = '✦'; btn.classList.remove('spinning'); }, 2000);
-        } else if (resp.status === 'busy') {
-          icon.textContent = '⏳';
-          btn.classList.remove('spinning');
-          showToast('⏳ 同步进行中，请稍候…');
-        } else {
-          throw new Error(resp.message || '刷新失败');
-        }
+        if (!window.FeishuSync) throw new Error('同步服务尚未加载');
+        await window.FeishuSync.refresh(true);
+        icon.textContent = '✅';
+        setTimeout(() => { icon.textContent = '✦'; btn.classList.remove('spinning'); }, 2000);
       } catch(e) {
         console.error('刷新失败:', e);
         icon.textContent = '✗';
         btn.classList.remove('spinning');
-        showToast('❌ 刷新失败，请确保本地服务已启动（python3 server.py）');
+        showToast('❌ 飞书刷新失败：' + e.message);
         setTimeout(() => { icon.textContent = '✦'; }, 2000);
       }
     }
@@ -2525,22 +2639,83 @@
       '情绪管理': 'news-cat-emotion', '运营技巧': 'news-cat-ops'
     };
 
+    // ====== HOT TOPICS / USER PAIN POINTS ======
     function renderHotTopics() {
       const col = document.getElementById('user-pain-points-col');
       if (!col || !HOT_TOPICS_DATA) return;
 
-      const items = HOT_TOPICS_DATA.user_pain_points || [];
-      col.innerHTML = items.map(item => {
-        const cls = CATEGORY_CLASSES[item.category] || 'news-cat-early-preg';
-        const link = item.url || `https://www.xiaohongshu.com/search_result?keyword=${encodeURIComponent(item.title)}`;
+      const allItems = HOT_TOPICS_DATA.user_pain_points || [];
+      // 只展示播客（有 category=播客）
+      const podcastItems = allItems.filter(item => item.category === '播客');
+
+      if (!podcastItems.length) {
+        col.innerHTML = '<div class="news-item-meta" style="padding:8px 0;color:var(--ink-faint);">暂无播客（同步后显示）</div>';
+        return;
+      }
+
+      col.style.display = 'flex';
+      col.style.flexDirection = 'column';
+      col.style.gap = '0.15rem';
+      col.innerHTML = podcastItems.map(item => {
+        const link = item.url || '#';
+        const time = item.time_ago || '';
+        const isPodcast = time && (time.includes('小宇宙') || time.includes('点击收听') || time.includes('点击在小宇宙'));
+        const metaStyle = isPodcast ? 'color:var(--green);font-size:0.75rem;' : '';
         return `
-          <a href="${link}" target="_blank" rel="noopener" class="news-item" style="display:block;color:inherit;text-decoration:none;">
+          <a class="news-item" href="${link}" target="_blank" rel="noopener">
             <div class="news-item-title">${item.title}</div>
-            <div class="news-item-meta">
-              <span class="news-item-cat ${cls}">${item.category}</span>
-              ${item.hotness}
-              ${item.url ? '<span style="margin-left:4px;font-size:0.6rem;color:var(--ink-faint);">🔗 查看原文</span>' : ''}
-            </div>
+            <div class="news-item-meta" style="${metaStyle}">${item.source || ''} · ${time}</div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // ====== AI NEWS RENDERING ======
+    function renderAINews() {
+      const col = document.getElementById('ai-news-col');
+      if (!col) return;
+      const items = HOT_TOPICS_DATA?.ai_news || [];
+      if (!items.length) {
+        col.innerHTML = '<div class="news-item-meta" style="padding:8px 0;color:var(--ink-faint);">暂无AI资讯（同步后显示）</div>';
+        return;
+      }
+      col.innerHTML = items.slice(0, 10).map(item => {
+        const link = item.url || '#';
+        const time = item.time_ago || '';
+        // 标题截断：超过28字截断并加省略号
+        const shortTitle = item.title.length > 28 ? item.title.slice(0, 28) + '…' : item.title;
+        return `
+          <a class="news-item" href="${link}" target="_blank" rel="noopener">
+            <div class="news-item-title">${shortTitle}</div>
+            <div class="news-item-meta">${item.source || ''} · ${time}</div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // ====== ONE-COMPANY NEWS RENDERING ======
+    function renderOneCompanyNews() {
+      const col = document.getElementById('one-company-col');
+      if (!col) return;
+      const items = HOT_TOPICS_DATA?.one_company_news || [];
+      if (!items.length) {
+        col.innerHTML = '<div class="news-item-meta" style="padding:8px 0;color:var(--ink-faint);">暂无内容（同步后显示）</div>';
+        return;
+      }
+      col.style.display = 'flex';
+      col.style.flexDirection = 'column';
+      col.style.gap = '0.15rem';
+      col.innerHTML = items.slice(0, 10).map(item => {
+        const isPodcast = item.category === '播客' || !!item.xiaoyuzhou_url || (item.url && (item.url.includes('xiaoyuzhoufm') || item.url.includes('ximalaya.com')));
+        // 播客优先跳转具体节目链接；没有节目链接时再退回播客主页
+        const link = item.url || item.xiaoyuzhou_url || '#';
+        const time = item.time_ago || '';
+        const metaStyle = isPodcast ? 'color:var(--green);font-size:0.75rem;' : '';
+        const titleText = isPodcast && item.title ? item.title : (item.title || '');
+        return `
+          <a class="news-item" href="${link}" target="_blank" rel="noopener">
+            <div class="news-item-title">${titleText}</div>
+            <div class="news-item-meta" style="${metaStyle}">${item.source || ''}${time ? ' · ' + time : ''}</div>
           </a>
         `;
       }).join('');
@@ -2581,7 +2756,7 @@
       const weekTime = READING_DATA.weekly_read_time;
       const dayTime = READING_DATA.yesterday_read_time;
       const totalHours = READING_DATA.total_read_hours;
-      const totalBooks = READING_DATA.total_finished_books;
+      const totalBooks = READING_DATA.total_finished_books ?? null;
       const weekEl = document.getElementById('reading-week-time');
       const dayEl = document.getElementById('reading-day-time');
       const totalHoursEl = document.getElementById('reading-total-hours');
@@ -2688,15 +2863,20 @@
 
       // Render revenue bars
       const barsContainer = document.getElementById('biz-revenue-bars');
-      if (barsContainer && data.monthly_revenue) {
-        const maxRev = Math.max(...data.monthly_revenue.map(m => m.revenue), 1);
+      const revenueTrend = (Array.isArray(data.weekly_revenue) && data.weekly_revenue.length)
+        ? data.weekly_revenue
+        : (Array.isArray(data.monthly_revenue) ? data.monthly_revenue : []);
+      if (barsContainer && revenueTrend.length) {
+        const maxRev = Math.max(...revenueTrend.map(item => Number(item.revenue) || 0), 1);
         const colors = ['purple', 'purple', 'purple', 'pink', 'pink', 'green', 'yellow'];
-        barsContainer.innerHTML = data.monthly_revenue.map((m, i) => {
-          const h = Math.max(3, (m.revenue / maxRev) * 80);
+        barsContainer.innerHTML = revenueTrend.map((item, i) => {
+          const revenue = Number(item.revenue) || 0;
+          const label = item.label || item.week || item.month || '';
+          const h = Math.max(3, (revenue / maxRev) * 80);
           return `<div class="bar-col">
-            <span class="bar-val">¥${m.revenue}</span>
-            <div class="bar-fill ${colors[i]}" style="height:${h}px;"></div>
-            <span class="bar-label">${m.month}</span>
+            <span class="bar-val">¥${revenue}</span>
+            <div class="bar-fill ${colors[i % colors.length]}" style="height:${h}px;"></div>
+            <span class="bar-label">${label}</span>
           </div>`;
         }).join('');
       }
@@ -2739,6 +2919,26 @@
       if (dailyEl && yearExpenseVal > 0) {
         const daysPassed = 31 + 28 + 31 + 30 + 31 + 30; // Jan-Jun total days
         dailyEl.textContent = '¥' + Math.round(yearExpenseVal / daysPassed).toLocaleString();
+      }
+
+      // ====== 支出分类排名（Top 7）======
+      const expCats = DASHBOARD_DATA?.expense_categories || {};
+      const catContainer = document.getElementById('expense-category-list');
+      if (catContainer) {
+        const items = expCats.items || [];
+        const monthLabel = expCats.month || '上月';
+        if (items.length > 0) {
+          const RANK_COLORS = ['gold', 'silver', 'bronze', '', '', '', ''];
+          const BAR_COLORS = ['var(--purple)', 'var(--pink)', 'var(--green)', 'var(--yellow)', 'var(--green)', 'var(--green)', 'var(--green)'];
+          catContainer.innerHTML = items.map(item => {
+            const rankColor = RANK_COLORS[item.rank - 1] || '';
+            const barColor = BAR_COLORS[item.rank - 1] || 'var(--purple)';
+            const rankClass = rankColor ? `rank-pos ${rankColor}` : `rank-pos`;
+            return `<div class="fin-rank-item"><span class="${rankClass}">${item.rank}</span><span class="fin-rank-label">${item.emoji} ${item.category}</span><span class="fin-rank-amount">${item.amount}</span></div><div class="fin-rank-bar-bg"><div class="fin-rank-bar-fill" style="width:${item.percent}%; background:${barColor};"></div></div>`;
+          }).join('');
+        } else {
+          catContainer.innerHTML = `<p style="color:var(--ink-faint);font-size:0.8rem;text-align:center;padding:1rem 0;">暂无分类数据</p>`;
+        }
       }
 
       // ====== Draw combo chart: expense bars + income line ======
@@ -3028,7 +3228,14 @@
       const firstDay = new Date(year, month - 1, 1).getDay();
       const startDay = firstDay === 0 ? 6 : firstDay - 1;
 
-      const checked = new Set(data.checked_days || []);
+      // localStorage 是用户打卡数据的唯一权威，显示和操作都以它为准
+      const storageKey = 'exercise_checked_' + (data.month_key || '2026-07');
+      let userChecked = [];
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (stored) userChecked = JSON.parse(stored);
+      } catch(e) {}
+      const checked = new Set(userChecked);
       let html = '<span class="cal-wh">一</span><span class="cal-wh">二</span><span class="cal-wh">三</span><span class="cal-wh">四</span><span class="cal-wh">五</span><span class="cal-wh">六</span><span class="cal-wh">日</span>';
 
       for (let i = 0; i < startDay; i++) {
@@ -3050,24 +3257,44 @@
       grid.innerHTML = html;
 
       // Click to toggle check-in + select date
+      // 核心原则：localStorage 是用户打卡数据的唯一权威来源
+      // 服务器数据只用于首次初始化（localStorage 为空时）
       grid.querySelectorAll('.ex-cal-day:not(.empty)').forEach(el => {
         el.addEventListener('click', () => {
           const date = el.dataset.date;
           const day = el.dataset.day;
+          const storageKey = 'exercise_checked_' + (EXERCISE_DATA.month_key || '2026-07');
+          const metaKey = 'exercise_checked_meta_' + (EXERCISE_DATA.month_key || '2026-07');
 
-          // Toggle check-in
-          el.classList.toggle('checked');
-          const checkedSet = new Set(EXERCISE_DATA.checked_days || []);
-          if (el.classList.contains('checked')) {
-            checkedSet.add(day); checkedSet.add(date);
+          // 从 localStorage 读取当前用户打卡记录（唯一权威）
+          let userChecked = [];
+          try {
+            const stored = localStorage.getItem(storageKey);
+            if (stored) userChecked = JSON.parse(stored);
+          } catch(e) {}
+          const checkedSet = new Set(userChecked);
+
+          const nextChecked = !(checkedSet.has(day) || checkedSet.has(date));
+          el.classList.toggle('checked', nextChecked);
+          if (nextChecked) {
+            checkedSet.add(date);
           } else {
             checkedSet.delete(day); checkedSet.delete(date);
           }
-          EXERCISE_DATA.checked_days = [...checkedSet];
-          localStorage.setItem('exercise_checked_' + (EXERCISE_DATA.month_key || '2026-07'), JSON.stringify([...checkedSet]));
 
-          // Update checked label on the cell
-          if (el.classList.contains('checked')) {
+          let operationMeta = {};
+          try {
+            operationMeta = JSON.parse(localStorage.getItem(metaKey) || '{}');
+          } catch(e) {}
+          operationMeta[date] = { checked: nextChecked, updatedAt: Date.now() };
+
+          // 记录每个日期的最后操作，取消打卡也会同步到其他设备。
+          localStorage.setItem(storageKey, JSON.stringify([...checkedSet]));
+          localStorage.setItem(metaKey, JSON.stringify(operationMeta));
+          if (window.CloudSync) window.CloudSync.saveNow();
+
+          // 更新 cell 显示
+          if (nextChecked) {
             el.innerHTML = '✓';
           } else {
             el.innerHTML = el.dataset.day;
@@ -3090,13 +3317,23 @@
       const data = EXERCISE_DATA;
       if (!data) return;
 
+      // localStorage 是用户打卡数据唯一权威
+      const storageKey = 'exercise_checked_' + (data.month_key || '2026-07');
+      let userChecked = [];
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (stored) userChecked = JSON.parse(stored);
+      } catch(e) {}
+      const checkedSet = new Set(userChecked);
+
       // Progress: checked days / total days so far
       const today = new Date();
       const todayDay = today.getDate();
-      const checkedSet = new Set(data.checked_days || []);
+      const monthKey = data.month_key || '2026-07';
       let checkedCount = 0;
       for (let d = 1; d <= todayDay; d++) {
-        if (checkedSet.has(String(d))) checkedCount++;
+        const dateStr = `${monthKey}-${String(d).padStart(2, '0')}`;
+        if (checkedSet.has(String(d)) || checkedSet.has(dateStr)) checkedCount++;
       }
       const progressEl = document.getElementById('ex-cal-progress');
       if (progressEl) progressEl.textContent = `${checkedCount}/${todayDay}`;
@@ -3295,11 +3532,21 @@
         .then(r => r.json())
         .then(data => {
           EXERCISE_DATA = data;
-          // Merge localStorage overrides
-          const stored = localStorage.getItem('exercise_checked_' + (data.month_key || '2026-07'));
-          if (stored) {
-            try { data.checked_days = JSON.parse(stored); } catch(e) {}
+
+          // ── 唯一权威来源：localStorage ──
+          // 服务器数据（飞书表格）仅在首次访问时（localStorage 为空时）用于初始化
+          // 之后所有打卡状态以 localStorage 为准，服务器更新不会影响用户打卡记录
+          const storageKey = 'exercise_checked_' + (data.month_key || '2026-07');
+          const stored = localStorage.getItem(storageKey);
+          if (!stored) {
+            // 首次访问：用服务器数据播种 localStorage
+            if (data.checked_days && data.checked_days.length) {
+              try {
+                localStorage.setItem(storageKey, JSON.stringify(data.checked_days));
+              } catch(e) {}
+            }
           }
+          // 如果 localStorage 已有数据，直接用它，不合并（防止服务器旧数据混入）
 
           // Set default selected = today
           const today = new Date();
@@ -3336,53 +3583,111 @@
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // ====== INIT ======
-    // ====== 每日任务滚动：未完成任务自动滚到第二天 ======
-    function rollTasksToNewDay() {
-      if (!TASKS_DATA) return;
-      const today = new Date().toISOString().slice(0, 10);
+    function localDateKey() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    }
+
+    function cleanTaskText(text) {
+      return String(text || '')
+        .replace(/^[✅❌]\s*/, '')
+        .replace(/^\d+[.、：:）)\-\s]+/, '')
+        .trim();
+    }
+
+    function taskTextKey(task) {
+      return cleanTaskText(task?.text).toLocaleLowerCase('zh-CN');
+    }
+
+    function prepareFeedTasks(tasks, today) {
+      return (Array.isArray(tasks) ? tasks : []).map((task, index) => ({
+        ...task,
+        text: cleanTaskText(task.text),
+        done: Boolean(task.done),
+        sourceId: task.sourceId || `feishu:${today}:${index}`
+      }));
+    }
+
+    function initializeTasksForToday(feedTasks) {
+      if (!window.TASKS_DATA) window.TASKS_DATA = { tasks: [] };
+      const today = localDateKey();
+      const todayLabel = `${new Date().getMonth() + 1}月${new Date().getDate()}日`;
       const lastDate = localStorage.getItem('dudu_last_tasks_date');
-      const saved = localStorage.getItem('dudu_tasks');
+      const preparedFeed = prepareFeedTasks(feedTasks, today);
+      let savedTasks = [];
 
-      // 同一天：直接恢复 localStorage 状态
-      if (lastDate === today && saved) {
-        try {
-          TASKS_DATA.tasks = JSON.parse(saved);
-          renderTasks();
-        } catch(e) {}
-        return;
-      }
+      try {
+        savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
+        if (!Array.isArray(savedTasks)) savedTasks = [];
+      } catch(e) {}
 
-      // 第二天：把昨天 done:false 的任务滚到今日
-      if (lastDate && lastDate !== today && saved) {
-        try {
-          const undone = JSON.parse(saved).filter(t => !t.done);
-          if (undone.length > 0) {
-            const combined = [...(TASKS_DATA.tasks || []), ...undone];
-            TASKS_DATA.tasks = combined;
-            localStorage.setItem('dudu_tasks', JSON.stringify(combined));
-            localStorage.setItem('dudu_last_tasks_date', today);
-            setTimeout(() => showToast(`📋 ${undone.length} 条未完成任务已滚动到今日`), 800);
-            renderTasks();
-            return;
+      let nextTasks = [];
+
+      if (lastDate === today && savedTasks.length) {
+        const savedNormalized = savedTasks.map(task => ({
+          ...task,
+          text: cleanTaskText(task.text),
+          done: Boolean(task.done)
+        }));
+        const usedSavedIndexes = new Set();
+        nextTasks = preparedFeed.map((task) => {
+          let matchedIndex = -1;
+          if (task.sourceId) {
+            matchedIndex = savedNormalized.findIndex((savedTask, index) =>
+              !usedSavedIndexes.has(index) && savedTask.sourceId === task.sourceId
+            );
           }
-        } catch(e) {}
+          if (matchedIndex < 0) {
+            matchedIndex = savedNormalized.findIndex((savedTask, index) =>
+              !usedSavedIndexes.has(index) && taskTextKey(savedTask) === taskTextKey(task)
+            );
+          }
+          if (matchedIndex >= 0) {
+            usedSavedIndexes.add(matchedIndex);
+            return { ...task, done: savedNormalized[matchedIndex].done };
+          }
+          return task;
+        });
+      } else {
+        nextTasks = preparedFeed;
       }
 
-      // 首次访问或无历史：直接用飞书数据，写入日期
-      localStorage.setItem('dudu_tasks', JSON.stringify(TASKS_DATA.tasks || []));
-      localStorage.setItem('dudu_last_tasks_date', today);
+      window.TASKS_DATA.tasks = nextTasks;
+      window.TASKS_DATA.date = todayLabel;
+      const previousJson = JSON.stringify(savedTasks);
+      const nextJson = JSON.stringify(nextTasks);
+      const shouldPersist = lastDate !== today || previousJson !== nextJson;
+
+      if (shouldPersist) {
+        localStorage.setItem('dudu_tasks', nextJson);
+        localStorage.setItem('dudu_last_tasks_date', today);
+        localStorage.setItem('dudu_tasks_updated_at', String(Date.now()));
+        if (window.CloudSync) window.CloudSync.saveNow();
+      }
       renderTasks();
     }
 
-    window.addEventListener('load', () => {
+    window.addEventListener('load', async () => {
       setTimeout(() => {
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
-      // 重要顺序：先 roll 再 load
-      // rollTasksToNewDay() 先读取 localStorage 中昨天的勾选状态，
-      // loadData() 再用飞书今日数据覆盖（这样飞书已划掉的任务不会重新出现）
-      rollTasksToNewDay();
+      // 先保留当天飞书任务，再加载云端状态，最后执行跨天合并。
       loadData();
+      const now = new Date();
+      const todayLabel = `${now.getMonth() + 1}月${now.getDate()}日`;
+      const feedDate = String(window.TASKS_DATA?.date || '');
+      const feedTasks = feedDate.includes(todayLabel)
+        ? JSON.parse(JSON.stringify(window.TASKS_DATA?.tasks || []))
+        : [];
+      if (window.CloudSync) await CloudSync.init();
+      if (window.FeishuSync) {
+        await FeishuSync.refresh(false).catch(error => {
+          console.warn('首次读取飞书失败:', error);
+        });
+      }
+      initializeTasksForToday(feedTasks);
+      refreshPublishedDashboard('load', { silent: true });
+      setupPublishedDataAutoRefresh();
       initExercise();
       const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');
       if (firstNav) firstNav.classList.add('active');
