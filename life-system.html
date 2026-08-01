@@ -692,6 +692,7 @@
       transition: background 0.2s;
     }
     .inspire-check-item:last-child { border-bottom: none; }
+    .inspire-check-item.struck { opacity: 0.5; }
 
     .inspire-check {
       width: 20px; height: 20px; border-radius: 50%;
@@ -2580,18 +2581,11 @@
       // Load done state
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
 
-      // 「划掉」逻辑：
-      // 任务 / 灵感 —— 划掉后从列表隐藏（遵从「没划掉就继续展示」，划掉即视为已处理）
-      // 收获 / 情绪 —— 不遵从划掉逻辑，始终展示（已按当天过滤，过期自然消失）
-      items = items.filter(item => {
-        if (item.type === 'task' || item.type === 'inspiration') {
-          // 飞书划线（删除线）/ 网页划掉回写 ✅ 均为跨设备一致的「已完成」真相源
-          if (item.done) return false;
-          if (item.text && (item.text.includes('✅') || item.text.includes('~~'))) return false;
-          return doneMap[item.id] !== true;
-        }
-        return true;
-      });
+      // 「划掉」逻辑（按用户习惯 2026-08-01 调整）：
+      // 任务 / 灵感 —— 当天划掉【不再立即消失】，渲染为「划线」样式，可随时撤销（防误删）；
+      //   第二天数据刷新时，飞书 rollover 不会把已划线的行带过来，自然不再展示。
+      // 收获 / 情绪 —— 不遵从划掉逻辑，始终展示（已按当天过滤，过期自然消失）。
+      // 注意：这里【不再过滤掉】已划线的任务/灵感，只由下方渲染层加划线样式。
 
       const typeLabelMap = {
         'task':       '📋 任务',
@@ -2608,17 +2602,19 @@
 
       container.innerHTML = '<div class="inspire-check-list">' +
         items.map(item => {
-          const isDone = doneMap[item.id] === true;
+          // 划线（删除线）判定：本地划掉 / 飞书划线 / 旧 ✅~~ 文本 都视为「已完成」显示划线
+          const isStruck = doneMap[item.id] === true || item.done === true ||
+            (item.text && (item.text.includes('✅') || item.text.includes('~~')));
           const typeLabel = typeLabelMap[item.type] || '💭 情绪';
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
           const checkHtml = isToggle
-            ? `<div class="inspire-check ${isDone ? 'done' : ''}" onclick="toggleInspireCheck('${item.id}')"></div>`
+            ? `<div class="inspire-check ${isStruck ? 'done' : ''}" onclick="toggleInspireCheck('${item.id}')"></div>`
             : `<div class="inspire-check" style="visibility:hidden"></div>`;
-          return `<div class="inspire-check-item" data-id="${item.id}" data-type="${item.type}">
+          return `<div class="inspire-check-item ${isStruck ? 'struck' : ''}" data-id="${item.id}" data-type="${item.type}">
             ${checkHtml}
             <div class="inspire-check-body">
-              <div class="inspire-check-text">${item.text}</div>
+              <div class="inspire-check-text ${isStruck ? 'done' : ''}">${item.text}</div>
             </div>
             <div class="inspire-check-actions">
               <div class="reclassify-menu" style="display:none;position:absolute;bottom:100%;right:0;background:white;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.15);padding:8px;z-index:10;gap:4px;flex-wrap:wrap;max-width:200px;">
