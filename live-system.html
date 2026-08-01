@@ -2493,6 +2493,21 @@
 
       const feishuItems = window.LIVE_INSPIRATIONS_DATA?.items || INSPIRATIONS_DATA?.items || [];
       feishuItems.forEach((i, di) => {
+        // 实时数据（worker /api/inspirations）为「单条」结构 {id, date, type, text}
+        if (i && i.type) {
+          const t = i.type;
+          const txt = (i.text != null ? i.text : '').trim();
+          if (!txt) return;
+          const isToday = i.date && i.date.includes(todayStr);
+          // 收获 / 情绪：仅展示「当天」；任务 / 灵感：跨天保留（未划掉就展示）
+          if (t === 'harvest' || t === 'mood') {
+            if (isToday) items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, ts: i.ts });
+          } else {
+            items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, ts: i.ts });
+          }
+          return;
+        }
+        // 嵌入式兜底数据为「行」结构 {date, inspiration, harvest, task, mood}
         const isToday = i.date && i.date.includes(todayStr);
         // 收获 / 情绪：仅展示「当天」发生的，过期自动消失，不遵从「划掉」逻辑
         if (isToday && i.harvest) {
@@ -3575,7 +3590,7 @@
 
     // Load exercise data
     function initExercise() {
-      fetch('feishu_data/exercise_data.json')
+      fetch('feishu_data/exercise_data.json?ts=' + Date.now())
         .then(r => r.json())
         .then(data => {
           EXERCISE_DATA = data;
@@ -3728,7 +3743,17 @@
       setTimeout(() => {
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
-      // 先保留当天飞书任务，再加载云端状态，最后执行跨天合并。
+      // 1) 先拉取飞书实时灵感数据（LIVE），确保首次渲染即用最新数据，避免「旧数据闪一下→新数据」。
+      if (window.FeishuSync) {
+        await FeishuSync.refresh(false).catch(error => {
+          console.warn('首次读取飞书失败:', error);
+        });
+      }
+      // 2) 先初始化运动打卡（把 EXERCISE_DATA 设为当前真实月份），再做后续会触发
+      //    CloudSync._rerender 的任务合并，避免 _rerender 用旧的 EXERCISE_DATA（如 2026-07）
+      //    渲染出「运动打卡先显示 7 月、刷新后才变 8 月」。
+      await initExercise();
+      // 3) 加载云端仪表盘数据并首屏渲染（此时 LIVE 与 EXERCISE_DATA 均已就绪）
       await loadData();
       const now = new Date();
       const todayLabel = `${now.getMonth() + 1}月${now.getDate()}日`;
@@ -3737,15 +3762,9 @@
         ? JSON.parse(JSON.stringify(window.TASKS_DATA?.tasks || []))
         : [];
       if (window.CloudSync) await CloudSync.init();
-      if (window.FeishuSync) {
-        await FeishuSync.refresh(false).catch(error => {
-          console.warn('首次读取飞书失败:', error);
-        });
-      }
       initializeTasksForToday(feedTasks);
       refreshPublishedDashboard('load', { silent: true });
       setupPublishedDataAutoRefresh();
-      initExercise();
       const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');
       if (firstNav) firstNav.classList.add('active');
     });
