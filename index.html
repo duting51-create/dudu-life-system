@@ -2185,6 +2185,7 @@
           if (clean.includes('✅')) continue;
           if (clean.startsWith('~~') && clean.endsWith('~~')) continue;
           clean = clean.replace(/^\d+[.、）)]\s*/, '');
+          clean = clean.replace(/^💡\s*/, '');
           clean = clean.replace(/^[○◦▪●❖◆🔹🔸1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟]+\s*/, '');
           clean = clean.replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, '');
           clean = clean.trim();
@@ -2586,6 +2587,8 @@
       // 收获 / 情绪 —— 不遵从划掉逻辑，始终展示（已按当天过滤，过期自然消失）
       items = items.filter(item => {
         if (item.type === 'task' || item.type === 'inspiration') {
+          // 飞书里的 ✅ 标记是跨设备一致的「已完成」真相源
+          if (item.text && item.text.includes('✅')) return false;
           return doneMap[item.id] !== true;
         }
         return true;
@@ -2635,12 +2638,37 @@
     function toggleInspireCheck(id) {
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
       const doneMeta = JSON.parse(localStorage.getItem('dudu_inspire_done_meta') || '{}');
-      doneMap[id] = doneMap[id] !== true;
+      const nowDone = doneMap[id] !== true;
+      doneMap[id] = nowDone;
       doneMeta[id] = Date.now();
       localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
       localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
       if (window.CloudSync) window.CloudSync.saveNow();
+      // 划掉 → 把 ✅ 标记同步写回飞书对应列（D列灵感 / E列任务），
+      // 使今日待办【备忘提醒】等依赖飞书 ✅ 过滤的模块同步隐藏。
+      if (id.startsWith('live_')) {
+        const item = findInspireItemById(id);
+        if (item && (item.type === 'task' || item.type === 'inspiration')) {
+          const newText = nowDone ? ('✅ ' + item.text) : item.text;
+          if (window.FeishuSync) {
+            window.FeishuSync.mutate({ action: 'update', id, text: newText }).catch(function (e) {
+              console.warn('划掉同步飞书失败（本地已隐藏）:', e);
+            });
+          }
+        }
+      }
       renderInspirations();
+    }
+
+    function findInspireItemById(id) {
+      const sources = [window.LIVE_INSPIRATIONS_DATA, window.INSPIRATIONS_DATA];
+      for (const src of sources) {
+        const items = (src && src.items) || [];
+        for (const it of items) {
+          if (it.id === id) return it;
+        }
+      }
+      return null;
     }
 
     async function refreshInspiration() {
