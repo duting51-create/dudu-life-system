@@ -146,6 +146,44 @@ async function updateCell(env, token, column, rowNumber, value) {
   }
 }
 
+// 以富文本（带样式）方式写入单元格，用于保留 / 设置删除线（划线）等样式。
+async function updateCellRich(env, token, column, rowNumber, segments) {
+  const range = `${env.SHEET_ID}!${column}${rowNumber}:${column}${rowNumber}`;
+  const response = await fetch(
+    `${FEISHU_API}/sheets/v2/spreadsheets/${env.SPREADSHEET_TOKEN}/values`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify({
+        valueRange: { range, values: [[segments]] },
+      }),
+    },
+  );
+  const data = await response.json();
+  if (!response.ok || data.code !== 0) {
+    throw new Error(`写入飞书 Sheet 失败：${data.msg || response.status}`);
+  }
+}
+
+// 把 [{ text, struck }] 行数组按编号写入单元格，struck 为 true 的行加删除线样式（划线）。
+async function writeLinesRich(env, token, column, rowNumber, lines) {
+  const segments = [];
+  lines.forEach((lineObj, idx) => {
+    segments.push({
+      type: "text",
+      text: `${idx + 1}.${lineObj.text}`,
+      style: { strikeThrough: lineObj.struck === true },
+    });
+    if (idx < lines.length - 1) {
+      segments.push({ type: "text", text: "\n", style: {} });
+    }
+  });
+  await updateCellRich(env, token, column, rowNumber, segments);
+}
+
 function shanghaiToday() {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "Asia/Shanghai",
@@ -271,17 +309,70 @@ function storedText(type, value) {
   return type === "inspiration" ? `💡 ${clean}` : clean;
 }
 
+// 去掉行首编号（1. / ❶ / 1、等），保留标记（💡）与正文
+function stripLeadingNumber(raw) {
+  return String(raw)
+    .replace(/^\d+[.、）)\-\s]+/, "")
+    .replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, "")
+    .trim();
+}
+
+// 将单元格原始值（可能是纯字符串，也可能是富文本段数组）归一化为 {text, strike} 段列表。
+// Feishu 的删除线(划线)以富文本段 style.strikeThrough 形式存在，需从段样式中读取。
+function normalizeSegments(value) {
+  if (value == null) return [];
+  if (typeof value === "string") return [{ text: value, strike: false }];
+  if (Array.isArray(value)) {
+    return value.map((seg) => {
+      if (typeof seg === "string") return { text: seg, strike: false };
+      const style = (seg && seg.style) ? seg.style : {};
+      const strike = Boolean(style.strikeThrough) || Boolean(style.strike);
+      return { text: seg && typeof seg.text === "string" ? seg.text : "", strike };
+    });
+  }
+  return [{ text: String(value), strike: false }];
+}
+
+// 把一列单元格值按行拆分，返回 [{ raw, struck }]。
+// raw 保留原始行文本（含编号与 💡 标记），struck 表示该行是否被飞书划线（删除线）。
+function getColumnLinesWithStyle(value) {
+  const segments = normalizeSegments(value);
+  const lines = [];
+  let cur = { text: "", struck: false };
+  for (const seg of segments) {
+    const parts = String(seg.text).split("\n");
+    for (let i = 0; i < parts.length; i += 1) {
+      if (i > 0) {
+        lines.push(cur);
+        cur = { text: "", struck: false };
+      }
+      if (parts[i].length) {
+        cur.text += parts[i];
+        if (seg.strike) cur.struck = true;
+      }
+    }
+  }
+  lines.push(cur);
+  return lines
+    .filter((l) => l.text.trim().length)
+    .map((l) => ({ raw: l.text.trim(), struck: l.struck }));
+}
+
 function listItems(rowNumber, row, date = shanghaiToday()) {
   const items = [];
   for (const [type, config] of Object.entries(TYPE_CONFIG)) {
-    const lines = parseLines(row[config.index]);
-    lines.forEach((line, sourceIndex) => {
-      if (type === "inspiration" && !line.startsWith(config.marker)) return;
+    const lines = getColumnLinesWithStyle(row[config.index]);
+    lines.forEach((lineObj, sourceIndex) => {
+      const cleaned = stripLeadingNumber(lineObj.raw);
+      if (type === "inspiration" && !cleaned.startsWith(config.marker)) return;
+      const display = displayText(type, cleaned);
+      if (!display) return;
       items.push({
         id: `live_${rowNumber}_${config.column}_${sourceIndex}`,
         date: `${date.month}月${date.day}日`,
         type,
-        text: displayText(type, line),
+        text: display,
+        done: lineObj.struck,
         sourceIndex,
       });
     });
@@ -300,32 +391,29 @@ async function rollInspirationsToToday(env, token, rows, current) {
     return { changed: false, count: 0 };
   }
 
-  const state = await env.DUDU_STATE.get(STATE_KEY, "json") || {};
-  const doneMap = state.dudu_inspire_done || {};
   marker = marker || { sourceRow: previous.rowNumber, completedColumns: [], count: 0 };
   const completedColumns = new Set(marker.completedColumns || []);
   let changed = false;
 
   for (const [type, config] of Object.entries(TYPE_CONFIG)) {
     if (completedColumns.has(config.column)) continue;
-    const previousLines = parseLines(previous.row[config.index]);
+    const previousLines = getColumnLinesWithStyle(previous.row[config.index]);
     const carryLines = [];
-    previousLines.forEach((line, sourceIndex) => {
-      if (type === "inspiration" && !line.startsWith(config.marker)) return;
-      const id = `live_${previous.rowNumber}_${config.column}_${sourceIndex}`;
-      if (doneMap[id] !== true) carryLines.push(line);
+    previousLines.forEach((lineObj) => {
+      const cleaned = stripLeadingNumber(lineObj.raw);
+      if (type === "inspiration" && !cleaned.startsWith(config.marker)) return;
+      if (lineObj.struck) return; // 已在飞书划线的（已完成）不滚动到今天
+      carryLines.push({ text: cleaned, struck: false });
     });
 
     if (carryLines.length) {
-      const todayLines = parseLines(current.row[config.index]);
-      await updateCell(
-        env,
-        token,
-        config.column,
-        current.rowNumber,
-        serializeLines(todayLines.concat(carryLines)),
-      );
-      current.row[config.index] = serializeLines(todayLines.concat(carryLines));
+      const todayLines = getColumnLinesWithStyle(current.row[config.index]).map((l) => ({
+        text: stripLeadingNumber(l.raw),
+        struck: l.struck === true,
+      }));
+      const merged = todayLines.concat(carryLines);
+      await writeLinesRich(env, token, config.column, current.rowNumber, merged);
+      current.row[config.index] = serializeLines(merged.map((l) => l.text));
       marker.count += carryLines.length;
       changed = true;
     }
@@ -339,7 +427,6 @@ async function rollInspirationsToToday(env, token, rows, current) {
   await env.DUDU_STATE.put(markerKey, JSON.stringify(marker));
   return { changed, count: marker.count };
 }
-
 async function readTodayInspirations(env) {
   const token = await getTenantToken(env);
   let rows = await readSheet(env, token);
@@ -409,6 +496,20 @@ async function mutateInspiration(env, body) {
   const oldLines = parseLines(row[oldConfig.index]);
   if (target.sourceIndex >= oldLines.length) {
     throw new Error("记录已经变化，请刷新后重试");
+  }
+
+  if (action === "done" || action === "undone") {
+    const struck = action === "done";
+    const lines = getColumnLinesWithStyle(row[oldConfig.index]);
+    if (target.sourceIndex >= lines.length) {
+      throw new Error("记录已经变化，请刷新后重试");
+    }
+    const rebuilt = lines.map((l, idx) => ({
+      text: stripLeadingNumber(l.raw),
+      struck: idx === target.sourceIndex ? struck : (l.struck === true),
+    }));
+    await writeLinesRich(env, token, oldConfig.column, rowNumber, rebuilt);
+    return { updated: body.id, done: struck };
   }
 
   if (action === "delete") {

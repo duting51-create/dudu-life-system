@@ -1902,6 +1902,14 @@
       window.HOT_TOPICS_DATA = DASHBOARD_DATA.hotTopics || {};
       window.ONE_COMPANY_DATA = DASHBOARD_DATA.oneCompany || {};
       window.EXERCISE_DATA = DASHBOARD_DATA.exercise || {};
+      // 运动打卡日历始终跟随当前真实月份，避免嵌入/缓存数据写死旧月份导致刷新先闪 7 月
+      {
+        const _now = new Date();
+        const _curKey = `${_now.getFullYear()}-${String(_now.getMonth() + 1).padStart(2, "0")}`;
+        window.EXERCISE_DATA.month_key = _curKey;
+        window.EXERCISE_DATA.month = `${_now.getFullYear()}年${_now.getMonth() + 1}月`;
+        window.EXERCISE_DATA.month_label = `${_now.getMonth() + 1}月`;
+      }
       window.MEMOS_DATA = DASHBOARD_DATA.memos || {};
     }
 
@@ -2528,7 +2536,7 @@
           if (t === 'harvest' || t === 'mood') {
             if (isToday) items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, ts: i.ts });
           } else {
-            items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, ts: i.ts });
+            items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, done: i.done, ts: i.ts });
           }
           return;
         }
@@ -2579,7 +2587,7 @@
         if (j.type === 'harvest' || j.type === 'mood') {
           if (isToday) items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts });
         } else {
-          items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts });
+          items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts });
         }
       });
 
@@ -2602,8 +2610,9 @@
       // 收获 / 情绪 —— 不遵从划掉逻辑，始终展示（已按当天过滤，过期自然消失）
       items = items.filter(item => {
         if (item.type === 'task' || item.type === 'inspiration') {
-          // 飞书里的 ✅ 标记是跨设备一致的「已完成」真相源
-          if (item.text && item.text.includes('✅')) return false;
+          // 飞书划线（删除线）/ 网页划掉回写 ✅ 均为跨设备一致的「已完成」真相源
+          if (item.done) return false;
+          if (item.text && (item.text.includes('✅') || item.text.includes('~~'))) return false;
           return doneMap[item.id] !== true;
         }
         return true;
@@ -2659,18 +2668,18 @@
       localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
       localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
       if (window.CloudSync) window.CloudSync.saveNow();
-      // 划掉 → 把 ✅ 标记同步写回飞书对应列（D列灵感 / E列任务），
-      // 使今日待办【备忘提醒】等依赖飞书 ✅ 过滤的模块同步隐藏。
+      // 划掉 → 在飞书对应列写「删除线（划线）」，与用户习惯一致（不再用 ✅ 前缀）；
+      // 飞书划线即为跨设备一致的「已完成」真相源，今日待办【备忘提醒】等会同步隐藏。
       if (id.startsWith('live_')) {
-        const item = findInspireItemById(id);
-        if (item && (item.type === 'task' || item.type === 'inspiration')) {
-          const newText = nowDone ? ('✅ ' + item.text) : item.text;
-          if (window.FeishuSync) {
-            window.FeishuSync.mutate({ action: 'update', id, text: newText }).catch(function (e) {
-              console.warn('划掉同步飞书失败（本地已隐藏）:', e);
-            });
-          }
+        if (window.FeishuSync) {
+          window.FeishuSync.mutate({ action: nowDone ? 'done' : 'undone', id }).catch(function (e) {
+            console.warn('划线同步飞书失败（本地已隐藏）:', e);
+          });
         }
+      } else if (id.startsWith('local_')) {
+        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const jot = jotData.find(function (j) { return (j.id || ('local_' + j.ts)) === id; });
+        if (jot) { jot.done = nowDone; localStorage.setItem('dudu_jots', JSON.stringify(jotData)); }
       }
       renderInspirations();
     }
@@ -3615,7 +3624,7 @@
 
     // Load exercise data
     function initExercise() {
-      fetch('feishu_data/exercise_data.json?ts=' + Date.now())
+      return fetch('feishu_data/exercise_data.json?ts=' + Date.now())
         .then(r => r.json())
         .then(data => {
           EXERCISE_DATA = data;
@@ -3788,7 +3797,6 @@
         : [];
       if (window.CloudSync) await CloudSync.init();
       initializeTasksForToday(feedTasks);
-      refreshPublishedDashboard('load', { silent: true });
       setupPublishedDataAutoRefresh();
       const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');
       if (firstNav) firstNav.classList.add('active');

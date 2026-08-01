@@ -502,6 +502,11 @@
           live.items.forEach(function (item) {
             if (item.id === payload.id) item.type = payload.type;
           });
+        } else if (payload.action === 'done' || payload.action === 'undone') {
+          var struck = payload.action === 'done';
+          live.items.forEach(function (item) {
+            if (item.id === payload.id) item.done = struck;
+          });
         }
         window.LIVE_INSPIRATIONS_DATA = live;
         if (typeof renderInspirations === 'function') renderInspirations();
