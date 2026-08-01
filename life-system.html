@@ -2490,55 +2490,54 @@
       // 加载已删除的飞书条目 ID 列表
       const deletedFeishuIds = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
 
-      if (window.LIVE_INSPIRATIONS_DATA?.items) {
-        window.LIVE_INSPIRATIONS_DATA.items.forEach(item => items.push(item));
-      } else if (INSPIRATIONS_DATA?.items) {
-        INSPIRATIONS_DATA.items.forEach((i, di) => {
-          if (i.date && i.date.includes(todayStr)) {
-            // harvest（今日收获）：放入灵感宝箱
-            // ★ 关键修复：ID 去掉 todayStr，跨天稳定，否则删除状态会失效
-            if (i.harvest) {
-              const harvestParts = splitNumberedText(i.harvest);
-              harvestParts.forEach((t, hi) => {
-                const id = `feishu_h_${di}_${hi}`;
-                if (!deletedFeishuIds.includes(id)) {
-                  items.push({ id, date: i.date, type: 'harvest', text: t });
-                }
-              });
+      const feishuItems = window.LIVE_INSPIRATIONS_DATA?.items || INSPIRATIONS_DATA?.items || [];
+      feishuItems.forEach((i, di) => {
+        const isToday = i.date && i.date.includes(todayStr);
+        // 收获 / 情绪：仅展示「当天」发生的，过期自动消失，不遵从「划掉」逻辑
+        if (isToday && i.harvest) {
+          const harvestParts = splitNumberedText(i.harvest);
+          harvestParts.forEach((t, hi) => {
+            const id = `feishu_h_${di}_${hi}`;
+            if (!deletedFeishuIds.includes(id)) {
+              items.push({ id, date: i.date, type: 'harvest', text: t });
             }
-            // mood（情绪波动）：放入灵感宝箱
-            if (i.mood) {
-              const moodParts = splitNumberedText(i.mood);
-              moodParts.forEach((t, mi) => {
-                const id = `feishu_md_${di}_${mi}`;
-                if (!deletedFeishuIds.includes(id)) {
-                  items.push({ id, date: i.date, type: 'mood', text: t });
-                }
-              });
+          });
+        }
+        if (isToday && i.mood) {
+          const moodParts = splitNumberedText(i.mood);
+          moodParts.forEach((t, mi) => {
+            const id = `feishu_md_${di}_${mi}`;
+            if (!deletedFeishuIds.includes(id)) {
+              items.push({ id, date: i.date, type: 'mood', text: t });
             }
-            if (i.task) {
-              splitNumberedText(i.task).forEach((t, ti) => {
-                const id = `feishu_t_${di}_${ti}`;
-                if (!deletedFeishuIds.includes(id)) {
-                  items.push({ id, date: i.date, type: 'task', text: t });
-                }
-              });
+          });
+        }
+        // 任务 / 灵感：不按日期过滤，遵从「没划掉就继续展示」——未划掉的跨天保留
+        if (i.task) {
+          splitNumberedText(i.task).forEach((t, ti) => {
+            const id = `feishu_t_${di}_${ti}`;
+            if (!deletedFeishuIds.includes(id)) {
+              items.push({ id, date: i.date, type: 'task', text: t });
             }
-            if (i.inspiration) {
-              splitNumberedText(i.inspiration).forEach((t, ii) => {
-                const id = `feishu_i_${di}_${ii}`;
-                if (!deletedFeishuIds.includes(id)) {
-                  items.push({ id, date: i.date, type: 'inspiration', text: t });
-                }
-              });
+          });
+        }
+        if (i.inspiration) {
+          splitNumberedText(i.inspiration).forEach((t, ii) => {
+            const id = `feishu_i_${di}_${ii}`;
+            if (!deletedFeishuIds.includes(id)) {
+              items.push({ id, date: i.date, type: 'inspiration', text: t });
             }
-          }
-        });
-      }
+          });
+        }
+      });
 
       const localJots = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
       localJots.forEach(j => {
-        if (j.date && j.date.includes(todayStr)) {
+        const isToday = j.date && j.date.includes(todayStr);
+        // 收获 / 情绪：仅当天展示；任务 / 灵感：跨天保留（未划掉就展示）
+        if (j.type === 'harvest' || j.type === 'mood') {
+          if (isToday) items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts });
+        } else {
           items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts });
         }
       });
@@ -2557,6 +2556,16 @@
       // Load done state
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
 
+      // 「划掉」逻辑：
+      // 任务 / 灵感 —— 划掉后从列表隐藏（遵从「没划掉就继续展示」，划掉即视为已处理）
+      // 收获 / 情绪 —— 不遵从划掉逻辑，始终展示（已按当天过滤，过期自然消失）
+      items = items.filter(item => {
+        if (item.type === 'task' || item.type === 'inspiration') {
+          return doneMap[item.id] !== true;
+        }
+        return true;
+      });
+
       const typeLabelMap = {
         'task':       '📋 任务',
         'inspiration':'💡 灵感',
@@ -2574,10 +2583,15 @@
         items.map(item => {
           const isDone = doneMap[item.id] === true;
           const typeLabel = typeLabelMap[item.type] || '💭 情绪';
+          // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
+          const isToggle = (item.type === 'task' || item.type === 'inspiration');
+          const checkHtml = isToggle
+            ? `<div class="inspire-check ${isDone ? 'done' : ''}" onclick="toggleInspireCheck('${item.id}')"></div>`
+            : `<div class="inspire-check" style="visibility:hidden"></div>`;
           return `<div class="inspire-check-item" data-id="${item.id}" data-type="${item.type}">
-            <div class="inspire-check ${isDone ? 'done' : ''}" onclick="toggleInspireCheck('${item.id}')"></div>
+            ${checkHtml}
             <div class="inspire-check-body">
-              <div class="inspire-check-text ${isDone ? 'done' : ''}">${item.text}</div>
+              <div class="inspire-check-text">${item.text}</div>
             </div>
             <div class="inspire-check-actions">
               <div class="reclassify-menu" style="display:none;position:absolute;bottom:100%;right:0;background:white;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.15);padding:8px;z-index:10;gap:4px;flex-wrap:wrap;max-width:200px;">
@@ -3537,6 +3551,16 @@
         .then(r => r.json())
         .then(data => {
           EXERCISE_DATA = data;
+
+          // 日历始终跟随当前真实月份（而非数据生成时写死的月份）。
+          // 进入新月份（如 8 月）时，日历自动切到当月，无需改 JSON 或等同步脚本。
+          {
+            const _now = new Date();
+            const _curKey = `${_now.getFullYear()}-${String(_now.getMonth() + 1).padStart(2, '0')}`;
+            EXERCISE_DATA.month_key = _curKey;
+            EXERCISE_DATA.month = `${_now.getFullYear()}年${_now.getMonth() + 1}月`;
+            EXERCISE_DATA.month_label = `${_now.getMonth() + 1}月`;
+          }
 
           // ── 唯一权威来源：localStorage ──
           // 服务器数据（飞书表格）仅在首次访问时（localStorage 为空时）用于初始化
