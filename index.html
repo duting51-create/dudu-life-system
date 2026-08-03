@@ -1525,8 +1525,8 @@
     .movie-list, .travel-list, .dates-list { display: flex; flex-direction: column; gap: 7px; max-height: 320px; overflow: auto; }
     .movie-row { display: flex; align-items: center; gap: 8px; background: var(--cream); border-radius: 9px; padding: 8px 10px; font-size: .84rem; }
     .movie-row .mr-check { width: 16px; height: 16px; cursor: pointer; accent-color: var(--purple); flex-shrink: 0; }
-    .movie-row .mr-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .movie-row .mr-title a { color: var(--purple); text-decoration: none; font-weight: 600; }
+    .movie-row .mr-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--purple); font-weight: 600; }
+    .movie-row .mr-title a { color: inherit; text-decoration: none; font-weight: inherit; }
     .movie-row .mr-year { color: var(--ink-faint); font-size: .74rem; margin-left: 6px; }
     .movie-row .mr-rate { color: #E0A100; font-size: .74rem; margin-left: 6px; }
     .movie-row .mr-del { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: none; background: transparent; color: var(--ink-faint); cursor: pointer; font-size: .9rem; line-height: 1; }
@@ -1556,7 +1556,7 @@
       /* 手机端：抽屉式导航（默认隐藏，不遮挡内容），汉堡按钮做明显 */
       .nav-toggle {
         display: flex; align-items: center; justify-content: center; gap: 7px;
-        position: fixed; top: 12px; left: 12px; z-index: 260;
+        position: fixed; top: 50%; left: 12px; z-index: 260; transform: translateY(-50%);
         width: auto; height: 44px; padding: 0 16px;
         border-radius: 22px; border: 2px solid #fff;
         background: linear-gradient(135deg, var(--purple, #7b5cd6), #6a3fd0);
@@ -1591,8 +1591,8 @@
       .side-nav-item .nav-label { opacity: 1; font-size: 0.98rem; font-family: 'Noto Sans SC', sans-serif; color: var(--ink); white-space: nowrap; }
       .side-nav-item.active .nav-label { color: #fff; opacity: 1; }
       .side-nav-item .dot { top: 50%; right: auto; left: 46px; transform: translateY(-50%); }
-      /* 顶部 header 居中，避免被左上角按钮遮挡 */
-      .top-header { justify-content: center; padding: 12px 14px 12px 72px; }
+      /* 顶部 header 居中 */
+      .top-header { justify-content: center; padding: 12px 14px; }
       .top-header .logo { max-width: 100%; }
       /* 布局适配：单栏、合适字号与间距，便于手机阅读 */
       .full-section { padding: 4.5rem 1rem 2rem; }
@@ -2399,7 +2399,7 @@
       };
       window.HOT_TOPICS_DATA = dashboardData.hotTopics || {};
       window.ONE_COMPANY_DATA = dashboardData.oneCompany || {};
-      window.EXERCISE_DATA = dashboardData.exercise || {};
+      syncExerciseData(dashboardData.exercise || {});
       // 运动打卡日历始终跟随当前真实月份，避免嵌入/缓存数据写死旧月份导致刷新先闪 7 月
       {
         const _now = new Date();
@@ -2578,15 +2578,20 @@
     }
 
     function renderAll() {
-      renderTasks();
-      renderLatestMemos();
-      renderInspirations();
-      renderReading();
-      renderHotTopics();
-      renderAINews();
-      renderOneCompanyNews();
-      renderOneCompany();
-      renderFinance();
+      [
+        renderTasks,
+        renderLatestMemos,
+        renderInspirations,
+        renderReading,
+        renderHotTopics,
+        renderAINews,
+        renderOneCompanyNews,
+        renderOneCompany,
+        renderFinance,
+        renderExerciseModule
+      ].forEach(function (renderer) {
+        try { renderer(); } catch (error) { console.warn('render failed:', renderer && renderer.name, error); }
+      });
     }
 
     // ====== TASKS RENDERING ======
@@ -3451,9 +3456,8 @@
 
     // ====== ONE COMPANY RENDERING ======
     function renderOneCompany() {
-      if (!ONE_COMPANY_DATA) return;
-
-      const data = ONE_COMPANY_DATA;
+      const data = window.ONE_COMPANY_DATA || {};
+      if (!Object.keys(data).length) return;
 
       // Update section stats
       if (data.total_revenue) document.getElementById('biz-revenue').textContent = data.total_revenue;
@@ -3769,6 +3773,11 @@
 
     // ====== EXERCISE DATA — Calendar + Daily Plan + B站 Videos ======
     let EXERCISE_DATA = null;
+    function syncExerciseData(data) {
+      EXERCISE_DATA = data && typeof data === 'object' ? data : {};
+      window.EXERCISE_DATA = EXERCISE_DATA;
+      return EXERCISE_DATA;
+    }
 
     // Cover lookup: bvid → local cover images (from Feishu exercise table)
     const VIDEO_COVER_MAP = {
@@ -3820,8 +3829,10 @@
 
     // Calendar rendering
     function renderCalendar(data) {
+      syncExerciseData(data);
       const grid = document.getElementById('ex-calendar-grid');
       const monthLabel = document.getElementById('ex-calendar-month');
+      if (!grid) return;
       if (monthLabel) monthLabel.textContent = data.month || '';
 
       const today = new Date();
@@ -3960,6 +3971,7 @@
     // Select a date: update right panel
     function selectDate(dateStr) {
       if (!dateStr) return;
+      if (EXERCISE_DATA) EXERCISE_DATA.selected_date = dateStr;
       const d = new Date(dateStr + (dateStr.includes('T') ? '' : 'T00:00:00'));
       const month = d.getMonth() + 1;
       const day = d.getDate();
@@ -4130,12 +4142,24 @@
         </div>`;
     }
 
+    function renderExerciseModule() {
+      var data = syncExerciseData(window.EXERCISE_DATA || EXERCISE_DATA || {});
+      if (!data || !Object.keys(data).length) return;
+      if (!data.selected_date) data.selected_date = todayKey();
+      renderCalendar(data);
+      selectDate(data.selected_date);
+    }
+
     // Load exercise data
     function initExercise() {
+      if (window.EXERCISE_DATA && Object.keys(window.EXERCISE_DATA).length) {
+        renderExerciseModule();
+        return Promise.resolve(window.EXERCISE_DATA);
+      }
       return fetch('feishu_data/exercise_data.json?ts=' + Date.now())
         .then(r => r.json())
         .then(data => {
-          EXERCISE_DATA = data;
+          syncExerciseData(data);
 
           // 日历始终跟随当前真实月份（而非数据生成时写死的月份）。
           // 进入新月份（如 8 月）时，日历自动切到当月，无需改 JSON 或等同步脚本。
@@ -4177,6 +4201,7 @@
             const todayEl = document.querySelector(`.ex-cal-day[data-date="${todayStr}"]`);
             if (todayEl) todayEl.classList.add('selected');
           }, 50);
+          return data;
         })
         .catch(() => {
           document.getElementById('ex-calendar-grid').innerHTML =
