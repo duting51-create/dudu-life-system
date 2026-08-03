@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
     }
   ]
 };
@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们是独立的个体，却不是孤独的存在。",
-  "source": "千里共良宵"
+  "content": "奇怪的动物会被保护起来，奇怪的人却遭受排挤。",
+  "source": "阳光劫匪"
 };
 window.updated = "2026-08-03";
 window.list = [
@@ -174,7 +174,7 @@ window.list = [
   },
   {
     "name": "畅所育言",
-    "latest": "111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区"
+    "latest": "最新单集加载中…"
   },
   {
     "name": "当个事儿",
@@ -182,6 +182,6 @@ window.list = [
   },
   {
     "name": "Alison Yu心理",
-    "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
+    "latest": "最新单集加载中…"
   }
 ];
