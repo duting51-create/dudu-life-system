@@ -477,6 +477,8 @@
       } catch (error) {}
       try { if (typeof renderTasks === 'function') renderTasks(); } catch (error) {}
       try { if (typeof renderInspirations === 'function') renderInspirations(); } catch (error) {}
+      try { if (typeof window.renderDouban === 'function') window.renderDouban(); } catch (error) {}
+      try { if (typeof window.renderTravel === 'function') window.renderTravel(); } catch (error) {}
       try {
         if (typeof renderCalendar === 'function' && window.EXERCISE_DATA) {
           renderCalendar(window.EXERCISE_DATA);
