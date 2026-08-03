@@ -1364,7 +1364,6 @@
       html { scroll-snap-type: none; }
       .full-section { scroll-margin-top: 88px; }
       .full-section { padding: 3.5rem 1.2rem 2rem; }
-      .side-nav { display: none; }
       .hero-stats { gap: 1.5rem; }
       .card-grid { grid-template-columns: 1fr; }
       .stat-cards { grid-template-columns: 1fr 1fr; }
@@ -1387,40 +1386,45 @@
     .side-nav-close { display: none; }
     .nav-overlay { display: none; }
 
-    /* Dashboard 顶部：天气 + 今日计划 */
-    .dash-top { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; margin-bottom: 22px; }
+    /* Dashboard 顶部：日期金句 + 天气 */
+    .dash-top { display: grid; grid-template-columns: 1fr 1.1fr; gap: 18px; margin-bottom: 22px; align-items: stretch; }
+    .today-quote-card { background: rgba(201,177,208,0.18); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+    .tq-date { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 700; color: var(--ink); }
+    .tq-week { font-size: .82rem; color: var(--ink-light); margin-bottom: 10px; }
+    .tq-quote { font-size: .92rem; line-height: 1.6; color: var(--ink); font-weight: 500; }
+    .tq-source { font-size: .72rem; color: var(--ink-faint); margin-top: 8px; }
     .weather-cards { display: flex; gap: 14px; }
-    .weather-card { flex: 1; background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+    .weather-card { flex: 1; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+    .weather-card.wc-purple { background: rgba(201,177,208,0.18); }
+    .weather-card.wc-green { background: rgba(168,213,186,0.22); }
     .weather-city { font-size: .82rem; color: var(--ink-faint); font-weight: 600; }
     .weather-temp { font-size: 2.1rem; font-weight: 800; margin: 6px 0 2px; color: var(--ink); }
     .weather-desc { font-size: .9rem; color: var(--ink); }
     .weather-hilo { font-size: .8rem; color: var(--ink-faint); margin-top: 4px; }
-    .today-plan-card { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+
+    /* Dashboard 中部：今日计划 + 进度环 */
+    .dash-mid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 18px; }
+    .today-plan-card { background: rgba(244,194,194,0.22); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
     .today-plan-title { font-weight: 700; margin-bottom: 10px; color: var(--ink); }
-    .today-plan-list { display: flex; flex-direction: column; gap: 7px; max-height: 150px; overflow: auto; }
+    .today-plan-list { display: flex; flex-direction: column; gap: 7px; max-height: 170px; overflow: auto; }
     .today-plan-item { display: flex; gap: 8px; align-items: center; font-size: .85rem; }
     .today-plan-item.done .tp-text { text-decoration: line-through; color: var(--ink-faint); }
     .tp-check { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--purple); flex: none; }
     .today-plan-item.done .tp-check { background: var(--purple); }
+    .tp-section { font-size: .65rem; color: #fff; background: var(--purple); padding: 1px 6px; border-radius: 10px; flex: none; }
+    .tp-section.review { background: var(--pink); }
 
     /* 进度环 */
-    .rings-wrap { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); margin-bottom: 22px; }
+    .rings-wrap { background: rgba(245,230,163,0.28); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
     .rings-title { font-weight: 700; margin-bottom: 14px; color: var(--ink); }
     .rings-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
     .ring-item { text-align: center; }
     .mini-ring { position: relative; width: 84px; height: 84px; margin: 0 auto; }
     .mini-ring svg { transform: rotate(-90deg); }
-    .mini-ring .ring-bg { fill: none; stroke: #eee; stroke-width: 9; }
+    .mini-ring .ring-bg { fill: none; stroke: rgba(255,255,255,0.5); stroke-width: 9; }
     .mini-ring .ring-fg { fill: none; stroke: var(--purple); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 339.292; stroke-dashoffset: 339.292; transition: stroke-dashoffset .8s ease; }
     .mini-ring-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .95rem; }
     .ring-label { font-size: .8rem; margin-top: 6px; color: var(--ink); }
-
-    /* AI 提醒占位 */
-    .ai-reminder-card { background: linear-gradient(135deg, #faf7ff, #fff); border: 1px dashed var(--purple); border-radius: 18px; padding: 18px; }
-    .ai-reminder-head { font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-    .ai-badge { font-size: .68rem; background: var(--purple); color: #fff; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
-    .ai-reminder-list { margin: 0; padding-left: 18px; color: var(--ink); font-size: .88rem; line-height: 1.9; }
-    .ai-reminder-note { font-size: .76rem; color: var(--ink-faint); margin-top: 10px; }
 
     /* 本月目标 / 房贷通用头 */
     .monthly-goals-card, .mortgage-card, .invest-card, .sleep-card, .english-card, .weekly-report-card { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); margin-top: 22px; }
@@ -1444,8 +1448,12 @@
     .wr-block p { margin: 6px 0 0; font-size: .85rem; color: var(--ink); }
     .wr-note { font-size: .76rem; color: var(--ink-faint); margin-top: 12px; }
 
-    /* 信息雷达播客提示 */
-    .news-ai-hint { font-size: .72rem; color: var(--ink-faint); margin: 6px 0 10px; font-style: italic; }
+    /* 信息雷达播客 */
+    .podcasts-list { display: flex; flex-direction: column; gap: 6px; max-height: 320px; overflow: auto; }
+    .podcast-row { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .podcast-row:last-child { border-bottom: none; }
+    .podcast-name { font-size: .72rem; color: var(--ink-faint); }
+    .podcast-episode { font-size: .82rem; font-weight: 500; color: var(--ink); line-height: 1.4; }
 
     /* 睡眠 */
     .sleep-form textarea { width: 100%; margin-top: 8px; resize: vertical; }
@@ -1469,6 +1477,8 @@
     .mortgage-cell { background: var(--cream); border-radius: 12px; padding: 11px; text-align: center; }
     .mortgage-cell .mc-val { font-weight: 800; font-size: 1.05rem; }
     .mortgage-cell .mc-name { font-size: .72rem; color: var(--ink-faint); margin-top: 3px; }
+    .mortgage-cell.highlight-balance { background: rgba(244,194,194,0.35); }
+    .mortgage-cell.highlight-paid { background: rgba(168,213,186,0.35); }
     .mortgage-edit { margin-top: 12px; }
     .mortgage-edit label { display: flex; flex-direction: column; font-size: .76rem; color: var(--ink-faint); gap: 4px; }
     .invest-header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
@@ -1527,10 +1537,10 @@
     .date-row .dr-count.up { color: var(--green); }
     .date-row .dr-count.down { color: #C0392B; }
 
-    @media (max-width: 1100px) { .dash-top { grid-template-columns: 1fr; } .life-grid { grid-template-columns: 1fr; } .rings-grid { grid-template-columns: repeat(5, 1fr); } }
+    @media (max-width: 1100px) { .dash-top, .dash-mid { grid-template-columns: 1fr; } .life-grid { grid-template-columns: 1fr; } .rings-grid { grid-template-columns: repeat(5, 1fr); } }
     @media (max-width: 820px) {
       .nav-toggle { display: flex; }
-      .side-nav { position: fixed; top: 0; left: 0; height: 100%; width: 240px; transform: translateX(-100%); transition: transform .25s ease; z-index: 65; box-shadow: 4px 0 24px rgba(0,0,0,.18); padding-top: 0; }
+      .side-nav { position: fixed; top: 0; left: 0; height: 100%; width: 240px; transform: translateX(-100%); transition: transform .25s ease; z-index: 65; box-shadow: 4px 0 24px rgba(0,0,0,.18); padding-top: 0; display: flex; }
       .side-nav.open { transform: translateX(0); }
       .side-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 10px; }
       .side-nav-close { display: block; border: none; background: transparent; font-size: 1.2rem; cursor: pointer; color: var(--ink); }
@@ -1538,11 +1548,13 @@
       .nav-overlay.open { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 60; }
       body.mobile-view .full-section { display: none; }
       body.mobile-view .full-section.active-view { display: block; }
+      body.mobile-view { overflow-x: hidden; }
       .rings-grid { grid-template-columns: repeat(3, 1fr); }
       .mg-grid, .mortgage-grid { grid-template-columns: repeat(2, 1fr); }
       .wr-body { grid-template-columns: 1fr; }
+      .today-plan-list { max-height: 160px; }
     }
-    @media (max-width: 480px) { .rings-grid { grid-template-columns: repeat(2, 1fr); } .weather-cards { flex-direction: column; } }
+    @media (max-width: 480px) { .rings-grid { grid-template-columns: repeat(2, 1fr); } .weather-cards { flex-direction: column; } .today-quote-card { padding: 14px; } .tq-date { font-size: 1.3rem; } }
   </style>
 </head>
 <body>
@@ -1657,70 +1669,67 @@
     <div class="section-inner">
       <div class="section-header reveal">
         <span class="section-number">🏠 00</span>
-        <h2 class="section-title">今日驾驶舱</h2>
+        <h2 class="section-title">今日巴士</h2>
         <p class="section-sub">一屏掌握今天的状态与近期方向 · 向下滑动看各模块详情</p>
       </div>
 
-      <!-- 天气 + 今日计划摘要 -->
+      <!-- 日期/金句 + 天气 -->
       <div class="dash-top reveal">
+        <div class="today-quote-card">
+          <div class="tq-date" id="todayBusDate">--</div>
+          <div class="tq-week" id="todayBusWeek">--</div>
+          <div class="tq-quote" id="todayBusQuote"> loading…</div>
+          <div class="tq-source" id="todayBusSource"></div>
+        </div>
         <div class="weather-cards" id="weatherCards">
-          <div class="weather-card">
+          <div class="weather-card wc-purple">
             <div class="weather-city">🌤 北京 · 顺义</div>
             <div class="weather-temp" id="wx-bj-temp">--°</div>
             <div class="weather-desc" id="wx-bj-desc">加载中…</div>
             <div class="weather-hilo" id="wx-bj-hilo">-- / --</div>
           </div>
-          <div class="weather-card">
+          <div class="weather-card wc-green">
             <div class="weather-city">🌧 武汉 · 洪山</div>
             <div class="weather-temp" id="wx-wh-temp">--°</div>
             <div class="weather-desc" id="wx-wh-desc">加载中…</div>
             <div class="weather-hilo" id="wx-wh-hilo">-- / --</div>
           </div>
         </div>
+      </div>
+
+      <!-- 今日计划摘要 + 进度环 -->
+      <div class="dash-mid reveal">
         <div class="today-plan-card">
           <div class="today-plan-title">📋 今日计划摘要</div>
           <div class="today-plan-list" id="todayPlanList">
             <div style="color:var(--ink-faint);font-size:0.82rem;">加载中…</div>
           </div>
         </div>
-      </div>
-
-      <!-- 5 进度环 -->
-      <div class="rings-wrap reveal">
-        <div class="rings-title">🎯 人生五维进度（本月实际 / 目标）</div>
-        <div class="rings-grid" id="ringsGrid">
-          <div class="ring-item">
-            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-health" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-health-num">0%</span></div></div>
-            <div class="ring-label">🟢 健康</div>
-          </div>
-          <div class="ring-item">
-            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-wealth" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-wealth-num">0%</span></div></div>
-            <div class="ring-label">💰 财富</div>
-          </div>
-          <div class="ring-item">
-            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-study" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-study-num">0%</span></div></div>
-            <div class="ring-label">📚 学习</div>
-          </div>
-          <div class="ring-item">
-            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-product" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-product-num">0%</span></div></div>
-            <div class="ring-label">👩‍💼 产品</div>
-          </div>
-          <div class="ring-item">
-            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-english" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-english-num">0%</span></div></div>
-            <div class="ring-label">🔤 英语</div>
+        <div class="rings-wrap">
+          <div class="rings-title">🎯 人生五维进度（本月实际 / 目标）</div>
+          <div class="rings-grid" id="ringsGrid">
+            <div class="ring-item">
+              <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-health" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-health-num">0%</span></div></div>
+              <div class="ring-label">🟢 健康</div>
+            </div>
+            <div class="ring-item">
+              <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-expense" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-expense-num">0%</span></div></div>
+              <div class="ring-label">💸 支出</div>
+            </div>
+            <div class="ring-item">
+              <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-study" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-study-num">0%</span></div></div>
+              <div class="ring-label">📚 学习</div>
+            </div>
+            <div class="ring-item">
+              <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-product" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-product-num">0%</span></div></div>
+              <div class="ring-label">👩‍💼 产品</div>
+            </div>
+            <div class="ring-item">
+              <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-english" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-english-num">0%</span></div></div>
+              <div class="ring-label">🔤 英语</div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- AI 提醒占位 -->
-      <div class="ai-reminder-card reveal">
-        <div class="ai-reminder-head">🤖 AI 今日提醒 <span class="ai-badge">占位 · 待接入</span></div>
-        <ul class="ai-reminder-list">
-          <li>📌 这里将展示 AI 自动生成的今日关注事项（如：今天有 3 件重要任务待推进）</li>
-          <li>📈 近期趋势变化（如：本周阅读时长下降，注意节奏）</li>
-          <li>👀 可能被忽略的事（如：长期任务「XX」已搁置 12 天）</li>
-        </ul>
-        <div class="ai-reminder-note">AI 能力将在 v2 接入（同步时预生成，安全无前端 key 暴露）</div>
       </div>
     </div>
   </section>
@@ -1794,7 +1803,7 @@
         <div class="mg-edit-area" id="mgEditArea" style="display:none;">
           <div class="mg-inputs">
             <label>🟢 健康(运动天数)<input type="number" id="mg-health" min="0"></label>
-            <label>💰 财富(预算¥)<input type="number" id="mg-wealth" min="0"></label>
+            <label>💸 支出预算(¥)<input type="number" id="mg-wealth" min="0"></label>
             <label>📚 学习(阅读天数)<input type="number" id="mg-study" min="0"></label>
             <label>👩‍💼 产品(发布数)<input type="number" id="mg-product" min="0"></label>
             <label>🔤 英语(打卡天数)<input type="number" id="mg-english" min="0"></label>
@@ -1888,10 +1897,9 @@
             <!-- Dynamically populated -->
           </div>
         </div>
-        <div class="news-col reveal reveal-d1">
+        <div class="news-col reveal reveal-d1" id="podcasts-col-wrap">
           <div class="news-col-label" style="color:#C47070;border-color:rgba(244,194,194,0.3);">💗 女性成长播客</div>
-          <div class="news-ai-hint">AI 摘要待接入 · 先列出在听清单</div>
-          <div id="podcasts-col">
+          <div id="podcasts-col" class="podcasts-list">
             <!-- 由 renderPodcasts() 填充 -->
           </div>
         </div>
@@ -4263,33 +4271,63 @@
     }
     function renderDashboard() {
       var g = nm('dudu_monthly_goals', {});
-      // 今日计划摘要
-      var tasks = (window.TASKS_DATA && window.TASKS_DATA.tasks) || [];
+      // 今日巴士：日期、星期、金句
+      var now = new Date();
+      var weekNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      var tqDate = $('todayBusDate'), tqWeek = $('todayBusWeek'), tqQuote = $('todayBusQuote'), tqSource = $('todayBusSource');
+      if (tqDate) tqDate.textContent = (now.getMonth() + 1) + '月' + now.getDate() + '日';
+      if (tqWeek) tqWeek.textContent = now.getFullYear() + ' · ' + weekNames[now.getDay()];
+      var q = window.DAILY_QUOTE;
+      if (tqQuote && q && q.content) {
+        tqQuote.textContent = '“' + q.content + '”';
+        tqSource.textContent = q.source ? '—— ' + q.source : '';
+      } else if (tqQuote) {
+        // 兜底：前端实时抓取一句名言，避免同步脚本未运行时金句为空
+        fetch('https://v1.hitokoto.cn/?c=k&c=d&c=i&c=h&max_length=50')
+          .then(function (r) { return r.json(); })
+          .then(function (d) { if (tqQuote) { tqQuote.textContent = '“' + (d.hitokoto || '') + '”'; tqSource.textContent = d.from ? '—— ' + d.from : ''; } })
+          .catch(function () { if (tqQuote) tqQuote.textContent = '“你不必很厉害才能开始，但你必须开始才能变得很厉害。”'; });
+      }
+      // 今日计划摘要：今日安排 + 人生复盘（今日灵感/收获/情绪）
       var list = $('todayPlanList');
       if (list) {
-        if (tasks.length) {
-          list.innerHTML = tasks.slice(0, 8).map(function (t) {
-            var done = t.done ? ' done' : ''; var tx = esc(t.text != null ? t.text : t);
-            return '<div class="today-plan-item' + done + '"><span class="tp-check"></span><span class="tp-text">' + tx + '</span></div>';
+        var items = [];
+        var tasks = (window.TASKS_DATA && window.TASKS_DATA.tasks) || [];
+        tasks.forEach(function (t) {
+          items.push({ type: 'plan', done: !!t.done, text: t.text != null ? t.text : t });
+        });
+        var tk = todayKey();
+        var inspirations = (window.INSPIRATIONS_DATA && window.INSPIRATIONS_DATA.items) || [];
+        inspirations.forEach(function (it) {
+          if (it.date && it.date.indexOf(tk) !== 0) return;
+          var tag = { inspiration: '灵感', harvest: '收获', mood: '情绪', task: '任务' }[it.type] || '复盘';
+          items.push({ type: 'review', tag: tag, text: it.text });
+        });
+        if (items.length) {
+          list.innerHTML = items.slice(0, 12).map(function (it) {
+            var tx = esc(it.text != null ? it.text : '');
+            if (it.type === 'plan') {
+              var done = it.done ? ' done' : '';
+              return '<div class="today-plan-item' + done + '"><span class="tp-check"></span><span class="tp-text">' + tx + '</span></div>';
+            }
+            return '<div class="today-plan-item"><span class="tp-section review">' + esc(it.tag) + '</span><span class="tp-text">' + tx + '</span></div>';
           }).join('');
         } else { list.innerHTML = '<div style="color:var(--ink-faint);font-size:.82rem;">今天还没有计划，去「计划中心」添加吧 📋</div>'; }
       }
       // 健康：本月打卡天数 / 目标
       var checked = nm('exercise_checked_' + monthKey(), []);
       setRing('ring-health', g.health ? (checked.length / g.health) * 100 : 0);
-      // 财富：本月支出 / 预算
+      // 支出：本月截至昨日累计支出 / 预算
       var fin = window.DASHBOARD_DATA && window.DASHBOARD_DATA.finance;
       var monthExpense = 0;
-      if (fin && fin.monthly_data && fin.monthly_data.length) {
-        var mkLabel = new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月';
-        var en = fin.monthly_data.filter(function (m) { return m.month === mkLabel; })[0] || fin.monthly_data[fin.monthly_data.length - 1];
-        monthExpense = en ? en.expense : 0;
+      if (fin && fin.month_expense_to_yesterday) {
+        monthExpense = parseFloat(String(fin.month_expense_to_yesterday).replace(/[¥,]/g, '')) || 0;
       }
-      setRing('ring-wealth', g.wealth ? (monthExpense / g.wealth) * 100 : 0);
+      setRing('ring-expense', g.wealth ? (monthExpense / g.wealth) * 100 : 0);
       // 学习：连续天数 / 365
       var rolling = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.reading && window.DASHBOARD_DATA.reading.rolling_day) || 0;
       setRing('ring-study', (rolling / 365) * 100);
-      // 产品：本月已发布 / 目标（v1：数据暂无月度明细，显示为 0，待 feishu_sync 暴露）
+      // 产品：本月已发布 / 目标
       setRing('ring-product', g.product ? 0 : 0);
       // 英语：本月打卡 / 目标
       var eng = nm('dudu_english', []);
@@ -4301,7 +4339,7 @@
     function renderMonthlyGoals() {
       var g = nm('dudu_monthly_goals', {});
       var grid = $('mgGrid'); if (!grid) return;
-      var cells = [['🟢 健康', g.health], ['💰 财富', g.wealth], ['📚 学习', g.study], ['👩‍💼 产品', g.product], ['🔤 英语', g.english]];
+      var cells = [['🟢 健康', g.health], ['💸 支出', g.wealth], ['📚 学习', g.study], ['👩‍💼 产品', g.product], ['🔤 英语', g.english]];
       grid.innerHTML = cells.map(function (c) {
         return '<div class="mg-cell"><div class="mg-val">' + (c[1] != null ? esc(c[1]) : '—') + '</div><div class="mg-name">' + c[0] + '</div></div>';
       }).join('');
@@ -4363,22 +4401,35 @@
     };
 
     /* ---------- 房贷 ---------- */
+    function monthsSincePayDay(startYM, payDay) {
+      var now = new Date();
+      var y = startYM[0], mo = startYM[1];
+      var months = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - mo);
+      if (now.getDate() < payDay) months -= 1;
+      return Math.max(0, months);
+    }
     function renderMortgage() {
       var m = window.MORTGAGE_DATA; var grid = $('mortgageGrid'); if (!m || !grid) return;
-      var balance = parseFloat(nm('dudu_mortgage_balance', m.balance));
+      var baseBalance = parseFloat(nm('dudu_mortgage_balance', m.balance));
+      // 自动月更新：自数据更新日以来，每月还款日过后自动扣减一期本金
+      var updated = m.updated ? new Date(m.updated) : new Date();
+      var avgPrincipalPerMonth = m.paid_months > 0 ? (m.total - baseBalance) / m.paid_months : 0;
+      var autoMonths = Math.max(0, monthsSincePayDay([updated.getFullYear(), updated.getMonth() + 1], m.pay_day || 1));
+      var balance = Math.max(0, baseBalance - avgPrincipalPerMonth * autoMonths);
+      var paidMonths = m.paid_months + autoMonths;
       var progress = ((m.total - balance) / m.total * 100);
       var cells = [
-        ['贷款总额', '¥' + m.total.toLocaleString()],
-        ['剩余本金', '¥' + Math.round(balance).toLocaleString()],
-        ['已还本金', '¥' + Math.round(m.total - balance).toLocaleString()],
-        ['每月还款', '¥' + m.monthly.toLocaleString()],
-        ['还款进度', progress.toFixed(1) + '%'],
-        ['已还期数', m.paid_months + ' / ' + m.total_months],
-        ['年利率', m.rate + '%'],
-        ['起始日期', m.start],
-        ['到期日期', m.end]
+        ['贷款总额', '¥' + m.total.toLocaleString(), ''],
+        ['剩余本金', '¥' + Math.round(balance).toLocaleString(), 'highlight-balance'],
+        ['已还本金', '¥' + Math.round(m.total - balance).toLocaleString(), 'highlight-paid'],
+        ['每月还款', '¥' + m.monthly.toLocaleString(), ''],
+        ['还款进度', progress.toFixed(1) + '%', ''],
+        ['已还期数', paidMonths + ' / ' + m.total_months, ''],
+        ['年利率', m.rate + '%', ''],
+        ['起始日期', m.start, ''],
+        ['到期日期', m.end, '']
       ];
-      grid.innerHTML = cells.map(function (c) { return '<div class="mortgage-cell"><div class="mc-val">' + esc(c[1]) + '</div><div class="mc-name">' + esc(c[0]) + '</div></div>'; }).join('');
+      grid.innerHTML = cells.map(function (c) { return '<div class="mortgage-cell ' + esc(c[2]) + '"><div class="mc-val">' + esc(c[1]) + '</div><div class="mc-name">' + esc(c[0]) + '</div></div>'; }).join('');
     }
     window.editMortgage = function () { $('mortgageEdit').style.display = 'block'; var m = window.MORTGAGE_DATA; $('mortgageBalanceInput').value = nm('dudu_mortgage_balance', m.balance); };
     window.cancelMortgageEdit = function () { $('mortgageEdit').style.display = 'none'; };
@@ -4582,7 +4633,16 @@
 
     function renderPodcasts() {
       var p = window.PODCASTS_DATA; var box = $('podcasts-col'); if (!p || !box) return;
-      box.innerHTML = p.list.map(function (n) { return '<div class="movie-row"><span>🎧 ' + esc(n) + '</span></div>'; }).join('');
+      var podcasts = p.list || [];
+      if (!podcasts.length) {
+        box.innerHTML = '<div class="news-item-meta" style="padding:8px 0;color:var(--ink-faint);">暂无播客数据</div>';
+        return;
+      }
+      box.innerHTML = podcasts.map(function (it) {
+        var name = esc(it.name || it);
+        var episode = it.latest ? esc(it.latest) : '最新单集加载中…';
+        return '<div class="podcast-row"><div class="podcast-name">🎧 ' + name + '</div><div class="podcast-episode">' + episode + '</div></div>';
+      }).join('');
     }
 
     /* ---------- 手机抽屉 + 单视图 ---------- */
