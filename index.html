@@ -1543,28 +1543,57 @@
 
     @media (max-width: 1100px) { .dash-top, .dash-mid { grid-template-columns: 1fr; } .life-grid { grid-template-columns: 1fr; } .rings-grid { grid-template-columns: repeat(5, 1fr); } }
     @media (max-width: 820px) {
-      /* 手机端左侧导航固定显示，不隐藏、不做抽屉 */
-      .nav-toggle, .side-nav-header, .side-nav-close, .nav-overlay { display: none !important; }
-      .side-nav, .side-nav.visible, .side-nav.open {
-        position: fixed; top: 0; left: 0; bottom: 0; height: 100%; width: 104px;
-        transform: none !important; opacity: 1 !important; pointer-events: auto !important;
-        background: rgba(253,248,242,0.96); backdrop-filter: blur(12px);
-        border-radius: 0; border: none; border-right: 1px solid var(--border);
-        padding: 58px 4px 12px; justify-content: flex-start; gap: 3px;
-        box-shadow: 2px 0 16px rgba(45,45,58,0.08); z-index: 65; display: flex; flex-direction: column;
+      /* 手机端：抽屉式导航（默认隐藏，不遮挡内容），汉堡按钮做明显 */
+      .nav-toggle {
+        display: flex; align-items: center; justify-content: center; gap: 7px;
+        position: fixed; top: 12px; left: 12px; z-index: 80;
+        width: auto; height: 44px; padding: 0 16px;
+        border-radius: 22px; border: 2px solid #fff;
+        background: linear-gradient(135deg, var(--purple, #7b5cd6), #6a3fd0);
+        color: #fff; font-size: 0.95rem; font-weight: 700;
+        font-family: 'Noto Sans SC', sans-serif; cursor: pointer;
+        box-shadow: 0 6px 18px rgba(123,92,214,.5);
       }
-      .side-nav-item { flex-direction: row; width: 100%; height: auto; padding: 11px 8px; justify-content: flex-start; gap: 8px; border-radius: 12px; }
-      .side-nav-item .nav-icon { font-size: 1.2rem; line-height: 1; }
-      .side-nav-item .nav-label { opacity: 1; font-size: 0.74rem; font-family: 'Noto Sans SC', sans-serif; color: var(--ink); white-space: nowrap; }
-      .side-nav-item.active .nav-label { color: #fff; opacity: 1; }
-      .side-nav-item .dot { top: 50%; right: auto; left: 36px; transform: translateY(-50%); }
-      body.mobile-view { padding-left: 104px; overflow-x: hidden; }
+      .nav-toggle .toggle-ico { font-size: 1.2rem; line-height: 1; }
+      .nav-toggle .toggle-text { display: inline; }
+      .side-nav, .side-nav.visible, .side-nav.open {
+        position: fixed; top: 0; left: 0; bottom: 0; height: 100%;
+        width: 250px; max-width: 78vw;
+        transform: translateX(-100%); opacity: 1; pointer-events: none;
+        transition: transform .28s ease; z-index: 90;
+        background: rgba(253,248,242,0.98); backdrop-filter: blur(12px);
+        border-radius: 0; border: none; border-right: 1px solid var(--border);
+        padding-top: 0; display: flex; flex-direction: column;
+        box-shadow: 4px 0 28px rgba(0,0,0,.22);
+      }
+      .side-nav.open { transform: translateX(0); pointer-events: auto; }
+      .side-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 16px 10px; }
+      .side-nav-close { display: block; border: none; background: transparent; font-size: 1.4rem; cursor: pointer; color: var(--ink); }
+      .side-nav-title { font-weight: 800; font-size: 1.05rem; }
+      .nav-overlay.open { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 85; }
+      body.mobile-view { overflow-x: hidden; }
       body.mobile-view .full-section { display: none; }
-      body.mobile-view .full-section.active-view { display: block; padding: 3.5rem 1rem 2rem; }
-      .rings-grid { grid-template-columns: repeat(3, 1fr); }
-      .mg-grid, .mortgage-grid { grid-template-columns: repeat(2, 1fr); }
+      body.mobile-view .full-section.active-view { display: block; }
+      /* 抽屉内导航项：图标左、文字右 */
+      .side-nav-item { flex-direction: row; width: 100%; height: auto; padding: 14px 16px; justify-content: flex-start; gap: 14px; border-radius: 14px; }
+      .side-nav-item .nav-icon { font-size: 1.35rem; line-height: 1; }
+      .side-nav-item .nav-label { opacity: 1; font-size: 0.98rem; font-family: 'Noto Sans SC', sans-serif; color: var(--ink); white-space: nowrap; }
+      .side-nav-item.active .nav-label { color: #fff; opacity: 1; }
+      .side-nav-item .dot { top: 50%; right: auto; left: 46px; transform: translateY(-50%); }
+      /* 顶部 header 居中，避免被左上角按钮遮挡 */
+      .top-header { justify-content: center; padding: 12px 14px; }
+      /* 布局适配：单栏、合适字号与间距，便于手机阅读 */
+      .full-section { padding: 4.5rem 1rem 2rem; }
+      .rings-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .mg-grid, .mortgage-grid { grid-template-columns: 1fr; }
       .wr-body { grid-template-columns: 1fr; }
       .today-plan-list { max-height: 160px; }
+      .section-title { font-size: 1.15rem; }
+      .module-card, .card, .product-rank, .bar-chart { padding: 1rem; }
+      .dashboard-grid, .card-row, .stat-grid, .grid-2, .grid-3 { grid-template-columns: 1fr !important; }
+      .hero-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .weather-cards { flex-direction: column; }
+      .tq-date { font-size: 1.4rem; }
     }
     @media (max-width: 480px) { .rings-grid { grid-template-columns: repeat(2, 1fr); } .weather-cards { flex-direction: column; } .today-quote-card { padding: 14px; } .tq-date { font-size: 1.3rem; } }
   </style>
@@ -1584,7 +1613,7 @@
   </header>
 
   <!-- ====== LEFT SIDE NAV (桌面滚动 / 手机抽屉) ====== -->
-  <button class="nav-toggle" id="navToggle" aria-label="打开导航">☰</button>
+  <button class="nav-toggle" id="navToggle" aria-label="打开导航"><span class="toggle-ico">☰</span><span class="toggle-text">菜单</span></button>
   <nav class="side-nav" id="sideNav" aria-label="内容导航">
     <div class="side-nav-header">
       <span class="side-nav-title">🚐 人生小巴士</span>
@@ -2370,16 +2399,23 @@
     }
 
     async function loadData() {
-      try {
-        await fetchPublishedDashboardData({ force: true, silent: true });
-      } catch (error) {
-        console.warn('Initial published dashboard fetch failed, fallback to embedded data:', error);
-      }
+      // 先渲染内嵌数据（秒开，不等待网络），显著改善手机端首屏加载慢的问题
       assignData();
       renderAll();
       // 新模块（今日计划摘要、人生五维进度等）依赖 TASKS_DATA/DASHBOARD_DATA，必须在 assignData 后渲染
       if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) { console.error('renderDashboard error:', e); } }
       if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
+      // 后台静默拉取远端最新数据并刷新（不阻塞首屏）
+      fetchPublishedDashboardData({ force: true, silent: true })
+        .then(function () {
+          assignData();
+          renderAll();
+          if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) {} }
+          if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
+        })
+        .catch(function (error) {
+          console.warn('Background published dashboard refresh failed, keep embedded data:', error);
+        });
     }
 
     function extractDashboardObjectFromScript(text) {
@@ -4365,8 +4401,9 @@
       // 学习：连续天数 / 365
       var rolling = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.reading && window.DASHBOARD_DATA.reading.rolling_day) || 0;
       setRing('ring-study', (rolling / 365) * 100);
-      // 产品：已发布笔记总数 / 目标（dashboard_data.js 暂无按月份拆分，先用总数让进度条有数据）
-      var productCount = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.published_notes && window.DASHBOARD_DATA.published_notes.total) || 0;
+      // 产品：本月（按飞书 Base「发布时间」）已发布记录数 / 目标
+      // published_notes.month_count = 已发布视图中发布时间落在本月的记录总和（非累计总笔记数）
+      var productCount = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.published_notes && window.DASHBOARD_DATA.published_notes.month_count) || 0;
       setRing('ring-product', g.product ? (productCount / g.product) * 100 : 0);
       // 英语：本月打卡 / 目标
       var eng = nm('dudu_english', []);
