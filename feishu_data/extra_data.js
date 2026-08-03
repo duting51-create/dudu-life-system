@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "为你战死是我至高无上的荣耀。",
-  "source": "天官赐福"
+  "content": "中秋谁与共孤光。把盏凄然北望。",
+  "source": "西江月·世事一场大梦"
 };
 window.updated = {
   "name": "嗨咻",
