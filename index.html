@@ -1417,12 +1417,13 @@
     .today-plan-card { background: rgba(244,194,194,0.22); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
     .today-plan-title { font-weight: 700; margin-bottom: 10px; color: var(--ink); }
     .today-plan-list { display: flex; flex-direction: column; gap: 7px; max-height: 170px; overflow: auto; }
-    .today-plan-item { display: flex; gap: 8px; align-items: center; font-size: .85rem; }
+    .today-plan-item { display: flex; gap: 8px; align-items: flex-start; font-size: .85rem; }
     .today-plan-item.done .tp-text { text-decoration: line-through; color: var(--ink-faint); }
     .tp-check { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--purple); flex: none; }
     .today-plan-item.done .tp-check { background: var(--purple); }
     .tp-section { font-size: .65rem; color: #fff; background: var(--purple); padding: 1px 6px; border-radius: 10px; flex: none; }
     .tp-section.review { background: var(--pink); }
+    .tp-text { flex: 1; min-width: 0; display: block; line-height: 1.55; white-space: normal; word-break: break-word; }
 
     /* 进度环 */
     .rings-wrap { background: rgba(245,230,163,0.28); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
@@ -1563,6 +1564,7 @@
         color: #fff; font-size: 0.95rem; font-weight: 700;
         font-family: 'Noto Sans SC', sans-serif; cursor: pointer;
         box-shadow: 0 6px 18px rgba(123,92,214,.5);
+        touch-action: none; user-select: none;
       }
       .nav-toggle .toggle-ico { font-size: 1.2rem; line-height: 1; }
       .nav-toggle .toggle-text { display: inline; }
@@ -2358,10 +2360,23 @@
     // This avoids fetch() which is blocked by file:// CORS policy
     // v=8 uses a timestamp so browser always fetches fresh copy after feishu_sync.py regenerates it
     const DASHBOARD_SCRIPT_URL = 'feishu_data/data_latest.js';
-    const AUTO_REFRESH_INTERVAL_MS = 10 * 60 * 1000;
-    const WAKE_REFRESH_DELAY_MS = 11 * 60 * 1000;
+    const AUTO_REFRESH_INTERVAL_MS = 4 * 60 * 60 * 1000;
+    const WAKE_REFRESH_DELAY_MS = 10 * 60 * 1000;
+    const REFRESH_STATE_KEY = 'dudu_dashboard_refresh_state';
     let dashboardRefreshInFlight = null;
     let wakeRefreshTimer = null;
+
+    function readRefreshState() {
+      try { return JSON.parse(localStorage.getItem(REFRESH_STATE_KEY) || '{}'); } catch (error) { return {}; }
+    }
+
+    function writeRefreshState(patch) {
+      try {
+        var state = readRefreshState();
+        Object.keys(patch || {}).forEach(function (key) { state[key] = patch[key]; });
+        localStorage.setItem(REFRESH_STATE_KEY, JSON.stringify(state));
+      } catch (error) {}
+    }
 
     function assignData() {
       const dashboardData = window.DASHBOARD_DATA || (typeof DASHBOARD_DATA !== 'undefined' ? DASHBOARD_DATA : null);
@@ -2484,6 +2499,7 @@
         assignData();
         renderAll();
         initializeTasksForToday(getTodayFeedTasks());
+        writeRefreshState({ lastRefreshAt: Date.now(), lastReason: reason || 'unknown' });
         const latestSync = String(window.DASHBOARD_DATA?.last_sync || '');
         if (!opts.silent && latestSync && latestSync !== previousSync) {
           showToast(`✅ 网站数据已更新（${latestSync}）`);
@@ -2503,29 +2519,23 @@
       }, WAKE_REFRESH_DELAY_MS);
     }
 
+    function shouldRunIntervalRefresh() {
+      const state = readRefreshState();
+      const lastRefreshAt = Number(state.lastRefreshAt || 0);
+      return !lastRefreshAt || (Date.now() - lastRefreshAt) >= AUTO_REFRESH_INTERVAL_MS;
+    }
+
     function setupPublishedDataAutoRefresh() {
       setInterval(function () {
-        if (!document.hidden) refreshPublishedDashboard('interval', { silent: true });
+        if (!document.hidden && shouldRunIntervalRefresh()) {
+          refreshPublishedDashboard('interval', { silent: true });
+        }
       }, AUTO_REFRESH_INTERVAL_MS);
 
       document.addEventListener('visibilitychange', function () {
         if (!document.hidden) {
-          refreshPublishedDashboard('visibilitychange', { silent: true });
           scheduleWakeFollowupRefresh();
         }
-      });
-
-      window.addEventListener('focus', function () {
-        refreshPublishedDashboard('focus', { silent: true });
-      });
-
-      window.addEventListener('pageshow', function () {
-        refreshPublishedDashboard('pageshow', { silent: true });
-        scheduleWakeFollowupRefresh();
-      });
-
-      window.addEventListener('online', function () {
-        refreshPublishedDashboard('online', { silent: true });
       });
     }
 
@@ -3030,6 +3040,7 @@
       let items = [];
       const today = new Date();
       const todayStr = `${today.getMonth() + 1}月${today.getDate()}日`;
+      const hasLiveItems = Array.isArray(window.LIVE_INSPIRATIONS_DATA?.items) && window.LIVE_INSPIRATIONS_DATA.items.length > 0;
 
       // 加载已删除的飞书条目 ID 列表
       const deletedFeishuIds = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
@@ -3050,6 +3061,7 @@
           }
           return;
         }
+        if (hasLiveItems) return;
         // 嵌入式兜底数据为「行」结构 {date, inspiration, harvest, task, mood}
         const isToday = i.date && i.date.includes(todayStr);
         // 收获 / 情绪：仅展示「当天」发生的，过期自动消失，不遵从「划掉」逻辑
@@ -3115,11 +3127,13 @@
       // Load done state
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
 
-      // 「划掉」逻辑（按用户习惯 2026-08-01 调整）：
-      // 任务 / 灵感 —— 当天划掉【不再立即消失】，渲染为「划线」样式，可随时撤销（防误删）；
-      //   第二天数据刷新时，飞书 rollover 不会把已划线的行带过来，自然不再展示。
-      // 收获 / 情绪 —— 不遵从划掉逻辑，始终展示（已按当天过滤，过期自然消失）。
-      // 注意：这里【不再过滤掉】已划线的任务/灵感，只由下方渲染层加划线样式。
+      // 用户当前规则：任务 / 灵感一旦完成就不再展示；收获 / 情绪仍按当天展示。
+      items = items.filter(function (item) {
+        if (item.type !== 'task' && item.type !== 'inspiration') return true;
+        const isStruck = doneMap[item.id] === true || item.done === true ||
+          (item.text && (item.text.includes('✅') || item.text.includes('~~')));
+        return !isStruck;
+      });
 
       const typeLabelMap = {
         'task':       '📋 任务',
@@ -3139,7 +3153,6 @@
           // 划线（删除线）判定：本地划掉 / 飞书划线 / 旧 ✅~~ 文本 都视为「已完成」显示划线
           const isStruck = doneMap[item.id] === true || item.done === true ||
             (item.text && (item.text.includes('✅') || item.text.includes('~~')));
-          const typeLabel = typeLabelMap[item.type] || '💭 情绪';
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
           const checkHtml = isToggle
@@ -4839,6 +4852,7 @@
       function apply() {
         if (isMobile()) {
           document.body.classList.add('mobile-view');
+          restoreMobileMenuPosition();
           if (!document.querySelector('.full-section.active-view')) {
             var savedView = 'hero-section';
             try { savedView = sessionStorage.getItem('dudu_mobile_view') || savedView; } catch (e) {}
@@ -4846,8 +4860,95 @@
           }
         } else { document.body.classList.remove('mobile-view'); document.querySelectorAll('.full-section').forEach(function (s) { s.classList.remove('active-view'); }); }
       }
+      initDraggableMobileMenu();
       apply();
       window.addEventListener('resize', apply);
+    }
+
+    function restoreMobileMenuPosition() {
+      var toggle = $('navToggle');
+      if (!toggle || !isMobile()) return;
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dudu_mobile_nav_toggle_pos') || 'null'); } catch (e) {}
+      if (!saved || typeof saved.left !== 'number' || typeof saved.top !== 'number') {
+        toggle.style.left = '12px';
+        toggle.style.top = '50%';
+        toggle.style.right = 'auto';
+        toggle.style.bottom = 'auto';
+        toggle.style.transform = 'translateY(-50%)';
+        return;
+      }
+      var maxLeft = Math.max(12, window.innerWidth - toggle.offsetWidth - 12);
+      var maxTop = Math.max(12, window.innerHeight - toggle.offsetHeight - 12);
+      var left = Math.min(Math.max(12, saved.left), maxLeft);
+      var top = Math.min(Math.max(12, saved.top), maxTop);
+      toggle.style.left = left + 'px';
+      toggle.style.top = top + 'px';
+      toggle.style.right = 'auto';
+      toggle.style.bottom = 'auto';
+      toggle.style.transform = 'none';
+    }
+
+    function initDraggableMobileMenu() {
+      var toggle = $('navToggle');
+      if (!toggle || toggle.dataset.draggableReady === 'true') return;
+      toggle.dataset.draggableReady = 'true';
+      var pointerId = null;
+      var moved = false;
+      var startX = 0;
+      var startY = 0;
+      var originLeft = 0;
+      var originTop = 0;
+
+      function clampAndPlace(nextLeft, nextTop) {
+        var maxLeft = Math.max(12, window.innerWidth - toggle.offsetWidth - 12);
+        var maxTop = Math.max(12, window.innerHeight - toggle.offsetHeight - 12);
+        var left = Math.min(Math.max(12, nextLeft), maxLeft);
+        var top = Math.min(Math.max(12, nextTop), maxTop);
+        toggle.style.left = left + 'px';
+        toggle.style.top = top + 'px';
+        toggle.style.right = 'auto';
+        toggle.style.bottom = 'auto';
+        toggle.style.transform = 'none';
+        return { left: left, top: top };
+      }
+
+      toggle.addEventListener('pointerdown', function (event) {
+        if (!isMobile()) return;
+        pointerId = event.pointerId;
+        moved = false;
+        startX = event.clientX;
+        startY = event.clientY;
+        var rect = toggle.getBoundingClientRect();
+        originLeft = rect.left;
+        originTop = rect.top;
+        toggle.setPointerCapture(pointerId);
+      });
+
+      toggle.addEventListener('pointermove', function (event) {
+        if (pointerId !== event.pointerId) return;
+        var dx = event.clientX - startX;
+        var dy = event.clientY - startY;
+        if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+        if (!moved) return;
+        event.preventDefault();
+        clampAndPlace(originLeft + dx, originTop + dy);
+      });
+
+      function finishDrag(event) {
+        if (pointerId !== event.pointerId) return;
+        if (moved) {
+          event.preventDefault();
+          var rect = toggle.getBoundingClientRect();
+          var placed = clampAndPlace(rect.left, rect.top);
+          try { localStorage.setItem('dudu_mobile_nav_toggle_pos', JSON.stringify(placed)); } catch (e) {}
+        }
+        try { toggle.releasePointerCapture(pointerId); } catch (e) {}
+        pointerId = null;
+      }
+
+      toggle.addEventListener('pointerup', finishDrag);
+      toggle.addEventListener('pointercancel', finishDrag);
     }
 
     /* ---------- 初始化 ---------- */
