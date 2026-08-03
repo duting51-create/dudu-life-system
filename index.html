@@ -1471,7 +1471,13 @@
     .mortgage-cell .mc-name { font-size: .72rem; color: var(--ink-faint); margin-top: 3px; }
     .mortgage-edit { margin-top: 12px; }
     .mortgage-edit label { display: flex; flex-direction: column; font-size: .76rem; color: var(--ink-faint); gap: 4px; }
-    .invest-total { font-weight: 800; color: var(--green); }
+    .invest-header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .invest-totals { display: flex; gap: 18px; }
+    .invest-total-item { display: flex; flex-direction: column; align-items: flex-end; }
+    .iti-label { font-size: .68rem; color: var(--ink-faint); white-space: nowrap; }
+    .iti-value { font-size: .98rem; font-weight: 800; white-space: nowrap; }
+    .iti-value.up { color: #C0392B; }
+    .iti-value.down { color: #2E8B57; }
     .invest-accounts { display: flex; flex-direction: column; gap: 10px; }
     .invest-acc { background: var(--cream); border-radius: 12px; padding: 12px; }
     .invest-acc .ia-name { font-weight: 700; }
@@ -1493,11 +1499,19 @@
     .life-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
     .life-tab { border: 1px solid var(--border); background: #fff; border-radius: 10px; padding: 4px 12px; cursor: pointer; font-size: .8rem; }
     .life-tab.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+    .movie-add-tab { margin-left: auto; }
+    .movie-add-form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; background: var(--cream); padding: 10px; border-radius: 10px; }
+    .movie-add-form input, .movie-add-form select { width: 100%; box-sizing: border-box; border: 1px solid var(--border); border-radius: 8px; padding: 7px 9px; font: inherit; font-size: .85rem; }
     .movie-list, .travel-list, .dates-list { display: flex; flex-direction: column; gap: 7px; max-height: 320px; overflow: auto; }
-    .movie-row { display: flex; justify-content: space-between; align-items: center; background: var(--cream); border-radius: 9px; padding: 8px 10px; font-size: .84rem; }
-    .movie-row a { color: var(--purple); text-decoration: none; font-weight: 600; }
+    .movie-row { display: flex; align-items: center; gap: 8px; background: var(--cream); border-radius: 9px; padding: 8px 10px; font-size: .84rem; }
+    .movie-row.user-added { background: #fff; border: 1px dashed rgba(201,177,208,.55); }
+    .movie-row .mr-check { width: 16px; height: 16px; cursor: pointer; accent-color: var(--purple); flex-shrink: 0; }
+    .movie-row .mr-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .movie-row .mr-title a { color: var(--purple); text-decoration: none; font-weight: 600; }
     .movie-row .mr-year { color: var(--ink-faint); font-size: .74rem; margin-left: 6px; }
     .movie-row .mr-rate { color: #E0A100; font-size: .74rem; margin-left: 6px; }
+    .movie-row .mr-del { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: none; background: transparent; color: var(--ink-faint); cursor: pointer; font-size: .9rem; line-height: 1; }
+    .movie-row .mr-del:hover { background: var(--pink-light); color: #c47070; }
     .travel-row { background: var(--cream); border-radius: 9px; padding: 9px 11px; font-size: .84rem; }
     .travel-row .tr-top { display: flex; justify-content: space-between; font-weight: 600; }
     .travel-row .tr-status { font-size: .72rem; padding: 1px 8px; border-radius: 10px; background: #fff; border: 1px solid var(--border); }
@@ -2183,9 +2197,22 @@
       </div>
       <!-- 投资 -->
       <div class="invest-card reveal">
-        <div class="mg-head">
+        <div class="invest-header-row">
           <span class="mg-title">📈 投资理财（股票）</span>
-          <span class="invest-total" id="investTotalLabel">--</span>
+          <div class="invest-totals">
+            <div class="invest-total-item">
+              <span class="iti-label">当前市值</span>
+              <span class="iti-value" id="investTotalValue">--</span>
+            </div>
+            <div class="invest-total-item">
+              <span class="iti-label">今日总收益</span>
+              <span class="iti-value" id="investTodayTotal">--</span>
+            </div>
+            <div class="invest-total-item">
+              <span class="iti-label">持仓总收益</span>
+              <span class="iti-value" id="investHoldTotal">--</span>
+            </div>
+          </div>
         </div>
         <div class="invest-accounts" id="investAccounts"><!-- renderInvest --></div>
         <div class="invest-gain">
@@ -2214,9 +2241,21 @@
         <!-- 观影清单 -->
         <div class="life-col reveal">
           <div class="life-col-head">🎬 观影清单 <span class="life-sub" id="doubanCount"></span></div>
+          <div class="movie-add-form" id="movieAddForm" style="display:none;">
+            <input type="text" id="movieAddTitle" placeholder="电影 / 剧集名称">
+            <select id="movieAddType">
+              <option value="wish">想看</option>
+              <option value="collect">看过</option>
+            </select>
+            <div style="display:flex;gap:6px;justify-content:flex-end;">
+              <button onclick="toggleMovieAddForm()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
+              <button onclick="saveManualMovie()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--purple);color:white;cursor:pointer;font-size:0.75rem;">添加</button>
+            </div>
+          </div>
           <div class="life-tabs">
             <button class="life-tab active" data-tab="wish" onclick="switchDouban('wish',this)">想看</button>
             <button class="life-tab" data-tab="collect" onclick="switchDouban('collect',this)">看过</button>
+            <button class="life-tab movie-add-tab" onclick="toggleMovieAddForm()">➕ 添加</button>
           </div>
           <div class="movie-list" id="movieList"><!-- renderDouban --></div>
         </div>
@@ -4352,7 +4391,16 @@
       var gains = nm('dudu_invest_gains', {});
       var gainSum = 0; Object.keys(gains).forEach(function (k) { gainSum += gains[k]; });
       var baseSum = inv.accounts.reduce(function (s, a) { return s + a.total; }, 0);
-      $('investTotalLabel').textContent = '当前市值 ¥' + Math.round(baseSum + gainSum).toLocaleString();
+      var todaySum = inv.accounts.reduce(function (s, a) { return s + a.today; }, 0);
+      var holdSum = inv.accounts.reduce(function (s, a) { return s + a.hold; }, 0);
+      function setTotal(id, value) {
+        var el = $(id); if (!el) return;
+        el.textContent = (value >= 0 ? '+' : '') + '¥' + Math.round(value).toLocaleString();
+        el.className = 'iti-value ' + (value >= 0 ? 'up' : 'down');
+      }
+      var totalValue = $('investTotalValue'); if (totalValue) totalValue.textContent = '¥' + Math.round(baseSum + gainSum).toLocaleString();
+      setTotal('investTodayTotal', todaySum);
+      setTotal('investHoldTotal', holdSum);
       ac.innerHTML = inv.accounts.map(function (a) {
         var cls = a.hold >= 0 ? 'ia-pos' : 'ia-neg';
         return '<div class="invest-acc"><div class="ia-name">' + esc(a.name) + '</div><div class="ia-rows">' +
@@ -4380,17 +4428,111 @@
 
     /* ---------- 生活管理：观影 / 旅行 / 重要日子 ---------- */
     var doubanTab = 'wish';
+    function getUserMovies() {
+      return {
+        wish: nm('dudu_movies_wish', []),
+        collect: nm('dudu_movies_collect', [])
+      };
+    }
+    function saveUserMovies(user) {
+      sv('dudu_movies_wish', user.wish);
+      sv('dudu_movies_collect', user.collect);
+    }
+    function mergeMovieList(doubanList, userList, excludeTitles) {
+      doubanList = Array.isArray(doubanList) ? doubanList : [];
+      userList = Array.isArray(userList) ? userList : [];
+      var exclude = {};
+      (excludeTitles || []).forEach(function (t) { exclude[normalizeMovieTitle(t)] = true; });
+      var seen = {};
+      var out = [];
+      function push(item, source) {
+        var key = normalizeMovieTitle(item.title);
+        if (seen[key] || exclude[key]) return;
+        seen[key] = true;
+        out.push({ title: item.title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source });
+      }
+      doubanList.forEach(function (m) { push(m, 'douban'); });
+      userList.forEach(function (m) { push(m, 'user'); });
+      return out;
+    }
+    function normalizeMovieTitle(t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); }
     function renderDouban() {
-      var dd = window.DOUBAN_DATA; var box = $('movieList'); if (!dd || !box) return;
-      var list = dd[doubanTab] || [];
-      $('doubanCount').textContent = '（' + (dd.wish ? dd.wish.length : 0) + ' 想看 / ' + (dd.collect ? dd.collect.length : 0) + ' 看过）';
-      if (!list.length) { box.innerHTML = '<div class="sleep-empty">暂无数据</div>'; return; }
-      box.innerHTML = list.map(function (m) {
-        return '<div class="movie-row"><span><a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(m.title) + '</a>' +
-          (m.year ? '<span class="mr-year">' + esc(m.year) + '</span>' : '') + (m.rating ? '<span class="mr-rate">★' + esc(m.rating) + '</span>' : '') + '</span></div>';
+      var dd = window.DOUBAN_DATA; var box = $('movieList'); if (!box) return;
+      var user = getUserMovies();
+      var wishList = mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }));
+      var collectList = mergeMovieList(dd && dd.collect, user.collect, []);
+      var isWish = doubanTab === 'wish';
+      var list = isWish ? wishList : collectList;
+      $('doubanCount').textContent = '（' + wishList.length + ' 想看 / ' + collectList.length + ' 看过）';
+      if (!list.length) { box.innerHTML = '<div class="sleep-empty">' + (isWish ? '暂时没有想看的影片，去豆瓣标记或手动添加吧 🎬' : '还没有看过的影片，勾选想看的条目即可移过来 ✨') + '</div>'; return; }
+      box.innerHTML = list.map(function (m, idx) {
+        var isUser = m.source === 'user';
+        var checkHtml = isWish ? '<input type="checkbox" class="mr-check" title="标记为看过" onchange="checkMovie(' + idx + ')">' : '';
+        var delHtml = isUser ? '<button class="mr-del" title="删除" onclick="deleteUserMovie(' + idx + ', \'' + doubanTab + '\')">×</button>' : '';
+        var titleHtml = m.link ? '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(m.title) + '</a>' : '<span>' + esc(m.title) + '</span>';
+        return '<div class="movie-row ' + (isUser ? 'user-added' : '') + '">' + checkHtml +
+          '<span class="mr-title">' + titleHtml +
+          (m.year ? '<span class="mr-year">' + esc(m.year) + '</span>' : '') +
+          (m.rating ? '<span class="mr-rate">★' + esc(m.rating) + '</span>' : '') + '</span>' + delHtml + '</div>';
       }).join('');
     }
-    window.switchDouban = function (tab, btn) { doubanTab = tab; document.querySelectorAll('.life-tab').forEach(function (b) { b.classList.remove('active'); }); btn.classList.add('active'); renderDouban(); };
+    window.switchDouban = function (tab, btn) {
+      doubanTab = tab;
+      document.querySelectorAll('.life-tab').forEach(function (b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      else {
+        var match = document.querySelector('.life-tab[data-tab="' + tab + '"]');
+        if (match) match.classList.add('active');
+      }
+      var form = $('movieAddForm'); if (form) form.style.display = 'none';
+      renderDouban();
+    };
+    window.toggleMovieAddForm = function () {
+      var f = $('movieAddForm'); if (!f) return;
+      f.style.display = f.style.display === 'none' ? 'flex' : 'none';
+      if (f.style.display === 'flex') setTimeout(function () { $('movieAddTitle').focus(); }, 50);
+    };
+    window.saveManualMovie = function () {
+      var title = $('movieAddTitle').value.trim(); if (!title) return;
+      var type = $('movieAddType').value;
+      var user = getUserMovies();
+      var item = { title: title, link: '', year: '', rating: '' };
+      if (type === 'collect') {
+        user.collect.push(item);
+        user.wish = user.wish.filter(function (m) { return normalizeMovieTitle(m.title) !== normalizeMovieTitle(title); });
+      } else {
+        user.wish.push(item);
+      }
+      saveUserMovies(user);
+      $('movieAddTitle').value = '';
+      $('movieAddForm').style.display = 'none';
+      renderDouban();
+    };
+    window.checkMovie = function (idx) {
+      var dd = window.DOUBAN_DATA;
+      var user = getUserMovies();
+      var wishList = mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }));
+      var item = wishList[idx]; if (!item) return;
+      user.collect.push({ title: item.title, link: item.link, year: item.year, rating: item.rating });
+      if (item.source === 'user') {
+        user.wish = user.wish.filter(function (m) { return normalizeMovieTitle(m.title) !== normalizeMovieTitle(item.title); });
+      }
+      saveUserMovies(user);
+      renderDouban();
+    };
+    window.deleteUserMovie = function (idx, tab) {
+      var dd = window.DOUBAN_DATA;
+      var user = getUserMovies();
+      var list = tab === 'wish'
+        ? mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }))
+        : mergeMovieList(dd && dd.collect, user.collect, []);
+      var item = list[idx]; if (!item || item.source !== 'user') return;
+      var key = normalizeMovieTitle(item.title);
+      if (tab === 'wish') user.wish = user.wish.filter(function (m) { return normalizeMovieTitle(m.title) !== key; });
+      else user.collect = user.collect.filter(function (m) { return normalizeMovieTitle(m.title) !== key; });
+      saveUserMovies(user);
+      renderDouban();
+    };
 
     function renderTravel() {
       var arr = nm('dudu_travel', []); var box = $('travelList'); if (!box) return;
@@ -4413,7 +4555,19 @@
     function renderImportantDates() {
       var dd = window.IMPORTANT_DATES_DATA; var box = $('datesList'); if (!dd || !box) return;
       var now = new Date();
-      box.innerHTML = dd.list.map(function (it) {
+      var sorted = dd.list.slice().sort(function (a, b) {
+        // 倒计时类（生日等）按 next_date 升序，最快到来的放最上面
+        if (a.mode !== 'elapsed' && b.mode !== 'elapsed') {
+          return new Date(a.next_date) - new Date(b.next_date);
+        }
+        // 已过去里程碑按 fixed 日期降序，最近的纪念日放上面
+        if (a.mode === 'elapsed' && b.mode === 'elapsed') {
+          return new Date(b.fixed) - new Date(a.fixed);
+        }
+        // 倒计时排在前面，已过去排在后面
+        return a.mode === 'elapsed' ? 1 : -1;
+      });
+      box.innerHTML = sorted.map(function (it) {
         var sub, count, cls;
         if (it.mode === 'elapsed') {
           var fd = new Date(it.fixed); var days = Math.floor((now - fd) / 86400000);

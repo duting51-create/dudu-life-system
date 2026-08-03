@@ -23,7 +23,9 @@
     'dudu_travel',
     'dudu_monthly_goals',
     'dudu_invest_gains',
-    'dudu_mortgage_balance'
+    'dudu_mortgage_balance',
+    'dudu_movies_wish',
+    'dudu_movies_collect'
   ];
   var SYNC_PREFIXES = ['exercise_checked_'];
   var pendingKeyPromise = null;
@@ -372,6 +374,22 @@
 
         if (key === 'dudu_last_tasks_date') {
           merged[key] = (localValue || '') >= (cloudValue || '') ? localValue : cloudValue;
+          return;
+        }
+
+        if (key === 'dudu_movies_wish' || key === 'dudu_movies_collect') {
+          var norm = function (t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); };
+          var arrA = Array.isArray(cloudValue) ? cloudValue : [];
+          var arrB = Array.isArray(localValue) ? localValue : [];
+          var seen = {};
+          merged[key] = [];
+          arrA.concat(arrB).forEach(function (item) {
+            if (!item || !item.title) return;
+            var k = norm(item.title);
+            if (seen[k]) return;
+            seen[k] = true;
+            merged[key].push({ title: item.title, link: item.link || '', year: item.year || '', rating: item.rating || '' });
+          });
           return;
         }
 
