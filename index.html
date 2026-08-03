@@ -2427,23 +2427,11 @@
     }
 
     async function loadData() {
-      // 先渲染内嵌数据（秒开，不等待网络），显著改善手机端首屏加载慢的问题
+      // 先渲染页面自带数据，首屏不主动追远端，避免首次打开时额外网络请求拖慢展示。
       assignData();
       renderAll();
-      // 新模块（今日计划摘要、人生五维进度等）依赖 TASKS_DATA/DASHBOARD_DATA，必须在 assignData 后渲染
       if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) { console.error('renderDashboard error:', e); } }
       if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
-      // 后台静默拉取远端最新数据并刷新（不阻塞首屏）
-      fetchPublishedDashboardData({ force: true, silent: true })
-        .then(function () {
-          assignData();
-          renderAll();
-          if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) {} }
-          if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
-        })
-        .catch(function (error) {
-          console.warn('Background published dashboard refresh failed, keep embedded data:', error);
-        });
     }
 
     function extractDashboardObjectFromScript(text) {
@@ -4247,17 +4235,41 @@
         .trim();
     }
 
+    function splitTaskTextLines(text) {
+      var src = String(text || '').replace(/\r/g, '').trim();
+      if (!src) return [];
+      var normalized = src
+        .replace(/([。！？；])\s*(?=\d+[.、：:）)\-])/g, '$1\n')
+        .replace(/\s+(?=\d+[.、：:）)\-])/g, '\n');
+      var parts = normalized
+        .split(/\n+/)
+        .map(function (line) { return cleanTaskText(line); })
+        .filter(Boolean);
+      if (parts.length > 1) return parts;
+      var inlineParts = src
+        .split(/(?=\d+[.、：:）)\-]\s*)/g)
+        .map(function (line) { return cleanTaskText(line); })
+        .filter(Boolean);
+      return inlineParts.length > 1 ? inlineParts : [cleanTaskText(src)];
+    }
+
     function taskTextKey(task) {
       return cleanTaskText(task?.text).toLocaleLowerCase('zh-CN');
     }
 
     function prepareFeedTasks(tasks, today) {
-      return (Array.isArray(tasks) ? tasks : []).map((task, index) => ({
-        ...task,
-        text: cleanTaskText(task.text),
-        done: Boolean(task.done),
-        sourceId: task.sourceId || `feishu:${today}:${index}`
-      }));
+      var prepared = [];
+      (Array.isArray(tasks) ? tasks : []).forEach(function (task, index) {
+        splitTaskTextLines(task && task.text).forEach(function (part, partIndex) {
+          prepared.push({
+            ...task,
+            text: part,
+            done: Boolean(task && task.done),
+            sourceId: (task && task.sourceId) || `feishu:${today}:${index}:${partIndex}`
+          });
+        });
+      });
+      return prepared;
     }
 
     function initializeTasksForToday(feedTasks) {
@@ -4337,7 +4349,9 @@
         ? CloudSync.init().catch(error => console.warn('Cloud sync initialization failed:', error))
         : Promise.resolve();
       if (window.FeishuSync) {
-        FeishuSync.refresh(false).catch(error => console.warn('首次读取飞书失败:', error));
+        setTimeout(function () {
+          FeishuSync.refresh(false).catch(error => console.warn('延后读取飞书失败:', error));
+        }, 4000);
       }
 
       Promise.all([dashboardPromise, cloudPromise]).then(() => {
