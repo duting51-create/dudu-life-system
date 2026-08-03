@@ -4500,7 +4500,10 @@
     window.saveMonthlyGoals = function () {
       var g = {};
       ['health', 'wealth', 'study', 'product', 'english'].forEach(function (k) { var v = parseFloat($('mg-' + k).value); g[k] = isNaN(v) ? null : v; });
-      sv('dudu_monthly_goals', g); $('mgEditArea').style.display = 'none';
+      sv('dudu_monthly_goals', g);
+      sv('dudu_monthly_goals_updated_at', Date.now());
+      if (window.CloudSync) window.CloudSync.saveNow();
+      $('mgEditArea').style.display = 'none';
       renderMonthlyGoals(); renderDashboard();
     };
     // 暴露给 script[0] 的 loadData，确保飞书数据 assign 后再渲染今日计划摘要与人生五维进度
@@ -4786,6 +4789,7 @@
       if (!window.confirm('确定删除「' + (item.place || '这条旅行计划') + '」吗？')) return;
       arr.splice(index, 1);
       sv('dudu_travel', arr);
+      sv('dudu_travel_updated_at', Date.now());
       if (window.CloudSync) window.CloudSync.saveNow();
       if (editingTravelIndex >= 0) window.cancelTravelForm();
       renderTravel();
@@ -4797,6 +4801,7 @@
       if (editingTravelIndex >= 0 && arr[editingTravelIndex]) arr[editingTravelIndex] = item;
       else arr.unshift(item);
       sv('dudu_travel', arr);
+      sv('dudu_travel_updated_at', Date.now());
       if (window.CloudSync) window.CloudSync.saveNow();
       $('travelForm').style.display = 'none';
       resetTravelForm();

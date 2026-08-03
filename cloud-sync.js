@@ -21,7 +21,9 @@
     'dudu_sleep',
     'dudu_english',
     'dudu_travel',
+    'dudu_travel_updated_at',
     'dudu_monthly_goals',
+    'dudu_monthly_goals_updated_at',
     'dudu_invest_gains',
     'dudu_mortgage_balance',
     'dudu_movies_wish',
@@ -152,11 +154,12 @@
         self._loading = true;
         return self._fetchCloud().then(function (cloudState) {
           var merged = self._merge(cloudState || {}, self._readLocal());
+          var mergedChanged = JSON.stringify(self._stripMeta(merged)) !== JSON.stringify(self._stripMeta(cloudState || {}));
           self._writeLocal(merged);
           self._loading = false;
           self._initialized = true;
           self._rerender();
-          if (!cloudState || !Object.keys(cloudState).length || self._queuedChanges) {
+          if (!cloudState || !Object.keys(cloudState).length || self._queuedChanges || mergedChanged) {
             self._queuedChanges = false;
             return self.save();
           }
@@ -372,6 +375,56 @@
           return;
         }
 
+        if (key === 'dudu_travel') {
+          var cloudTravel = Array.isArray(cloudValue) ? cloudValue : [];
+          var localTravel = Array.isArray(localValue) ? localValue : [];
+          var cloudTravelTime = Number(cloud.dudu_travel_updated_at || 0);
+          var localTravelTime = Number(local.dudu_travel_updated_at || 0);
+          if (!localTravel.length && cloudTravel.length) {
+            merged[key] = cloudTravel;
+          } else if (!cloudTravel.length && localTravel.length) {
+            merged[key] = localTravel;
+          } else if (localTravelTime > cloudTravelTime) {
+            merged[key] = localTravel;
+          } else if (cloudTravelTime > localTravelTime) {
+            merged[key] = cloudTravel;
+          } else {
+            merged[key] = localTravel.length >= cloudTravel.length ? localTravel : cloudTravel;
+          }
+          return;
+        }
+
+        if (key === 'dudu_travel_updated_at') {
+          merged[key] = Math.max(Number(cloudValue || 0), Number(localValue || 0));
+          return;
+        }
+
+        if (key === 'dudu_monthly_goals') {
+          var cloudGoals = cloudValue && typeof cloudValue === 'object' ? cloudValue : {};
+          var localGoals = localValue && typeof localValue === 'object' ? localValue : {};
+          var cloudGoalsTime = Number(cloud.dudu_monthly_goals_updated_at || 0);
+          var localGoalsTime = Number(local.dudu_monthly_goals_updated_at || 0);
+          var cloudGoalCount = Object.keys(cloudGoals).filter(function (k) { return cloudGoals[k] != null && cloudGoals[k] !== ''; }).length;
+          var localGoalCount = Object.keys(localGoals).filter(function (k) { return localGoals[k] != null && localGoals[k] !== ''; }).length;
+          if (!localGoalCount && cloudGoalCount) {
+            merged[key] = cloudGoals;
+          } else if (!cloudGoalCount && localGoalCount) {
+            merged[key] = localGoals;
+          } else if (localGoalsTime > cloudGoalsTime) {
+            merged[key] = localGoals;
+          } else if (cloudGoalsTime > localGoalsTime) {
+            merged[key] = cloudGoals;
+          } else {
+            merged[key] = localGoalCount >= cloudGoalCount ? localGoals : cloudGoals;
+          }
+          return;
+        }
+
+        if (key === 'dudu_monthly_goals_updated_at') {
+          merged[key] = Math.max(Number(cloudValue || 0), Number(localValue || 0));
+          return;
+        }
+
         if (key === 'dudu_last_tasks_date') {
           merged[key] = (localValue || '') >= (cloudValue || '') ? localValue : cloudValue;
           return;
@@ -479,6 +532,7 @@
       try { if (typeof renderInspirations === 'function') renderInspirations(); } catch (error) {}
       try { if (typeof window.renderDouban === 'function') window.renderDouban(); } catch (error) {}
       try { if (typeof window.renderTravel === 'function') window.renderTravel(); } catch (error) {}
+      try { if (typeof window.renderMonthlyGoals === 'function') window.renderMonthlyGoals(); } catch (error) {}
       try {
         if (typeof renderCalendar === 'function' && window.EXERCISE_DATA) {
           renderCalendar(window.EXERCISE_DATA);
