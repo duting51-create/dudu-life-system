@@ -2,23 +2,61 @@
   "items": [
     {
       "date": "6月24日",
+      "inspiration": "",
       "harvest": "",
       "task": "",
       "mood": "test full range"
     },
     {
       "date": "7月27日",
-      "harvest": "",
-      "task": "让AI直接读取我的飞书选题表格，做好排期后，让它一键写笔记，不用我再一个个选题发给它们了",
+      "inspiration": "",
+      "harvest": "让AI直接读取我的飞书选题表格，做好排期后，让它一键写笔记，不用我再一个个选题发给它们了",
+      "task": "",
       "mood": ""
     },
     {
       "date": "7月28日",
+      "inspiration": "",
+      "harvest": "1.学会了借助skill优化网站\n2.发现了飞书字段有一个【字段捷径中心】，可以把现有字段转换为其他想要的字段形式，比如日期变成年月\n3.把做人生系统个人网站的经验封装成了life-dashboard-builder Skill",
+      "task": "",
+      "mood": ""
+    },
+    {
+      "date": "7月30日",
+      "inspiration": "",
       "harvest": "",
-      "task": "1.学会了借助skill优化网站\n2.发现了飞书字段有一个【字段捷径中心】，可以把现有字段转换为其他想要的字段形式，比如日期变成年月\n3.把做人生系统个人网站的经验封装成了life-dashboard-builder Skill",
+      "task": "1.挂周一的号-北京妇产医院\n2.买山药粉\n3.做鸡肉干",
+      "mood": ""
+    },
+    {
+      "date": "7月31日",
+      "inspiration": "",
+      "harvest": "孕期知识库是我的第一个产品，不一定是我人生唯一产品",
+      "task": "1.买山药粉\n2.确认一下 AI 资讯数据来源和已发布笔记数据是否正确",
+      "mood": ""
+    },
+    {
+      "date": "8月1日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "1.和杜爽爽视频\n2.调研一下爆款笔记，关键词：生育、成为妈妈、怀孕",
+      "mood": ""
+    },
+    {
+      "date": "8月3日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "1.上架新产品，做 3 个 sku\n2.把我的人生系统这个网站做一下优化迭代",
+      "mood": ""
+    },
+    {
+      "date": "8月4日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "1.上架新产品，做 3 个 sku",
       "mood": ""
     }
   ],
   "last_updated": "6月24日",
-  "today_updated": false
+  "today_updated": true
 }

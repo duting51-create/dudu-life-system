@@ -1,6 +1,6 @@
 {
-  "total_revenue": "¥179",
-  "total_orders": 9,
+  "total_revenue": "¥192.9",
+  "total_orders": 11,
   "products": [
     {
       "name": "孕期安心知识库",
@@ -12,5 +12,32 @@
     }
   ],
   "total_published_notes": 104,
-  "monthly_revenue": []
+  "monthly_revenue": [],
+  "weekly_revenue": [
+    {
+      "label": "6/29",
+      "revenue": 39.9
+    },
+    {
+      "label": "7/6",
+      "revenue": 89.4
+    },
+    {
+      "label": "7/13",
+      "revenue": 49.8
+    },
+    {
+      "label": "7/20",
+      "revenue": 0
+    },
+    {
+      "label": "7/27",
+      "revenue": 13.8
+    },
+    {
+      "label": "8/3",
+      "revenue": 0
+    }
+  ],
+  "last_updated": "2026-08-04"
 }

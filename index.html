@@ -2628,6 +2628,16 @@
       let tasks = TASKS_DATA?.items || [];
       if (!tasks.length) tasks = TASKS_DATA?.tasks || [];
       const rawText = TASKS_DATA?.raw_tasks_text || TASKS_DATA?.raw_text || '';
+      if (!tasks.length && rawText) {
+        tasks = splitTaskTextLines(rawText).map(function (text, index) {
+          return {
+            text: text,
+            done: false,
+            priority: 'mid',
+            sourceId: 'raw:' + index
+          };
+        });
+      }
       updateTodoProgress();
 
       // Render main task list
@@ -2646,15 +2656,7 @@
       }
 
       if (!tasks.length) {
-        // Fallback: show raw_tasks_text as a single readable item
-        if (rawText) {
-          list.innerHTML = `<div class="todo-item">
-            <div class="todo-check" onclick="this.classList.toggle('done');updateTodoProgress();"></div>
-            <div style="flex:1"><p class="todo-text" contenteditable="true" onblur="saveRawTaskText(this.textContent)" title="点击编辑">${rawText}</p></div>
-          </div>`;
-        } else {
-          list.innerHTML = `<div class="todo-item"><div class="todo-check"></div><div><p class="todo-text" style="color:var(--ink-faint);font-size:0.85rem;">今日暂无安排 · 点击右上角 ✏️ 手动添加</p></div></div>`;
-        }
+        list.innerHTML = `<div class="todo-item"><div class="todo-check"></div><div><p class="todo-text" style="color:var(--ink-faint);font-size:0.85rem;">今日暂无安排 · 点击右上角 ✏️ 手动添加</p></div></div>`;
         return;
       }
 
@@ -3097,7 +3099,9 @@
         if (j.type === 'harvest' || j.type === 'mood') {
           if (isToday) items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts });
         } else {
-          items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts });
+          if (isToday || j.syncPending) {
+            items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts, syncPending: j.syncPending });
+          }
         }
       });
 
@@ -3118,6 +3122,7 @@
       // 用户当前规则：任务 / 灵感一旦完成就不再展示；收获 / 情绪仍按当天展示。
       items = items.filter(function (item) {
         if (item.type !== 'task' && item.type !== 'inspiration') return true;
+        if (!hasLiveItems && item.date && item.date.indexOf(todayStr) === -1 && !item.syncPending) return false;
         const isStruck = doneMap[item.id] === true || item.done === true ||
           (item.text && (item.text.includes('✅') || item.text.includes('~~')));
         return !isStruck;
@@ -4354,7 +4359,7 @@
         }, 4000);
       }
 
-      Promise.all([dashboardPromise, cloudPromise]).then(() => {
+      Promise.resolve(dashboardPromise).then(() => {
         initializeTasksForToday(getTodayFeedTasks());
       });
 
@@ -4637,6 +4642,7 @@
     function saveUserMovies(user) {
       sv('dudu_movies_wish', user.wish);
       sv('dudu_movies_collect', user.collect);
+      if (window.CloudSync) window.CloudSync.saveNow();
     }
     function mergeMovieList(doubanList, userList, excludeTitles, userFirst) {
       doubanList = Array.isArray(doubanList) ? doubanList : [];
@@ -4780,6 +4786,7 @@
       if (!window.confirm('确定删除「' + (item.place || '这条旅行计划') + '」吗？')) return;
       arr.splice(index, 1);
       sv('dudu_travel', arr);
+      if (window.CloudSync) window.CloudSync.saveNow();
       if (editingTravelIndex >= 0) window.cancelTravelForm();
       renderTravel();
     };
@@ -4790,6 +4797,7 @@
       if (editingTravelIndex >= 0 && arr[editingTravelIndex]) arr[editingTravelIndex] = item;
       else arr.unshift(item);
       sv('dudu_travel', arr);
+      if (window.CloudSync) window.CloudSync.saveNow();
       $('travelForm').style.display = 'none';
       resetTravelForm();
       renderTravel();

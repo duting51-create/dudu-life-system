@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-03",
+  "updated": "2026-08-04",
   "list": [
     {
       "name": "嗨咻",
@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "两情若是久长时，又岂在朝朝暮暮。",
-  "source": "鹊桥仙·纤云弄巧"
+  "content": "我们奋力前行，逆水行舟，被不断向后推，直至回到往昔岁月。",
+  "source": "了不起的盖茨比"
 };
 window.updated = {
   "name": "嗨咻",

@@ -10,30 +10,22 @@
     },
     {
       "rank": 2,
-      "category": "赵晗支出",
-      "emoji": "👤",
-      "amount": "¥5,693",
-      "amount_raw": 5693.59,
-      "percent": 72
+      "category": "房租",
+      "emoji": "🏠",
+      "amount": "¥4,530",
+      "amount_raw": 4530.0,
+      "percent": 57
     },
     {
       "rank": 3,
-      "category": "房租",
-      "emoji": "🏠",
-      "amount": "¥3,800",
-      "amount_raw": 3800.0,
-      "percent": 48
+      "category": "赵晗支出",
+      "emoji": "👤",
+      "amount": "¥3,518",
+      "amount_raw": 3518.07,
+      "percent": 44
     },
     {
       "rank": 4,
-      "category": "武装大脑",
-      "emoji": "📚",
-      "amount": "¥3,349",
-      "amount_raw": 3349.05,
-      "percent": 42
-    },
-    {
-      "rank": 5,
       "category": "固定支出",
       "emoji": "🔒",
       "amount": "¥2,667",
@@ -41,22 +33,30 @@
       "percent": 34
     },
     {
+      "rank": 5,
+      "category": "公交打车",
+      "emoji": "📌",
+      "amount": "¥1,266",
+      "amount_raw": 1266.0700000000002,
+      "percent": 16
+    },
+    {
       "rank": 6,
-      "category": "买药看病",
-      "emoji": "🏥",
-      "amount": "¥2,147",
-      "amount_raw": 2147.12,
-      "percent": 27
+      "category": "零食奶茶",
+      "emoji": "📌",
+      "amount": "¥926",
+      "amount_raw": 926.73,
+      "percent": 12
     },
     {
       "rank": 7,
       "category": "一日三餐",
       "emoji": "🍽️",
-      "amount": "¥1,168",
-      "amount_raw": 1168.57,
-      "percent": 15
+      "amount": "¥884",
+      "amount_raw": 884.7199999999999,
+      "percent": 11
     }
   ],
-  "month": "2026年6月",
-  "last_updated": "2026-07-29"
+  "month": "2026年7月",
+  "last_updated": "2026-08-04"
 }
