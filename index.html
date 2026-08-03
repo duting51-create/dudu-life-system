@@ -4271,6 +4271,9 @@
     function todayKey() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
     function monthKey() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
 
+    // 暴露共享辅助函数给 script[0] 的旧渲染逻辑（IIFE 闭包隔离导致跨脚本不可见 → ReferenceError 使 renderAll 崩溃、模块数据丢失）
+    window.nm = nm; window.sv = sv; window.esc = esc; window.$ = $; window.todayKey = todayKey; window.monthKey = monthKey;
+
     /* ---------- 天气（open-meteo，无需 key） ---------- */
     var WX_CODE = { 0: '☀️ 晴', 1: '🌤 多云', 2: '⛅ 局部多云', 3: '☁️ 阴', 45: '🌫 雾', 48: '🌫 雾凇', 51: '🌦 毛毛雨', 53: '🌦 小雨', 55: '🌧 中雨', 61: '🌧 小雨', 63: '🌧 中雨', 65: '🌧 大雨', 71: '🌨 小雪', 73: '🌨 中雪', 75: '❄️ 大雪', 80: '🌦 阵雨', 81: '🌧 阵雨', 82: '⛈ 强阵雨', 95: '⛈ 雷阵雨', 96: '⛈ 雷阵雨伴雹', 99: '⛈ 雷暴' };
     var WX = [
