@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们奋力前行，逆水行舟，被不断向后推，直至回到往昔岁月。",
-  "source": "了不起的盖茨比"
+  "content": "为你战死是我至高无上的荣耀。",
+  "source": "天官赐福"
 };
 window.updated = {
   "name": "嗨咻",
