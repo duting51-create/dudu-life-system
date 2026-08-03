@@ -1543,26 +1543,28 @@
 
     @media (max-width: 1100px) { .dash-top, .dash-mid { grid-template-columns: 1fr; } .life-grid { grid-template-columns: 1fr; } .rings-grid { grid-template-columns: repeat(5, 1fr); } }
     @media (max-width: 820px) {
-      .nav-toggle { display: flex; }
-      .side-nav, .side-nav.visible, .side-nav.open { position: fixed; top: 0; left: 0; height: 100%; width: 240px; transform: translateX(-100%); opacity: 1; pointer-events: none; transition: transform .25s ease; z-index: 65; box-shadow: 4px 0 24px rgba(0,0,0,.18); padding-top: 0; display: flex; flex-direction: column; }
-      .side-nav.open { transform: translateX(0); pointer-events: auto; }
-      .side-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 10px; }
-      .side-nav-close { display: block; border: none; background: transparent; font-size: 1.2rem; cursor: pointer; color: var(--ink); }
-      .side-nav-title { font-weight: 800; }
-      .nav-overlay.open { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 60; }
+      /* 手机端左侧导航固定显示，不隐藏、不做抽屉 */
+      .nav-toggle, .side-nav-header, .side-nav-close, .nav-overlay { display: none !important; }
+      .side-nav, .side-nav.visible, .side-nav.open {
+        position: fixed; top: 0; left: 0; bottom: 0; height: 100%; width: 104px;
+        transform: none !important; opacity: 1 !important; pointer-events: auto !important;
+        background: rgba(253,248,242,0.96); backdrop-filter: blur(12px);
+        border-radius: 0; border: none; border-right: 1px solid var(--border);
+        padding: 58px 4px 12px; justify-content: flex-start; gap: 3px;
+        box-shadow: 2px 0 16px rgba(45,45,58,0.08); z-index: 65; display: flex; flex-direction: column;
+      }
+      .side-nav-item { flex-direction: row; width: 100%; height: auto; padding: 11px 8px; justify-content: flex-start; gap: 8px; border-radius: 12px; }
+      .side-nav-item .nav-icon { font-size: 1.2rem; line-height: 1; }
+      .side-nav-item .nav-label { opacity: 1; font-size: 0.74rem; font-family: 'Noto Sans SC', sans-serif; color: var(--ink); white-space: nowrap; }
+      .side-nav-item.active .nav-label { color: #fff; opacity: 1; }
+      .side-nav-item .dot { top: 50%; right: auto; left: 36px; transform: translateY(-50%); }
+      body.mobile-view { padding-left: 104px; overflow-x: hidden; }
       body.mobile-view .full-section { display: none; }
-      body.mobile-view .full-section.active-view { display: block; }
-      body.mobile-view { overflow-x: hidden; }
+      body.mobile-view .full-section.active-view { display: block; padding: 3.5rem 1rem 2rem; }
       .rings-grid { grid-template-columns: repeat(3, 1fr); }
       .mg-grid, .mortgage-grid { grid-template-columns: repeat(2, 1fr); }
       .wr-body { grid-template-columns: 1fr; }
       .today-plan-list { max-height: 160px; }
-      /* 手机抽屉：图标在左、文字在右（行布局） */
-      .side-nav-item { flex-direction: row; width: 100%; height: auto; padding: 13px 16px; justify-content: flex-start; gap: 14px; border-radius: 14px; }
-      .side-nav-item .nav-icon { font-size: 1.35rem; line-height: 1; }
-      .side-nav-item .nav-label { opacity: 1; font-size: 0.98rem; font-family: 'Noto Sans SC', sans-serif; color: var(--ink); white-space: nowrap; }
-      .side-nav-item.active .nav-label { color: #fff; opacity: 1; }
-      .side-nav-item .dot { top: 50%; right: auto; left: 44px; transform: translateY(-50%); }
     }
     @media (max-width: 480px) { .rings-grid { grid-template-columns: repeat(2, 1fr); } .weather-cards { flex-direction: column; } .today-quote-card { padding: 14px; } .tq-date { font-size: 1.3rem; } }
   </style>
@@ -2375,6 +2377,9 @@
       }
       assignData();
       renderAll();
+      // 新模块（今日计划摘要、人生五维进度等）依赖 TASKS_DATA/DASHBOARD_DATA，必须在 assignData 后渲染
+      if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) { console.error('renderDashboard error:', e); } }
+      if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
     }
 
     function extractDashboardObjectFromScript(text) {
@@ -2632,36 +2637,28 @@
       const container = document.getElementById('memo-display-list');
       if (!container) return;
 
-      // 优先展示「长期任务」(TASKS_DATA.tasks，来自飞书今日安排表的临时任务列)
-      const longTasks = (TASKS_DATA?.tasks || []).filter(t => t && (t.text || t));
-      let list = longTasks.map(t => ({ text: (t.text != null ? t.text : t), done: !!t.done }));
-      let isLongTask = true;
-
-      // 长期任务为空时，回退到「备忘提醒」(MEMOS_DATA)
-      if (!list.length) {
-        isLongTask = false;
-        const rawMemos = MEMOS_DATA?.items || [];
-        const memos = [];
-        for (const item of rawMemos) {
-          if (!item.text) continue;
-          const lines = item.text.split('\n');
-          for (const line of lines) {
-            let clean = line.trim();
-            if (!clean) continue;
-            if (clean.startsWith('✅')) continue;
-            if (clean.includes('✅')) continue;
-            if (clean.startsWith('~~') && clean.endsWith('~~')) continue;
-            clean = clean.replace(/^\d+[.、）)]\s*/, '');
-            clean = clean.replace(/^💡\s*/, '');
-            clean = clean.replace(/^[○◦▪●❖◆🔹🔸1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟]+\s*/, '');
-            clean = clean.replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, '');
-            clean = clean.trim();
-            if (!clean || clean.startsWith('🌿全部待做事项')) continue;
-            memos.push({ text: clean, done: false });
-          }
+      // 长期任务 = 飞书表格 D列（备忘提醒）→ DASHBOARD_DATA.memos.items
+      const rawMemos = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.memos && window.DASHBOARD_DATA.memos.items) || MEMOS_DATA?.items || [];
+      const memos = [];
+      for (const item of rawMemos) {
+        if (!item.text) continue;
+        const lines = item.text.split('\n');
+        for (const line of lines) {
+          let clean = line.trim();
+          if (!clean) continue;
+          if (clean.startsWith('✅')) continue;
+          if (clean.includes('✅')) continue;
+          if (clean.startsWith('~~') && clean.endsWith('~~')) continue;
+          clean = clean.replace(/^\d+[.、）)]\s*/, '');
+          clean = clean.replace(/^💡\s*/, '');
+          clean = clean.replace(/^[○◦▪●❖◆🔹🔸1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟]+\s*/, '');
+          clean = clean.replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, '');
+          clean = clean.trim();
+          if (!clean || clean.startsWith('🌿全部待做事项')) continue;
+          memos.push({ text: clean, done: false });
         }
-        list = memos.slice(0, 10);
       }
+      const list = memos.slice(0, 10);
 
       if (!list.length) {
         container.innerHTML = '<div style="color:var(--ink-faint);font-size:0.82rem;text-align:center;padding:1.5rem 0;">暂无长期任务 📝</div>';
@@ -4368,8 +4365,9 @@
       // 学习：连续天数 / 365
       var rolling = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.reading && window.DASHBOARD_DATA.reading.rolling_day) || 0;
       setRing('ring-study', (rolling / 365) * 100);
-      // 产品：本月已发布 / 目标
-      setRing('ring-product', g.product ? 0 : 0);
+      // 产品：已发布笔记总数 / 目标（dashboard_data.js 暂无按月份拆分，先用总数让进度条有数据）
+      var productCount = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.published_notes && window.DASHBOARD_DATA.published_notes.total) || 0;
+      setRing('ring-product', g.product ? (productCount / g.product) * 100 : 0);
       // 英语：本月打卡 / 目标
       var eng = nm('dudu_english', []);
       var engMonth = eng.filter(function (d) { return d.indexOf(monthKey()) === 0; }).length;
@@ -4393,6 +4391,9 @@
       sv('dudu_monthly_goals', g); $('mgEditArea').style.display = 'none';
       renderMonthlyGoals(); renderDashboard();
     };
+    // 暴露给 script[0] 的 loadData，确保飞书数据 assign 后再渲染今日计划摘要与人生五维进度
+    window.renderDashboard = renderDashboard;
+    window.renderMonthlyGoals = renderMonthlyGoals;
 
     /* ---------- 睡眠记录 ---------- */
     function dur(bed, wake) {
