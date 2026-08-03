@@ -56,12 +56,12 @@
       "hotness": "🎧"
     },
     {
-      "title": "🎙 当个事儿 | 怎么无痛的出血，反而更要命啊？！｜有点小事60",
+      "title": "🎙 当个事儿 | 我跟金钱的关系，被谁影响了？| Vol.173",
       "url": "https://www.xiaoyuzhoufm.com/podcast/60d2d172afc14743da181066",
       "source": "当个事儿",
       "category": "播客",
       "hotness": "🎧",
-      "time_ago": "昨天"
+      "time_ago": "3天前"
     },
     {
       "title": "🎙 嗨咻 | 100. 为什么越想表现自己，越容易在社交中露怯？",
@@ -69,7 +69,7 @@
       "source": "嗨咻",
       "category": "播客",
       "hotness": "🎧",
-      "time_ago": "今天"
+      "time_ago": "5天前"
     },
     {
       "title": "🎙 头回当妈 | 100. 特别节目｜头回当妈的101问 第一弹",
@@ -77,15 +77,15 @@
       "source": "头回当妈",
       "category": "播客",
       "hotness": "🎧",
-      "time_ago": "昨天"
+      "time_ago": "5天前"
     },
     {
-      "title": "🎙 畅所育言 | 110把感激误认为爱情，把健身练成疲劳，把AI当成答案｜最近想分享的6期播客",
+      "title": "🎙 畅所育言 | 111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区",
       "url": "https://www.xiaoyuzhoufm.com/podcast/64d25bd580c9ec4c5fbb0da4",
       "source": "畅所育言",
       "category": "播客",
       "hotness": "🎧",
-      "time_ago": "1周前"
+      "time_ago": "昨天"
     },
     {
       "title": "🎙 Alison Yu心理 | ep90 | 边界：主体性的表达，真实关系的开始",
@@ -93,142 +93,123 @@
       "source": "Alison Yu心理",
       "category": "播客",
       "hotness": "🎧",
-      "time_ago": "1周前"
+      "time_ago": "2周前"
     }
   ],
   "ai_news": [
     {
-      "title": "OpenAI 总裁布罗克曼承认新版 ChatGPT 桌面应用&quot;有点乱&quot;，目标年底实现&quot;零标签&quot;",
-      "url": "https://aihot.virxact.com/items/cms6xky2402xgrouqgudkfgsg",
-      "published": "Thu, 30 Jul 2026 02:49:47 GMT",
-      "source": "IT之家（RSS）",
+      "title": "Kimi Work 幻灯片制作教程发布",
+      "url": "https://aihot.virxact.com/items/cmsd6q57g12pwroeu6iacjuqj",
+      "published": "Mon, 03 Aug 2026 11:51:51 GMT",
+      "source": "X：Kimi.ai (@Kimi_Moonshot)",
       "time_ago": "今天"
     },
     {
-      "title": "腾讯混元Hyra破解50年数学难题",
-      "url": "https://aihot.virxact.com/items/cms6xa31u02nlrouq0wkhylfp",
-      "published": "Thu, 30 Jul 2026 02:33:16 GMT",
-      "source": "X：腾讯混元 (@TencentHunyuan)",
+      "title": "Qwen3.8-Max 发布：开源最强编码与协作模型，2.4T 参数",
+      "url": "https://aihot.virxact.com/items/cmscldw820c4kroeu7bw1kb27",
+      "published": "Mon, 03 Aug 2026 02:00:00 GMT",
+      "source": "Qwen：Blog Retrieval（API）",
       "time_ago": "今天"
     },
     {
-      "title": "揭秘 AI 智能体入侵 Hugging Face 全过程：4 天半执行 17600 次操作",
-      "url": "https://aihot.virxact.com/items/cms6r5fog0btjrohz9heu2c6f",
-      "published": "Wed, 29 Jul 2026 23:29:34 GMT",
-      "source": "IT之家（RSS）",
+      "title": "OpenAI 新模型 Astra 数学表现出色，但被过度吹捧",
+      "url": "https://aihot.virxact.com/items/cmscc62eo033broeusw72isi0",
+      "published": "Sun, 02 Aug 2026 21:25:27 GMT",
+      "source": "Gary Marcus：The Road to AI We Can Trust（RSS）",
       "time_ago": "今天"
     },
     {
-      "title": "Replit Design 发布：AI 赋能设计愿景",
-      "url": "https://aihot.virxact.com/items/cms6kdopf05tbrohzoim2kpeg",
-      "published": "Wed, 29 Jul 2026 20:45:42 GMT",
-      "source": "X：Replit (@Replit)",
-      "time_ago": "今天"
+      "title": "Codex 用 Sol 指挥 Luna Max 省额度翻倍产出",
+      "url": "https://aihot.virxact.com/items/cmsbowa0l0m77rohvw8s15ia1",
+      "published": "Sun, 02 Aug 2026 10:47:27 GMT",
+      "source": "X：阿易 AI Notes (@AYi_AInotes)",
+      "time_ago": "昨天"
     },
     {
-      "title": "Claude Opus 5 在模拟售货机任务中展现欺骗与背叛，创下新纪录",
-      "url": "https://aihot.virxact.com/items/cms6g4nn502errohzoxo9al2o",
-      "published": "Wed, 29 Jul 2026 18:45:27 GMT",
-      "source": "TechCrunch：AI（RSS）",
-      "time_ago": "今天"
+      "title": "Grok 支持分析任意视频",
+      "url": "https://aihot.virxact.com/items/cmsbf9by90dq7rohvp1oggqmk",
+      "published": "Sun, 02 Aug 2026 06:23:54 GMT",
+      "source": "X：Elon Musk (@elonmusk, xAI)",
+      "time_ago": "昨天"
     },
     {
-      "title": "Miles 在 Blackwell 架构上实现端到端 MXFP8 与逐 token NVFP4 强化学习方案",
-      "url": "https://aihot.virxact.com/items/cms6drkj8001crohzuxf7kfy7",
-      "published": "Wed, 29 Jul 2026 17:50:30 GMT",
-      "source": "LMSYS：Blog（Chatbot Arena 团队）",
-      "time_ago": "今天"
+      "title": "从实验到产线——AI 工作流的规模化挑战与协作生态 | 2026 ChinaJoy AI未来生态大会",
+      "url": "https://36kr.com/p/3923717502072969?f=rss",
+      "published": "2026-08-03 19:39:13  +0800",
+      "author": "",
+      "source": "36氪",
+      "time_ago": "08-03"
     },
     {
-      "title": "OpenAI 为学术研究者免费提供前沿模型",
-      "url": "https://aihot.virxact.com/items/cms6cw5ha02sgrotzfmlr8p11",
-      "published": "Wed, 29 Jul 2026 17:22:02 GMT",
-      "source": "X：Sherwin Wu（@sherwinwu）",
-      "time_ago": "今天"
+      "title": "德明利今��跌超9%，36氪企业全情报提前捕捉到这一市场信号",
+      "url": "https://36kr.com/p/3923603053686151?f=rss",
+      "published": "2026-08-03 17:44:31  +0800",
+      "author": "",
+      "source": "36氪",
+      "time_ago": "08-03"
     },
     {
-      "title": "Perplexity 开源智能体检测层 Numbat",
-      "url": "https://aihot.virxact.com/items/cms6czboh031krotzmczxbw2v",
-      "published": "Wed, 29 Jul 2026 17:01:42 GMT",
-      "source": "X：Perplexity (@perplexity_ai)",
-      "time_ago": "今天"
+      "title": "可灵观察②｜用可灵重现《霸王别姬》：电影感足了，复杂叙事如何更稳？",
+      "url": "https://36kr.com/p/3923465542364545?f=rss",
+      "published": "2026-08-03 16:12:09  +0800",
+      "author": "",
+      "source": "36氪",
+      "time_ago": "08-03"
     },
     {
-      "title": "开源引擎可在任何 M 系列 Mac 上以 2 GB 内存运行 Gemma 4 26B",
-      "url": "https://aihot.virxact.com/items/cms6arrc700rbrotzo1wseql3",
-      "published": "Wed, 29 Jul 2026 16:09:22 GMT",
-      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
-      "time_ago": "今天"
+      "title": "硬氪首发 | 硅光资深团队获数千万天使轮融资，瞄准CPO/OIO下一代光互连解决方案",
+      "url": "https://36kr.com/p/3923374038265217?f=rss",
+      "published": "2026-08-03 13:43:36  +0800",
+      "author": "",
+      "source": "36氪",
+      "time_ago": "08-03"
     },
     {
-      "title": "Google DeepMind 在 Flow Music 中推出 Lyria 3.5，提升音乐性、歌词、人声与创作控制",
-      "url": "https://aihot.virxact.com/items/cms6arrcb00rerotztt8cp1mv",
-      "published": "Wed, 29 Jul 2026 16:02:10 GMT",
-      "source": "Google DeepMind：Blog（RSS）",
-      "time_ago": "今天"
+      "title": "前安克3D打印业务负责人要做B端工具产品，获数千万融资｜36氪首发",
+      "url": "https://36kr.com/p/3923371035831684?f=rss",
+      "published": "2026-08-03 13:40:12  +0800",
+      "author": "",
+      "source": "36氪",
+      "time_ago": "08-03"
     }
   ],
   "one_company_news": [
     {
-      "title": "上半年美股复盘：存储芯片半导体，K线虐我如蝼蚁",
-      "url": "https://www.ximalaya.com/sound/1003587637",
-      "published": "Wed, 29 Jul 2026 23:30:00 GMT",
+      "title": "老股东高价套现离场，新东家用并购贷接盘：欣天科技控制权易主背后的\"冰与火\"",
+      "url": "https://www.tmtpost.com/8089630.html",
+      "published": "Mon, 03 Aug 2026 20:19:32 +0800",
       "author": "",
-      "source": "亏钱指南",
+      "source": "钛媒体",
       "time_ago": "今天",
-      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
+      "category": "资讯"
     },
     {
-      "title": "00后摆脱搞钱羞耻：做明星应援扇月入过万，摆摊穿戴甲日入五百",
-      "url": "https://www.ximalaya.com/sound/1002371330",
-      "published": "Wed, 22 Jul 2026 23:30:00 GMT",
+      "title": "内存奇缺，Macbook Air 或缺货；智元母公司推《魔兽世界》机器人；微信地震预警上线新功能",
+      "url": "http://www.geekpark.net/news/368278",
+      "published": "Mon, 03 Aug 2026 08:13:32 +0800",
       "author": "",
-      "source": "亏钱指南",
-      "time_ago": "1周前",
-      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6615cd1e5b4c7f0012fd9c7a"
+      "source": "极客公园",
+      "time_ago": "今天",
+      "category": "资讯"
     },
     {
-      "title": "vol.53 对谈易立竞：折腾vs独处 极致对照组的两种活法答案",
-      "url": "https://www.xiaoyuzhoufm.com/episode/6a66487e6356eb2d9be8ca46?utm_source=rss",
-      "published": "Mon, 27 Jul 2026 00:00:00 GMT",
+      "title": "具身智能挤满「修路人」，机器人还没普及，12270家服务商先打起来了",
+      "url": "https://36kr.com/p/3923585549031297?f=rss",
+      "published": "2026-08-03 20:34:13  +0800",
+      "author": "雷科技",
+      "source": "36氪",
+      "time_ago": "08-03",
+      "category": "资讯"
+    },
+    {
+      "title": "对话卓驭 CEO 沈劭劼：汽车在被撞前 0.01 秒退出智驾肯定是不行的",
+      "url": "https://www.ifanr.com/1673777?utm_source=rss&utm_medium=rss&utm_campaign=",
+      "published": "Mon, 03 Aug 2026 10:23:14 +0000",
       "author": "",
-      "source": "天真不天真",
-      "time_ago": "3天前",
-      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
-    },
-    {
-      "title": "vol.52 对谈王安宇：十年可以让一个人发生多少变化",
-      "url": "https://www.xiaoyuzhoufm.com/episode/6a4a7af02e335a35a80e7c18?utm_source=rss",
-      "published": "Mon, 06 Jul 2026 00:00:00 GMT",
-      "author": "",
-      "source": "天真不天真",
-      "time_ago": "3周前",
-      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6473f1b85b4c7f0012fd9bf8"
-    },
-    {
-      "title": "【截胡不截财】最新节目",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/65e9c5e9d5e8d90013f65ab8",
-      "source": "截胡不截财",
-      "time_ago": "📱 点击在小宇宙App收听"
-    },
-    {
-      "title": "269. 卷规模 VS 卷创作：真人短剧的两种生存模式",
-      "url": "https://www.xiaoyuzhoufm.com/episode/6a4f777d1e32575f5eb3cbc1?utm_source=rss",
-      "published": "Thu, 09 Jul 2026 10:32:06 GMT",
-      "author": "",
-      "source": "乱翻书",
-      "time_ago": "3周前",
-      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
-    },
-    {
-      "title": "268.AI时代，个人工作台会重新回到手机吗？",
-      "url": "https://www.xiaoyuzhoufm.com/episode/6a3bdd319d2f5743683d4841?utm_source=rss",
-      "published": "Wed, 24 Jun 2026 13:49:54 GMT",
-      "author": "",
-      "source": "乱翻书",
-      "time_ago": "1月前",
-      "xiaoyuzhou_url": "https://www.xiaoyuzhoufm.com/podcast/6416be6e5b4c7f0012fd9b86"
+      "source": "爱范儿",
+      "time_ago": "今天",
+      "category": "资讯"
     }
   ],
-  "last_updated": "2026-07-30"
+  "last_updated": "2026-08-03"
 }

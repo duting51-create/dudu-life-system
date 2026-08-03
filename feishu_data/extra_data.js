@@ -159,29 +159,14 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "奇怪的动物会被保护起来，奇怪的人却遭受排挤。",
-  "source": "阳光劫匪"
+  "content": "师者，所以传道授业解惑也。",
+  "source": "师说"
 };
-window.updated = "2026-08-03";
-window.list = [
-  {
-    "name": "嗨咻",
-    "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
-  },
-  {
-    "name": "头回当妈",
-    "latest": "100. 特别节目｜头回当妈的101问 第一弹"
-  },
-  {
-    "name": "畅所育言",
-    "latest": "最新单集加载中…"
-  },
-  {
-    "name": "当个事儿",
-    "latest": "我跟金钱的关系，被谁影响了？| Vol.173"
-  },
-  {
-    "name": "Alison Yu心理",
-    "latest": "最新单集加载中…"
-  }
-];
+window.updated = {
+  "name": "嗨咻",
+  "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
+};
+window.list = {
+  "name": "嗨咻",
+  "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
+};
