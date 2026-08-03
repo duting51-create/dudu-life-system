@@ -17,7 +17,13 @@
     'dudu_jots',
     'dudu_inspire_done',
     'dudu_inspire_done_meta',
-    'dudu_deleted_feishu'
+    'dudu_deleted_feishu',
+    'dudu_sleep',
+    'dudu_english',
+    'dudu_travel',
+    'dudu_monthly_goals',
+    'dudu_invest_gains',
+    'dudu_mortgage_balance'
   ];
   var SYNC_PREFIXES = ['exercise_checked_'];
   var pendingKeyPromise = null;

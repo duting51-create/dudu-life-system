@@ -1,0 +1,101 @@
+{
+  "updated": "2026-08-03",
+  "list": [
+    {
+      "name": "爽",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "7-18",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2026-08-30",
+      "icon": "🎂"
+    },
+    {
+      "name": "晗哥",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "1-1",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2027-02-06",
+      "icon": "🎂"
+    },
+    {
+      "name": "爸爸",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "1-21",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2027-02-26",
+      "icon": "🎂"
+    },
+    {
+      "name": "妈妈",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "7-6",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2026-08-18",
+      "icon": "🎂"
+    },
+    {
+      "name": "何瑜",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "9-6",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2026-10-15",
+      "icon": "🎂"
+    },
+    {
+      "name": "张娈",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "3-28",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2027-05-04",
+      "icon": "🎂"
+    },
+    {
+      "name": "郭瑞",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "12-15",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2027-01-22",
+      "icon": "🎂"
+    },
+    {
+      "name": "丽妍",
+      "type": "生日",
+      "calendar": "solar",
+      "lunar": null,
+      "solar": "08-26",
+      "mode": "countdown",
+      "next_date": "2026-08-26",
+      "icon": "🎂"
+    },
+    {
+      "name": "结婚纪念日",
+      "type": "纪念日",
+      "calendar": "solar",
+      "fixed": "2023-04-28",
+      "mode": "elapsed",
+      "icon": "💍"
+    },
+    {
+      "name": "买房日",
+      "type": "里程碑",
+      "calendar": "solar",
+      "fixed": "2024-09-30",
+      "mode": "elapsed",
+      "icon": "🏠"
+    }
+  ]
+}

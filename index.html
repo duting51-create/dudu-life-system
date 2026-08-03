@@ -1380,6 +1380,155 @@
       .section-number { font-size: 1.5rem; }
     }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .scroll-hint { animation: none; } }
+
+    /* ====== 新增模块样式（2026-08-03） ====== */
+    .nav-toggle { display: none; position: fixed; top: 14px; left: 14px; z-index: 70; width: 44px; height: 44px; border-radius: 12px; border: none; background: var(--purple); color: #fff; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+    .side-nav-header { display: none; }
+    .side-nav-close { display: none; }
+    .nav-overlay { display: none; }
+
+    /* Dashboard 顶部：天气 + 今日计划 */
+    .dash-top { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; margin-bottom: 22px; }
+    .weather-cards { display: flex; gap: 14px; }
+    .weather-card { flex: 1; background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+    .weather-city { font-size: .82rem; color: var(--ink-faint); font-weight: 600; }
+    .weather-temp { font-size: 2.1rem; font-weight: 800; margin: 6px 0 2px; color: var(--ink); }
+    .weather-desc { font-size: .9rem; color: var(--ink); }
+    .weather-hilo { font-size: .8rem; color: var(--ink-faint); margin-top: 4px; }
+    .today-plan-card { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+    .today-plan-title { font-weight: 700; margin-bottom: 10px; color: var(--ink); }
+    .today-plan-list { display: flex; flex-direction: column; gap: 7px; max-height: 150px; overflow: auto; }
+    .today-plan-item { display: flex; gap: 8px; align-items: center; font-size: .85rem; }
+    .today-plan-item.done .tp-text { text-decoration: line-through; color: var(--ink-faint); }
+    .tp-check { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--purple); flex: none; }
+    .today-plan-item.done .tp-check { background: var(--purple); }
+
+    /* 进度环 */
+    .rings-wrap { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); margin-bottom: 22px; }
+    .rings-title { font-weight: 700; margin-bottom: 14px; color: var(--ink); }
+    .rings-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .ring-item { text-align: center; }
+    .mini-ring { position: relative; width: 84px; height: 84px; margin: 0 auto; }
+    .mini-ring svg { transform: rotate(-90deg); }
+    .mini-ring .ring-bg { fill: none; stroke: #eee; stroke-width: 9; }
+    .mini-ring .ring-fg { fill: none; stroke: var(--purple); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 339.292; stroke-dashoffset: 339.292; transition: stroke-dashoffset .8s ease; }
+    .mini-ring-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .95rem; }
+    .ring-label { font-size: .8rem; margin-top: 6px; color: var(--ink); }
+
+    /* AI 提醒占位 */
+    .ai-reminder-card { background: linear-gradient(135deg, #faf7ff, #fff); border: 1px dashed var(--purple); border-radius: 18px; padding: 18px; }
+    .ai-reminder-head { font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .ai-badge { font-size: .68rem; background: var(--purple); color: #fff; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+    .ai-reminder-list { margin: 0; padding-left: 18px; color: var(--ink); font-size: .88rem; line-height: 1.9; }
+    .ai-reminder-note { font-size: .76rem; color: var(--ink-faint); margin-top: 10px; }
+
+    /* 本月目标 / 房贷通用头 */
+    .monthly-goals-card, .mortgage-card, .invest-card, .sleep-card, .english-card, .weekly-report-card { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); margin-top: 22px; }
+    .mg-head, .sleep-head, .english-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .mg-title, .sleep-title, .english-title { font-weight: 700; font-size: 1.05rem; }
+    .mg-edit-btn, .sleep-add-btn, .english-check-btn { border: 1px solid var(--border); background: #fff; border-radius: 10px; padding: 5px 12px; cursor: pointer; font-size: .8rem; }
+    .english-check-btn { background: var(--green); color: #fff; border: none; }
+    .mg-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .mg-cell { text-align: center; background: var(--cream); border-radius: 12px; padding: 12px 6px; }
+    .mg-cell .mg-val { font-weight: 800; font-size: 1.2rem; }
+    .mg-cell .mg-name { font-size: .72rem; color: var(--ink-faint); margin-top: 3px; }
+    .mg-inputs, .sleep-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+    .mg-inputs label, .sleep-inputs label { display: flex; flex-direction: column; font-size: .76rem; color: var(--ink-faint); gap: 4px; }
+    .mg-inputs input, .sleep-inputs input, .sleep-inputs select, .sleep-form textarea, .mortgage-edit label input, .invest-gain-inputs input, .invest-gain-inputs select, .travel-form input, .travel-form select, .travel-form textarea { border: 1px solid var(--border); border-radius: 8px; padding: 7px 9px; font-size: .85rem; font-family: inherit; }
+
+    /* 周报 */
+    .wr-head { font-weight: 700; font-size: 1.05rem; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .wr-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .wr-block { background: var(--cream); border-radius: 12px; padding: 12px; }
+    .wr-label { font-weight: 700; font-size: .82rem; }
+    .wr-block p { margin: 6px 0 0; font-size: .85rem; color: var(--ink); }
+    .wr-note { font-size: .76rem; color: var(--ink-faint); margin-top: 12px; }
+
+    /* 信息雷达播客提示 */
+    .news-ai-hint { font-size: .72rem; color: var(--ink-faint); margin: 6px 0 10px; font-style: italic; }
+
+    /* 睡眠 */
+    .sleep-form textarea { width: 100%; margin-top: 8px; resize: vertical; }
+    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .sleep-row { display: flex; justify-content: space-between; align-items: center; background: var(--cream); border-radius: 10px; padding: 9px 12px; font-size: .85rem; }
+    .sleep-row .sr-main { font-weight: 600; }
+    .sleep-row .sr-sub { color: var(--ink-faint); font-size: .78rem; }
+    .sleep-empty { color: var(--ink-faint); font-size: .82rem; text-align: center; padding: 1rem 0; }
+
+    /* 英语 */
+    .english-stats { display: flex; gap: 18px; margin: 10px 0; }
+    .english-stat { text-align: center; }
+    .english-stat span { font-size: 1.5rem; font-weight: 800; color: var(--purple); }
+    .english-stat label { display: block; font-size: .72rem; color: var(--ink-faint); }
+    .english-bar { height: 8px; background: #eee; border-radius: 6px; overflow: hidden; }
+    .english-bar-fill { height: 100%; background: var(--green); transition: width .6s; }
+    .english-hint { font-size: .78rem; color: var(--ink-faint); margin-top: 8px; }
+
+    /* 房贷 / 投资 */
+    .mortgage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .mortgage-cell { background: var(--cream); border-radius: 12px; padding: 11px; text-align: center; }
+    .mortgage-cell .mc-val { font-weight: 800; font-size: 1.05rem; }
+    .mortgage-cell .mc-name { font-size: .72rem; color: var(--ink-faint); margin-top: 3px; }
+    .mortgage-edit { margin-top: 12px; }
+    .mortgage-edit label { display: flex; flex-direction: column; font-size: .76rem; color: var(--ink-faint); gap: 4px; }
+    .invest-total { font-weight: 800; color: var(--green); }
+    .invest-accounts { display: flex; flex-direction: column; gap: 10px; }
+    .invest-acc { background: var(--cream); border-radius: 12px; padding: 12px; }
+    .invest-acc .ia-name { font-weight: 700; }
+    .invest-acc .ia-rows { display: flex; gap: 16px; margin-top: 6px; font-size: .85rem; }
+    .invest-acc .ia-pos { color: #C0392B; }
+    .invest-acc .ia-neg { color: #2E8B57; }
+    .invest-gain { margin-top: 14px; }
+    .invest-gain-title { font-weight: 700; margin-bottom: 8px; }
+    .invest-gain-inputs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .invest-gain-inputs button { background: var(--purple); color: #fff; border: none; border-radius: 8px; padding: 7px 14px; cursor: pointer; }
+    .invest-trend { display: flex; align-items: flex-end; gap: 4px; height: 60px; margin-top: 12px; overflow-x: auto; }
+    .invest-bar { width: 14px; border-radius: 4px 4px 0 0; min-height: 3px; }
+
+    /* 生活管理 */
+    .life-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .life-col { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+    .life-col-head { font-weight: 700; font-size: 1.02rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .life-sub { font-size: .76rem; color: var(--ink-faint); font-weight: 400; }
+    .life-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+    .life-tab { border: 1px solid var(--border); background: #fff; border-radius: 10px; padding: 4px 12px; cursor: pointer; font-size: .8rem; }
+    .life-tab.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+    .movie-list, .travel-list, .dates-list { display: flex; flex-direction: column; gap: 7px; max-height: 320px; overflow: auto; }
+    .movie-row { display: flex; justify-content: space-between; align-items: center; background: var(--cream); border-radius: 9px; padding: 8px 10px; font-size: .84rem; }
+    .movie-row a { color: var(--purple); text-decoration: none; font-weight: 600; }
+    .movie-row .mr-year { color: var(--ink-faint); font-size: .74rem; margin-left: 6px; }
+    .movie-row .mr-rate { color: #E0A100; font-size: .74rem; margin-left: 6px; }
+    .travel-row { background: var(--cream); border-radius: 9px; padding: 9px 11px; font-size: .84rem; }
+    .travel-row .tr-top { display: flex; justify-content: space-between; font-weight: 600; }
+    .travel-row .tr-status { font-size: .72rem; padding: 1px 8px; border-radius: 10px; background: #fff; border: 1px solid var(--border); }
+    .travel-row .tr-note { color: var(--ink-faint); font-size: .76rem; margin-top: 3px; }
+    .travel-form input, .travel-form select, .travel-form textarea { width: 100%; margin-bottom: 8px; }
+    .travel-form textarea { resize: vertical; }
+    .date-row { display: flex; align-items: center; gap: 10px; background: var(--cream); border-radius: 10px; padding: 9px 12px; }
+    .date-row .dr-icon { font-size: 1.3rem; }
+    .date-row .dr-main { flex: 1; }
+    .date-row .dr-name { font-weight: 600; font-size: .88rem; }
+    .date-row .dr-sub { font-size: .74rem; color: var(--ink-faint); }
+    .date-row .dr-count { font-weight: 800; font-size: .9rem; }
+    .date-row .dr-count.up { color: var(--green); }
+    .date-row .dr-count.down { color: #C0392B; }
+
+    @media (max-width: 1100px) { .dash-top { grid-template-columns: 1fr; } .life-grid { grid-template-columns: 1fr; } .rings-grid { grid-template-columns: repeat(5, 1fr); } }
+    @media (max-width: 820px) {
+      .nav-toggle { display: flex; }
+      .side-nav { position: fixed; top: 0; left: 0; height: 100%; width: 240px; transform: translateX(-100%); transition: transform .25s ease; z-index: 65; box-shadow: 4px 0 24px rgba(0,0,0,.18); padding-top: 0; }
+      .side-nav.open { transform: translateX(0); }
+      .side-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 10px; }
+      .side-nav-close { display: block; border: none; background: transparent; font-size: 1.2rem; cursor: pointer; color: var(--ink); }
+      .side-nav-title { font-weight: 800; }
+      .nav-overlay.open { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 60; }
+      body.mobile-view .full-section { display: none; }
+      body.mobile-view .full-section.active-view { display: block; }
+      .rings-grid { grid-template-columns: repeat(3, 1fr); }
+      .mg-grid, .mortgage-grid { grid-template-columns: repeat(2, 1fr); }
+      .wr-body { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) { .rings-grid { grid-template-columns: repeat(2, 1fr); } .weather-cards { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -1387,7 +1536,7 @@
   <!-- ====== TOP HEADER ====== -->
   <header class="top-header" id="topHeader">
     <div class="logo" style="gap:10px;">
-      <img src="img/杜杜的IP小人.png" alt="杜杜IP" class="header-avatar" />
+      <img src="img/杜杜的IP小人.webp" alt="杜杜IP" class="header-avatar" />
       <span class="logo-dot" id="logoDot"></span>
       杜杜的人生小巴士 🚐
     </div>
@@ -1396,30 +1545,42 @@
     </div>
   </header>
 
-  <!-- ====== LEFT SIDE NAV ====== -->
+  <!-- ====== LEFT SIDE NAV (桌面滚动 / 手机抽屉) ====== -->
+  <button class="nav-toggle" id="navToggle" aria-label="打开导航">☰</button>
   <nav class="side-nav" id="sideNav" aria-label="内容导航">
-    <button class="side-nav-item" data-tab="s1" title="今日待办">
-      <span class="dot"></span><span class="nav-icon">📋</span><span class="nav-label">今日待办</span>
+    <div class="side-nav-header">
+      <span class="side-nav-title">🚐 人生小巴士</span>
+      <button class="side-nav-close" id="navClose" aria-label="关闭">✕</button>
+    </div>
+    <button class="side-nav-item" data-tab="hero-section" title="首页">
+      <span class="dot"></span><span class="nav-icon">🏠</span><span class="nav-label">首页</span>
     </button>
-    <button class="side-nav-item" data-tab="s2" title="灵感宝箱">
-      <span class="dot"></span><span class="nav-icon">💡</span><span class="nav-label">灵感宝箱</span>
+    <button class="side-nav-item" data-tab="s1" title="计划中心">
+      <span class="dot"></span><span class="nav-icon">📋</span><span class="nav-label">计划中心</span>
     </button>
-    <button class="side-nav-item" data-tab="s3" title="热点资讯">
-      <span class="dot"></span><span class="nav-icon">🔥</span><span class="nav-label">热点资讯</span>
+    <button class="side-nav-item" data-tab="s2" title="人生复盘">
+      <span class="dot"></span><span class="nav-icon">💡</span><span class="nav-label">人生复盘</span>
     </button>
-    <button class="side-nav-item" data-tab="s4" title="运动打卡">
-      <span class="dot"></span><span class="nav-icon">🏃</span><span class="nav-label">运动打卡</span>
+    <button class="side-nav-item" data-tab="s3" title="信息雷达">
+      <span class="dot"></span><span class="nav-icon">🔥</span><span class="nav-label">信息雷达</span>
     </button>
-    <button class="side-nav-item" data-tab="s5" title="阅读挑战">
-      <span class="dot"></span><span class="nav-icon">📚</span><span class="nav-label">阅读挑战</span>
+    <button class="side-nav-item" data-tab="s4" title="健康管理">
+      <span class="dot"></span><span class="nav-icon">🏃</span><span class="nav-label">健康管理</span>
+    </button>
+    <button class="side-nav-item" data-tab="s5" title="成长中心">
+      <span class="dot"></span><span class="nav-icon">📚</span><span class="nav-label">成长中心</span>
     </button>
     <button class="side-nav-item" data-tab="s6" title="一人公司">
       <span class="dot"></span><span class="nav-icon">👩‍💼</span><span class="nav-label">一人公司</span>
     </button>
-    <button class="side-nav-item" data-tab="s7" title="家庭财务">
-      <span class="dot"></span><span class="nav-icon">💰</span><span class="nav-label">家庭财务</span>
+    <button class="side-nav-item" data-tab="s7" title="财富管理">
+      <span class="dot"></span><span class="nav-icon">💰</span><span class="nav-label">财富管理</span>
+    </button>
+    <button class="side-nav-item" data-tab="s8" title="生活管理">
+      <span class="dot"></span><span class="nav-icon">🧳</span><span class="nav-label">生活管理</span>
     </button>
   </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
 
   <!-- ====== S0: HERO ====== -->
   <section class="full-section section-cream" id="hero-section" data-section="s0">
@@ -1462,7 +1623,7 @@
       <div class="hero-right">
         <div class="hero-illustration">
           <div class="dog-avatar-frame">
-            <img src="img/小耳屁.jpg" alt="小耳屁" id="dogPhoto">
+            <img src="img/小耳屁.webp" alt="小耳屁" id="dogPhoto">
           </div>
           <div class="hero-encourage">
             杜杜今天也要加油鸭 🚐<br>
@@ -1477,13 +1638,86 @@
     </div>
   </section>
 
-  <!-- ====== S1: 今日待办 ====== -->
+  <!-- ====== S0B: 首页 DASHBOARD ====== -->
+  <section class="full-section section-cream" id="dashboard" data-section="dashboard">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-number">🏠 00</span>
+        <h2 class="section-title">今日驾驶舱</h2>
+        <p class="section-sub">一屏掌握今天的状态与近期方向 · 向下滑动看各模块详情</p>
+      </div>
+
+      <!-- 天气 + 今日计划摘要 -->
+      <div class="dash-top reveal">
+        <div class="weather-cards" id="weatherCards">
+          <div class="weather-card">
+            <div class="weather-city">🌤 北京 · 顺义</div>
+            <div class="weather-temp" id="wx-bj-temp">--°</div>
+            <div class="weather-desc" id="wx-bj-desc">加载中…</div>
+            <div class="weather-hilo" id="wx-bj-hilo">-- / --</div>
+          </div>
+          <div class="weather-card">
+            <div class="weather-city">🌧 武汉 · 洪山</div>
+            <div class="weather-temp" id="wx-wh-temp">--°</div>
+            <div class="weather-desc" id="wx-wh-desc">加载中…</div>
+            <div class="weather-hilo" id="wx-wh-hilo">-- / --</div>
+          </div>
+        </div>
+        <div class="today-plan-card">
+          <div class="today-plan-title">📋 今日计划摘要</div>
+          <div class="today-plan-list" id="todayPlanList">
+            <div style="color:var(--ink-faint);font-size:0.82rem;">加载中…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 进度环 -->
+      <div class="rings-wrap reveal">
+        <div class="rings-title">🎯 人生五维进度（本月实际 / 目标）</div>
+        <div class="rings-grid" id="ringsGrid">
+          <div class="ring-item">
+            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-health" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-health-num">0%</span></div></div>
+            <div class="ring-label">🟢 健康</div>
+          </div>
+          <div class="ring-item">
+            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-wealth" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-wealth-num">0%</span></div></div>
+            <div class="ring-label">💰 财富</div>
+          </div>
+          <div class="ring-item">
+            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-study" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-study-num">0%</span></div></div>
+            <div class="ring-label">📚 学习</div>
+          </div>
+          <div class="ring-item">
+            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-product" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-product-num">0%</span></div></div>
+            <div class="ring-label">👩‍💼 产品</div>
+          </div>
+          <div class="ring-item">
+            <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-english" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-english-num">0%</span></div></div>
+            <div class="ring-label">🔤 英语</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI 提醒占位 -->
+      <div class="ai-reminder-card reveal">
+        <div class="ai-reminder-head">🤖 AI 今日提醒 <span class="ai-badge">占位 · 待接入</span></div>
+        <ul class="ai-reminder-list">
+          <li>📌 这里将展示 AI 自动生成的今日关注事项（如：今天有 3 件重要任务待推进）</li>
+          <li>📈 近期趋势变化（如：本周阅读时长下降，注意节奏）</li>
+          <li>👀 可能被忽略的事（如：长期任务「XX」已搁置 12 天）</li>
+        </ul>
+        <div class="ai-reminder-note">AI 能力将在 v2 接入（同步时预生成，安全无前端 key 暴露）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== S1: 计划中心 ====== -->
   <section class="full-section section-purple" id="s1" data-section="s1">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="section-number">📋 01</span>
-        <h2 class="section-title">今日待办</h2>
-        <p class="section-sub">数据来源：飞书「💪每日安排」表格 · 明天自动重置 · 点击文字可直接编辑</p>
+        <span class="section-number">📋 02</span>
+        <h2 class="section-title">计划中心</h2>
+        <p class="section-sub">数据来源：飞书「💪每日安排」表格 · 今日计划 + 长期任务 + 本月目标</p>
       </div>
       <div class="todo-progress-hint reveal">
         <div class="todo-progress-wrap">
@@ -1519,8 +1753,8 @@
           <div class="card-top-bar"></div>
           <div class="todo-sub-header">
             <span class="todo-sub-num pink-num">📎</span>
-            <h3 class="todo-sub-title">备忘提醒</h3>
-            <button onclick="toggleMemoEditor(this)" title="编辑备忘" class="memo-edit-btn">✏️</button>
+            <h3 class="todo-sub-title">长期任务</h3>
+            <button onclick="toggleMemoEditor(this)" title="编辑长期任务" class="memo-edit-btn">✏️</button>
           </div>
           <!-- 展示模式 -->
           <div class="memo-display-list" id="memo-display-list">
@@ -1528,7 +1762,7 @@
           </div>
           <!-- 编辑模式（默认隐藏，点击编辑按钮显示） -->
           <div class="memo-edit-area" id="memo-edit-area" style="display:none;">
-            <textarea id="memo-edit-ta" rows="6" placeholder="每行一条备忘提醒，保存后生效"></textarea>
+            <textarea id="memo-edit-ta" rows="6" placeholder="每行一条长期任务，保存后生效"></textarea>
             <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:8px;">
               <button onclick="cancelMemoEdit()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
               <button onclick="saveMemoEdit()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--pink);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
@@ -1536,16 +1770,37 @@
           </div>
         </div>
       </div>
+      <!-- 本月目标 -->
+      <div class="monthly-goals-card reveal">
+        <div class="mg-head">
+          <span class="mg-title">🎯 本月目标</span>
+          <button class="mg-edit-btn" onclick="toggleMonthlyGoals()">✏️ 编辑</button>
+        </div>
+        <div class="mg-grid" id="mgGrid"><!-- renderMonthlyGoals --></div>
+        <div class="mg-edit-area" id="mgEditArea" style="display:none;">
+          <div class="mg-inputs">
+            <label>🟢 健康(运动天数)<input type="number" id="mg-health" min="0"></label>
+            <label>💰 财富(预算¥)<input type="number" id="mg-wealth" min="0"></label>
+            <label>📚 学习(阅读天数)<input type="number" id="mg-study" min="0"></label>
+            <label>👩‍💼 产品(发布数)<input type="number" id="mg-product" min="0"></label>
+            <label>🔤 英语(打卡天数)<input type="number" id="mg-english" min="0"></label>
+          </div>
+          <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:8px;">
+            <button onclick="cancelMonthlyGoals()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
+            <button onclick="saveMonthlyGoals()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--purple);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ====== S2: 灵感宝箱 ====== -->
+  <!-- ====== S2: 人生复盘（灵感宝箱） ====== -->
   <section class="full-section section-pink" id="s2" data-section="s2">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="section-number">💡 02</span>
-        <h2 class="section-title">灵感宝箱</h2>
-        <p class="section-sub">近 30 天的备忘、收获与灵感 · 数据来源：飞书「💪每日安排」</p>
+        <span class="section-number">💡 03</span>
+        <h2 class="section-title">人生复盘</h2>
+        <p class="section-sub">输入：灵感 · 收获 · 情绪觉察（飞书同步） · 输出：每周 AI 复盘</p>
       </div>
 
       <!-- 左右双卡片布局 -->
@@ -1590,16 +1845,27 @@
           </div>
         </div>
       </div>
+      <!-- 周报占位卡 -->
+      <div class="weekly-report-card reveal">
+        <div class="wr-head">📝 本周 AI 复盘 <span class="ai-badge">占位 · 待接入</span></div>
+        <div class="wr-body">
+          <div class="wr-block"><span class="wr-label">📌 本周发生</span><p>示例：完成「孕期知识库」3 篇笔记发布；处理 2 条用户反馈。</p></div>
+          <div class="wr-block"><span class="wr-label">🌱 本周成长</span><p>示例：对「内容选题」有了更清晰的方法论认知。</p></div>
+          <div class="wr-block"><span class="wr-label">💗 情绪变化</span><p>示例：整体平稳，周中因数据波动略有焦虑。</p></div>
+          <div class="wr-block"><span class="wr-label">🔍 AI 洞察</span><p>示例：连续两周「长期任务」推进缓慢，建议拆小目标。</p></div>
+        </div>
+        <div class="wr-note">输入来自上方灵感宝箱（灵感/收获/情绪），v2 接入 AI 后自动生成周报。</div>
+      </div>
     </div>
   </section>
 
-  <!-- ====== S3: 热点资讯 ====== -->
+  <!-- ====== S3: 信息雷达（热点资讯） ====== -->
   <section class="full-section section-yellow" id="s3" data-section="s3">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="section-number">🔥 03</span>
-        <h2 class="section-title">热点资讯</h2>
-        <p class="section-sub">用户痛点洞察 · 小红书孕期关键词追踪 · 内容创作灵感</p>
+        <span class="section-number">🔥 04</span>
+        <h2 class="section-title">信息雷达</h2>
+        <p class="section-sub">先看摘要，再决定是否深入 · AI 摘要将于 v2 接入</p>
       </div>
       <div class="news-three">
         <div class="news-col reveal">
@@ -1609,9 +1875,10 @@
           </div>
         </div>
         <div class="news-col reveal reveal-d1">
-          <div class="news-col-label" style="color:#C47070;border-color:rgba(244,194,194,0.3);">💔 用户痛点</div>
-          <div id="user-pain-points-col">
-            <!-- Dynamically populated -->
+          <div class="news-col-label" style="color:#C47070;border-color:rgba(244,194,194,0.3);">💗 女性成长播客</div>
+          <div class="news-ai-hint">AI 摘要待接入 · 先列出在听清单</div>
+          <div id="podcasts-col">
+            <!-- 由 renderPodcasts() 填充 -->
           </div>
         </div>
         <div class="news-col reveal reveal-d2">
@@ -1642,9 +1909,9 @@
   <section class="full-section section-green" id="s4" data-section="s4">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="section-number">🏃 04</span>
-        <h2 class="section-title">运动打卡</h2>
-        <p class="section-sub">今日训练计划｜点击日期查看当天计划</p>
+        <span class="section-number">🏃 05</span>
+        <h2 class="section-title">健康管理</h2>
+        <p class="section-sub">训练计划（飞书）+ 睡眠记录（手动录入）· 长期观察身体状态</p>
       </div>
 
       <div class="ex-layout reveal">
@@ -1695,16 +1962,41 @@
           </div>
         </div>
       </div>
+      <!-- 睡眠记录 -->
+      <div class="sleep-card reveal">
+        <div class="sleep-head">
+          <span class="sleep-title">😴 睡眠记录</span>
+          <button class="sleep-add-btn" onclick="toggleSleepForm()">➕ 记录</button>
+        </div>
+        <div class="sleep-form" id="sleepForm" style="display:none;">
+          <div class="sleep-inputs">
+            <label>日期<input type="date" id="sleep-date"></label>
+            <label>入睡<input type="time" id="sleep-bed"></label>
+            <label>起床<input type="time" id="sleep-wake"></label>
+            <label>质量
+              <select id="sleep-quality">
+                <option value="好">好</option><option value="一般">一般</option><option value="差">差</option>
+              </select>
+            </label>
+          </div>
+          <textarea id="sleep-note" rows="2" placeholder="备注（如：半夜醒了一次）"></textarea>
+          <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:6px;">
+            <button onclick="cancelSleepForm()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
+            <button onclick="saveSleep()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--green);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
+          </div>
+        </div>
+        <div class="sleep-list" id="sleepList"><!-- renderSleep --></div>
+      </div>
     </div>
   </section>
 
-  <!-- ====== S5: 阅读 ====== -->
+  <!-- ====== S5: 成长中心（阅读） ====== -->
   <section class="full-section section-purple" id="s5" data-section="s5">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="section-number">📚 05</span>
-        <h2 class="section-title">阅读挑战</h2>
-        <p class="section-sub" id="reading-sub">微信读书 · 目标 365 天 · 从微信读书后台同步</p>
+        <span class="section-number">📚 06</span>
+        <h2 class="section-title">成长中心</h2>
+        <p class="section-sub">阅读（微信读书同步）+ 英语学习打卡 · 记录长期成长轨迹</p>
       </div>
       <div class="reading-row reveal">
         <div class="reading-ring-wrap">
@@ -1752,6 +2044,20 @@
           <!-- Dynamically populated -->
         </div>
       </div>
+      <!-- 英语学习打卡 -->
+      <div class="english-card reveal">
+        <div class="english-head">
+          <span class="english-title">🔤 英语学习打卡</span>
+          <button class="english-check-btn" id="englishCheckBtn" onclick="toggleEnglishToday()">✅ 今日打卡</button>
+        </div>
+        <div class="english-stats">
+          <div class="english-stat"><span id="englishStreak">0</span><label>连续天数</label></div>
+          <div class="english-stat"><span id="englishMonth">0</span><label>本月打卡</label></div>
+          <div class="english-stat"><span id="englishTotal">0</span><label>累计打卡</label></div>
+        </div>
+        <div class="english-bar"><div class="english-bar-fill" id="englishBarFill" style="width:0%"></div></div>
+        <div class="english-hint" id="englishHint">点击右上角记录今天学过英语 🗣</div>
+      </div>
     </div>
   </section>
 
@@ -1759,7 +2065,7 @@
   <section class="full-section section-purple" id="s6" data-section="s6">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="section-number">👩‍💼 06</span>
+        <span class="section-number">👩‍💼 07</span>
         <h2 class="section-title">一人公司 · 经营仪表盘</h2>
         <p class="section-sub">数据来源：飞书多维表格 · 已发布笔记实时统计</p>
       </div>
@@ -1809,9 +2115,9 @@
   <section class="full-section section-pink" id="s7" data-section="s7">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="section-number">💰 07</span>
-        <h2 class="section-title">家庭财务 · 年度看板</h2>
-        <p class="section-sub">数据来源：飞书多维表格 · 年度总览</p>
+        <span class="section-number">💰 08</span>
+        <h2 class="section-title">财富管理</h2>
+        <p class="section-sub">收入 / 支出（飞书）+ 房贷 + 投资理财 · 了解家庭财务状态</p>
       </div>
       <div class="finance-summary reveal">
         <div class="finance-big-label">📊 2026 年度总支出</div>
@@ -1860,11 +2166,92 @@
           </div>
         </div>
       </div>
+      <!-- 房贷 -->
+      <div class="mortgage-card reveal">
+        <div class="mg-head">
+          <span class="mg-title">🏠 房贷</span>
+          <button class="mg-edit-btn" onclick="editMortgage()">✏️ 更新余额</button>
+        </div>
+        <div class="mortgage-grid" id="mortgageGrid"><!-- renderMortgage --></div>
+        <div class="mortgage-edit" id="mortgageEdit" style="display:none;">
+          <label>剩余本金(¥)<input type="number" id="mortgageBalanceInput" step="0.01"></label>
+          <div style="display:flex;gap:6px;justify-content:flex-end;margin-top:6px;">
+            <button onclick="cancelMortgageEdit()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
+            <button onclick="saveMortgageBalance()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--pink);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
+          </div>
+        </div>
+      </div>
+      <!-- 投资 -->
+      <div class="invest-card reveal">
+        <div class="mg-head">
+          <span class="mg-title">📈 投资理财（股票）</span>
+          <span class="invest-total" id="investTotalLabel">--</span>
+        </div>
+        <div class="invest-accounts" id="investAccounts"><!-- renderInvest --></div>
+        <div class="invest-gain">
+          <div class="invest-gain-title">📅 每日收益记录</div>
+          <div class="invest-gain-inputs">
+            <input type="date" id="gainDate">
+            <input type="number" id="gainAmount" step="0.01" placeholder="今日收益 ±">
+            <button onclick="saveInvestGain()">记录</button>
+          </div>
+          <div class="invest-trend" id="investTrend"><!-- bars --></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== S8: 生活管理 ====== -->
+  <section class="full-section section-cream" id="s8" data-section="s8">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-number">🧳 09</span>
+        <h2 class="section-title">生活管理</h2>
+        <p class="section-sub">观影清单（豆瓣同步）· 旅行计划 · 重要日子 · 经营生活规划</p>
+      </div>
+
+      <div class="life-grid">
+        <!-- 观影清单 -->
+        <div class="life-col reveal">
+          <div class="life-col-head">🎬 观影清单 <span class="life-sub" id="doubanCount"></span></div>
+          <div class="life-tabs">
+            <button class="life-tab active" data-tab="wish" onclick="switchDouban('wish',this)">想看</button>
+            <button class="life-tab" data-tab="collect" onclick="switchDouban('collect',this)">看过</button>
+          </div>
+          <div class="movie-list" id="movieList"><!-- renderDouban --></div>
+        </div>
+
+        <!-- 旅行计划 -->
+        <div class="life-col reveal reveal-d1">
+          <div class="life-col-head">✈️ 旅行计划 <button class="sleep-add-btn" onclick="toggleTravelForm()">➕ 添加</button></div>
+          <div class="travel-form" id="travelForm" style="display:none;">
+            <input type="text" id="travelPlace" placeholder="目的地（如：北海道）">
+            <input type="text" id="travelDate" placeholder="计划日期（如：2026 春节）">
+            <select id="travelStatus">
+              <option value="规划中">规划中</option><option value="已订票">已订票</option><option value="已完成">已完成</option>
+            </select>
+            <textarea id="travelNote" rows="2" placeholder="准备事项 / 备注"></textarea>
+            <div style="display:flex;gap:6px;justify-content:flex-end;">
+              <button onclick="cancelTravelForm()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
+              <button onclick="saveTravel()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--purple);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
+            </div>
+          </div>
+          <div class="travel-list" id="travelList"><!-- renderTravel --></div>
+        </div>
+
+        <!-- 重要日子 -->
+        <div class="life-col reveal reveal-d2">
+          <div class="life-col-head">🎉 重要日子</div>
+          <div class="dates-list" id="datesList"><!-- renderImportantDates --></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <script src="cloud-sync.js?v=20260730-4"></script>
   <script src="feishu_data/dashboard_data.js?v=20260731-sync4"></script>
+  <script src="feishu_data/extra_data.js?v=20260803-1"></script>
+  <script src="feishu_data/douban_data.js?v=20260803-1"></script>
   <script>
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
@@ -2210,7 +2597,7 @@
       const top10 = memos.slice(0, 10);
 
       if (!top10.length) {
-        container.innerHTML = '<div style="color:var(--ink-faint);font-size:0.82rem;text-align:center;padding:1.5rem 0;">暂无备忘提醒 📝</div>';
+        container.innerHTML = '<div style="color:var(--ink-faint);font-size:0.82rem;text-align:center;padding:1.5rem 0;">暂无长期任务 📝</div>';
         return;
       }
 
@@ -3186,8 +3573,8 @@
     const logoDot = document.getElementById('logoDot');
     const HERO_H = window.innerHeight;
 
-    const SECTION_COLORS = { s1: 'purple', s2: 'pink', s3: 'yellow', s4: 'green', s5: 'purple', s6: 'pink' };
-    const ALL_SECTIONS = ['s1','s2','s3','s4','s5','s6'];
+    const SECTION_COLORS = { s1: 'purple', s2: 'pink', s3: 'yellow', s4: 'green', s5: 'purple', s6: 'pink', s7: 'pink', s8: 'cream' };
+    const ALL_SECTIONS = ['hero-section','s1','s2','s3','s4','s5','s6','s7','s8'];
 
     let lastScrollY = 0;
     let idleTimer = null;
@@ -3797,6 +4184,303 @@
       const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');
       if (firstNav) firstNav.classList.add('active');
     });
+  </script>
+
+  <!-- ====== 新增模块逻辑（2026-08-03） ====== -->
+  <script>
+  (function () {
+    'use strict';
+    function nm(key, def) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
+    function sv(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
+    function $(id) { return document.getElementById(id); }
+    function todayKey() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+    function monthKey() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
+
+    /* ---------- 天气（open-meteo，无需 key） ---------- */
+    var WX_CODE = { 0: '☀️ 晴', 1: '🌤 多云', 2: '⛅ 局部多云', 3: '☁️ 阴', 45: '🌫 雾', 48: '🌫 雾凇', 51: '🌦 毛毛雨', 53: '🌦 小雨', 55: '🌧 中雨', 61: '🌧 小雨', 63: '🌧 中雨', 65: '🌧 大雨', 71: '🌨 小雪', 73: '🌨 中雪', 75: '❄️ 大雪', 80: '🌦 阵雨', 81: '🌧 阵雨', 82: '⛈ 强阵雨', 95: '⛈ 雷阵雨', 96: '⛈ 雷阵雨伴雹', 99: '⛈ 雷暴' };
+    var WX = [
+      { lat: 40.13, lon: 116.65, temp: 'wx-bj-temp', desc: 'wx-bj-desc', hilo: 'wx-bj-hilo' },
+      { lat: 30.50, lon: 114.34, temp: 'wx-wh-temp', desc: 'wx-wh-desc', hilo: 'wx-wh-hilo' }
+    ];
+    function initWeather() {
+      WX.forEach(function (w) {
+        var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + w.lat + '&longitude=' + w.lon +
+          '&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Shanghai&forecast_days=1';
+        fetch(url).then(function (r) { return r.json(); }).then(function (d) {
+          if (!d.current) return;
+          $(w.temp).textContent = Math.round(d.current.temperature_2m) + '°';
+          $(w.desc).textContent = WX_CODE[d.current.weather_code] || '🌡';
+          $(w.hilo).textContent = Math.round(d.daily.temperature_2m_min[0]) + '° / ' + Math.round(d.daily.temperature_2m_max[0]) + '°';
+        }).catch(function () { $(w.desc).textContent = '天气加载失败'; });
+      });
+    }
+
+    /* ---------- 进度环 ---------- */
+    function setRing(id, pct) {
+      pct = Math.max(0, Math.min(100, pct || 0));
+      var c = $(id); if (c) c.style.strokeDashoffset = (339.292 * (1 - pct / 100)).toFixed(1);
+      var n = $(id + '-num'); if (n) n.textContent = Math.round(pct) + '%';
+    }
+    function renderDashboard() {
+      var g = nm('dudu_monthly_goals', {});
+      // 今日计划摘要
+      var tasks = (window.TASKS_DATA && window.TASKS_DATA.tasks) || [];
+      var list = $('todayPlanList');
+      if (list) {
+        if (tasks.length) {
+          list.innerHTML = tasks.slice(0, 8).map(function (t) {
+            var done = t.done ? ' done' : ''; var tx = esc(t.text != null ? t.text : t);
+            return '<div class="today-plan-item' + done + '"><span class="tp-check"></span><span class="tp-text">' + tx + '</span></div>';
+          }).join('');
+        } else { list.innerHTML = '<div style="color:var(--ink-faint);font-size:.82rem;">今天还没有计划，去「计划中心」添加吧 📋</div>'; }
+      }
+      // 健康：本月打卡天数 / 目标
+      var checked = nm('exercise_checked_' + monthKey(), []);
+      setRing('ring-health', g.health ? (checked.length / g.health) * 100 : 0);
+      // 财富：本月支出 / 预算
+      var fin = window.DASHBOARD_DATA && window.DASHBOARD_DATA.finance;
+      var monthExpense = 0;
+      if (fin && fin.monthly_data && fin.monthly_data.length) {
+        var mkLabel = new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月';
+        var en = fin.monthly_data.filter(function (m) { return m.month === mkLabel; })[0] || fin.monthly_data[fin.monthly_data.length - 1];
+        monthExpense = en ? en.expense : 0;
+      }
+      setRing('ring-wealth', g.wealth ? (monthExpense / g.wealth) * 100 : 0);
+      // 学习：连续天数 / 365
+      var rolling = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.reading && window.DASHBOARD_DATA.reading.rolling_day) || 0;
+      setRing('ring-study', (rolling / 365) * 100);
+      // 产品：本月已发布 / 目标（v1：数据暂无月度明细，显示为 0，待 feishu_sync 暴露）
+      setRing('ring-product', g.product ? 0 : 0);
+      // 英语：本月打卡 / 目标
+      var eng = nm('dudu_english', []);
+      var engMonth = eng.filter(function (d) { return d.indexOf(monthKey()) === 0; }).length;
+      setRing('ring-english', g.english ? (engMonth / g.english) * 100 : 0);
+    }
+
+    /* ---------- 本月目标 ---------- */
+    function renderMonthlyGoals() {
+      var g = nm('dudu_monthly_goals', {});
+      var grid = $('mgGrid'); if (!grid) return;
+      var cells = [['🟢 健康', g.health], ['💰 财富', g.wealth], ['📚 学习', g.study], ['👩‍💼 产品', g.product], ['🔤 英语', g.english]];
+      grid.innerHTML = cells.map(function (c) {
+        return '<div class="mg-cell"><div class="mg-val">' + (c[1] != null ? esc(c[1]) : '—') + '</div><div class="mg-name">' + c[0] + '</div></div>';
+      }).join('');
+    }
+    window.toggleMonthlyGoals = function () { $('mgEditArea').style.display = 'block'; var g = nm('dudu_monthly_goals', {}); ['health', 'wealth', 'study', 'product', 'english'].forEach(function (k) { if ($('mg-' + k)) $('mg-' + k).value = g[k] != null ? g[k] : ''; }); };
+    window.cancelMonthlyGoals = function () { $('mgEditArea').style.display = 'none'; };
+    window.saveMonthlyGoals = function () {
+      var g = {};
+      ['health', 'wealth', 'study', 'product', 'english'].forEach(function (k) { var v = parseFloat($('mg-' + k).value); g[k] = isNaN(v) ? null : v; });
+      sv('dudu_monthly_goals', g); $('mgEditArea').style.display = 'none';
+      renderMonthlyGoals(); renderDashboard();
+    };
+
+    /* ---------- 睡眠记录 ---------- */
+    function dur(bed, wake) {
+      if (!bed || !wake) return '';
+      var b = bed.split(':'), w = wake.split(':');
+      var mins = (w[0] * 60 + w[1] * 1) - (b[0] * 60 + b[1] * 1);
+      if (mins < 0) mins += 24 * 60;
+      return Math.floor(mins / 60) + 'h' + (mins % 60) + 'm';
+    }
+    function renderSleep() {
+      var arr = nm('dudu_sleep', []); var box = $('sleepList'); if (!box) return;
+      if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有睡眠记录，点「➕ 记录」开始 💤</div>'; return; }
+      arr.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+      box.innerHTML = arr.map(function (s) {
+        return '<div class="sleep-row"><div><div class="sr-main">' + esc(s.date) + ' · ' + esc(s.bed) + '→' + esc(s.wake) + ' (' + dur(s.bed, s.wake) + ')</div><div class="sr-sub">质量：' + esc(s.quality) + (s.note ? ' · ' + esc(s.note) : '') + '</div></div></div>';
+      }).join('');
+    }
+    window.toggleSleepForm = function () { var f = $('sleepForm'); f.style.display = f.style.display === 'none' ? 'block' : 'none'; if (f.style.display === 'block') $('sleep-date').value = todayKey(); };
+    window.cancelSleepForm = function () { $('sleepForm').style.display = 'none'; };
+    window.saveSleep = function () {
+      var arr = nm('dudu_sleep', []);
+      arr.push({ date: $('sleep-date').value || todayKey(), bed: $('sleep-bed').value, wake: $('sleep-wake').value, quality: $('sleep-quality').value, note: $('sleep-note').value });
+      sv('dudu_sleep', arr); $('sleepForm').style.display = 'none'; $('sleep-note').value = ''; renderSleep();
+    };
+
+    /* ---------- 英语学习打卡 ---------- */
+    function renderEnglish() {
+      var arr = nm('dudu_english', []); var t = todayKey();
+      var has = arr.indexOf(t) >= 0;
+      var btn = $('englishCheckBtn'); if (btn) btn.textContent = has ? '✅ 已打卡' : '✅ 今日打卡';
+      var month = arr.filter(function (d) { return d.indexOf(monthKey()) === 0; }).length;
+      var total = arr.length;
+      // 连续天数
+      var set = {}; arr.forEach(function (d) { set[d] = 1; });
+      var streak = 0; var cur = new Date();
+      if (!set[t]) cur.setDate(cur.getDate() - 1);
+      while (set[[cur.getFullYear(), String(cur.getMonth() + 1).padStart(2, '0'), String(cur.getDate()).padStart(2, '0')].join('-')]) { streak++; cur.setDate(cur.getDate() - 1); }
+      $('englishStreak').textContent = streak; $('englishMonth').textContent = month; $('englishTotal').textContent = total;
+      var goal = (nm('dudu_monthly_goals', {}).english) || 20;
+      $('englishBarFill').style.width = Math.min(100, goal ? (month / goal) * 100 : 0) + '%';
+      $('englishHint').textContent = has ? '今天已记录，继续加油 🔥' : '点击右上角记录今天学过英语 🗣';
+    }
+    window.toggleEnglishToday = function () {
+      var arr = nm('dudu_english', []); var t = todayKey(); var i = arr.indexOf(t);
+      if (i >= 0) arr.splice(i, 1); else arr.push(t);
+      sv('dudu_english', arr); renderEnglish(); renderDashboard();
+    };
+
+    /* ---------- 房贷 ---------- */
+    function renderMortgage() {
+      var m = window.MORTGAGE_DATA; var grid = $('mortgageGrid'); if (!m || !grid) return;
+      var balance = parseFloat(nm('dudu_mortgage_balance', m.balance));
+      var progress = ((m.total - balance) / m.total * 100);
+      var cells = [
+        ['贷款总额', '¥' + m.total.toLocaleString()],
+        ['剩余本金', '¥' + Math.round(balance).toLocaleString()],
+        ['已还本金', '¥' + Math.round(m.total - balance).toLocaleString()],
+        ['每月还款', '¥' + m.monthly.toLocaleString()],
+        ['还款进度', progress.toFixed(1) + '%'],
+        ['已还期数', m.paid_months + ' / ' + m.total_months],
+        ['年利率', m.rate + '%'],
+        ['起始日期', m.start],
+        ['到期日期', m.end]
+      ];
+      grid.innerHTML = cells.map(function (c) { return '<div class="mortgage-cell"><div class="mc-val">' + esc(c[1]) + '</div><div class="mc-name">' + esc(c[0]) + '</div></div>'; }).join('');
+    }
+    window.editMortgage = function () { $('mortgageEdit').style.display = 'block'; var m = window.MORTGAGE_DATA; $('mortgageBalanceInput').value = nm('dudu_mortgage_balance', m.balance); };
+    window.cancelMortgageEdit = function () { $('mortgageEdit').style.display = 'none'; };
+    window.saveMortgageBalance = function () { var v = parseFloat($('mortgageBalanceInput').value); if (!isNaN(v)) { sv('dudu_mortgage_balance', v); } $('mortgageEdit').style.display = 'none'; renderMortgage(); };
+
+    /* ---------- 投资 ---------- */
+    function renderInvest() {
+      var inv = window.INVEST_DATA; if (!inv) return;
+      var ac = $('investAccounts'); if (!ac) return;
+      var gains = nm('dudu_invest_gains', {});
+      var gainSum = 0; Object.keys(gains).forEach(function (k) { gainSum += gains[k]; });
+      var baseSum = inv.accounts.reduce(function (s, a) { return s + a.total; }, 0);
+      $('investTotalLabel').textContent = '当前市值 ¥' + Math.round(baseSum + gainSum).toLocaleString();
+      ac.innerHTML = inv.accounts.map(function (a) {
+        var cls = a.hold >= 0 ? 'ia-pos' : 'ia-neg';
+        return '<div class="invest-acc"><div class="ia-name">' + esc(a.name) + '</div><div class="ia-rows">' +
+          '<span>总资产 <b>¥' + a.total.toLocaleString() + '</b></span>' +
+          '<span>今日 <b>' + (a.today >= 0 ? '+' : '') + a.today.toLocaleString() + '</b></span>' +
+          '<span class="' + cls + '">持仓 ' + (a.hold >= 0 ? '+' : '') + a.hold.toLocaleString() + '</span></div></div>';
+      }).join('');
+      // 趋势
+      var trend = $('investTrend'); if (trend) {
+        var days = Object.keys(gains).sort().slice(-14);
+        var max = Math.max(1, Math.max.apply(null, days.map(function (d) { return Math.abs(gains[d]); })));
+        trend.innerHTML = days.map(function (d) {
+          var v = gains[d]; var h = Math.max(3, Math.abs(v) / max * 56);
+          var col = v >= 0 ? '#C0392B' : '#2E8B57';
+          return '<div class="invest-bar" title="' + d + ': ' + v + '" style="height:' + h + 'px;background:' + col + '"></div>';
+        }).join('') || '<div style="color:var(--ink-faint);font-size:.78rem;">还没有每日收益记录</div>';
+      }
+    }
+    window.saveInvestGain = function () {
+      var d = $('gainDate').value || todayKey(); var v = parseFloat($('gainAmount').value);
+      if (isNaN(v)) return;
+      var gains = nm('dudu_invest_gains', {}); gains[d] = (gains[d] || 0) + v;
+      sv('dudu_invest_gains', gains); $('gainAmount').value = ''; renderInvest(); renderDashboard();
+    };
+
+    /* ---------- 生活管理：观影 / 旅行 / 重要日子 ---------- */
+    var doubanTab = 'wish';
+    function renderDouban() {
+      var dd = window.DOUBAN_DATA; var box = $('movieList'); if (!dd || !box) return;
+      var list = dd[doubanTab] || [];
+      $('doubanCount').textContent = '（' + (dd.wish ? dd.wish.length : 0) + ' 想看 / ' + (dd.collect ? dd.collect.length : 0) + ' 看过）';
+      if (!list.length) { box.innerHTML = '<div class="sleep-empty">暂无数据</div>'; return; }
+      box.innerHTML = list.map(function (m) {
+        return '<div class="movie-row"><span><a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(m.title) + '</a>' +
+          (m.year ? '<span class="mr-year">' + esc(m.year) + '</span>' : '') + (m.rating ? '<span class="mr-rate">★' + esc(m.rating) + '</span>' : '') + '</span></div>';
+      }).join('');
+    }
+    window.switchDouban = function (tab, btn) { doubanTab = tab; document.querySelectorAll('.life-tab').forEach(function (b) { b.classList.remove('active'); }); btn.classList.add('active'); renderDouban(); };
+
+    function renderTravel() {
+      var arr = nm('dudu_travel', []); var box = $('travelList'); if (!box) return;
+      if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有旅行计划，记下想去的地方 ✈️</div>'; return; }
+      box.innerHTML = arr.map(function (t) {
+        return '<div class="travel-row"><div class="tr-top"><span>' + esc(t.place) + '</span><span class="tr-status">' + esc(t.status) + '</span></div>' +
+          (t.date ? '<div class="tr-note">📅 ' + esc(t.date) + '</div>' : '') + (t.note ? '<div class="tr-note">' + esc(t.note) + '</div>' : '') + '</div>';
+      }).join('');
+    }
+    window.toggleTravelForm = function () { var f = $('travelForm'); f.style.display = f.style.display === 'none' ? 'block' : 'none'; };
+    window.cancelTravelForm = function () { $('travelForm').style.display = 'none'; };
+    window.saveTravel = function () {
+      var arr = nm('dudu_travel', []);
+      arr.push({ place: $('travelPlace').value, date: $('travelDate').value, status: $('travelStatus').value, note: $('travelNote').value });
+      sv('dudu_travel', arr); $('travelForm').style.display = 'none';
+      $('travelPlace').value = ''; $('travelDate').value = ''; $('travelNote').value = '';
+      renderTravel();
+    };
+
+    function renderImportantDates() {
+      var dd = window.IMPORTANT_DATES_DATA; var box = $('datesList'); if (!dd || !box) return;
+      var now = new Date();
+      box.innerHTML = dd.list.map(function (it) {
+        var sub, count, cls;
+        if (it.mode === 'elapsed') {
+          var fd = new Date(it.fixed); var days = Math.floor((now - fd) / 86400000);
+          sub = (it.calendar === 'solar' ? it.fixed : it.fixed) + ' 起'; count = days + ' 天'; cls = 'up';
+        } else {
+          var nd = new Date(it.next_date); var days2 = Math.ceil((nd - now) / 86400000);
+          sub = (it.lunar ? '农历 ' + it.lunar : '阳历 ' + it.solar) + ' → ' + it.next_date; count = '还有 ' + days2 + ' 天'; cls = 'down';
+        }
+        return '<div class="date-row"><span class="dr-icon">' + it.icon + '</span><div class="dr-main"><div class="dr-name">' + esc(it.name) + ' · ' + esc(it.type) + '</div><div class="dr-sub">' + esc(sub) + '</div></div><div class="dr-count ' + cls + '">' + esc(count) + '</div></div>';
+      }).join('');
+    }
+
+    function renderPodcasts() {
+      var p = window.PODCASTS_DATA; var box = $('podcasts-col'); if (!p || !box) return;
+      box.innerHTML = p.list.map(function (n) { return '<div class="movie-row"><span>🎧 ' + esc(n) + '</span></div>'; }).join('');
+    }
+
+    /* ---------- 手机抽屉 + 单视图 ---------- */
+    var GROUPS = { 'hero-section': ['hero-section', 'dashboard'], 's1': ['s1'], 's2': ['s2'], 's3': ['s3'], 's4': ['s4'], 's5': ['s5'], 's6': ['s6'], 's7': ['s7'], 's8': ['s8'] };
+    function isMobile() { return window.innerWidth <= 820; }
+    function setActiveView(tab) {
+      var secs = GROUPS[tab] || [tab];
+      document.querySelectorAll('.full-section').forEach(function (s) { s.classList.remove('active-view'); });
+      secs.forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.add('active-view'); });
+      window.scrollTo(0, 0);
+    }
+    function initMobileNav() {
+      var toggle = $('navToggle'), close = $('navClose'), overlay = $('navOverlay'), nav = $('sideNav');
+      if (toggle) toggle.addEventListener('click', function () { nav.classList.add('open'); overlay.classList.add('open'); });
+      if (close) close.addEventListener('click', function () { nav.classList.remove('open'); overlay.classList.remove('open'); });
+      if (overlay) overlay.addEventListener('click', function () { nav.classList.remove('open'); overlay.classList.remove('open'); });
+      document.querySelectorAll('.side-nav-item').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (isMobile()) { setActiveView(btn.dataset.tab); nav.classList.remove('open'); overlay.classList.remove('open'); }
+        });
+      });
+      function apply() {
+        if (isMobile()) {
+          document.body.classList.add('mobile-view');
+          if (!document.querySelector('.full-section.active-view')) setActiveView('hero-section');
+        } else { document.body.classList.remove('mobile-view'); document.querySelectorAll('.full-section').forEach(function (s) { s.classList.remove('active-view'); }); }
+      }
+      apply();
+      window.addEventListener('resize', apply);
+    }
+
+    /* ---------- 初始化 ---------- */
+    function initNewModules() {
+      try { initWeather(); } catch (e) {}
+      try { renderDashboard(); } catch (e) {}
+      try { renderMonthlyGoals(); } catch (e) {}
+      try { renderSleep(); } catch (e) {}
+      try { renderEnglish(); } catch (e) {}
+      try { renderMortgage(); } catch (e) {}
+      try { renderInvest(); } catch (e) {}
+      try { renderDouban(); } catch (e) {}
+      try { renderTravel(); } catch (e) {}
+      try { renderImportantDates(); } catch (e) {}
+      try { renderPodcasts(); } catch (e) {}
+      try { initMobileNav(); } catch (e) {}
+      // 数据可能晚到（TASKS_DATA 等），二次渲染
+      setTimeout(function () { try { renderDashboard(); } catch (e) {} }, 1800);
+      if ($('gainDate')) $('gainDate').value = todayKey();
+    }
+    if (document.readyState === 'complete') initNewModules();
+    else window.addEventListener('load', initNewModules);
+  })();
   </script>
 </body>
 </html>

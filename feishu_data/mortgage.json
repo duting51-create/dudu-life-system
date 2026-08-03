@@ -1,0 +1,15 @@
+{
+  "updated": "2026-08-03",
+  "total": 1910000.0,
+  "balance": 1717726.07,
+  "paid_principal": 192273.93,
+  "monthly": 7927.4,
+  "rate": 3.1,
+  "start": "2023-01-04",
+  "end": "2053-01-04",
+  "method": "等额本息",
+  "pay_day": 21,
+  "paid_months": 42,
+  "total_months": 360,
+  "progress": 0.1007
+}
