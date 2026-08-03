@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "师者，所以传道授业解惑也。",
-  "source": "师说"
+  "content": "爱欲于人，犹如执炬，逆风而行，必有烧手之患。",
+  "source": "四十二章经"
 };
 window.updated = {
   "name": "嗨咻",
