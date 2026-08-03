@@ -2355,6 +2355,13 @@
   <script src="feishu_data/extra_data.js?v=extra-48faeaf-2"></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2"></script>
   <script>
+    const PUBLISHED_SYNC_DEFAULTS_VERSION = '2026-08-03-sync-defaults-1';
+    const PUBLISHED_SYNC_DEFAULTS = {
+      monthlyGoals: { health: 20, wealth: 20000, study: 31, product: 65, english: 15 },
+      moviesWish: [{ title: 'The Help', link: '', year: '', rating: '' }],
+      travel: [{ place: '马来西亚兰卡威', date: '2026年国庆', status: '规划中', note: '' }]
+    };
+
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
     // This avoids fetch() which is blocked by file:// CORS policy
@@ -2376,6 +2383,69 @@
         Object.keys(patch || {}).forEach(function (key) { state[key] = patch[key]; });
         localStorage.setItem(REFRESH_STATE_KEY, JSON.stringify(state));
       } catch (error) {}
+    }
+
+    function mergePublishedPersonalDefaults() {
+      try {
+        var version = localStorage.getItem('dudu_published_defaults_version');
+        if (version === PUBLISHED_SYNC_DEFAULTS_VERSION) return;
+
+        var changed = false;
+        var goalDefaults = PUBLISHED_SYNC_DEFAULTS.monthlyGoals || {};
+        var currentGoals = {};
+        try { currentGoals = JSON.parse(localStorage.getItem('dudu_monthly_goals') || '{}') || {}; } catch (error) {}
+        ['health', 'wealth', 'study', 'product', 'english'].forEach(function (key) {
+          if ((currentGoals[key] == null || currentGoals[key] === '') && goalDefaults[key] != null) {
+            currentGoals[key] = goalDefaults[key];
+            changed = true;
+          }
+        });
+        if (changed) {
+          localStorage.setItem('dudu_monthly_goals', JSON.stringify(currentGoals));
+          localStorage.setItem('dudu_monthly_goals_updated_at', String(Date.now()));
+        }
+
+        var wishChanged = false;
+        var currentWish = [];
+        try { currentWish = JSON.parse(localStorage.getItem('dudu_movies_wish') || '[]') || []; } catch (error) {}
+        var currentTitles = {};
+        currentWish.forEach(function (item) {
+          currentTitles[String(item && item.title || '').replace(/\s+/g, '').toLowerCase()] = true;
+        });
+        (PUBLISHED_SYNC_DEFAULTS.moviesWish || []).forEach(function (item) {
+          var key = String(item && item.title || '').replace(/\s+/g, '').toLowerCase();
+          if (!key || currentTitles[key]) return;
+          currentWish.unshift(item);
+          currentTitles[key] = true;
+          wishChanged = true;
+        });
+        if (wishChanged) {
+          localStorage.setItem('dudu_movies_wish', JSON.stringify(currentWish));
+        }
+
+        var travelChanged = false;
+        var currentTravel = [];
+        try { currentTravel = JSON.parse(localStorage.getItem('dudu_travel') || '[]') || []; } catch (error) {}
+        var currentPlaces = {};
+        currentTravel.forEach(function (item) {
+          currentPlaces[String(item && item.place || '').trim()] = true;
+        });
+        (PUBLISHED_SYNC_DEFAULTS.travel || []).forEach(function (item) {
+          var key = String(item && item.place || '').trim();
+          if (!key || currentPlaces[key]) return;
+          currentTravel.unshift(item);
+          currentPlaces[key] = true;
+          travelChanged = true;
+        });
+        if (travelChanged) {
+          localStorage.setItem('dudu_travel', JSON.stringify(currentTravel));
+          localStorage.setItem('dudu_travel_updated_at', String(Date.now()));
+        }
+
+        localStorage.setItem('dudu_published_defaults_version', PUBLISHED_SYNC_DEFAULTS_VERSION);
+      } catch (error) {
+        console.warn('Failed to merge published personal defaults:', error);
+      }
     }
 
     function assignData() {
@@ -2427,6 +2497,7 @@
     }
 
     async function loadData() {
+      mergePublishedPersonalDefaults();
       // 先渲染页面自带数据，首屏不主动追远端，避免首次打开时额外网络请求拖慢展示。
       assignData();
       renderAll();
