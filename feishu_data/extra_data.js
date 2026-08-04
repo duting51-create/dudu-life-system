@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "是亦不可以已乎？此之谓失其本心。",
-  "source": "鱼我所欲也"
+  "content": "人的痛苦会把自己折磨到多深呢？",
+  "source": "如实陈述"
 };
 window.updated = {
   "name": "嗨咻",
