@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "中秋谁与共孤光。把盏凄然北望。",
-  "source": "西江月·世事一场大梦"
+  "content": "是亦不可以已乎？此之谓失其本心。",
+  "source": "鱼我所欲也"
 };
 window.updated = {
   "name": "嗨咻",
