@@ -1509,8 +1509,22 @@
     .invest-gain-title { font-weight: 700; margin-bottom: 8px; }
     .invest-gain-inputs { display: flex; gap: 8px; flex-wrap: wrap; }
     .invest-gain-inputs button { background: var(--purple); color: #fff; border: none; border-radius: 8px; padding: 7px 14px; cursor: pointer; }
-    .invest-trend { display: flex; align-items: flex-end; gap: 4px; height: 60px; margin-top: 12px; overflow-x: auto; }
-    .invest-bar { width: 14px; border-radius: 4px 4px 0 0; min-height: 3px; }
+    .invest-trend { margin-top: 16px; padding: 12px 14px; background: rgba(255,255,255,0.6); border-radius: 12px; border: 1px solid var(--border); overflow-x: auto; }
+    .invest-trend-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .invest-trend-title { font-weight: 700; font-size: .9rem; }
+    .invest-trend-sub { font-size: .72rem; color: var(--ink-faint); }
+    .invest-trend-body { position: relative; height: 130px; min-width: 320px; display: flex; flex-direction: column; }
+    .invest-trend-grid { flex: 1; display: flex; align-items: stretch; position: relative; padding-bottom: 22px; }
+    .invest-trend-baseline { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0,0,0,0.08); z-index: 0; }
+    .invest-trend-col { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; min-width: 22px; z-index: 1; }
+    .invest-trend-bar { width: 70%; position: absolute; left: 15%; transition: height .25s ease; }
+    .invest-trend-bar.up { bottom: 50%; border-radius: 4px 4px 0 0; background: #C0392B; }
+    .invest-trend-bar.down { top: 50%; border-radius: 0 0 4px 4px; background: #2E8B57; }
+    .invest-trend-bar.zero { background: transparent; }
+    .invest-trend-col:hover .invest-trend-tooltip { opacity: 1; visibility: visible; transform: translate(-50%, -6px); }
+    .invest-trend-tooltip { position: absolute; bottom: calc(50% + 6px); left: 50%; transform: translate(-50%, 0); background: rgba(30,30,30,0.92); color: #fff; font-size: .7rem; padding: 5px 8px; border-radius: 6px; white-space: nowrap; opacity: 0; visibility: hidden; transition: all .2s; pointer-events: none; z-index: 10; }
+    .invest-trend-label { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) rotate(-35deg); transform-origin: left top; font-size: .65rem; color: var(--ink-faint); white-space: nowrap; }
+    .invest-trend-empty { text-align: center; color: var(--ink-faint); font-size: .78rem; padding: 28px 0; }
 
     /* 生活管理 */
     .life-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -4741,13 +4755,35 @@
       }).join('');
       // 趋势
       var trend = $('investTrend'); if (trend) {
-        var days = Object.keys(gains).sort().slice(-14);
-        var max = Math.max(1, Math.max.apply(null, days.map(function (d) { return Math.abs(sumInvestDayGain(gains[d])); })));
-        trend.innerHTML = days.map(function (d) {
-          var v = sumInvestDayGain(gains[d]); var h = Math.max(3, Math.abs(v) / max * 56);
-          var col = v >= 0 ? '#C0392B' : '#2E8B57';
-          return '<div class="invest-bar" title="' + d + ': ' + v + '" style="height:' + h + 'px;background:' + col + '"></div>';
-        }).join('') || '<div style="color:var(--ink-faint);font-size:.78rem;">还没有每日收益记录</div>';
+        var rangeDays = 14;
+        var now = new Date();
+        var allDays = [];
+        for (var i = rangeDays - 1; i >= 0; i--) {
+          var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+          allDays.push(d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'));
+        }
+        var vals = allDays.map(function (d) { return sumInvestDayGain(gains[d] || {}); });
+        var maxAbs = Math.max(1, Math.max.apply(null, vals.map(function (v) { return Math.abs(v); })));
+        var maxPercent = 44;
+        var hasData = vals.some(function (v) { return v !== 0; });
+        if (!hasData) {
+          trend.innerHTML = '<div class="invest-trend-empty">还没有每日收益记录</div>';
+        } else {
+          trend.innerHTML = '<div class="invest-trend-header"><span class="invest-trend-title">📈 每日收益趋势</span><span class="invest-trend-sub">近14天</span></div>' +
+            '<div class="invest-trend-body"><div class="invest-trend-grid"><div class="invest-trend-baseline"></div>' +
+            allDays.map(function (d, idx) {
+              var v = vals[idx];
+              var h = v === 0 ? 0 : Math.max(2, Math.round(Math.abs(v) / maxAbs * maxPercent));
+              var cls = v === 0 ? 'zero' : (v >= 0 ? 'up' : 'down');
+              var label = d.slice(5).replace('-', '/');
+              var sign = v >= 0 ? '+' : '';
+              return '<div class="invest-trend-col">' +
+                '<div class="invest-trend-tooltip">' + d + '  ' + sign + '¥' + Math.round(v).toLocaleString() + '</div>' +
+                '<div class="invest-trend-bar ' + cls + '" style="height:' + h + '%;"></div>' +
+                '<div class="invest-trend-label">' + label + '</div>' +
+                '</div>';
+            }).join('') + '</div></div>';
+        }
       }
     }
     window.saveInvestGain = function () {
