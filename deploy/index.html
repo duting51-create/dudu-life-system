@@ -1468,11 +1468,41 @@
 
     /* 睡眠 */
     .sleep-form textarea { width: 100%; margin-top: 8px; resize: vertical; }
-    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
-    .sleep-row { display: flex; justify-content: space-between; align-items: center; background: var(--cream); border-radius: 10px; padding: 9px 12px; font-size: .85rem; }
-    .sleep-row .sr-main { font-weight: 600; }
-    .sleep-row .sr-sub { color: var(--ink-faint); font-size: .78rem; }
+    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+    .sleep-row { display: grid; grid-template-columns: 50px 1fr auto auto; grid-template-areas: "date time dur quality" "note note note note"; gap: 4px 10px; align-items: center; background: var(--cream); border-radius: 10px; padding: 9px 12px; font-size: .82rem; }
+    .sleep-row .sr-date { grid-area: date; font-weight: 700; color: var(--purple); font-size: .8rem; }
+    .sleep-row .sr-time { grid-area: time; color: var(--ink); }
+    .sleep-row .sr-dur { grid-area: dur; font-weight: 700; padding: 2px 9px; border-radius: 20px; font-size: .76rem; white-space: nowrap; }
+    .sleep-row .sr-dur.ok { background: rgba(127,182,155,.22); color: #4E8C6F; }
+    .sleep-row .sr-dur.bad { background: rgba(224,160,122,.28); color: #B06A3C; }
+    .sleep-row .sr-quality { grid-area: quality; font-size: .72rem; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+    .sleep-row .sr-quality.q-good { background: rgba(127,182,155,.22); color: #4E8C6F; }
+    .sleep-row .sr-quality.q-mid { background: rgba(245,230,163,.55); color: #9A8A2E; }
+    .sleep-row .sr-quality.q-bad { background: rgba(217,140,122,.28); color: #B0492E; }
+    .sleep-row .sr-note { grid-area: note; color: var(--ink-faint); font-size: .74rem; }
     .sleep-empty { color: var(--ink-faint); font-size: .82rem; text-align: center; padding: 1rem 0; }
+    /* 睡眠 概览与图表 */
+    .sleep-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+    .sleep-stat { background: var(--cream); border-radius: 12px; padding: 9px 4px; text-align: center; }
+    .sleep-stat .ss-val { font-size: 1.08rem; font-weight: 800; color: var(--ink); }
+    .sleep-stat .ss-label { font-size: .68rem; color: var(--ink-faint); margin-top: 2px; }
+    .sleep-chart-block { margin-top: 16px; }
+    .sleep-chart-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .sleep-chart-head > span:first-child { font-weight: 700; font-size: .92rem; }
+    .sleep-chart-sub { font-size: .7rem; color: var(--ink-faint); }
+    .sleep-dur-chart { position: relative; display: flex; align-items: flex-end; gap: 5px; height: 88px; overflow-x: auto; padding: 4px 0 0; }
+    .sleep-dur-col { flex: 0 0 auto; width: 22px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+    .sleep-dur-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; }
+    .sleep-dur-bar.ok { background: #7FB69B; }
+    .sleep-dur-bar.bad { background: #E0A07A; }
+    .sleep-dur-label { font-size: .58rem; color: var(--ink-faint); margin-top: 3px; white-space: nowrap; }
+    .sleep-dur-target { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed var(--purple); }
+    .sleep-dur-tooltip { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; font-size: .68rem; padding: 4px 7px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 5; }
+    .sleep-dur-col:hover .sleep-dur-tooltip { opacity: 1; }
+    .sleep-bed-chart { overflow-x: auto; }
+    @media (max-width: 820px) {
+      .sleep-summary { grid-template-columns: repeat(2, 1fr); }
+    }
 
     /* 英语 */
     .english-stats { display: flex; gap: 18px; margin: 10px 0; }
@@ -2075,6 +2105,15 @@
             <button onclick="cancelSleepForm()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
             <button onclick="saveSleep()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--green);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
           </div>
+        </div>
+        <div class="sleep-summary" id="sleepSummary"><!-- renderSleepSummary --></div>
+        <div class="sleep-chart-block">
+          <div class="sleep-chart-head"><span>⏱️ 睡眠时长</span><span class="sleep-chart-sub" id="sleepDurSub">近14天 · 目标 7.5h</span></div>
+          <div class="sleep-dur-chart" id="sleepDurChart"><!-- renderSleepDur --></div>
+        </div>
+        <div class="sleep-chart-block">
+          <div class="sleep-chart-head"><span>🌙 入睡时间</span><span class="sleep-chart-sub">近14天 · 目标 23:30</span></div>
+          <div class="sleep-bed-chart" id="sleepBedChart"><!-- renderSleepBed --></div>
         </div>
         <div class="sleep-list" id="sleepList"><!-- renderSleep --></div>
       </div>
@@ -4600,6 +4639,8 @@
     window.renderMonthlyGoals = renderMonthlyGoals;
 
     /* ---------- 睡眠记录 ---------- */
+    var SLEEP_TARGET_H = 7.5;       // 目标睡眠时长（小时）
+    var SLEEP_TARGET_BED = '23:30'; // 目标入睡时间
     function dur(bed, wake) {
       if (!bed || !wake) return '';
       var b = bed.split(':'), w = wake.split(':');
@@ -4607,12 +4648,113 @@
       if (mins < 0) mins += 24 * 60;
       return Math.floor(mins / 60) + 'h' + (mins % 60) + 'm';
     }
+    function durMin(bed, wake) {
+      if (!bed || !wake) return 0;
+      var b = bed.split(':'), w = wake.split(':');
+      var mins = (w[0] * 60 + w[1] * 1) - (b[0] * 60 + b[1] * 1);
+      if (mins < 0) mins += 24 * 60;
+      return mins;
+    }
+    // 入睡时间 → 距 18:00 的分钟数（跨午夜顺延到次日，便于求平均）
+    function bedToMin(t) {
+      if (!t) return null;
+      var p = t.split(':'); var m = p[0] * 60 + p[1] * 1;
+      if (m < 18 * 60) m += 24 * 60;
+      return m - 18 * 60;
+    }
+    function minToBed(m) {
+      m = ((m + 18 * 60) % (24 * 60) + 24 * 60) % (24 * 60);
+      return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+    }
+    function bedColor(t) {
+      var m = bedToMin(t); if (m == null) return '#A8A8B5';
+      if (m <= 300) return '#7FB69B';        // 至23:00 早/好
+      if (m <= 420) return '#E0A07A';        // 23:00–01:00 偏晚
+      return '#D98C7A';                       // 01:00 以后 太晚
+    }
+    function renderSleepSummary(arr) {
+      var box = $('sleepSummary'); if (!box) return;
+      var last7 = arr.slice(-7);
+      var bedMins = last7.map(function (s) { return bedToMin(s.bed); }).filter(function (x) { return x != null; });
+      var durs = last7.map(function (s) { return durMin(s.bed, s.wake); }).filter(function (x) { return x > 0; });
+      var avgBed = bedMins.length ? minToBed(Math.round(bedMins.reduce(function (a, b) { return a + b; }, 0) / bedMins.length)) : '—';
+      var avgDur = durs.length ? (durs.reduce(function (a, b) { return a + b; }, 0) / durs.length) : 0;
+      var ok = durs.filter(function (d) { return d >= SLEEP_TARGET_H * 60; }).length;
+      var rate = durs.length ? Math.round(ok / durs.length * 100) : 0;
+      function stat(v, l) { return '<div class="sleep-stat"><div class="ss-val">' + v + '</div><div class="ss-label">' + l + '</div></div>'; }
+      box.innerHTML =
+        stat(avgBed, '平均入睡') +
+        stat(avgDur ? Math.floor(avgDur / 60) + 'h' + Math.round(avgDur % 60) + 'm' : '—', '平均时长') +
+        stat(rate + '%', '时长达标率') +
+        stat(last7.length, '近7天记录');
+    }
+    function renderSleepDur(arr) {
+      var box = $('sleepDurChart'); if (!box) return;
+      if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有睡眠记录</div>'; return; }
+      var target = SLEEP_TARGET_H;
+      var maxD = Math.max.apply(null, arr.map(function (s) { return durMin(s.bed, s.wake) / 60; }));
+      var scale = Math.max(target * 1.3, maxD);
+      var html = '<div class="sleep-dur-target" style="bottom:' + (target / scale * 100) + '%"></div>';
+      html += arr.map(function (s) {
+        var h = durMin(s.bed, s.wake) / 60;
+        var pct = Math.max(2, h / scale * 100);
+        var cls = h >= target ? 'ok' : 'bad';
+        var label = s.date.slice(5).replace('-', '/');
+        return '<div class="sleep-dur-col"><div class="sleep-dur-tooltip">' + esc(s.date) + ' · ' + (h ? h.toFixed(1) + 'h' : '—') + '</div>' +
+          '<div class="sleep-dur-bar ' + cls + '" style="height:' + pct + '%"></div>' +
+          '<div class="sleep-dur-label">' + label + '</div></div>';
+      }).join('');
+      box.innerHTML = html;
+    }
+    function renderSleepBed(arr) {
+      var box = $('sleepBedChart'); if (!box) return;
+      if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有睡眠记录</div>'; return; }
+      var W = Math.max(300, arr.length * 26), H = 112, padT = 6, padB = 18;
+      var plotH = H - padT - padB, span = 330; // 21:00 → 02:30（距18:00的分钟差）
+      var chartMin = bedToMin('21:00'); // = 180
+      function y(t) {
+        var m = bedToMin(t); if (m == null) return padT + plotH;
+        return padT + Math.max(0, Math.min(span, m - chartMin)) / span * plotH;
+      }
+      var tgtY = y(SLEEP_TARGET_BED);
+      var step = arr.length > 1 ? (W - 32) / (arr.length - 1) : 0;
+      var pts = arr.map(function (s, i) {
+        var x = 16 + i * step;
+        return { x: x, y: y(s.bed), t: s.bed, d: s.date, c: bedColor(s.bed) };
+      });
+      var line = pts.map(function (p) { return p.x + ',' + p.y; }).join(' ');
+      var dots = pts.map(function (p) {
+        return '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + p.c + '" stroke="#fff" stroke-width="1.5"><title>' + esc(p.d) + ' · 入睡 ' + esc(p.t || '—') + '</title></circle>';
+      }).join('');
+      var labels = arr.map(function (s, i) {
+        var x = 16 + i * step;
+        return '<text x="' + x + '" y="' + (H - 5) + '" font-size="8" fill="#A8A8B5" text-anchor="middle">' + s.date.slice(5).replace('-', '/') + '</text>';
+      }).join('');
+      box.innerHTML = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="display:block;">' +
+        '<line x1="0" y1="' + tgtY + '" x2="' + W + '" y2="' + tgtY + '" stroke="#C9B1D0" stroke-width="1" stroke-dasharray="4 3"/>' +
+        '<polyline points="' + line + '" fill="none" stroke="#C9B1D0" stroke-width="1.5" opacity="0.6"/>' +
+        dots + labels + '</svg>';
+    }
     function renderSleep() {
-      var arr = nm('dudu_sleep', []); var box = $('sleepList'); if (!box) return;
+      var arr = nm('dudu_sleep', []);
+      arr.sort(function (a, b) { return a.date < b.date ? -1 : 1; }); // 升序，便于取最近
+      var recent = arr.slice(-14);
+      renderSleepSummary(arr);
+      renderSleepDur(recent);
+      renderSleepBed(recent);
+      var box = $('sleepList'); if (!box) return;
       if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有睡眠记录，点「➕ 记录」开始 💤</div>'; return; }
-      arr.sort(function (a, b) { return a.date < b.date ? 1 : -1; });
-      box.innerHTML = arr.map(function (s) {
-        return '<div class="sleep-row"><div><div class="sr-main">' + esc(s.date) + ' · ' + esc(s.bed) + '→' + esc(s.wake) + ' (' + dur(s.bed, s.wake) + ')</div><div class="sr-sub">质量：' + esc(s.quality) + (s.note ? ' · ' + esc(s.note) : '') + '</div></div></div>';
+      box.innerHTML = arr.slice().reverse().map(function (s) {
+        var dm = durMin(s.bed, s.wake);
+        var ok = dm >= SLEEP_TARGET_H * 60;
+        var qcls = s.quality === '好' ? 'q-good' : (s.quality === '差' ? 'q-bad' : 'q-mid');
+        return '<div class="sleep-row">' +
+          '<div class="sr-date">' + esc(s.date.slice(5)) + '</div>' +
+          '<div class="sr-time">' + esc(s.bed) + ' → ' + esc(s.wake) + '</div>' +
+          '<div class="sr-dur ' + (ok ? 'ok' : 'bad') + '">' + dur(s.bed, s.wake) + '</div>' +
+          '<div class="sr-quality ' + qcls + '">' + esc(s.quality) + '</div>' +
+          (s.note ? '<div class="sr-note">' + esc(s.note) + '</div>' : '') +
+          '</div>';
       }).join('');
     }
     window.toggleSleepForm = function () { var f = $('sleepForm'); f.style.display = f.style.display === 'none' ? 'block' : 'none'; if (f.style.display === 'block') $('sleep-date').value = todayKey(); };
