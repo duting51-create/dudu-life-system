@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "羌笛何须怨杨柳，春风不度玉门关。",
-  "source": "凉州词二首·其一"
+  "content": "要知道，一个文学人物十分钟的行为，可能是她十年的经历的反映。",
+  "source": "三体I: 地球往事"
 };
 window.updated = {
   "name": "嗨咻",
