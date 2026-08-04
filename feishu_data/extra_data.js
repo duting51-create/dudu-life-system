@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "孤独才是寂寞的唯一出口。",
-  "source": "百年孤独"
+  "content": "曾盛开过一朵，曾不会败落，曾在他眼中流淌过浩瀚的银河。",
+  "source": "不痛"
 };
 window.updated = {
   "name": "嗨咻",

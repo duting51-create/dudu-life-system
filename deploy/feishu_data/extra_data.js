@@ -44,13 +44,13 @@ window.INVEST_DATA = {
   "gold": false,
   "accounts": [
     {
-      "name": "股票A",
+      "name": "股票账户杜",
       "total": 380956.03,
       "today": 10565.0,
       "hold": -51001.13
     },
     {
-      "name": "股票B",
+      "name": "股票账户赵",
       "total": 429811.7,
       "today": 12214.0,
       "hold": -54598.92
@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们奋力前行，逆水行舟，被不断向后推，直至回到往昔岁月。",
-  "source": "了不起的盖茨比"
+  "content": "曾盛开过一朵，曾不会败落，曾在他眼中流淌过浩瀚的银河。",
+  "source": "不痛"
 };
 window.updated = {
   "name": "嗨咻",

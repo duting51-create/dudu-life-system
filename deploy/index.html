@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=20260803-7" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=20260803-3" as="script">
-  <link rel="preload" href="feishu_data/douban_data.js?v=20260803-2" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-48faeaf-2" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-48faeaf-2" as="script">
+  <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
   <style>
@@ -1417,12 +1417,13 @@
     .today-plan-card { background: rgba(244,194,194,0.22); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
     .today-plan-title { font-weight: 700; margin-bottom: 10px; color: var(--ink); }
     .today-plan-list { display: flex; flex-direction: column; gap: 7px; max-height: 170px; overflow: auto; }
-    .today-plan-item { display: flex; gap: 8px; align-items: center; font-size: .85rem; }
+    .today-plan-item { display: flex; gap: 8px; align-items: flex-start; font-size: .85rem; }
     .today-plan-item.done .tp-text { text-decoration: line-through; color: var(--ink-faint); }
     .tp-check { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--purple); flex: none; }
     .today-plan-item.done .tp-check { background: var(--purple); }
     .tp-section { font-size: .65rem; color: #fff; background: var(--purple); padding: 1px 6px; border-radius: 10px; flex: none; }
     .tp-section.review { background: var(--pink); }
+    .tp-text { flex: 1; min-width: 0; display: block; line-height: 1.55; white-space: normal; word-break: break-word; }
 
     /* 进度环 */
     .rings-wrap { background: rgba(245,230,163,0.28); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
@@ -1524,17 +1525,21 @@
     .movie-add-form input, .movie-add-form select { width: 100%; box-sizing: border-box; border: 1px solid var(--border); border-radius: 8px; padding: 7px 9px; font: inherit; font-size: .85rem; }
     .movie-list, .travel-list, .dates-list { display: flex; flex-direction: column; gap: 7px; max-height: 320px; overflow: auto; }
     .movie-row { display: flex; align-items: center; gap: 8px; background: var(--cream); border-radius: 9px; padding: 8px 10px; font-size: .84rem; }
-    .movie-row.user-added { background: #fff; border: 1px dashed rgba(201,177,208,.55); }
     .movie-row .mr-check { width: 16px; height: 16px; cursor: pointer; accent-color: var(--purple); flex-shrink: 0; }
-    .movie-row .mr-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .movie-row .mr-title a { color: var(--purple); text-decoration: none; font-weight: 600; }
+    .movie-row .mr-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--purple); font-weight: 600; }
+    .movie-row .mr-title a { color: inherit; text-decoration: none; font-weight: inherit; }
     .movie-row .mr-year { color: var(--ink-faint); font-size: .74rem; margin-left: 6px; }
     .movie-row .mr-rate { color: #E0A100; font-size: .74rem; margin-left: 6px; }
     .movie-row .mr-del { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: none; background: transparent; color: var(--ink-faint); cursor: pointer; font-size: .9rem; line-height: 1; }
     .movie-row .mr-del:hover { background: var(--pink-light); color: #c47070; }
     .travel-row { background: var(--cream); border-radius: 9px; padding: 9px 11px; font-size: .84rem; }
-    .travel-row .tr-top { display: flex; justify-content: space-between; font-weight: 600; }
+    .travel-row .tr-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; font-weight: 600; }
+    .travel-row .tr-main { flex: 1; min-width: 0; }
+    .travel-row .tr-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
     .travel-row .tr-status { font-size: .72rem; padding: 1px 8px; border-radius: 10px; background: #fff; border: 1px solid var(--border); }
+    .travel-row .tr-action { width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: transparent; color: var(--ink-faint); cursor: pointer; font-size: .8rem; }
+    .travel-row .tr-action:hover { background: #fff; color: var(--purple); }
+    .travel-row .tr-action.delete:hover { background: var(--pink-light); color: #c47070; }
     .travel-row .tr-note { color: var(--ink-faint); font-size: .76rem; margin-top: 3px; }
     .travel-form input, .travel-form select, .travel-form textarea { width: 100%; margin-bottom: 8px; }
     .travel-form textarea { resize: vertical; }
@@ -1552,13 +1557,14 @@
       /* 手机端：抽屉式导航（默认隐藏，不遮挡内容），汉堡按钮做明显 */
       .nav-toggle {
         display: flex; align-items: center; justify-content: center; gap: 7px;
-        position: fixed; top: 12px; left: 12px; z-index: 80;
+        position: fixed; top: 50%; left: 12px; z-index: 260; transform: translateY(-50%);
         width: auto; height: 44px; padding: 0 16px;
         border-radius: 22px; border: 2px solid #fff;
         background: linear-gradient(135deg, var(--purple, #7b5cd6), #6a3fd0);
         color: #fff; font-size: 0.95rem; font-weight: 700;
         font-family: 'Noto Sans SC', sans-serif; cursor: pointer;
         box-shadow: 0 6px 18px rgba(123,92,214,.5);
+        touch-action: none; user-select: none;
       }
       .nav-toggle .toggle-ico { font-size: 1.2rem; line-height: 1; }
       .nav-toggle .toggle-text { display: inline; }
@@ -1579,15 +1585,17 @@
       .nav-overlay.open { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 85; }
       body.mobile-view { overflow-x: hidden; }
       body.mobile-view .full-section { display: none; }
-      body.mobile-view .full-section.active-view { display: block; }
+      body.mobile-view .full-section.active-view { display: block; min-height: calc(100svh - 60px); }
+      body.mobile-view #dashboard.active-view { padding-top: 4.5rem; }
       /* 抽屉内导航项：图标左、文字右 */
       .side-nav-item { flex-direction: row; width: 100%; height: auto; padding: 14px 16px; justify-content: flex-start; gap: 14px; border-radius: 14px; }
       .side-nav-item .nav-icon { font-size: 1.35rem; line-height: 1; }
       .side-nav-item .nav-label { opacity: 1; font-size: 0.98rem; font-family: 'Noto Sans SC', sans-serif; color: var(--ink); white-space: nowrap; }
       .side-nav-item.active .nav-label { color: #fff; opacity: 1; }
       .side-nav-item .dot { top: 50%; right: auto; left: 46px; transform: translateY(-50%); }
-      /* 顶部 header 居中，避免被左上角按钮遮挡 */
+      /* 顶部 header 居中 */
       .top-header { justify-content: center; padding: 12px 14px; }
+      .top-header .logo { max-width: 100%; }
       /* 布局适配：单栏、合适字号与间距，便于手机阅读 */
       .full-section { padding: 4.5rem 1rem 2rem; }
       .rings-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -2331,7 +2339,7 @@
             <textarea id="travelNote" rows="2" placeholder="准备事项 / 备注"></textarea>
             <div style="display:flex;gap:6px;justify-content:flex-end;">
               <button onclick="cancelTravelForm()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--border);background:white;cursor:pointer;font-size:0.75rem;">取消</button>
-              <button onclick="saveTravel()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--purple);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
+              <button id="travelSaveButton" onclick="saveTravel()" style="padding:5px 12px;border-radius:8px;border:none;background:var(--purple);color:white;cursor:pointer;font-size:0.75rem;">保存</button>
             </div>
           </div>
           <div class="travel-list" id="travelList"><!-- renderTravel --></div>
@@ -2346,28 +2354,112 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=20260803-7" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=20260803-7"></script>
-  <script src="feishu_data/extra_data.js?v=20260803-3"></script>
-  <script src="feishu_data/douban_data.js?v=20260803-2"></script>
+  <script src="cloud-sync.js?v=sync-ff42302-2" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-48faeaf-2"></script>
+  <script src="feishu_data/extra_data.js?v=extra-48faeaf-2"></script>
+  <script src="feishu_data/douban_data.js?v=douban-48faeaf-2"></script>
   <script>
+    const PUBLISHED_SYNC_DEFAULTS_VERSION = '2026-08-03-sync-defaults-1';
+    const PUBLISHED_SYNC_DEFAULTS = {
+      monthlyGoals: { health: 20, wealth: 20000, study: 31, product: 65, english: 15 },
+      moviesWish: [{ title: 'The Help', link: '', year: '', rating: '' }],
+      travel: [{ place: '马来西亚兰卡威', date: '2026年国庆', status: '规划中', note: '' }]
+    };
+
     // ====== DATA LOADING ======
     // DASHBOARD_DATA is injected globally by dashboard_data.js (included above)
     // This avoids fetch() which is blocked by file:// CORS policy
     // v=8 uses a timestamp so browser always fetches fresh copy after feishu_sync.py regenerates it
     const DASHBOARD_SCRIPT_URL = 'feishu_data/data_latest.js';
-    const AUTO_REFRESH_INTERVAL_MS = 10 * 60 * 1000;
-    const WAKE_REFRESH_DELAY_MS = 11 * 60 * 1000;
+    const AUTO_REFRESH_INTERVAL_MS = 4 * 60 * 60 * 1000;
+    const WAKE_REFRESH_DELAY_MS = 10 * 60 * 1000;
+    const REFRESH_STATE_KEY = 'dudu_dashboard_refresh_state';
     let dashboardRefreshInFlight = null;
     let wakeRefreshTimer = null;
 
+    function readRefreshState() {
+      try { return JSON.parse(localStorage.getItem(REFRESH_STATE_KEY) || '{}'); } catch (error) { return {}; }
+    }
+
+    function writeRefreshState(patch) {
+      try {
+        var state = readRefreshState();
+        Object.keys(patch || {}).forEach(function (key) { state[key] = patch[key]; });
+        localStorage.setItem(REFRESH_STATE_KEY, JSON.stringify(state));
+      } catch (error) {}
+    }
+
+    function mergePublishedPersonalDefaults() {
+      try {
+        var version = localStorage.getItem('dudu_published_defaults_version');
+        if (version === PUBLISHED_SYNC_DEFAULTS_VERSION) return;
+
+        var changed = false;
+        var goalDefaults = PUBLISHED_SYNC_DEFAULTS.monthlyGoals || {};
+        var currentGoals = {};
+        try { currentGoals = JSON.parse(localStorage.getItem('dudu_monthly_goals') || '{}') || {}; } catch (error) {}
+        ['health', 'wealth', 'study', 'product', 'english'].forEach(function (key) {
+          if ((currentGoals[key] == null || currentGoals[key] === '') && goalDefaults[key] != null) {
+            currentGoals[key] = goalDefaults[key];
+            changed = true;
+          }
+        });
+        if (changed) {
+          localStorage.setItem('dudu_monthly_goals', JSON.stringify(currentGoals));
+          localStorage.setItem('dudu_monthly_goals_updated_at', String(Date.now()));
+        }
+
+        var wishChanged = false;
+        var currentWish = [];
+        try { currentWish = JSON.parse(localStorage.getItem('dudu_movies_wish') || '[]') || []; } catch (error) {}
+        var currentTitles = {};
+        currentWish.forEach(function (item) {
+          currentTitles[String(item && item.title || '').replace(/\s+/g, '').toLowerCase()] = true;
+        });
+        (PUBLISHED_SYNC_DEFAULTS.moviesWish || []).forEach(function (item) {
+          var key = String(item && item.title || '').replace(/\s+/g, '').toLowerCase();
+          if (!key || currentTitles[key]) return;
+          currentWish.unshift(item);
+          currentTitles[key] = true;
+          wishChanged = true;
+        });
+        if (wishChanged) {
+          localStorage.setItem('dudu_movies_wish', JSON.stringify(currentWish));
+        }
+
+        var travelChanged = false;
+        var currentTravel = [];
+        try { currentTravel = JSON.parse(localStorage.getItem('dudu_travel') || '[]') || []; } catch (error) {}
+        var currentPlaces = {};
+        currentTravel.forEach(function (item) {
+          currentPlaces[String(item && item.place || '').trim()] = true;
+        });
+        (PUBLISHED_SYNC_DEFAULTS.travel || []).forEach(function (item) {
+          var key = String(item && item.place || '').trim();
+          if (!key || currentPlaces[key]) return;
+          currentTravel.unshift(item);
+          currentPlaces[key] = true;
+          travelChanged = true;
+        });
+        if (travelChanged) {
+          localStorage.setItem('dudu_travel', JSON.stringify(currentTravel));
+          localStorage.setItem('dudu_travel_updated_at', String(Date.now()));
+        }
+
+        localStorage.setItem('dudu_published_defaults_version', PUBLISHED_SYNC_DEFAULTS_VERSION);
+      } catch (error) {
+        console.warn('Failed to merge published personal defaults:', error);
+      }
+    }
+
     function assignData() {
-      if (typeof DASHBOARD_DATA === 'undefined') {
+      const dashboardData = window.DASHBOARD_DATA || (typeof DASHBOARD_DATA !== 'undefined' ? DASHBOARD_DATA : null);
+      if (!dashboardData) {
         console.warn('DASHBOARD_DATA not found — dashboard_data.js may be missing');
         return;
       }
       // 归一化：tasks 可能是对象（含 items 今日安排 / tasks 长期任务）或旧版数组
-      var rawTasks = DASHBOARD_DATA.tasks;
+      var rawTasks = dashboardData.tasks;
       if (Array.isArray(rawTasks)) {
         // 旧版：tasks 直接是今日安排数组
         window.TASKS_DATA = { items: rawTasks, tasks: [], raw_text: '', raw_tasks_text: '', date: '' };
@@ -2376,8 +2468,8 @@
       }
       if (!Array.isArray(window.TASKS_DATA.items)) window.TASKS_DATA.items = [];
       if (!Array.isArray(window.TASKS_DATA.tasks)) window.TASKS_DATA.tasks = [];
-      window.INSPIRATIONS_DATA = DASHBOARD_DATA.inspirations || { items: [] };
-      const rawReading = DASHBOARD_DATA.reading || {};
+      window.INSPIRATIONS_DATA = dashboardData.inspirations || { items: [] };
+      const rawReading = dashboardData.reading || {};
       const weeklyData = rawReading.weekly_data || rawReading.week_data || rawReading;
       const totalData = rawReading.total_data || rawReading.total_stats || rawReading;
       window.READING_DATA = {
@@ -2394,9 +2486,9 @@
         medals: rawReading.medals || [],
         last_synced: rawReading.last_updated || ''
       };
-      window.HOT_TOPICS_DATA = DASHBOARD_DATA.hotTopics || {};
-      window.ONE_COMPANY_DATA = DASHBOARD_DATA.oneCompany || {};
-      window.EXERCISE_DATA = DASHBOARD_DATA.exercise || {};
+      window.HOT_TOPICS_DATA = dashboardData.hotTopics || {};
+      window.ONE_COMPANY_DATA = dashboardData.oneCompany || {};
+      syncExerciseData(dashboardData.exercise || {});
       // 运动打卡日历始终跟随当前真实月份，避免嵌入/缓存数据写死旧月份导致刷新先闪 7 月
       {
         const _now = new Date();
@@ -2405,27 +2497,16 @@
         window.EXERCISE_DATA.month = `${_now.getFullYear()}年${_now.getMonth() + 1}月`;
         window.EXERCISE_DATA.month_label = `${_now.getMonth() + 1}月`;
       }
-      window.MEMOS_DATA = DASHBOARD_DATA.memos || {};
+      window.MEMOS_DATA = dashboardData.memos || {};
     }
 
     async function loadData() {
-      // 先渲染内嵌数据（秒开，不等待网络），显著改善手机端首屏加载慢的问题
+      mergePublishedPersonalDefaults();
+      // 先渲染页面自带数据，首屏不主动追远端，避免首次打开时额外网络请求拖慢展示。
       assignData();
       renderAll();
-      // 新模块（今日计划摘要、人生五维进度等）依赖 TASKS_DATA/DASHBOARD_DATA，必须在 assignData 后渲染
       if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) { console.error('renderDashboard error:', e); } }
       if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
-      // 后台静默拉取远端最新数据并刷新（不阻塞首屏）
-      fetchPublishedDashboardData({ force: true, silent: true })
-        .then(function () {
-          assignData();
-          renderAll();
-          if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) {} }
-          if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
-        })
-        .catch(function (error) {
-          console.warn('Background published dashboard refresh failed, keep embedded data:', error);
-        });
     }
 
     function extractDashboardObjectFromScript(text) {
@@ -2481,6 +2562,7 @@
         assignData();
         renderAll();
         initializeTasksForToday(getTodayFeedTasks());
+        writeRefreshState({ lastRefreshAt: Date.now(), lastReason: reason || 'unknown' });
         const latestSync = String(window.DASHBOARD_DATA?.last_sync || '');
         if (!opts.silent && latestSync && latestSync !== previousSync) {
           showToast(`✅ 网站数据已更新（${latestSync}）`);
@@ -2500,29 +2582,23 @@
       }, WAKE_REFRESH_DELAY_MS);
     }
 
+    function shouldRunIntervalRefresh() {
+      const state = readRefreshState();
+      const lastRefreshAt = Number(state.lastRefreshAt || 0);
+      return !lastRefreshAt || (Date.now() - lastRefreshAt) >= AUTO_REFRESH_INTERVAL_MS;
+    }
+
     function setupPublishedDataAutoRefresh() {
       setInterval(function () {
-        if (!document.hidden) refreshPublishedDashboard('interval', { silent: true });
+        if (!document.hidden && shouldRunIntervalRefresh()) {
+          refreshPublishedDashboard('interval', { silent: true });
+        }
       }, AUTO_REFRESH_INTERVAL_MS);
 
       document.addEventListener('visibilitychange', function () {
         if (!document.hidden) {
-          refreshPublishedDashboard('visibilitychange', { silent: true });
           scheduleWakeFollowupRefresh();
         }
-      });
-
-      window.addEventListener('focus', function () {
-        refreshPublishedDashboard('focus', { silent: true });
-      });
-
-      window.addEventListener('pageshow', function () {
-        refreshPublishedDashboard('pageshow', { silent: true });
-        scheduleWakeFollowupRefresh();
-      });
-
-      window.addEventListener('online', function () {
-        refreshPublishedDashboard('online', { silent: true });
       });
     }
 
@@ -2575,15 +2651,20 @@
     }
 
     function renderAll() {
-      renderTasks();
-      renderLatestMemos();
-      renderInspirations();
-      renderReading();
-      renderHotTopics();
-      renderAINews();
-      renderOneCompanyNews();
-      renderOneCompany();
-      renderFinance();
+      [
+        renderTasks,
+        renderLatestMemos,
+        renderInspirations,
+        renderReading,
+        renderHotTopics,
+        renderAINews,
+        renderOneCompanyNews,
+        renderOneCompany,
+        renderFinance,
+        renderExerciseModule
+      ].forEach(function (renderer) {
+        try { renderer(); } catch (error) { console.warn('render failed:', renderer && renderer.name, error); }
+      });
     }
 
     // ====== TASKS RENDERING ======
@@ -2622,6 +2703,16 @@
       let tasks = TASKS_DATA?.items || [];
       if (!tasks.length) tasks = TASKS_DATA?.tasks || [];
       const rawText = TASKS_DATA?.raw_tasks_text || TASKS_DATA?.raw_text || '';
+      if (!tasks.length && rawText) {
+        tasks = splitTaskTextLines(rawText).map(function (text, index) {
+          return {
+            text: text,
+            done: false,
+            priority: 'mid',
+            sourceId: 'raw:' + index
+          };
+        });
+      }
       updateTodoProgress();
 
       // Render main task list
@@ -2640,15 +2731,7 @@
       }
 
       if (!tasks.length) {
-        // Fallback: show raw_tasks_text as a single readable item
-        if (rawText) {
-          list.innerHTML = `<div class="todo-item">
-            <div class="todo-check" onclick="this.classList.toggle('done');updateTodoProgress();"></div>
-            <div style="flex:1"><p class="todo-text" contenteditable="true" onblur="saveRawTaskText(this.textContent)" title="点击编辑">${rawText}</p></div>
-          </div>`;
-        } else {
-          list.innerHTML = `<div class="todo-item"><div class="todo-check"></div><div><p class="todo-text" style="color:var(--ink-faint);font-size:0.85rem;">今日暂无安排 · 点击右上角 ✏️ 手动添加</p></div></div>`;
-        }
+        list.innerHTML = `<div class="todo-item"><div class="todo-check"></div><div><p class="todo-text" style="color:var(--ink-faint);font-size:0.85rem;">今日暂无安排 · 点击右上角 ✏️ 手动添加</p></div></div>`;
         return;
       }
 
@@ -3022,6 +3105,7 @@
       let items = [];
       const today = new Date();
       const todayStr = `${today.getMonth() + 1}月${today.getDate()}日`;
+      const hasLiveItems = Array.isArray(window.LIVE_INSPIRATIONS_DATA?.items) && window.LIVE_INSPIRATIONS_DATA.items.length > 0;
 
       // 加载已删除的飞书条目 ID 列表
       const deletedFeishuIds = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
@@ -3042,6 +3126,7 @@
           }
           return;
         }
+        if (hasLiveItems) return;
         // 嵌入式兜底数据为「行」结构 {date, inspiration, harvest, task, mood}
         const isToday = i.date && i.date.includes(todayStr);
         // 收获 / 情绪：仅展示「当天」发生的，过期自动消失，不遵从「划掉」逻辑
@@ -3089,7 +3174,9 @@
         if (j.type === 'harvest' || j.type === 'mood') {
           if (isToday) items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts });
         } else {
-          items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts });
+          if (isToday || j.syncPending) {
+            items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts, syncPending: j.syncPending });
+          }
         }
       });
 
@@ -3107,11 +3194,14 @@
       // Load done state
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
 
-      // 「划掉」逻辑（按用户习惯 2026-08-01 调整）：
-      // 任务 / 灵感 —— 当天划掉【不再立即消失】，渲染为「划线」样式，可随时撤销（防误删）；
-      //   第二天数据刷新时，飞书 rollover 不会把已划线的行带过来，自然不再展示。
-      // 收获 / 情绪 —— 不遵从划掉逻辑，始终展示（已按当天过滤，过期自然消失）。
-      // 注意：这里【不再过滤掉】已划线的任务/灵感，只由下方渲染层加划线样式。
+      // 用户当前规则：任务 / 灵感一旦完成就不再展示；收获 / 情绪仍按当天展示。
+      items = items.filter(function (item) {
+        if (item.type !== 'task' && item.type !== 'inspiration') return true;
+        if (!hasLiveItems && item.date && item.date.indexOf(todayStr) === -1 && !item.syncPending) return false;
+        const isStruck = doneMap[item.id] === true || item.done === true ||
+          (item.text && (item.text.includes('✅') || item.text.includes('~~')));
+        return !isStruck;
+      });
 
       const typeLabelMap = {
         'task':       '📋 任务',
@@ -3131,7 +3221,6 @@
           // 划线（删除线）判定：本地划掉 / 飞书划线 / 旧 ✅~~ 文本 都视为「已完成」显示划线
           const isStruck = doneMap[item.id] === true || item.done === true ||
             (item.text && (item.text.includes('✅') || item.text.includes('~~')));
-          const typeLabel = typeLabelMap[item.type] || '💭 情绪';
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
           const checkHtml = isToggle
@@ -3448,9 +3537,8 @@
 
     // ====== ONE COMPANY RENDERING ======
     function renderOneCompany() {
-      if (!ONE_COMPANY_DATA) return;
-
-      const data = ONE_COMPANY_DATA;
+      const data = window.ONE_COMPANY_DATA || {};
+      if (!Object.keys(data).length) return;
 
       // Update section stats
       if (data.total_revenue) document.getElementById('biz-revenue').textContent = data.total_revenue;
@@ -3752,6 +3840,7 @@
     // Nav button click
     document.querySelectorAll('.side-nav-item').forEach(btn => {
       btn.addEventListener('click', () => {
+        if (window.innerWidth <= 820) return;
         const target = document.getElementById(btn.dataset.tab);
         if (target) {
           const headerOffset = topHeader ? topHeader.offsetHeight + 12 : 0;
@@ -3765,6 +3854,11 @@
 
     // ====== EXERCISE DATA — Calendar + Daily Plan + B站 Videos ======
     let EXERCISE_DATA = null;
+    function syncExerciseData(data) {
+      EXERCISE_DATA = data && typeof data === 'object' ? data : {};
+      window.EXERCISE_DATA = EXERCISE_DATA;
+      return EXERCISE_DATA;
+    }
 
     // Cover lookup: bvid → local cover images (from Feishu exercise table)
     const VIDEO_COVER_MAP = {
@@ -3816,8 +3910,10 @@
 
     // Calendar rendering
     function renderCalendar(data) {
+      syncExerciseData(data);
       const grid = document.getElementById('ex-calendar-grid');
       const monthLabel = document.getElementById('ex-calendar-month');
+      if (!grid) return;
       if (monthLabel) monthLabel.textContent = data.month || '';
 
       const today = new Date();
@@ -3956,6 +4052,7 @@
     // Select a date: update right panel
     function selectDate(dateStr) {
       if (!dateStr) return;
+      if (EXERCISE_DATA) EXERCISE_DATA.selected_date = dateStr;
       const d = new Date(dateStr + (dateStr.includes('T') ? '' : 'T00:00:00'));
       const month = d.getMonth() + 1;
       const day = d.getDate();
@@ -4126,12 +4223,24 @@
         </div>`;
     }
 
+    function renderExerciseModule() {
+      var data = syncExerciseData(window.EXERCISE_DATA || EXERCISE_DATA || {});
+      if (!data || !Object.keys(data).length) return;
+      if (!data.selected_date) data.selected_date = todayKey();
+      renderCalendar(data);
+      selectDate(data.selected_date);
+    }
+
     // Load exercise data
     function initExercise() {
+      if (window.EXERCISE_DATA && Object.keys(window.EXERCISE_DATA).length) {
+        renderExerciseModule();
+        return Promise.resolve(window.EXERCISE_DATA);
+      }
       return fetch('feishu_data/exercise_data.json?ts=' + Date.now())
         .then(r => r.json())
         .then(data => {
-          EXERCISE_DATA = data;
+          syncExerciseData(data);
 
           // 日历始终跟随当前真实月份（而非数据生成时写死的月份）。
           // 进入新月份（如 8 月）时，日历自动切到当月，无需改 JSON 或等同步脚本。
@@ -4173,6 +4282,7 @@
             const todayEl = document.querySelector(`.ex-cal-day[data-date="${todayStr}"]`);
             if (todayEl) todayEl.classList.add('selected');
           }, 50);
+          return data;
         })
         .catch(() => {
           document.getElementById('ex-calendar-grid').innerHTML =
@@ -4205,17 +4315,41 @@
         .trim();
     }
 
+    function splitTaskTextLines(text) {
+      var src = String(text || '').replace(/\r/g, '').trim();
+      if (!src) return [];
+      var normalized = src
+        .replace(/([。！？；])\s*(?=\d+[.、：:）)\-])/g, '$1\n')
+        .replace(/\s+(?=\d+[.、：:）)\-])/g, '\n');
+      var parts = normalized
+        .split(/\n+/)
+        .map(function (line) { return cleanTaskText(line); })
+        .filter(Boolean);
+      if (parts.length > 1) return parts;
+      var inlineParts = src
+        .split(/(?=\d+[.、：:）)\-]\s*)/g)
+        .map(function (line) { return cleanTaskText(line); })
+        .filter(Boolean);
+      return inlineParts.length > 1 ? inlineParts : [cleanTaskText(src)];
+    }
+
     function taskTextKey(task) {
       return cleanTaskText(task?.text).toLocaleLowerCase('zh-CN');
     }
 
     function prepareFeedTasks(tasks, today) {
-      return (Array.isArray(tasks) ? tasks : []).map((task, index) => ({
-        ...task,
-        text: cleanTaskText(task.text),
-        done: Boolean(task.done),
-        sourceId: task.sourceId || `feishu:${today}:${index}`
-      }));
+      var prepared = [];
+      (Array.isArray(tasks) ? tasks : []).forEach(function (task, index) {
+        splitTaskTextLines(task && task.text).forEach(function (part, partIndex) {
+          prepared.push({
+            ...task,
+            text: part,
+            done: Boolean(task && task.done),
+            sourceId: (task && task.sourceId) || `feishu:${today}:${index}:${partIndex}`
+          });
+        });
+      });
+      return prepared;
     }
 
     function initializeTasksForToday(feedTasks) {
@@ -4277,31 +4411,33 @@
       renderTasks();
     }
 
-    window.addEventListener('load', async () => {
+    window.addEventListener('load', () => {
       setTimeout(() => {
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
       }, 150);
-      // 1) 先拉取飞书实时灵感数据（LIVE），确保首次渲染即用最新数据，避免「旧数据闪一下→新数据」。
-      if (window.FeishuSync) {
-        await FeishuSync.refresh(false).catch(error => {
-          console.warn('首次读取飞书失败:', error);
-        });
-      }
-      // 2) 先初始化运动打卡（把 EXERCISE_DATA 设为当前真实月份），再做后续会触发
-      //    CloudSync._rerender 的任务合并，避免 _rerender 用旧的 EXERCISE_DATA（如 2026-07）
-      //    渲染出「运动打卡先显示 7 月、刷新后才变 8 月」。
-      await initExercise();
-      // 3) 加载云端仪表盘数据并首屏渲染（此时 LIVE 与 EXERCISE_DATA 均已就绪）
-      await loadData();
-      const now = new Date();
-      const todayLabel = `${now.getMonth() + 1}月${now.getDate()}日`;
-      const feedDate = String(window.TASKS_DATA?.date || '');
-      const feedTasks = feedDate.includes(todayLabel)
-        ? JSON.parse(JSON.stringify(window.TASKS_DATA?.items || []))
-        : [];
-      if (window.CloudSync) await CloudSync.init();
-      initializeTasksForToday(feedTasks);
+
+      // 首屏只使用随页面发布的本地数据，远程请求全部放到后台，避免手机端弱网时长时间空白。
+      const dashboardPromise = loadData().catch(error => {
+        console.warn('Dashboard initialization failed:', error);
+      });
+      initExercise().catch(error => {
+        console.warn('Exercise initialization failed:', error);
+      });
       setupPublishedDataAutoRefresh();
+
+      const cloudPromise = window.CloudSync
+        ? CloudSync.init().catch(error => console.warn('Cloud sync initialization failed:', error))
+        : Promise.resolve();
+      if (window.FeishuSync) {
+        setTimeout(function () {
+          FeishuSync.refresh(false).catch(error => console.warn('延后读取飞书失败:', error));
+        }, 4000);
+      }
+
+      Promise.resolve(dashboardPromise).then(() => {
+        initializeTasksForToday(getTodayFeedTasks());
+      });
+
       const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');
       if (firstNav) firstNav.classList.add('active');
     });
@@ -4439,7 +4575,10 @@
     window.saveMonthlyGoals = function () {
       var g = {};
       ['health', 'wealth', 'study', 'product', 'english'].forEach(function (k) { var v = parseFloat($('mg-' + k).value); g[k] = isNaN(v) ? null : v; });
-      sv('dudu_monthly_goals', g); $('mgEditArea').style.display = 'none';
+      sv('dudu_monthly_goals', g);
+      sv('dudu_monthly_goals_updated_at', Date.now());
+      if (window.CloudSync) window.CloudSync.saveNow();
+      $('mgEditArea').style.display = 'none';
       renderMonthlyGoals(); renderDashboard();
     };
     // 暴露给 script[0] 的 loadData，确保飞书数据 assign 后再渲染今日计划摘要与人生五维进度
@@ -4583,7 +4722,7 @@
         return {
           name: accountName,
           total: a.total + cumulativeGain,
-          today: a.today + todayGain,
+          today: todayGain,
           hold: a.hold + cumulativeGain
         };
       });
@@ -4632,8 +4771,9 @@
     function saveUserMovies(user) {
       sv('dudu_movies_wish', user.wish);
       sv('dudu_movies_collect', user.collect);
+      if (window.CloudSync) window.CloudSync.saveNow();
     }
-    function mergeMovieList(doubanList, userList, excludeTitles) {
+    function mergeMovieList(doubanList, userList, excludeTitles, userFirst) {
       doubanList = Array.isArray(doubanList) ? doubanList : [];
       userList = Array.isArray(userList) ? userList : [];
       var exclude = {};
@@ -4646,15 +4786,17 @@
         seen[key] = true;
         out.push({ title: item.title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source });
       }
+      var orderedUserList = userList.slice().reverse();
+      if (userFirst) orderedUserList.forEach(function (m) { push(m, 'user'); });
       doubanList.forEach(function (m) { push(m, 'douban'); });
-      userList.forEach(function (m) { push(m, 'user'); });
+      if (!userFirst) orderedUserList.forEach(function (m) { push(m, 'user'); });
       return out;
     }
     function normalizeMovieTitle(t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); }
     function renderDouban() {
       var dd = window.DOUBAN_DATA; var box = $('movieList'); if (!box) return;
       var user = getUserMovies();
-      var wishList = mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }));
+      var wishList = mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }), true);
       var collectList = mergeMovieList(dd && dd.collect, user.collect, []);
       var isWish = doubanTab === 'wish';
       var list = isWish ? wishList : collectList;
@@ -4665,7 +4807,7 @@
         var checkHtml = isWish ? '<input type="checkbox" class="mr-check" title="标记为看过" onchange="checkMovie(' + idx + ')">' : '';
         var delHtml = isUser ? '<button class="mr-del" title="删除" onclick="deleteUserMovie(' + idx + ', \'' + doubanTab + '\')">×</button>' : '';
         var titleHtml = m.link ? '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(m.title) + '</a>' : '<span>' + esc(m.title) + '</span>';
-        return '<div class="movie-row ' + (isUser ? 'user-added' : '') + '">' + checkHtml +
+        return '<div class="movie-row">' + checkHtml +
           '<span class="mr-title">' + titleHtml +
           (m.year ? '<span class="mr-year">' + esc(m.year) + '</span>' : '') +
           (m.rating ? '<span class="mr-rate">★' + esc(m.rating) + '</span>' : '') + '</span>' + delHtml + '</div>';
@@ -4706,7 +4848,7 @@
     window.checkMovie = function (idx) {
       var dd = window.DOUBAN_DATA;
       var user = getUserMovies();
-      var wishList = mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }));
+      var wishList = mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }), true);
       var item = wishList[idx]; if (!item) return;
       user.collect.push({ title: item.title, link: item.link, year: item.year, rating: item.rating });
       if (item.source === 'user') {
@@ -4719,7 +4861,7 @@
       var dd = window.DOUBAN_DATA;
       var user = getUserMovies();
       var list = tab === 'wish'
-        ? mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }))
+        ? mergeMovieList(dd && dd.wish, user.wish, user.collect.map(function (m) { return m.title; }), true)
         : mergeMovieList(dd && dd.collect, user.collect, []);
       var item = list[idx]; if (!item || item.source !== 'user') return;
       var key = normalizeMovieTitle(item.title);
@@ -4729,23 +4871,71 @@
       renderDouban();
     };
 
+    var editingTravelIndex = -1;
+    function resetTravelForm() {
+      editingTravelIndex = -1;
+      $('travelPlace').value = '';
+      $('travelDate').value = '';
+      $('travelStatus').value = '规划中';
+      $('travelNote').value = '';
+      var saveButton = $('travelSaveButton');
+      if (saveButton) saveButton.textContent = '保存';
+    }
     function renderTravel() {
       var arr = nm('dudu_travel', []); var box = $('travelList'); if (!box) return;
       if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有旅行计划，记下想去的地方 ✈️</div>'; return; }
-      box.innerHTML = arr.map(function (t) {
-        return '<div class="travel-row"><div class="tr-top"><span>' + esc(t.place) + '</span><span class="tr-status">' + esc(t.status) + '</span></div>' +
+      box.innerHTML = arr.map(function (t, index) {
+        return '<div class="travel-row"><div class="tr-top"><div class="tr-main"><span>' + esc(t.place) + '</span></div>' +
+          '<div class="tr-actions"><span class="tr-status">' + esc(t.status) + '</span>' +
+          '<button class="tr-action" title="编辑" aria-label="编辑 ' + esc(t.place) + '" onclick="editTravel(' + index + ')">✎</button>' +
+          '<button class="tr-action delete" title="删除" aria-label="删除 ' + esc(t.place) + '" onclick="deleteTravel(' + index + ')">×</button></div></div>' +
           (t.date ? '<div class="tr-note">📅 ' + esc(t.date) + '</div>' : '') + (t.note ? '<div class="tr-note">' + esc(t.note) + '</div>' : '') + '</div>';
       }).join('');
     }
-    window.toggleTravelForm = function () { var f = $('travelForm'); f.style.display = f.style.display === 'none' ? 'block' : 'none'; };
-    window.cancelTravelForm = function () { $('travelForm').style.display = 'none'; };
-    window.saveTravel = function () {
-      var arr = nm('dudu_travel', []);
-      arr.push({ place: $('travelPlace').value, date: $('travelDate').value, status: $('travelStatus').value, note: $('travelNote').value });
-      sv('dudu_travel', arr); $('travelForm').style.display = 'none';
-      $('travelPlace').value = ''; $('travelDate').value = ''; $('travelNote').value = '';
+    window.toggleTravelForm = function () {
+      var form = $('travelForm');
+      if (form.style.display === 'none') { resetTravelForm(); form.style.display = 'block'; $('travelPlace').focus(); }
+      else { form.style.display = 'none'; resetTravelForm(); }
+    };
+    window.cancelTravelForm = function () { $('travelForm').style.display = 'none'; resetTravelForm(); };
+    window.editTravel = function (index) {
+      var arr = nm('dudu_travel', []); var item = arr[index]; if (!item) return;
+      editingTravelIndex = index;
+      $('travelPlace').value = item.place || '';
+      $('travelDate').value = item.date || '';
+      $('travelStatus').value = item.status || '规划中';
+      $('travelNote').value = item.note || '';
+      var saveButton = $('travelSaveButton');
+      if (saveButton) saveButton.textContent = '更新';
+      $('travelForm').style.display = 'block';
+      $('travelPlace').focus();
+    };
+    window.deleteTravel = function (index) {
+      var arr = nm('dudu_travel', []); var item = arr[index]; if (!item) return;
+      if (!window.confirm('确定删除「' + (item.place || '这条旅行计划') + '」吗？')) return;
+      arr.splice(index, 1);
+      sv('dudu_travel', arr);
+      sv('dudu_travel_updated_at', Date.now());
+      if (window.CloudSync) window.CloudSync.saveNow();
+      if (editingTravelIndex >= 0) window.cancelTravelForm();
       renderTravel();
     };
+    window.saveTravel = function () {
+      var place = $('travelPlace').value.trim(); if (!place) { $('travelPlace').focus(); return; }
+      var arr = nm('dudu_travel', []);
+      var item = { place: place, date: $('travelDate').value.trim(), status: $('travelStatus').value, note: $('travelNote').value.trim() };
+      if (editingTravelIndex >= 0 && arr[editingTravelIndex]) arr[editingTravelIndex] = item;
+      else arr.unshift(item);
+      sv('dudu_travel', arr);
+      sv('dudu_travel_updated_at', Date.now());
+      if (window.CloudSync) window.CloudSync.saveNow();
+      $('travelForm').style.display = 'none';
+      resetTravelForm();
+      renderTravel();
+    };
+
+    window.renderDouban = renderDouban;
+    window.renderTravel = renderTravel;
 
     function renderImportantDates() {
       var dd = window.IMPORTANT_DATES_DATA; var box = $('datesList'); if (!dd || !box) return;
@@ -4796,6 +4986,10 @@
       var secs = GROUPS[tab] || [tab];
       document.querySelectorAll('.full-section').forEach(function (s) { s.classList.remove('active-view'); });
       secs.forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.add('active-view'); });
+      document.querySelectorAll('.side-nav-item').forEach(function (button) {
+        button.classList.toggle('active', button.dataset.tab === tab);
+      });
+      try { sessionStorage.setItem('dudu_mobile_view', tab); } catch (e) {}
       window.scrollTo(0, 0);
     }
     function initMobileNav() {
@@ -4811,11 +5005,103 @@
       function apply() {
         if (isMobile()) {
           document.body.classList.add('mobile-view');
-          if (!document.querySelector('.full-section.active-view')) setActiveView('hero-section');
+          restoreMobileMenuPosition();
+          if (!document.querySelector('.full-section.active-view')) {
+            var savedView = 'hero-section';
+            try { savedView = sessionStorage.getItem('dudu_mobile_view') || savedView; } catch (e) {}
+            setActiveView(GROUPS[savedView] ? savedView : 'hero-section');
+          }
         } else { document.body.classList.remove('mobile-view'); document.querySelectorAll('.full-section').forEach(function (s) { s.classList.remove('active-view'); }); }
       }
+      initDraggableMobileMenu();
       apply();
       window.addEventListener('resize', apply);
+    }
+
+    function restoreMobileMenuPosition() {
+      var toggle = $('navToggle');
+      if (!toggle || !isMobile()) return;
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('dudu_mobile_nav_toggle_pos') || 'null'); } catch (e) {}
+      if (!saved || typeof saved.left !== 'number' || typeof saved.top !== 'number') {
+        toggle.style.left = '12px';
+        toggle.style.top = '50%';
+        toggle.style.right = 'auto';
+        toggle.style.bottom = 'auto';
+        toggle.style.transform = 'translateY(-50%)';
+        return;
+      }
+      var maxLeft = Math.max(12, window.innerWidth - toggle.offsetWidth - 12);
+      var maxTop = Math.max(12, window.innerHeight - toggle.offsetHeight - 12);
+      var left = Math.min(Math.max(12, saved.left), maxLeft);
+      var top = Math.min(Math.max(12, saved.top), maxTop);
+      toggle.style.left = left + 'px';
+      toggle.style.top = top + 'px';
+      toggle.style.right = 'auto';
+      toggle.style.bottom = 'auto';
+      toggle.style.transform = 'none';
+    }
+
+    function initDraggableMobileMenu() {
+      var toggle = $('navToggle');
+      if (!toggle || toggle.dataset.draggableReady === 'true') return;
+      toggle.dataset.draggableReady = 'true';
+      var pointerId = null;
+      var moved = false;
+      var startX = 0;
+      var startY = 0;
+      var originLeft = 0;
+      var originTop = 0;
+
+      function clampAndPlace(nextLeft, nextTop) {
+        var maxLeft = Math.max(12, window.innerWidth - toggle.offsetWidth - 12);
+        var maxTop = Math.max(12, window.innerHeight - toggle.offsetHeight - 12);
+        var left = Math.min(Math.max(12, nextLeft), maxLeft);
+        var top = Math.min(Math.max(12, nextTop), maxTop);
+        toggle.style.left = left + 'px';
+        toggle.style.top = top + 'px';
+        toggle.style.right = 'auto';
+        toggle.style.bottom = 'auto';
+        toggle.style.transform = 'none';
+        return { left: left, top: top };
+      }
+
+      toggle.addEventListener('pointerdown', function (event) {
+        if (!isMobile()) return;
+        pointerId = event.pointerId;
+        moved = false;
+        startX = event.clientX;
+        startY = event.clientY;
+        var rect = toggle.getBoundingClientRect();
+        originLeft = rect.left;
+        originTop = rect.top;
+        toggle.setPointerCapture(pointerId);
+      });
+
+      toggle.addEventListener('pointermove', function (event) {
+        if (pointerId !== event.pointerId) return;
+        var dx = event.clientX - startX;
+        var dy = event.clientY - startY;
+        if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved = true;
+        if (!moved) return;
+        event.preventDefault();
+        clampAndPlace(originLeft + dx, originTop + dy);
+      });
+
+      function finishDrag(event) {
+        if (pointerId !== event.pointerId) return;
+        if (moved) {
+          event.preventDefault();
+          var rect = toggle.getBoundingClientRect();
+          var placed = clampAndPlace(rect.left, rect.top);
+          try { localStorage.setItem('dudu_mobile_nav_toggle_pos', JSON.stringify(placed)); } catch (e) {}
+        }
+        try { toggle.releasePointerCapture(pointerId); } catch (e) {}
+        pointerId = null;
+      }
+
+      toggle.addEventListener('pointerup', finishDrag);
+      toggle.addEventListener('pointercancel', finishDrag);
     }
 
     /* ---------- 初始化 ---------- */
