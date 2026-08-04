@@ -159,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人的痛苦会把自己折磨到多深呢？",
-  "source": "如实陈述"
+  "content": "羌笛何须怨杨柳，春风不度玉门关。",
+  "source": "凉州词二首·其一"
 };
 window.updated = {
   "name": "嗨咻",
