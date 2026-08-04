@@ -1620,8 +1620,8 @@ def generate_extra_data():
         "updated": datetime.now().strftime('%Y-%m-%d'),
         "gold": False,
         "accounts": [
-            {"name": "股票A", "total": 380956.03, "today": 10565.0, "hold": -51001.13},
-            {"name": "股票B", "total": 429811.7, "today": 12214.0, "hold": -54598.92}
+            {"name": "股票账户杜", "total": 380956.03, "today": 10565.0, "hold": -51001.13},
+            {"name": "股票账户赵", "total": 429811.7, "today": 12214.0, "hold": -54598.92}
         ]
     }
     important_dates = {

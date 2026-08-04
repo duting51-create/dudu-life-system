@@ -3,13 +3,13 @@
   "gold": false,
   "accounts": [
     {
-      "name": "股票A",
+      "name": "股票账户杜",
       "total": 380956.03,
       "today": 10565.0,
       "hold": -51001.13
     },
     {
-      "name": "股票B",
+      "name": "股票账户赵",
       "total": 429811.7,
       "today": 12214.0,
       "hold": -54598.92

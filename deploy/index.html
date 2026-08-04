@@ -2274,6 +2274,10 @@
           <div class="invest-gain-title">📅 每日收益记录</div>
           <div class="invest-gain-inputs">
             <input type="date" id="gainDate">
+            <select id="gainAccount">
+              <option value="股票账户杜">股票账户杜</option>
+              <option value="股票账户赵">股票账户赵</option>
+            </select>
             <input type="number" id="gainAmount" step="0.01" placeholder="今日收益 ±">
             <button onclick="saveInvestGain()">记录</button>
           </div>
@@ -4525,23 +4529,71 @@
     window.saveMortgageBalance = function () { var v = parseFloat($('mortgageBalanceInput').value); if (!isNaN(v)) { sv('dudu_mortgage_balance', v); } $('mortgageEdit').style.display = 'none'; renderMortgage(); };
 
     /* ---------- 投资 ---------- */
+    function getInvestAccountName(account, index) {
+      if (account && account.name) return account.name;
+      return index === 0 ? '股票账户杜' : '股票账户赵';
+    }
+    function getInvestGains() {
+      var raw = nm('dudu_invest_gains', {});
+      var normalized = {};
+      Object.keys(raw || {}).forEach(function (date) {
+        var entry = raw[date];
+        if (entry && typeof entry === 'object' && !Array.isArray(entry)) {
+          normalized[date] = {};
+          Object.keys(entry).forEach(function (accountName) {
+            var value = parseFloat(entry[accountName]);
+            if (!isNaN(value)) normalized[date][accountName] = value;
+          });
+        } else {
+          var legacyValue = parseFloat(entry);
+          if (!isNaN(legacyValue)) normalized[date] = { '股票账户杜': legacyValue };
+        }
+      });
+      return normalized;
+    }
+    function sumInvestDayGain(entry) {
+      if (!entry || typeof entry !== 'object') return 0;
+      return Object.keys(entry).reduce(function (sum, accountName) {
+        return sum + (parseFloat(entry[accountName]) || 0);
+      }, 0);
+    }
+    function sumInvestAccountGain(gains, accountName) {
+      return Object.keys(gains).reduce(function (sum, date) {
+        var entry = gains[date] || {};
+        return sum + (parseFloat(entry[accountName]) || 0);
+      }, 0);
+    }
+    function getTodayInvestGain(gains, accountName) {
+      var entry = gains[todayKey()] || {};
+      return parseFloat(entry[accountName]) || 0;
+    }
     function renderInvest() {
       var inv = window.INVEST_DATA; if (!inv) return;
       var ac = $('investAccounts'); if (!ac) return;
-      var gains = nm('dudu_invest_gains', {});
-      var gainSum = 0; Object.keys(gains).forEach(function (k) { gainSum += gains[k]; });
-      var baseSum = inv.accounts.reduce(function (s, a) { return s + a.total; }, 0);
-      var todaySum = inv.accounts.reduce(function (s, a) { return s + a.today; }, 0);
-      var holdSum = inv.accounts.reduce(function (s, a) { return s + a.hold; }, 0);
+      var gains = getInvestGains();
       function setTotal(id, value) {
         var el = $(id); if (!el) return;
         el.textContent = (value >= 0 ? '+' : '') + '¥' + Math.round(value).toLocaleString();
         el.className = 'iti-value ' + (value >= 0 ? 'up' : 'down');
       }
-      var totalValue = $('investTotalValue'); if (totalValue) totalValue.textContent = '¥' + Math.round(baseSum + gainSum).toLocaleString();
+      var adjustedAccounts = inv.accounts.map(function (a, index) {
+        var accountName = getInvestAccountName(a, index);
+        var cumulativeGain = sumInvestAccountGain(gains, accountName);
+        var todayGain = getTodayInvestGain(gains, accountName);
+        return {
+          name: accountName,
+          total: a.total + cumulativeGain,
+          today: a.today + todayGain,
+          hold: a.hold + cumulativeGain
+        };
+      });
+      var totalValueAmount = adjustedAccounts.reduce(function (sum, account) { return sum + account.total; }, 0);
+      var todaySum = adjustedAccounts.reduce(function (sum, account) { return sum + account.today; }, 0);
+      var holdSum = adjustedAccounts.reduce(function (sum, account) { return sum + account.hold; }, 0);
+      var totalValue = $('investTotalValue'); if (totalValue) totalValue.textContent = '¥' + Math.round(totalValueAmount).toLocaleString();
       setTotal('investTodayTotal', todaySum);
       setTotal('investHoldTotal', holdSum);
-      ac.innerHTML = inv.accounts.map(function (a) {
+      ac.innerHTML = adjustedAccounts.map(function (a) {
         var cls = a.hold >= 0 ? 'ia-pos' : 'ia-neg';
         return '<div class="invest-acc"><div class="ia-name">' + esc(a.name) + '</div><div class="ia-rows">' +
           '<span>总资产 <b>¥' + a.total.toLocaleString() + '</b></span>' +
@@ -4551,18 +4603,21 @@
       // 趋势
       var trend = $('investTrend'); if (trend) {
         var days = Object.keys(gains).sort().slice(-14);
-        var max = Math.max(1, Math.max.apply(null, days.map(function (d) { return Math.abs(gains[d]); })));
+        var max = Math.max(1, Math.max.apply(null, days.map(function (d) { return Math.abs(sumInvestDayGain(gains[d])); })));
         trend.innerHTML = days.map(function (d) {
-          var v = gains[d]; var h = Math.max(3, Math.abs(v) / max * 56);
+          var v = sumInvestDayGain(gains[d]); var h = Math.max(3, Math.abs(v) / max * 56);
           var col = v >= 0 ? '#C0392B' : '#2E8B57';
           return '<div class="invest-bar" title="' + d + ': ' + v + '" style="height:' + h + 'px;background:' + col + '"></div>';
         }).join('') || '<div style="color:var(--ink-faint);font-size:.78rem;">还没有每日收益记录</div>';
       }
     }
     window.saveInvestGain = function () {
+      var accountName = $('gainAccount').value || '股票账户杜';
       var d = $('gainDate').value || todayKey(); var v = parseFloat($('gainAmount').value);
       if (isNaN(v)) return;
-      var gains = nm('dudu_invest_gains', {}); gains[d] = (gains[d] || 0) + v;
+      var gains = getInvestGains();
+      gains[d] = gains[d] || {};
+      gains[d][accountName] = (parseFloat(gains[d][accountName]) || 0) + v;
       sv('dudu_invest_gains', gains); $('gainAmount').value = ''; renderInvest(); renderDashboard();
     };
 
