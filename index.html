@@ -1490,18 +1490,25 @@
     .sleep-chart-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
     .sleep-chart-head > span:first-child { font-weight: 700; font-size: .92rem; }
     .sleep-chart-sub { font-size: .7rem; color: var(--ink-faint); }
-    .sleep-dur-chart { position: relative; display: flex; align-items: flex-end; gap: 5px; height: 88px; overflow-x: auto; padding: 4px 0 0; }
-    .sleep-dur-col { flex: 0 0 auto; width: 22px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+    .sleep-chart-flex { display: flex; gap: 4px; height: 118px; }
+    .sleep-yaxis, .sleep-yaxis-bed { display: flex; flex-direction: column; justify-content: space-between; font-size: .58rem; color: var(--ink-faint); text-align: right; flex-shrink: 0; width: 28px; line-height: 1; padding: 2px 0; }
+    .sleep-yaxis span, .sleep-yaxis-bed span { display: block; }
+    .sleep-dur-chart { position: relative; display: flex; align-items: flex-end; gap: 6px; height: 100%; overflow-x: auto; padding: 14px 4px 0 2px; }
+    .sleep-dur-col { flex: 0 0 auto; width: 24px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; position: relative; }
     .sleep-dur-bar { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; }
     .sleep-dur-bar.ok { background: #7FB69B; }
     .sleep-dur-bar.bad { background: #E0A07A; }
     .sleep-dur-label { font-size: .58rem; color: var(--ink-faint); margin-top: 3px; white-space: nowrap; }
     .sleep-dur-target { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed var(--purple); }
-    .sleep-dur-tooltip { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; font-size: .68rem; padding: 4px 7px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 5; }
-    .sleep-dur-col:hover .sleep-dur-tooltip { opacity: 1; }
-    .sleep-bed-chart { overflow-x: auto; }
+    .sleep-dur-val { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); margin-bottom: 2px; font-size: .55rem; color: var(--ink-light); white-space: nowrap; }
+    .sleep-bed-chart { overflow-x: auto; height: 100%; position: relative; }
+    .sleep-bed-chart svg { display: block; }
+    .sleep-tooltip { position: fixed; background: var(--ink); color: #fff; font-size: .68rem; padding: 5px 9px; border-radius: 7px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s; z-index: 300; box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+    .sleep-tooltip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 4px solid transparent; border-top-color: var(--ink); }
     @media (max-width: 820px) {
       .sleep-summary { grid-template-columns: repeat(2, 1fr); }
+      .sleep-chart-flex { height: 108px; }
+      .sleep-yaxis, .sleep-yaxis-bed { width: 26px; font-size: .55rem; }
     }
 
     /* 英语 */
@@ -2109,11 +2116,17 @@
         <div class="sleep-summary" id="sleepSummary"><!-- renderSleepSummary --></div>
         <div class="sleep-chart-block">
           <div class="sleep-chart-head"><span>⏱️ 睡眠时长</span><span class="sleep-chart-sub" id="sleepDurSub">近14天 · 目标 7.5h</span></div>
-          <div class="sleep-dur-chart" id="sleepDurChart"><!-- renderSleepDur --></div>
+          <div class="sleep-chart-flex">
+            <div class="sleep-yaxis" id="sleepDurYAxis"></div>
+            <div class="sleep-dur-chart" id="sleepDurChart"><!-- renderSleepDur --></div>
+          </div>
         </div>
         <div class="sleep-chart-block">
           <div class="sleep-chart-head"><span>🌙 入睡时间</span><span class="sleep-chart-sub">近14天 · 目标 23:30</span></div>
-          <div class="sleep-bed-chart" id="sleepBedChart"><!-- renderSleepBed --></div>
+          <div class="sleep-chart-flex">
+            <div class="sleep-yaxis-bed" id="sleepBedYAxis"></div>
+            <div class="sleep-bed-chart" id="sleepBedChart"><!-- renderSleepBed --></div>
+          </div>
         </div>
         <div class="sleep-list" id="sleepList"><!-- renderSleep --></div>
       </div>
@@ -4672,6 +4685,23 @@
       if (m <= 420) return '#E0A07A';        // 23:00–01:00 偏晚
       return '#D98C7A';                       // 01:00 以后 太晚
     }
+    // 睡眠图表 tooltip（点击/悬停显示数据）
+    function sleepTooltip(el, html) {
+      var tip = $('sleepTooltip'); if (!tip) return;
+      tip.innerHTML = html;
+      tip.style.opacity = '1';
+      var rect = el.getBoundingClientRect();
+      var top = rect.top - tip.offsetHeight - 6;
+      var left = rect.left + rect.width / 2 - tip.offsetWidth / 2;
+      tip.style.top = Math.max(4, top) + 'px';
+      tip.style.left = Math.max(4, Math.min(window.innerWidth - tip.offsetWidth - 4, left)) + 'px';
+    }
+    function hideSleepTooltip() {
+      var tip = $('sleepTooltip'); if (tip) tip.style.opacity = '0';
+    }
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.sleep-dur-col') && !e.target.closest('.sleep-bed-point')) hideSleepTooltip();
+    });
     function renderSleepSummary(arr) {
       var box = $('sleepSummary'); if (!box) return;
       var last7 = arr.slice(-7);
@@ -4690,17 +4720,23 @@
     }
     function renderSleepDur(arr) {
       var box = $('sleepDurChart'); if (!box) return;
+      var yAxis = $('sleepDurYAxis'); if (yAxis) yAxis.innerHTML = '';
       if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有睡眠记录</div>'; return; }
       var target = SLEEP_TARGET_H;
       var maxD = Math.max.apply(null, arr.map(function (s) { return durMin(s.bed, s.wake) / 60; }));
       var scale = Math.max(target * 1.3, maxD);
+      function fmtH(h) { return h.toFixed(1) + 'h'; }
+      if (yAxis) yAxis.innerHTML = '<span>' + fmtH(scale) + '</span><span>' + fmtH(scale / 2) + '</span><span>0h</span>';
       var html = '<div class="sleep-dur-target" style="bottom:' + (target / scale * 100) + '%"></div>';
       html += arr.map(function (s) {
         var h = durMin(s.bed, s.wake) / 60;
         var pct = Math.max(2, h / scale * 100);
         var cls = h >= target ? 'ok' : 'bad';
         var label = s.date.slice(5).replace('-', '/');
-        return '<div class="sleep-dur-col"><div class="sleep-dur-tooltip">' + esc(s.date) + ' · ' + (h ? h.toFixed(1) + 'h' : '—') + '</div>' +
+        var val = h ? h.toFixed(1) + 'h' : '—';
+        var tip = esc(s.date) + '<br>' + esc(s.bed || '—') + ' → ' + esc(s.wake || '—') + '<br>时长 ' + val;
+        return '<div class="sleep-dur-col" onclick="sleepTooltip(this, \'' + tip + '\')">' +
+          '<div class="sleep-dur-val">' + val + '</div>' +
           '<div class="sleep-dur-bar ' + cls + '" style="height:' + pct + '%"></div>' +
           '<div class="sleep-dur-label">' + label + '</div></div>';
       }).join('');
@@ -4708,30 +4744,45 @@
     }
     function renderSleepBed(arr) {
       var box = $('sleepBedChart'); if (!box) return;
+      var yAxis = $('sleepBedYAxis'); if (yAxis) yAxis.innerHTML = '';
       if (!arr.length) { box.innerHTML = '<div class="sleep-empty">还没有睡眠记录</div>'; return; }
-      var W = Math.max(300, arr.length * 26), H = 112, padT = 6, padB = 18;
-      var plotH = H - padT - padB, span = 330; // 21:00 → 02:30（距18:00的分钟差）
+      var padL = 34, padT = 8, padB = 18, padR = 8;
+      var W = Math.max(300, arr.length * 28 + padL + padR), H = 118;
+      var plotW = W - padL - padR, plotH = H - padT - padB;
+      var span = 330; // 21:00 → 02:30（距18:00的分钟差）
       var chartMin = bedToMin('21:00'); // = 180
       function y(t) {
         var m = bedToMin(t); if (m == null) return padT + plotH;
         return padT + Math.max(0, Math.min(span, m - chartMin)) / span * plotH;
       }
       var tgtY = y(SLEEP_TARGET_BED);
-      var step = arr.length > 1 ? (W - 32) / (arr.length - 1) : 0;
+      var step = arr.length > 1 ? plotW / (arr.length - 1) : 0;
       var pts = arr.map(function (s, i) {
-        var x = 16 + i * step;
-        return { x: x, y: y(s.bed), t: s.bed, d: s.date, c: bedColor(s.bed) };
+        var x = padL + i * step;
+        return { x: x, y: y(s.bed), t: s.bed, d: s.date, c: bedColor(s.bed), dur: dur(s.bed, s.wake) };
       });
+      // Y 轴时间刻度 + 水平网格线
+      var yLabels = [['21:00','21:00'],['22:00','22:00'],['23:00','23:00'],['00:00','00:00'],['01:00','01:00'],['02:30','02:30']];
+      var yAxisHtml = yLabels.map(function(item){
+        var yy = y(item[1]);
+        return '<line x1="' + padL + '" y1="' + yy + '" x2="' + W + '" y2="' + yy + '" stroke="#E8E8ED" stroke-width="0.5"/>';
+      }).join('');
+      if (yAxis) yAxis.innerHTML = yLabels.map(function(item){ return '<span>' + item[0] + '</span>'; }).join('');
       var line = pts.map(function (p) { return p.x + ',' + p.y; }).join(' ');
       var dots = pts.map(function (p) {
-        return '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + p.c + '" stroke="#fff" stroke-width="1.5"><title>' + esc(p.d) + ' · 入睡 ' + esc(p.t || '—') + '</title></circle>';
+        var tip = esc(p.d) + '<br>入睡 ' + esc(p.t || '—') + '<br>时长 ' + esc(p.dur || '—');
+        return '<g class="sleep-bed-point" onclick="sleepTooltip(this, \'' + tip + '\')">' +
+          '<circle cx="' + p.x + '" cy="' + p.y + '" r="14" fill="transparent" style="cursor:pointer"/>' +
+          '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + p.c + '" stroke="#fff" stroke-width="1.5"/>' +
+          '</g>';
       }).join('');
       var labels = arr.map(function (s, i) {
-        var x = 16 + i * step;
+        var x = padL + i * step;
         return '<text x="' + x + '" y="' + (H - 5) + '" font-size="8" fill="#A8A8B5" text-anchor="middle">' + s.date.slice(5).replace('-', '/') + '</text>';
       }).join('');
       box.innerHTML = '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="display:block;">' +
-        '<line x1="0" y1="' + tgtY + '" x2="' + W + '" y2="' + tgtY + '" stroke="#C9B1D0" stroke-width="1" stroke-dasharray="4 3"/>' +
+        yAxisHtml +
+        '<line x1="' + padL + '" y1="' + tgtY + '" x2="' + W + '" y2="' + tgtY + '" stroke="#C9B1D0" stroke-width="1" stroke-dasharray="4 3"/>' +
         '<polyline points="' + line + '" fill="none" stroke="#C9B1D0" stroke-width="1.5" opacity="0.6"/>' +
         dots + labels + '</svg>';
     }
@@ -5304,5 +5355,6 @@
     else window.addEventListener('load', initNewModules);
   })();
   </script>
+  <div id="sleepTooltip" class="sleep-tooltip"></div>
 </body>
 </html>
