@@ -169,8 +169,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "荣格感到惊异，并向他指出有很多具骷髅，而不是只有一具。",
-  "source": "千高原"
+  "content": "天要你走，我要你留",
+  "source": "一本蛮不错的电子书"
 };
 window.updated = {
   "name": "嗨咻",

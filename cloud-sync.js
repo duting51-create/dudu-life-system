@@ -602,8 +602,9 @@
       try {
         // 重新初始化今日任务：从云同步后的 dudu_tasks 恢复 done 状态并合并飞书当前任务
         if (window.TASKS_DATA && typeof initializeTasksForToday === 'function') {
-          var feedTasks = (window.getTodayFeedTasks && window.getTodayFeedTasks()) || [];
-          initializeTasksForToday(feedTasks);
+          var tasks = localStorage.getItem('dudu_tasks');
+          var parsed = tasks ? JSON.parse(tasks) : [];
+          initializeTasksForToday(parsed);
         }
       } catch (error) {}
       try { if (typeof renderTasks === 'function') renderTasks(); } catch (error) {}
