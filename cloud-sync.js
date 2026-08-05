@@ -493,23 +493,18 @@
         }
 
         if (key === 'dudu_monthly_goals') {
+          // 本月目标由用户主动设置，云端（通常来自电脑端设置）应作为权威值。
+          // 改为逐字段「云端优先」合并：云端有有效值用云端，否则用本地。
+          // 这样能避免手机端首次打开时被 mergePublishedPersonalDefaults 注入的默认值(如 wealth:250000)
+          // 用「本地时间戳较新」的规则覆盖掉云端用户填的正确值。
           var cloudGoals = cloudValue && typeof cloudValue === 'object' ? cloudValue : {};
           var localGoals = localValue && typeof localValue === 'object' ? localValue : {};
-          var cloudGoalsTime = Number(cloud.dudu_monthly_goals_updated_at || 0);
-          var localGoalsTime = Number(local.dudu_monthly_goals_updated_at || 0);
-          var cloudGoalCount = Object.keys(cloudGoals).filter(function (k) { return cloudGoals[k] != null && cloudGoals[k] !== ''; }).length;
-          var localGoalCount = Object.keys(localGoals).filter(function (k) { return localGoals[k] != null && localGoals[k] !== ''; }).length;
-          if (!localGoalCount && cloudGoalCount) {
-            merged[key] = cloudGoals;
-          } else if (!cloudGoalCount && localGoalCount) {
-            merged[key] = localGoals;
-          } else if (localGoalsTime > cloudGoalsTime) {
-            merged[key] = localGoals;
-          } else if (cloudGoalsTime > localGoalsTime) {
-            merged[key] = cloudGoals;
-          } else {
-            merged[key] = localGoalCount >= cloudGoalCount ? localGoals : cloudGoals;
-          }
+          var mergedGoals = {};
+          Object.keys(cloudGoals).concat(Object.keys(localGoals)).forEach(function (k) {
+            if (cloudGoals[k] != null && cloudGoals[k] !== '') mergedGoals[k] = cloudGoals[k];
+            else if (localGoals[k] != null && localGoals[k] !== '') mergedGoals[k] = localGoals[k];
+          });
+          merged[key] = mergedGoals;
           return;
         }
 
@@ -566,13 +561,14 @@
       if (this._pendingDeletes[key].indexOf(id) === -1) this._pendingDeletes[key].push(id);
     },
 
-    save: function () {
+    save: function (attempt) {
       var self = this;
+      attempt = attempt || 0;
       var local = this._readLocal();
       return this._fetchCloud().then(function (cloud) {
         var merged = self._merge(cloud || {}, local);
         var content = JSON.stringify(merged);
-        if (content === self._lastSaveContent) return;
+        if (content === self._lastSaveContent && attempt === 0) return;
         return apiRequest('/api/state', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -586,8 +582,14 @@
           syncToast('已同步到手机和电脑');
         });
       }).catch(function (error) {
+        var msg = (error && error.message) || '';
+        // 并发冲突兜底重试：重新拉云端 + 重新合并本地（含最新改动）再写
+        if (msg.indexOf('冲突') >= 0 && attempt < 3) {
+          return new Promise(function (res) { setTimeout(res, 600 * (attempt + 1)); })
+            .then(function () { return self.save(attempt + 1); });
+        }
         console.warn('Cloud save failed:', error);
-        syncToast('云同步失败：' + error.message);
+        syncToast('云同步失败：' + msg);
       });
     },
 
