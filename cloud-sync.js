@@ -200,6 +200,8 @@
         // 成功或失败而白屏。多端「已完成态」的拉取改由后台 _refresh（每 10s / 切前台时）以
         // 「只合并轻量 done 态、绝不替换整块内容」的安全方式完成。
         self._initialized = true;
+        // 安全恢复云端睡眠历史（异步、不阻塞首屏、仅重渲染睡眠卡片，绝不整页重渲染）。
+        self._restoreSleepHistory();
         if (self._queuedChanges) {
           self._queuedChanges = false;
           self.save();
@@ -209,6 +211,7 @@
         document.addEventListener('visibilitychange', function () {
           if (!document.hidden) {
             self._refresh(true);
+            self._restoreSleepHistory();
             try { FeishuSync.refresh(false); } catch (e) {}
           }
         });
@@ -554,6 +557,29 @@
       this._fetchCloud().then(function (cloud) {
         // 安全合并：只叠加云端「已完成态」等轻量键，绝不重写整块内容，避免白屏。
         self._applyCloudDoneStates(cloud || {});
+      }).catch(function () {});
+    },
+
+    // 安全恢复云端睡眠历史：把云端 dudu_sleep 与本地 dudu_sleep 按日期 union（双向不丢），
+    // 写回本地并重渲染睡眠卡片。只在「云端数据比本地多」时写入，避免无谓覆写；
+    // 完全不触碰其他模块、不整页重渲染，因此不会引发白屏。
+    _restoreSleepHistory: function () {
+      var self = this;
+      this._fetchCloud().then(function (cloud) {
+        try {
+          if (!cloud || !Array.isArray(cloud.dudu_sleep) || !cloud.dudu_sleep.length) return;
+          var localSleep = [];
+          try { var ls = localStorage.getItem('dudu_sleep'); if (ls) localSleep = JSON.parse(ls) || []; } catch (e) {}
+          if (!Array.isArray(localSleep)) localSleep = [];
+          var byDate = {};
+          localSleep.forEach(function (s) { if (s && s.date) byDate[s.date] = s; });
+          cloud.dudu_sleep.forEach(function (s) { if (s && s.date) byDate[s.date] = s; });
+          var merged = Object.keys(byDate).sort().map(function (d) { return byDate[d]; });
+          if (merged.length > localSleep.length) {
+            localStorage.setItem('dudu_sleep', JSON.stringify(merged));
+            try { if (typeof renderSleep === 'function') renderSleep(); } catch (e) {}
+          }
+        } catch (e) {}
       }).catch(function () {});
     },
 
