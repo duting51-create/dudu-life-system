@@ -194,33 +194,24 @@
           self._initialized = true;
           return;
         }
-        self._loading = true;
-        return self._fetchCloud().then(function (cloudState) {
-          var merged = self._merge(cloudState || {}, self._readLocal());
-          var mergedChanged = JSON.stringify(self._stripMeta(merged)) !== JSON.stringify(self._stripMeta(cloudState || {}));
-          self._writeLocal(merged);
-          self._loading = false;
-          self._initialized = true;
-          self._rerender();
-          if (!cloudState || !Object.keys(cloudState).length || self._queuedChanges || mergedChanged) {
-            self._queuedChanges = false;
-            return self.save();
+        // 首屏渲染不依赖云端：立即标记已初始化，云端读取在后台进行，
+        // 成功与否都绝不阻塞首屏、绝不整页重渲染（避免弱网/VPN 下白屏）。
+        self._initialized = true;
+        self._fetchCloud().then(function (cloudState) {
+          if (cloudState && typeof cloudState === 'object') {
+            var merged = self._merge(cloudState, self._readLocal());
+            self._writeLocal(merged);
+            self._safeRerender();
           }
-        }).then(function () {
-          setInterval(function () { self._refresh(); }, 10000);
-          setInterval(function () { FeishuSync.refresh(false).catch(function () {}); }, 30000);
-          document.addEventListener('visibilitychange', function () {
-            if (!document.hidden) {
-              self._refresh(true);
-              FeishuSync.refresh(false);
-            }
-          });
+        }).catch(function () {});
+        // 周期轻量刷新（只合并轻量 done 态，不整页重渲染、不阻塞首屏）。
+        setInterval(function () { self._refresh(); }, 30000);
+        document.addEventListener('visibilitychange', function () {
+          if (!document.hidden) self._refresh();
         });
       }).catch(function (error) {
-        self._loading = false;
         self._initialized = true;
         console.warn('Cloud sync init failed:', error);
-        syncToast('云同步连接失败：' + error.message);
       });
     },
 
@@ -408,42 +399,32 @@
         }
 
         if (key === 'dudu_tasks') {
-          var cloudDate = cloud.dudu_last_tasks_date || '';
-          var localDate = local.dudu_last_tasks_date || '';
-          var cloudTaskTime = Number(cloud.dudu_tasks_updated_at || 0);
-          var localTaskTime = Number(local.dudu_tasks_updated_at || 0);
-          var pickLocal;
-          if (cloudDate === localDate && cloudDate) {
-            pickLocal = localTaskTime >= cloudTaskTime;
-          } else {
-            pickLocal = (localDate || '') >= (cloudDate || '');
-          }
-          var baseTasks = Array.isArray(pickLocal ? localValue : cloudValue) ? (pickLocal ? localValue : cloudValue).slice() : [];
-          var otherTasks = Array.isArray(pickLocal ? cloudValue : localValue) ? (pickLocal ? cloudValue : localValue) : [];
-          var taskDoneMap = {};
-          function taskDoneKey(t) {
-            if (!t) return '';
+          // 双向同步：按稳定 ID（sourceId 或归一化文本）合并两端任务，
+          // done 态「任一侧为 true 即完成」，避免整体替换导致一端任务丢失。
+          var byId = {};
+          function taskKeyOf(t) {
+            if (!t) return null;
             if (t.sourceId) return 'id:' + t.sourceId;
             var text = String(t.text || '')
               .replace(/^[✅❌]\s*/, '')
-              .replace(/^\d+[.、：:)）)\-\s]+/, '')
-              .trim()
-              .toLowerCase();
-            return 'txt:' + text;
+              .replace(/^\d+[.、：:)）-]\s+/, '')
+              .trim().toLowerCase();
+            return text ? ('txt:' + text) : null;
           }
-          function collectDone(tasks) {
-            (Array.isArray(tasks) ? tasks : []).forEach(function (task) {
-              var k = taskDoneKey(task);
-              if (k && task.done === true) taskDoneMap[k] = true;
+          function ingest(list) {
+            (Array.isArray(list) ? list : []).forEach(function (t) {
+              var k = taskKeyOf(t);
+              if (!k) return;
+              var cur = byId[k] || (byId[k] = JSON.parse(JSON.stringify(t)));
+              if (t.done === true) cur.done = true;
+              var lt = Number(t.updatedAt || t.ts || 0);
+              var mt = Number(cur.updatedAt || cur.ts || 0);
+              if (lt > mt) { cur.updatedAt = t.updatedAt; cur.ts = t.ts; }
             });
           }
-          collectDone(baseTasks);
-          collectDone(otherTasks);
-          baseTasks.forEach(function (task) {
-            var k = taskDoneKey(task);
-            if (k && taskDoneMap[k]) task.done = true;
-          });
-          merged[key] = baseTasks;
+          ingest(cloudValue);
+          ingest(localValue);
+          merged[key] = Object.keys(byId).map(function (k) { return byId[k]; });
           return;
         }
 
@@ -582,10 +563,8 @@
         var local = self._readLocal();
         var merged = self._merge(cloud || {}, local);
         if (JSON.stringify(self._stripMeta(merged)) !== JSON.stringify(self._stripMeta(local))) {
-          self._loading = true;
           self._writeLocal(merged);
-          self._loading = false;
-          self._rerender();
+          self._safeRerender();
         }
       }).catch(function () {});
     },
@@ -598,27 +577,14 @@
       return clean;
     },
 
-    _rerender: function () {
-      try {
-        // 重新初始化今日任务：从云同步后的 dudu_tasks 恢复 done 状态并合并飞书当前任务
-        if (window.TASKS_DATA && typeof initializeTasksForToday === 'function') {
-          var tasks = localStorage.getItem('dudu_tasks');
-          var parsed = tasks ? JSON.parse(tasks) : [];
-          initializeTasksForToday(parsed);
-        }
-      } catch (error) {}
+    _safeRerender: function () {
+      // 只重渲染依赖云端同步数据的部件；绝不整页重渲染，避免弱网/脏数据导致白屏。
+      // 不调用 initializeTasksForToday，避免用合并后数据重置今日任务。
       try { if (typeof renderTasks === 'function') renderTasks(); } catch (error) {}
       try { if (typeof renderInspirations === 'function') renderInspirations(); } catch (error) {}
-      try { if (typeof window.renderDouban === 'function') window.renderDouban(); } catch (error) {}
-      try { if (typeof window.renderTravel === 'function') window.renderTravel(); } catch (error) {}
-      try { if (typeof window.renderMonthlyGoals === 'function') window.renderMonthlyGoals(); } catch (error) {}
-      try {
-        if (typeof renderCalendar === 'function' && window.EXERCISE_DATA) {
-          renderCalendar(window.EXERCISE_DATA);
-        }
-      } catch (error) {}
-      try { if (typeof updateTodoProgress === 'function') updateTodoProgress(); } catch (error) {}
       try { if (typeof renderSleep === 'function') renderSleep(); } catch (error) {}
+      try { if (typeof window.renderMonthlyGoals === 'function') window.renderMonthlyGoals(); } catch (error) {}
+      try { if (typeof window.renderDashboard === 'function') window.renderDashboard(); } catch (error) {}
     }
   };
 

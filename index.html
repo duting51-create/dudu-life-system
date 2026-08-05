@@ -6,16 +6,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="杜杜的小巴士">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <base href="/dudu-life-system/">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <title>杜杜的人生小巴士 🚐</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
+  <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-1535" as="script">
   <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-1255" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
-  <!-- 字体改为真正非阻塞加载：preload + onload 切换，既不阻塞渲染也不拖慢 load 事件（治 VPN 下白屏） -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
   <script>
     document.documentElement.className += ' js';
@@ -2465,7 +2467,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-1745" defer></script>
+  <script src="cloud-sync.js?v=sync-20260805-1830" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260805-1535" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-1255" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -4578,9 +4580,7 @@
       renderTasks();
     }
 
-    // 首屏渲染改挂 DOMContentLoaded：HTML 解析完 + defer 数据脚本已执行(DASHBOARD_DATA 就绪)即渲染，
-    // 不再等外部字体/图片下载完(window.load)，从根本上消除 VPN 下字体慢导致整页白屏。
-    function bootDashboard() {
+    window.addEventListener('load', () => {
       // 立即显示首屏 hero，防止任何后续异常导致白屏「打不开」
       try {
         document.querySelectorAll('#hero-section .reveal').forEach(el => el.classList.add('visible'));
@@ -4628,13 +4628,7 @@
         console.error('初始化异常：', err);
         revealAllSafe();
       }
-    }
-    // 不等 window.load（会被慢字体/图片卡住），DOM 解析完即刻渲染首屏
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', bootDashboard, { once: true });
-    } else {
-      bootDashboard();
-    }
+    });
   </script>
 
   <!-- ====== 新增模块逻辑（2026-08-03） ====== -->
@@ -5567,12 +5561,8 @@
       setTimeout(function () { try { renderDashboard(); } catch (e) {} }, 1800);
       if ($('gainDate')) $('gainDate').value = todayKey();
     }
-    // 模块渲染同步改挂 DOMContentLoaded，避免被慢字体/图片卡住的 window.load 拖白屏
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initNewModules, { once: true });
-    } else {
-      initNewModules();
-    }
+    if (document.readyState === 'complete') initNewModules();
+    else window.addEventListener('load', initNewModules);
   })();
   </script>
   <div id="sleepTooltip" class="sleep-tooltip"></div>
