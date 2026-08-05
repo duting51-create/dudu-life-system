@@ -71,8 +71,7 @@
       top: 0; left: 0; right: 0;
       z-index: 200;
       height: 52px;
-      background: rgba(253,248,242,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(253,248,242,0.95);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -115,8 +114,7 @@
       flex-direction: column;
       gap: 4px;
       padding: 10px 6px;
-      background: rgba(253,248,242,0.9);
-      backdrop-filter: blur(14px);
+      background: rgba(253,248,242,0.92);
       border-radius: 0 18px 18px 0;
       box-shadow: 3px 0 20px rgba(45,45,58,0.08), -1px 0 8px rgba(0,0,0,0.04);
       border: 1px solid var(--border);
@@ -1359,13 +1357,19 @@
     /* ====== SCROLL REVEAL ====== */
     /* 默认可见：JS 未执行/失败时内容照常显示，杜绝移动端白屏「打不开」 */
     .reveal { opacity: 1; transform: none; }
-    /* 仅当 JS 成功运行（<html> 带 .js 类）时，才启用入场淡入动画 */
-    html.js .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    /* 入场淡入：仅 JS 成功运行（<html> 带 .js 类）时启用。
+       纯 CSS @keyframes 动画，不依赖后续脚本去「取消隐藏」——
+       动画无论是否播放，终态都是 opacity:1，彻底杜绝白屏。 */
+    html.js .reveal { animation: revealIn 0.7s cubic-bezier(0.16,1,0.3,1) both; }
     html.js .reveal.visible { opacity: 1; transform: none; }
-    .reveal-d1 { transition-delay: 0.1s; }
-    .reveal-d2 { transition-delay: 0.2s; }
-    .reveal-d3 { transition-delay: 0.3s; }
-    .reveal-d4 { transition-delay: 0.4s; }
+    @keyframes revealIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .reveal-d1 { animation-delay: 0.1s; }
+    .reveal-d2 { animation-delay: 0.2s; }
+    .reveal-d3 { animation-delay: 0.3s; }
+    .reveal-d4 { animation-delay: 0.4s; }
 
     /* ====== RESPONSIVE ====== */
     @media (max-width: 1024px) {
@@ -1401,7 +1405,7 @@
       .ex-blocks-grid { grid-template-columns: 1fr; }
       .section-number { font-size: 1.5rem; }
     }
-    @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; transition: none; } .scroll-hint { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { html.js .reveal { animation: none; } .scroll-hint { animation: none; } }
 
     /* ====== 新增模块样式（2026-08-03） ====== */
     .nav-toggle { display: none; position: fixed; top: 14px; left: 14px; z-index: 70; width: 44px; height: 44px; border-radius: 12px; border: none; background: var(--purple); color: #fff; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
@@ -1657,7 +1661,7 @@
         width: 250px; max-width: 78vw;
         transform: translateX(-100%); opacity: 1; pointer-events: none;
         transition: transform .28s ease; z-index: 90;
-        background: rgba(253,248,242,0.98); backdrop-filter: blur(12px);
+        background: rgba(253,248,242,0.98);
         border-radius: 0; border: none; border-right: 1px solid var(--border);
         padding-top: 0; display: flex; flex-direction: column;
         box-shadow: 4px 0 28px rgba(0,0,0,.22);
