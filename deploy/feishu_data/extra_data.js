@@ -155,6 +155,16 @@ window.IMPORTANT_DATES_DATA = {
       "fixed": "2024-09-30",
       "mode": "elapsed",
       "icon": "🏠"
+    },
+    {
+      "name": "韩莹",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "8-7",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2026-09-17",
+      "icon": "🎂"
     }
   ]
 };

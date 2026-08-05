@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="preload" href="feishu_data/dashboard_data.js?v=data-48faeaf-2" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-48faeaf-2" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-1" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -1437,6 +1437,17 @@
     .mini-ring-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .95rem; }
     .ring-label { font-size: .8rem; margin-top: 6px; color: var(--ink); }
 
+    /* 首页重要日子提醒 */
+    .dash-bottom { margin-top: 22px; }
+    .important-dates-reminder { background: rgba(201,177,208,0.15); border-radius: 18px; padding: 16px 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+    .idr-title { font-weight: 700; margin-bottom: 10px; color: var(--ink); font-size: .95rem; }
+    .idr-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .idr-item { display: flex; align-items: center; gap: 7px; background: var(--cream); border-radius: 12px; padding: 8px 12px; font-size: .82rem; }
+    .idr-icon { font-size: 1.05rem; }
+    .idr-name { font-weight: 600; color: var(--ink); }
+    .idr-when { color: var(--ink-faint); font-size: .74rem; }
+    .idr-count { margin-left: auto; font-weight: 700; color: #C0392B; white-space: nowrap; }
+
     /* 本月目标 / 房贷通用头 */
     .monthly-goals-card, .mortgage-card, .invest-card, .sleep-card, .english-card, .weekly-report-card { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); margin-top: 22px; }
     .mg-head, .sleep-head, .english-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
@@ -1468,11 +1479,16 @@
 
     /* 睡眠 */
     .sleep-form textarea { width: 100%; margin-top: 8px; resize: vertical; }
-    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; max-height: 260px; overflow-y: auto; padding-right: 6px; scrollbar-width: thin; scrollbar-color: rgba(201,177,208,0.75) transparent; }
-    .sleep-list::-webkit-scrollbar { width: 7px; }
-    .sleep-list::-webkit-scrollbar-track { background: transparent; }
-    .sleep-list::-webkit-scrollbar-thumb { background: rgba(201,177,208,0.75); border-radius: 4px; }
-    .sleep-list::-webkit-scrollbar-thumb:hover { background: rgba(201,177,208,0.95); }
+    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; max-height: 190px; overflow-y: auto; padding-right: 8px; scrollbar-width: thin; scrollbar-color: rgba(201,177,208,0.9) rgba(201,177,208,0.18); position: relative; -webkit-overflow-scrolling: touch; }
+    .sleep-list::-webkit-scrollbar { width: 8px; }
+    .sleep-list::-webkit-scrollbar-track { background: rgba(201,177,208,0.18); border-radius: 4px; }
+    .sleep-list::-webkit-scrollbar-thumb { background: rgba(201,177,208,0.9); border-radius: 4px; border: 1px solid rgba(255,255,255,0.4); }
+    .sleep-list::-webkit-scrollbar-thumb:hover { background: rgba(201,177,208,1); }
+    .sleep-list-scroll-hint { text-align: center; font-size: .68rem; color: var(--ink-faint); margin-top: 6px; opacity: 0; transition: opacity .2s; }
+    .sleep-list-scroll-hint.show { opacity: 1; }
+    @media (max-width: 640px) {
+      .sleep-list { max-height: 170px; padding-right: 6px; }
+    }
     .sleep-row { display: grid; grid-template-columns: 50px 1fr auto auto; grid-template-areas: "date time dur quality" "note note note note"; gap: 4px 10px; align-items: center; background: var(--cream); border-radius: 10px; padding: 9px 12px; font-size: .82rem; }
     .sleep-row .sr-date { grid-area: date; font-weight: 700; color: var(--purple); font-size: .8rem; }
     .sleep-row .sr-time { grid-area: time; color: var(--ink); }
@@ -1841,6 +1857,14 @@
           </div>
         </div>
       </div>
+
+      <!-- 重要日子提前提醒 -->
+      <div class="dash-bottom reveal" id="importantDatesReminder" style="display:none;">
+        <div class="important-dates-reminder">
+          <div class="idr-title">🎉 近期重要日子</div>
+          <div class="idr-list" id="idrList"><!-- renderImportantDatesReminder --></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2133,6 +2157,7 @@
           </div>
         </div>
         <div class="sleep-list" id="sleepList"><!-- renderSleep --></div>
+        <div class="sleep-list-scroll-hint" id="sleepScrollHint">↓ 下滑查看更多</div>
       </div>
     </div>
   </section>
@@ -2424,9 +2449,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-ff42302-2" defer></script>
+  <script src="cloud-sync.js?v=sync-20260805-1" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-48faeaf-2"></script>
-  <script src="feishu_data/extra_data.js?v=extra-48faeaf-2"></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260805-1"></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2"></script>
   <script>
     const PUBLISHED_SYNC_DEFAULTS_VERSION = '2026-08-03-sync-defaults-1';
@@ -3264,12 +3289,13 @@
       // Load done state
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
 
-      // 用户当前规则：任务 / 灵感一旦完成就不再展示；收获 / 情绪仍按当天展示。
+      // 任务/灵感：当天无论是否划掉都展示（划掉显示删除线），非当天仅未划掉的继续展示；收获/情绪仍按当天展示。
       items = items.filter(function (item) {
         if (item.type !== 'task' && item.type !== 'inspiration') return true;
-        if (!hasLiveItems && item.date && item.date.indexOf(todayStr) === -1 && !item.syncPending) return false;
+        const isToday = item.date && item.date.indexOf(todayStr) !== -1;
         const isStruck = doneMap[item.id] === true || item.done === true ||
           (item.text && (item.text.includes('✅') || item.text.includes('~~')));
+        if (isToday || item.syncPending) return true;
         return !isStruck;
       });
 
@@ -3325,14 +3351,14 @@
       localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
       if (window.CloudSync) window.CloudSync.saveNow();
       // 划掉 → 在飞书对应列写「删除线（划线）」，与用户习惯一致（不再用 ✅ 前缀）；
-      // 飞书划线即为跨设备一致的「已完成」真相源，今日待办【备忘提醒】等会同步隐藏。
-      if (id.startsWith('live_')) {
-        if (window.FeishuSync) {
-          window.FeishuSync.mutate({ action: nowDone ? 'done' : 'undone', id }).catch(function (e) {
-            console.warn('划线同步飞书失败（本地已隐藏）:', e);
-          });
-        }
-      } else if (id.startsWith('local_')) {
+      // 飞书划线即为跨设备一致的「已完成」真相源。
+      var feishuItem = findInspireItemById(id);
+      if (feishuItem && window.FeishuSync) {
+        window.FeishuSync.mutate({ action: nowDone ? 'done' : 'undone', id: feishuItem.id }).catch(function (e) {
+          console.warn('划线同步飞书失败（本地已保留）:', e);
+        });
+      }
+      if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const jot = jotData.find(function (j) { return (j.id || ('local_' + j.ts)) === id; });
         if (jot) { jot.done = nowDone; localStorage.setItem('dudu_jots', JSON.stringify(jotData)); }
@@ -4811,6 +4837,11 @@
           (s.note ? '<div class="sr-note">' + esc(s.note) + '</div>' : '') +
           '</div>';
       }).join('');
+      // 内容溢出时显示下滑提示
+      setTimeout(function () {
+        var hint = $('sleepScrollHint');
+        if (hint) hint.classList.toggle('show', box.scrollHeight > box.clientHeight);
+      }, 0);
     }
     window.toggleSleepForm = function () { var f = $('sleepForm'); f.style.display = f.style.display === 'none' ? 'block' : 'none'; if (f.style.display === 'block') $('sleep-date').value = todayKey(); };
     window.cancelSleepForm = function () { $('sleepForm').style.display = 'none'; };
@@ -5171,6 +5202,34 @@
     window.renderDouban = renderDouban;
     window.renderTravel = renderTravel;
 
+    function renderImportantDatesReminder() {
+      var dd = window.IMPORTANT_DATES_DATA;
+      var box = $('importantDatesReminder');
+      var listBox = $('idrList');
+      if (!dd || !box || !listBox) return;
+      var now = new Date();
+      now.setHours(0, 0, 0, 0);
+      var upcoming = dd.list.filter(function (it) {
+        if (it.mode === 'elapsed') return false;
+        var nd = new Date(it.next_date);
+        nd.setHours(0, 0, 0, 0);
+        var days = Math.ceil((nd - now) / 86400000);
+        return days >= 0 && days <= 7;
+      }).sort(function (a, b) {
+        return new Date(a.next_date) - new Date(b.next_date);
+      }).map(function (it) {
+        var nd = new Date(it.next_date);
+        nd.setHours(0, 0, 0, 0);
+        var days = Math.ceil((nd - now) / 86400000);
+        var when = days === 0 ? '今天' : days === 1 ? '明天' : days + '天后';
+        var dateLabel = it.lunar ? '农历 ' + it.lunar : (it.solar ? '阳历 ' + it.solar : it.next_date);
+        return '<div class="idr-item"><span class="idr-icon">' + (it.icon || '🎉') + '</span><span class="idr-name">' + esc(it.name) + '</span><span class="idr-when">' + esc(dateLabel) + ' · ' + esc(when) + '</span><span class="idr-count">' + (days === 0 ? '今天' : '还有 ' + days + ' 天') + '</span></div>';
+      });
+      if (!upcoming.length) { box.style.display = 'none'; return; }
+      listBox.innerHTML = upcoming.join('');
+      box.style.display = 'block';
+    }
+
     function renderImportantDates() {
       var dd = window.IMPORTANT_DATES_DATA; var box = $('datesList'); if (!dd || !box) return;
       var now = new Date();
@@ -5350,6 +5409,7 @@
       try { renderDouban(); } catch (e) {}
       try { renderTravel(); } catch (e) {}
       try { renderImportantDates(); } catch (e) {}
+      try { renderImportantDatesReminder(); } catch (e) {}
       try { renderPodcasts(); } catch (e) {}
       try { initMobileNav(); } catch (e) {}
       // 数据可能晚到（TASKS_DATA 等），二次渲染
