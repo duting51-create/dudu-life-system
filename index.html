@@ -1694,8 +1694,8 @@
     <button class="side-nav-item" data-tab="s1" title="计划中心">
       <span class="dot"></span><span class="nav-icon">📋</span><span class="nav-label">计划中心</span>
     </button>
-    <button class="side-nav-item" data-tab="s2" title="人生复盘">
-      <span class="dot"></span><span class="nav-icon">💡</span><span class="nav-label">人生复盘</span>
+      <button class="side-nav-item" data-tab="s2" title="灵感宝箱">
+        <span class="dot"></span><span class="nav-icon">💡</span><span class="nav-label">灵感宝箱</span>
     </button>
     <button class="side-nav-item" data-tab="s3" title="信息雷达">
       <span class="dot"></span><span class="nav-icon">🔥</span><span class="nav-label">信息雷达</span>
@@ -1927,12 +1927,12 @@
     </div>
   </section>
 
-  <!-- ====== S2: 人生复盘（灵感宝箱） ====== -->
+  <!-- ====== S2: 灵感宝箱 ====== -->
   <section class="full-section section-pink" id="s2" data-section="s2">
     <div class="section-inner">
       <div class="section-header reveal">
         <span class="section-number">💡 03</span>
-        <h2 class="section-title">人生复盘</h2>
+        <h2 class="section-title">灵感宝箱</h2>
         <p class="section-sub">输入：灵感 · 收获 · 情绪觉察（飞书同步） · 输出：每周 AI 复盘</p>
       </div>
 
@@ -4571,7 +4571,7 @@
           .then(function (d) { if (tqQuote) { tqQuote.textContent = '“' + (d.hitokoto || '') + '”'; tqSource.textContent = d.from ? '—— ' + d.from : ''; } })
           .catch(function () { if (tqQuote) tqQuote.textContent = '“你不必很厉害才能开始，但你必须开始才能变得很厉害。”'; });
       }
-      // 今日计划摘要：今日安排（TASKS_DATA.items）+ 人生复盘（今日灵感/收获/情绪）
+      // 今日计划摘要：今日安排（TASKS_DATA.items）+ 灵感宝箱（今日灵感/收获/情绪）
       var list = $('todayPlanList');
       if (list) {
         var items = [];
@@ -4579,7 +4579,7 @@
         planTasks.forEach(function (t) {
           items.push({ type: 'plan', done: !!t.done, text: t.text != null ? t.text : t });
         });
-        // 人生复盘：匹配今天（M月D日）
+        // 灵感宝箱：匹配今天（M月D日）
         var _now = new Date();
         var tk = (_now.getMonth() + 1) + '月' + _now.getDate() + '日';
         var inspirations = (window.INSPIRATIONS_DATA && window.INSPIRATIONS_DATA.items) || [];
