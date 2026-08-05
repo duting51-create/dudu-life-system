@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-05",
+  "updated": "2026-08-04",
   "list": [
     {
       "name": "嗨咻",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "医生，我咋算自己是哪天怀孕的？|有点小事61"
+      "latest": "我跟金钱的关系，被谁影响了？| Vol.173"
     },
     {
       "name": "Alison Yu心理",
@@ -58,7 +58,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-05",
+  "updated": "2026-08-03",
   "list": [
     {
       "name": "爽",
@@ -141,16 +141,6 @@ window.IMPORTANT_DATES_DATA = {
       "icon": "🎂"
     },
     {
-      "name": "韩莹",
-      "type": "生日",
-      "calendar": "lunar",
-      "lunar": "8-7",
-      "solar": null,
-      "mode": "countdown",
-      "next_date": "2026-09-17",
-      "icon": "🎂"
-    },
-    {
       "name": "结婚纪念日",
       "type": "纪念日",
       "calendar": "solar",
@@ -169,8 +159,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "天要你走，我要你留",
-  "source": "一本蛮不错的电子书"
+  "content": "我们奋力前行，逆水行舟，被不断向后推，直至回到往昔岁月。",
+  "source": "了不起的盖茨比"
 };
 window.updated = {
   "name": "嗨咻",

@@ -2476,7 +2476,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-2236" defer></script>
+  <script src="cloud-sync.js?v=sync-20260805-2330" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260805-2236" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -2633,6 +2633,12 @@
               task.done = savedDoneMap[key];
             }
           });
+          // 关键：恢复 done 态后立即固化回 localStorage，确保紧接着 CloudSync.init 的
+          // _readLocal 读到的是含正确 done 的完整列表，避免被云端旧数据覆盖后刷新丢失。
+          try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
+        } else if (Array.isArray(savedTasks) && savedTasks.length && !window.TASKS_DATA.items.length) {
+          window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
+          try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
         }
       } catch (e) {}
 
@@ -3016,7 +3022,17 @@
     }
 
     function persistTaskOperation() {
-      localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA?.items || []));
+      // 给每个任务补一个稳定 sourceId（基于归一化文本）和 updatedAt 时间戳，
+      // 这样跨设备 / 跨刷新合并时 done 态能稳定匹配，且「取消划掉」也能按时间戳生效。
+      var items = window.TASKS_DATA?.items || [];
+      items.forEach(function (t) {
+        if (t && t.text) {
+          var k = String(t.text).replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）\-\s]+/, '').trim().toLowerCase();
+          if (!t.sourceId) t.sourceId = 'task:' + k;
+          t.updatedAt = Date.now();
+        }
+      });
+      localStorage.setItem('dudu_tasks', JSON.stringify(items));
       localStorage.setItem('dudu_tasks_updated_at', String(Date.now()));
       if (window.CloudSync) window.CloudSync.saveNow();
     }
@@ -4622,6 +4638,8 @@
             });
           }
           window.TASKS_DATA.date = todayLabel;
+          // 固化：把叠加了 done 态的 items 写回 localStorage，保证 CloudSync 与下次刷新读到正确值
+          try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
         }
         renderTasks();
         return;

@@ -459,11 +459,19 @@
             return text || null;
           }
           function mergeTask(cur, t) {
-            if (t.done === true) cur.done = true;
-            // 保留 sourceId，优先采用更稳定的值
-            if (t.sourceId && !cur.sourceId) cur.sourceId = t.sourceId;
+            // 不再用「OR 合并(done 只增不减)」——那会让「取消划掉」永远被云端旧值压回。
+            // 改为「时间戳优先」：取 updatedAt/ts 较新一侧的 done 值，取消划掉也能生效。
             var lt = Number(t.updatedAt || t.ts || 0);
             var mt = Number(cur.updatedAt || cur.ts || 0);
+            if (lt > 0 && lt >= mt) {
+              cur.done = Boolean(t.done);
+              if (t.updatedAt || t.ts) { cur.updatedAt = t.updatedAt; cur.ts = t.ts; }
+            } else if (lt === 0 && mt === 0) {
+              // 两侧都无时间戳（最早兼容数据）：保留已完成态，避免旧数据丢失勾选
+              if (t.done === true) cur.done = true;
+            }
+            // 保留 sourceId，优先采用更稳定的值
+            if (t.sourceId && !cur.sourceId) cur.sourceId = t.sourceId;
             if (lt > mt) { cur.updatedAt = t.updatedAt; cur.ts = t.ts; }
           }
           function ingest(list) {

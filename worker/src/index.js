@@ -3,6 +3,13 @@ const SHEET_RANGE = "A1:G125";
 const STATE_KEY = "dudu-user-state";
 const MAX_STATE_BYTES = 100 * 1024;
 
+// 用用户自己设置的同步口令作为 KV 命名空间（不再是固定 env.SYNC_KEY），
+// 这样两端填同一个口令即可共享同一份数据，无需知道任何服务器密钥。
+function stateKeyFor(request) {
+  const supplied = (request.headers.get("X-Dudu-Sync-Key") || "").trim();
+  return supplied || STATE_KEY;
+}
+
 const TYPE_CONFIG = {
   inspiration: { column: "D", index: 3, marker: "💡" },
   task: { column: "E", index: 4, marker: "" },
@@ -30,7 +37,7 @@ export default {
 
     try {
       if (url.pathname === "/api/state" && request.method === "GET") {
-        const state = await env.DUDU_STATE.get(STATE_KEY, "json");
+        const state = await env.DUDU_STATE.get(stateKeyFor(request), "json");
         return json(state || {}, 200, cors);
       }
 
@@ -41,7 +48,7 @@ export default {
         }
         const state = JSON.parse(raw || "{}");
         state._server_updated_at = new Date().toISOString();
-        await env.DUDU_STATE.put(STATE_KEY, JSON.stringify(state));
+        await env.DUDU_STATE.put(stateKeyFor(request), JSON.stringify(state));
         return json({ status: "ok", updated_at: state._server_updated_at }, 200, cors);
       }
 
@@ -92,8 +99,9 @@ function json(value, status, headers) {
 }
 
 function isAuthorized(request, env) {
-  const supplied = request.headers.get("X-Dudu-Sync-Key") || "";
-  return supplied.length >= 16 && supplied === env.SYNC_KEY;
+  // 用户的同步口令即命名空间：任意 ≥16 位口令都被接受，作为各自独立的数据分区。
+  const supplied = (request.headers.get("X-Dudu-Sync-Key") || "").trim();
+  return supplied.length >= 16;
 }
 
 async function getTenantToken(env) {
