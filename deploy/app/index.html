@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <base href="https://duting51-create.github.io/dudu-life-system/">
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -2468,10 +2466,10 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-1500" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260805-1255"></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260805-1255"></script>
-  <script src="feishu_data/douban_data.js?v=douban-48faeaf-2"></script>
+  <script src="cloud-sync.js?v=sync-20260805-2230" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260805-1255" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260805-1255" defer></script>
+  <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
     function revealAllSafe() {
@@ -3372,7 +3370,7 @@
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
           const checkHtml = isToggle
-            ? `<div class="inspire-check ${isStruck ? 'done' : ''}" onclick="toggleInspireCheck('${item.id}')"></div>`
+            ? `<div class="inspire-check ${isStruck ? 'done' : ''}" onclick='toggleInspireCheck(${JSON.stringify(item.id)}, ${JSON.stringify(item.fp)})'></div>`
             : `<div class="inspire-check" style="visibility:hidden"></div>`;
           return `<div class="inspire-check-item ${isStruck ? 'struck' : ''}" data-id="${item.id}" data-type="${item.type}">
             ${checkHtml}
@@ -3393,9 +3391,11 @@
         }).join('') + '</div>';
     }
 
-    function toggleInspireCheck(id) {
+    function toggleInspireCheck(id, fpOverride) {
       var feishuItem = findInspireItemById(id);
-      var fp = feishuItem ? inspireFp(feishuItem.type, feishuItem.text) : id;
+      // 优先用渲染时的指纹(fp)作为 done 态主键，保证与 renderInspirations 读取的键一致；
+      // 否则嵌入式/本地灵感项的合成 id 与指纹不匹配，导致划掉后刷新又出现（经典 bug）。
+      var fp = fpOverride || (feishuItem ? inspireFp(feishuItem.type, feishuItem.text) : id);
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
       const doneMeta = JSON.parse(localStorage.getItem('dudu_inspire_done_meta') || '{}');
       const nowDone = doneMap[fp] !== true;
@@ -4596,8 +4596,17 @@
           }, 4000);
         }
 
-        Promise.resolve(dashboardPromise).then(() => {
+        // 等云同步完成（最多 4s，避免弱网把首屏卡死）再初始化今日任务，
+        // 这样手机端会以「云端合并后的 dudu_tasks」恢复划掉(done)状态，而不是本地旧数据。
+        const cloudReady = Promise.race([
+          Promise.resolve(cloudPromise).catch(function () {}),
+          new Promise(function (res) { setTimeout(res, 4000); })
+        ]);
+        Promise.resolve(dashboardPromise).then(function () { return cloudReady; }).then(function () {
           initializeTasksForToday(getTodayFeedTasks());
+        }).catch(function (err) {
+          console.warn('initializeTasksForToday 失败:', err);
+          revealAllSafe();
         });
 
         const firstNav = document.querySelector('.side-nav-item[data-tab="s1"]');

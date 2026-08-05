@@ -57,11 +57,42 @@
     catch (e) { return btoa(str); }
   }
 
-  // 从 GitHub 读取同步状态（带鉴权的 API 读取，实时无 CDN 缓存；raw 分支读取会被 CDN 缓存导致读到旧数据）
-  function _githubReadState() {
-    return fetch(GITHUB_API, {
+  // 带超时的 fetch：避免弱网/被墙的 api.github.com 把初始化或保存挂死（导致页面长时间空白）
+  function _fetchWithTimeout(url, options, ms) {
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = null;
+    if (ctrl) {
+      timer = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, ms || 8000);
+    }
+    options = options || {};
+    if (ctrl) options.signal = ctrl.signal;
+    return fetch(url, options).then(function (r) {
+      if (timer) clearTimeout(timer);
+      return r;
+    }, function (err) {
+      if (timer) clearTimeout(timer);
+      throw err;
+    });
+  }
+
+  // 读取方案 A：raw.githubusercontent.com（公开、CORS:*、无需 Authorization 头 → 不会触发
+  // CORS 预检，中国大陆/手机/VPN 网络下成功率远高于带鉴权的 API）。带 ts 缓存戳绕过 CDN 缓存。
+  function _githubReadStateRaw() {
+    var rawUrl = GITHUB_RAW + '?ts=' + Date.now();
+    return _fetchWithTimeout(rawUrl, { method: 'GET', cache: 'no-store' }, 8000).then(function (r) {
+      if (!r.ok) throw new Error('raw ' + r.status);
+      return r.text();
+    }).then(function (text) {
+      try { return JSON.parse(text); } catch (e) { return null; }
+    });
+  }
+
+  // 读取方案 B（兜底）：带鉴权的 GitHub API（实时、无 CDN 缓存），仅在 raw 失败时使用
+  function _githubReadStateApi() {
+    return _fetchWithTimeout(GITHUB_API, {
+      method: 'GET',
       headers: { 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github+json' }
-    }).then(function (r) {
+    }, 8000).then(function (r) {
       if (r.status === 404) return {};
       if (!r.ok) return {};
       return r.json().then(function (d) {
@@ -73,15 +104,24 @@
     }).catch(function () { return {}; });
   }
 
+  // 读取：raw 优先（手机/VPN 友好），失败再回落到鉴权 API
+  function _githubReadState() {
+    return _githubReadStateRaw().then(function (state) {
+      if (state && typeof state === 'object') return state;
+      return _githubReadStateApi();
+    }).catch(function () { return _githubReadStateApi(); });
+  }
+
   // 写入同步状态到 GitHub（需内嵌 Token；冲突时抛出由调用方稍后重试）
   function _githubWriteState(content) {
-    return fetch(GITHUB_API, {
+    return _fetchWithTimeout(GITHUB_API, {
+      method: 'GET',
       headers: { 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github+json' }
-    }).then(function (r) { return r.json(); }).then(function (meta) {
+    }, 8000).then(function (r) { return r.json(); }).then(function (meta) {
       var sha = meta && meta.sha;
       var body = { message: 'sync update ' + new Date().toISOString(), content: b64encodeUnicode(content), branch: 'sync' };
       if (sha) body.sha = sha;
-      return fetch(GITHUB_API, {
+      return _fetchWithTimeout(GITHUB_API, {
         method: 'PUT',
         headers: {
           'Authorization': 'Bearer ' + GITHUB_TOKEN,
@@ -89,7 +129,7 @@
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(body)
-      });
+      }, 8000);
     }).then(function (r) {
       if (r.status === 409) throw new Error('并发写入冲突，稍后自动重试');
       if (!r.ok) throw new Error('HTTP ' + r.status);
