@@ -479,19 +479,19 @@ def fetch_finance():
             finance['year_income'] = f'¥{int(total_income):,}'
             finance['year_expense'] = f'¥{int(total_expense):,}'
 
-            # 年收入目标（杜婷婷收入 2026 全年求和）& 本年累计收入（截至当前月）
-            # 列映射：index 5 = 赵晗收入, index 6 = 杜婷婷收入（见 +field-list）
-            # 用于「人生五维进度」中「收入」维度：目标=年收入，实际=本年累计
-            income_annual = round(sum(to_num(r[6]) for r in year_records if len(r) > 6), 2)
+            # 杜婷婷收入（2026 全年求和 & 本年累计截至当前月）
+            # record-list 数组列映射与 field-list 不同：index 8 = 杜婷婷收入
+            # 用于「人生五维进度」中「收入」维度：实际=本年累计(income_ytd)，目标=用户在本月目标中手动填写的年收入目标
+            income_annual = round(sum(to_num(r[8]) for r in year_records if len(r) > 8), 2)
             income_ytd = 0.0
             for r in year_records:
-                if len(r) > 6:
+                if len(r) > 8:
                     ym = _parse_month(r[0])
                     if ym and ym[1] <= now.month:
-                        income_ytd += to_num(r[6])
+                        income_ytd += to_num(r[8])
             finance['income_annual'] = income_annual
             finance['income_ytd'] = round(income_ytd, 2)
-            print(f"  ✅ 收入维度: 年收入目标 {income_annual:,.2f}, 本年累计 {income_ytd:,.2f}")
+            print(f"  ✅ 收入维度: 杜婷婷收入年累计 {income_annual:,.2f}, 本年累计 {income_ytd:,.2f}")
 
             # monthly_data: 最近6个2026年月（不含当月）
             monthly = []
@@ -716,6 +716,51 @@ def call_weread_api(api_name, params=None):
     except Exception as e:
         print(f"  ⚠️ WeRead API error ({api_name}): {e}")
         return None
+
+
+WX_CODE_MAP = {
+    0: '☀️ 晴', 1: '🌤 多云', 2: '⛅ 局部多云', 3: '☁️ 阴',
+    45: '🌫 雾', 48: '🌫 雾凇', 51: '🌦 毛毛雨', 53: '🌦 小雨', 55: '🌧 中雨',
+    61: '🌧 小雨', 63: '🌧 中雨', 65: '🌧 大雨', 71: '🌨 小雪', 73: '🌨 中雪',
+    75: '❄️ 大雪', 80: '🌦 阵雨', 81: '🌧 阵雨', 82: '⛈ 强阵雨',
+    95: '⛈ 雷阵雨', 96: '⛈ 雷阵雨伴雹', 99: '⛈ 雷暴'
+}
+
+
+def fetch_weather():
+    """预取 Open-Meteo 天气数据，避免手机端直接访问 open-meteo.com 被墙/超时"""
+    print("🌤 Fetching weather data...")
+    cities = [
+        {'key': 'beijing', 'name': '北京 · 顺义', 'lat': 40.13, 'lon': 116.65},
+        {'key': 'wuhan', 'name': '武汉 · 洪山', 'lat': 30.50, 'lon': 114.34},
+    ]
+    weather = {'cities': {}, 'last_updated': datetime.now().strftime('%Y-%m-%d %H:%M')}
+    ctx = ssl.create_default_context()
+    for city in cities:
+        url = (
+            f'https://api.open-meteo.com/v1/forecast?latitude={city["lat"]}&longitude={city["lon"]}'
+            '&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min'
+            '&timezone=Asia/Shanghai&forecast_days=1'
+        )
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, context=ctx, timeout=15) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+            current = data.get('current', {})
+            daily = data.get('daily', {})
+            weather['cities'][city['key']] = {
+                'name': city['name'],
+                'temp': current.get('temperature_2m'),
+                'weather_code': current.get('weather_code'),
+                'desc': WX_CODE_MAP.get(current.get('weather_code'), '🌡'),
+                'min': daily.get('temperature_2m_min', [None])[0],
+                'max': daily.get('temperature_2m_max', [None])[0],
+            }
+            print(f"  ✅ {city['name']}: {current.get('temperature_2m')}° {weather['cities'][city['key']]['desc']}")
+        except Exception as e:
+            print(f"  ⚠️ Weather fetch error for {city['name']}: {e}")
+    save_json('weather.json', weather)
+    return weather
 
 
 def fetch_reading():
@@ -1649,6 +1694,7 @@ def generate_extra_data():
             {"name": "张娈", "type": "生日", "calendar": "lunar", "lunar": "3-28", "solar": None, "mode": "countdown", "next_date": "2027-05-04", "icon": "🎂"},
             {"name": "郭瑞", "type": "生日", "calendar": "lunar", "lunar": "12-15", "solar": None, "mode": "countdown", "next_date": "2027-01-22", "icon": "🎂"},
             {"name": "丽妍", "type": "生日", "calendar": "solar", "lunar": None, "solar": "08-26", "mode": "countdown", "next_date": "2026-08-26", "icon": "🎂"},
+            {"name": "韩莹", "type": "生日", "calendar": "lunar", "lunar": "8-7", "solar": None, "mode": "countdown", "next_date": "2026-09-17", "icon": "🎂"},
             {"name": "结婚纪念日", "type": "纪念日", "calendar": "solar", "fixed": "2023-04-28", "mode": "elapsed", "icon": "💍"},
             {"name": "买房日", "type": "里程碑", "calendar": "solar", "fixed": "2024-09-30", "mode": "elapsed", "icon": "🏠"}
         ]
@@ -1692,6 +1738,8 @@ def generate_extra_data():
     # 静态数据以代码内为准，金句/播客必须重新抓取
     merged["PODCASTS_DATA"] = base["PODCASTS_DATA"]
     merged["DAILY_QUOTE"] = base["DAILY_QUOTE"]
+    # 重要日子以代码内为准（deep-merge 对 list 是整体覆盖，会丢新增项如「韩莹」）
+    merged["IMPORTANT_DATES_DATA"] = base["IMPORTANT_DATES_DATA"]
     # 保留日期字段的 next_date 计算？这里简化，直接以代码内为准；如需阴历计算可扩展
 
     js = "// 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）\n"
@@ -1734,6 +1782,7 @@ def generate_dashboard():
         'published_notes': load_json('published_notes.json', {}),
         'exercise': load_json('exercise_data.json', {}),
         'hot_topics': load_json('hot_topics.json', {}),
+        'weather': load_json('weather.json', {}),
     }
 
     # ── 合并一人公司数据：把 published_notes.total 注入 oneCompany ──
@@ -1822,6 +1871,9 @@ def main():
 
     # 2b. 支出分类排名
     expense_categories = fetch_expense_categories()
+
+    # 2c. 天气数据（预取，避免手机端直接访问 open-meteo 被墙/超时）
+    weather = fetch_weather()
 
     # 3. 阅读挑战
     reading = fetch_reading()

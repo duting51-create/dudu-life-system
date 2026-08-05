@@ -523,9 +523,11 @@
 
     _rerender: function () {
       try {
-        if (window.TASKS_DATA) {
+        // 重新初始化今日任务：从云同步后的 dudu_tasks 恢复 done 状态并合并飞书当前任务
+        if (window.TASKS_DATA && typeof initializeTasksForToday === 'function') {
           var tasks = localStorage.getItem('dudu_tasks');
-          if (tasks) window.TASKS_DATA.tasks = JSON.parse(tasks);
+          var parsed = tasks ? JSON.parse(tasks) : [];
+          initializeTasksForToday(parsed);
         }
       } catch (error) {}
       try { if (typeof renderTasks === 'function') renderTasks(); } catch (error) {}

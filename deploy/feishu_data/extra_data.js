@@ -58,7 +58,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-03",
+  "updated": "2026-08-05",
   "list": [
     {
       "name": "爽",
@@ -141,6 +141,16 @@ window.IMPORTANT_DATES_DATA = {
       "icon": "🎂"
     },
     {
+      "name": "韩莹",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "8-7",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2026-09-17",
+      "icon": "🎂"
+    },
+    {
       "name": "结婚纪念日",
       "type": "纪念日",
       "calendar": "solar",
@@ -159,8 +169,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "甲之蜜糖，乙之砒霜。",
-  "source": "曼陀罗"
+  "content": "我们所爱之物昭示着我们究竟是谁。",
+  "source": "托马斯·阿奎纳"
 };
 window.updated = {
   "name": "嗨咻",

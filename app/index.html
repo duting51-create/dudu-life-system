@@ -15,8 +15,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-48faeaf-2" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-1" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-1232" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-1232" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -1863,7 +1863,7 @@
             </div>
             <div class="ring-item">
               <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-study" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-study-num">0%</span></div></div>
-              <div class="ring-label">📚 学习</div>
+              <div class="ring-label">📚 阅读</div>
             </div>
             <div class="ring-item">
               <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-product" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-product-num">0%</span></div></div>
@@ -1957,7 +1957,7 @@
           <div class="mg-inputs">
             <label>🟢 健康(运动天数)<input type="number" id="mg-health" min="0"></label>
             <label>💰 年收入目标(¥)<input type="number" id="mg-wealth" min="0"></label>
-            <label>📚 学习(阅读天数)<input type="number" id="mg-study" min="0"></label>
+            <label>📚 阅读(天数)<input type="number" id="mg-study" min="0"></label>
             <label>👩‍💼 产品(发布数)<input type="number" id="mg-product" min="0"></label>
             <label>🔤 英语(打卡天数)<input type="number" id="mg-english" min="0"></label>
           </div>
@@ -2469,8 +2469,8 @@
   </section>
 
   <script src="cloud-sync.js?v=sync-20260805-1" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-48faeaf-2"></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260805-1"></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260805-1232"></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260805-1232"></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2"></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -2496,9 +2496,10 @@
       bar.textContent = '⚠️ 页面脚本出错（已尽量显示内容）：' + msg;
     });
 
-    const PUBLISHED_SYNC_DEFAULTS_VERSION = '2026-08-05-income-goal-1';
+    const PUBLISHED_SYNC_DEFAULTS_VERSION = '2026-08-05-income-goal-2';
     const PUBLISHED_SYNC_DEFAULTS = {
-      monthlyGoals: { health: 20, wealth: 526801.59, study: 31, product: 65, english: 15 },
+      // wealth(收入目标) 由用户在本月目标中手动填写，默认给 250000 方便首次使用
+      monthlyGoals: { health: 20, wealth: 250000, study: 31, product: 65, english: 15 },
       moviesWish: [{ title: 'The Help', link: '', year: '', rating: '' }],
       travel: [{ place: '马来西亚兰卡威', date: '2026年国庆', status: '规划中', note: '' }]
     };
@@ -2535,14 +2536,9 @@
         var goalDefaults = PUBLISHED_SYNC_DEFAULTS.monthlyGoals || {};
         var currentGoals = {};
         try { currentGoals = JSON.parse(localStorage.getItem('dudu_monthly_goals') || '{}') || {}; } catch (error) {}
+        // 收入目标(wealth)由用户在本月目标手动填写，不再从飞书自动覆盖；其余维度仅在空值时填充默认
         ['health', 'wealth', 'study', 'product', 'english'].forEach(function (key) {
-          if (key === 'wealth') {
-            // 维度语义由「支出预算」改为「年收入目标」，强制迁移旧的小额预算值
-            if (currentGoals[key] == null || currentGoals[key] === '' || currentGoals[key] <= 200000) {
-              currentGoals[key] = goalDefaults[key];
-              changed = true;
-            }
-          } else if ((currentGoals[key] == null || currentGoals[key] === '') && goalDefaults[key] != null) {
+          if ((currentGoals[key] == null || currentGoals[key] === '') && goalDefaults[key] != null) {
             currentGoals[key] = goalDefaults[key];
             changed = true;
           }
@@ -4618,22 +4614,44 @@
     // 暴露共享辅助函数给 script[0] 的旧渲染逻辑（IIFE 闭包隔离导致跨脚本不可见 → ReferenceError 使 renderAll 崩溃、模块数据丢失）
     window.nm = nm; window.sv = sv; window.esc = esc; window.$ = $; window.todayKey = todayKey; window.monthKey = monthKey;
 
-    /* ---------- 天气（open-meteo，无需 key） ---------- */
+    /* ---------- 天气（优先用 dashboard_data.js 预取数据，fallback 到 open-meteo） ---------- */
     var WX_CODE = { 0: '☀️ 晴', 1: '🌤 多云', 2: '⛅ 局部多云', 3: '☁️ 阴', 45: '🌫 雾', 48: '🌫 雾凇', 51: '🌦 毛毛雨', 53: '🌦 小雨', 55: '🌧 中雨', 61: '🌧 小雨', 63: '🌧 中雨', 65: '🌧 大雨', 71: '🌨 小雪', 73: '🌨 中雪', 75: '❄️ 大雪', 80: '🌦 阵雨', 81: '🌧 阵雨', 82: '⛈ 强阵雨', 95: '⛈ 雷阵雨', 96: '⛈ 雷阵雨伴雹', 99: '⛈ 雷暴' };
     var WX = [
-      { lat: 40.13, lon: 116.65, temp: 'wx-bj-temp', desc: 'wx-bj-desc', hilo: 'wx-bj-hilo' },
-      { lat: 30.50, lon: 114.34, temp: 'wx-wh-temp', desc: 'wx-wh-desc', hilo: 'wx-wh-hilo' }
+      { key: 'beijing', lat: 40.13, lon: 116.65, temp: 'wx-bj-temp', desc: 'wx-bj-desc', hilo: 'wx-bj-hilo' },
+      { key: 'wuhan', lat: 30.50, lon: 114.34, temp: 'wx-wh-temp', desc: 'wx-wh-desc', hilo: 'wx-wh-hilo' }
     ];
+    function applyWeatherData(w, data) {
+      if (!data) return false;
+      if (data.temp != null) $(w.temp).textContent = Math.round(data.temp) + '°';
+      if (data.desc != null) $(w.desc).textContent = data.desc;
+      if (data.min != null && data.max != null) $(w.hilo).textContent = Math.round(data.min) + '° / ' + Math.round(data.max) + '°';
+      return data.temp != null;
+    }
+    function fetchWeatherRemote(w) {
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + w.lat + '&longitude=' + w.lon +
+        '&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Shanghai&forecast_days=1';
+      fetch(url).then(function (r) { return r.json(); }).then(function (d) {
+        if (!d.current) return;
+        $(w.temp).textContent = Math.round(d.current.temperature_2m) + '°';
+        $(w.desc).textContent = WX_CODE[d.current.weather_code] || '🌡';
+        $(w.hilo).textContent = Math.round(d.daily.temperature_2m_min[0]) + '° / ' + Math.round(d.daily.temperature_2m_max[0]) + '°';
+      }).catch(function () {
+        // 静默失败，保留已有数据或继续显示“加载中…”
+        if ($(w.desc).textContent === '加载中…') $(w.desc).textContent = '天气加载失败';
+      });
+    }
     function initWeather() {
+      var preloaded = window.DASHBOARD_DATA && window.DASHBOARD_DATA.weather && window.DASHBOARD_DATA.weather.cities;
       WX.forEach(function (w) {
-        var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + w.lat + '&longitude=' + w.lon +
-          '&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Shanghai&forecast_days=1';
-        fetch(url).then(function (r) { return r.json(); }).then(function (d) {
-          if (!d.current) return;
-          $(w.temp).textContent = Math.round(d.current.temperature_2m) + '°';
-          $(w.desc).textContent = WX_CODE[d.current.weather_code] || '🌡';
-          $(w.hilo).textContent = Math.round(d.daily.temperature_2m_min[0]) + '° / ' + Math.round(d.daily.temperature_2m_max[0]) + '°';
-        }).catch(function () { $(w.desc).textContent = '天气加载失败'; });
+        var cached = preloaded && preloaded[w.key];
+        // 预取数据存在且不超过 6 小时则直接用，否则回退到远程 fetch
+        var fresh = cached && cached.last_updated && (Date.now() - new Date(cached.last_updated).getTime() < 6 * 3600 * 1000);
+        if (cached && applyWeatherData(w, cached)) {
+          // 已有预取数据，静默尝试刷新一次（失败不影响显示）
+          fetchWeatherRemote(w);
+        } else {
+          fetchWeatherRemote(w);
+        }
       });
     }
 
@@ -4705,9 +4723,10 @@
       // 收入：本年累计收入 / 年收入目标（年收入目标 = 飞书复盘表「杜婷婷收入」2026 全年求和）
       var fin = window.DASHBOARD_DATA && window.DASHBOARD_DATA.finance;
       var incomeActual = (fin && fin.income_ytd != null) ? fin.income_ytd : 0;
-      var incomeGoal = (fin && fin.income_annual != null) ? fin.income_annual : (g.wealth || 0);
+      // 收入目标以用户在本月目标中填写的年收入目标(g.wealth)为准，不再使用飞书抓取值
+      var incomeGoal = g.wealth || 0;
       setRing('ring-income', incomeGoal ? (incomeActual / incomeGoal) * 100 : 0);
-      // 学习：连续天数 / 365
+      // 阅读：连续阅读天数 / 365
       var rolling = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.reading && window.DASHBOARD_DATA.reading.rolling_day) || 0;
       setRing('ring-study', (rolling / 365) * 100);
       // 产品：本月（按飞书 Base「发布时间」）已发布记录数 / 目标
@@ -4724,7 +4743,7 @@
     function renderMonthlyGoals() {
       var g = nm('dudu_monthly_goals', {});
       var grid = $('mgGrid'); if (!grid) return;
-      var cells = [['🟢 健康', g.health], ['💰 收入', g.wealth], ['📚 学习', g.study], ['👩‍💼 产品', g.product], ['🔤 英语', g.english]];
+      var cells = [['🟢 健康', g.health], ['💰 收入', g.wealth], ['📚 阅读', g.study], ['👩‍💼 产品', g.product], ['🔤 英语', g.english]];
       grid.innerHTML = cells.map(function (c) {
         return '<div class="mg-cell"><div class="mg-val">' + (c[1] != null ? esc(c[1]) : '—') + '</div><div class="mg-name">' + c[0] + '</div></div>';
       }).join('');
