@@ -1856,8 +1856,8 @@
               <div class="ring-label">🟢 健康</div>
             </div>
             <div class="ring-item">
-              <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-expense" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-expense-num">0%</span></div></div>
-              <div class="ring-label">💸 支出</div>
+              <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-income" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-income-num">0%</span></div></div>
+              <div class="ring-label">💰 收入</div>
             </div>
             <div class="ring-item">
               <div class="mini-ring"><svg viewBox="0 0 120 120"><circle class="ring-bg" cx="60" cy="60" r="54"/><circle class="ring-fg" id="ring-study" cx="60" cy="60" r="54"/></svg><div class="mini-ring-center"><span id="ring-study-num">0%</span></div></div>
@@ -1954,7 +1954,7 @@
         <div class="mg-edit-area" id="mgEditArea" style="display:none;">
           <div class="mg-inputs">
             <label>🟢 健康(运动天数)<input type="number" id="mg-health" min="0"></label>
-            <label>💸 支出预算(¥)<input type="number" id="mg-wealth" min="0"></label>
+            <label>💰 年收入目标(¥)<input type="number" id="mg-wealth" min="0"></label>
             <label>📚 学习(阅读天数)<input type="number" id="mg-study" min="0"></label>
             <label>👩‍💼 产品(发布数)<input type="number" id="mg-product" min="0"></label>
             <label>🔤 英语(打卡天数)<input type="number" id="mg-english" min="0"></label>
@@ -2494,9 +2494,9 @@
       bar.textContent = '⚠️ 页面脚本出错（已尽量显示内容）：' + msg;
     });
 
-    const PUBLISHED_SYNC_DEFAULTS_VERSION = '2026-08-03-sync-defaults-1';
+    const PUBLISHED_SYNC_DEFAULTS_VERSION = '2026-08-05-income-goal-1';
     const PUBLISHED_SYNC_DEFAULTS = {
-      monthlyGoals: { health: 20, wealth: 20000, study: 31, product: 65, english: 15 },
+      monthlyGoals: { health: 20, wealth: 551774.59, study: 31, product: 65, english: 15 },
       moviesWish: [{ title: 'The Help', link: '', year: '', rating: '' }],
       travel: [{ place: '马来西亚兰卡威', date: '2026年国庆', status: '规划中', note: '' }]
     };
@@ -2534,7 +2534,13 @@
         var currentGoals = {};
         try { currentGoals = JSON.parse(localStorage.getItem('dudu_monthly_goals') || '{}') || {}; } catch (error) {}
         ['health', 'wealth', 'study', 'product', 'english'].forEach(function (key) {
-          if ((currentGoals[key] == null || currentGoals[key] === '') && goalDefaults[key] != null) {
+          if (key === 'wealth') {
+            // 维度语义由「支出预算」改为「年收入目标」，强制迁移旧的小额预算值
+            if (currentGoals[key] == null || currentGoals[key] === '' || currentGoals[key] <= 200000) {
+              currentGoals[key] = goalDefaults[key];
+              changed = true;
+            }
+          } else if ((currentGoals[key] == null || currentGoals[key] === '') && goalDefaults[key] != null) {
             currentGoals[key] = goalDefaults[key];
             changed = true;
           }
@@ -4694,13 +4700,11 @@
       // 健康：本月打卡天数 / 目标
       var checked = nm('exercise_checked_' + monthKey(), []);
       setRing('ring-health', g.health ? (checked.length / g.health) * 100 : 0);
-      // 支出：本月截至昨日累计支出 / 预算
+      // 收入：本年累计收入 / 年收入目标（年收入目标 = 飞书复盘表「杜婷婷收入」2026 全年求和）
       var fin = window.DASHBOARD_DATA && window.DASHBOARD_DATA.finance;
-      var monthExpense = 0;
-      if (fin && fin.month_expense_to_yesterday) {
-        monthExpense = parseFloat(String(fin.month_expense_to_yesterday).replace(/[¥,]/g, '')) || 0;
-      }
-      setRing('ring-expense', g.wealth ? (monthExpense / g.wealth) * 100 : 0);
+      var incomeActual = (fin && fin.income_ytd != null) ? fin.income_ytd : 0;
+      var incomeGoal = (fin && fin.income_annual != null) ? fin.income_annual : (g.wealth || 0);
+      setRing('ring-income', incomeGoal ? (incomeActual / incomeGoal) * 100 : 0);
       // 学习：连续天数 / 365
       var rolling = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.reading && window.DASHBOARD_DATA.reading.rolling_day) || 0;
       setRing('ring-study', (rolling / 365) * 100);
@@ -4718,7 +4722,7 @@
     function renderMonthlyGoals() {
       var g = nm('dudu_monthly_goals', {});
       var grid = $('mgGrid'); if (!grid) return;
-      var cells = [['🟢 健康', g.health], ['💸 支出', g.wealth], ['📚 学习', g.study], ['👩‍💼 产品', g.product], ['🔤 英语', g.english]];
+      var cells = [['🟢 健康', g.health], ['💰 收入', g.wealth], ['📚 学习', g.study], ['👩‍💼 产品', g.product], ['🔤 英语', g.english]];
       grid.innerHTML = cells.map(function (c) {
         return '<div class="mg-cell"><div class="mg-val">' + (c[1] != null ? esc(c[1]) : '—') + '</div><div class="mg-name">' + c[0] + '</div></div>';
       }).join('');

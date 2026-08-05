@@ -155,20 +155,13 @@ window.IMPORTANT_DATES_DATA = {
       "fixed": "2024-09-30",
       "mode": "elapsed",
       "icon": "🏠"
-    },
-    {
-      "name": "韩莹",
-      "type": "生日",
-      "calendar": "lunar",
-      "lunar": "8-7",
-      "solar": null,
-      "mode": "countdown",
-      "next_date": "2026-09-17",
-      "icon": "🎂"
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "我们的情人，不过是随便借个名字，用幻想吹出来的肥皂泡。",
+  "source": "大鼻子情圣"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
