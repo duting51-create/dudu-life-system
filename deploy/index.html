@@ -1468,7 +1468,11 @@
 
     /* 睡眠 */
     .sleep-form textarea { width: 100%; margin-top: 8px; resize: vertical; }
-    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; max-height: 260px; overflow-y: auto; padding-right: 4px; }
+    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; max-height: 260px; overflow-y: auto; padding-right: 6px; scrollbar-width: thin; scrollbar-color: rgba(201,177,208,0.75) transparent; }
+    .sleep-list::-webkit-scrollbar { width: 7px; }
+    .sleep-list::-webkit-scrollbar-track { background: transparent; }
+    .sleep-list::-webkit-scrollbar-thumb { background: rgba(201,177,208,0.75); border-radius: 4px; }
+    .sleep-list::-webkit-scrollbar-thumb:hover { background: rgba(201,177,208,0.95); }
     .sleep-row { display: grid; grid-template-columns: 50px 1fr auto auto; grid-template-areas: "date time dur quality" "note note note note"; gap: 4px 10px; align-items: center; background: var(--cream); border-radius: 10px; padding: 9px 12px; font-size: .82rem; }
     .sleep-row .sr-date { grid-area: date; font-weight: 700; color: var(--purple); font-size: .8rem; }
     .sleep-row .sr-time { grid-area: time; color: var(--ink); }
@@ -4786,7 +4790,7 @@
         '<polyline points="' + line + '" fill="none" stroke="#C9B1D0" stroke-width="1.5" opacity="0.6"/>' +
         dots + labels + '</svg>';
     }
-    function renderSleep() {
+    window.renderSleep = function () {
       var arr = nm('dudu_sleep', []);
       arr.sort(function (a, b) { return a.date < b.date ? -1 : 1; }); // 升序，便于取最近
       var recent = arr.slice(-14);
