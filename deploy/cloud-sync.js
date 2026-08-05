@@ -112,8 +112,13 @@
     }).catch(function () { return _githubReadStateApi(); });
   }
 
-  // 写入同步状态到 GitHub（需内嵌 Token；冲突时抛出由调用方稍后重试）
-  function _githubWriteState(content) {
+  // 写入同步状态到 GitHub（需内嵌 Token）。
+  // 关键修复：遇到 409 并发冲突时不再直接失败，而是短暂退避后自动重试同一内容
+  // （content 已包含「本地改动 + 最新云端」的合并结果），最多 5 次。
+  // 这样勾选任务 / 新增任务 / 改本月目标时不再出现「并发写入冲突」报错，
+  // 也保证改动一定写进云端，刷新或另一设备能拉到最新数据。
+  function _githubWriteState(content, attempt) {
+    attempt = attempt || 0;
     return _fetchWithTimeout(GITHUB_API, {
       method: 'GET',
       headers: { 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github+json' }
@@ -131,7 +136,13 @@
         body: JSON.stringify(body)
       }, 8000);
     }).then(function (r) {
-      if (r.status === 409) throw new Error('并发写入冲突，稍后自动重试');
+      if (r.status === 409) {
+        if (attempt < 5) {
+          return new Promise(function (res) { setTimeout(res, 500 * (attempt + 1)); })
+            .then(function () { return _githubWriteState(content, attempt + 1); });
+        }
+        throw new Error('并发写入冲突，稍后自动重试');
+      }
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json().catch(function () { return {}; });
     });
