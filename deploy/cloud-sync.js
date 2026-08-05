@@ -197,7 +197,7 @@
         // 首屏渲染不依赖云端：立即标记已初始化，云端读取在后台进行，
         // 成功与否都绝不阻塞首屏、绝不整页重渲染（避免弱网/VPN 下白屏）。
         self._initialized = true;
-        self._fetchCloud().then(function (cloudState) {
+        var _initFetch = self._fetchCloud().then(function (cloudState) {
           if (cloudState && typeof cloudState === 'object') {
             var merged = self._merge(cloudState, self._readLocal());
             self._writeLocal(merged);
@@ -209,6 +209,9 @@
         document.addEventListener('visibilitychange', function () {
           if (!document.hidden) self._refresh();
         });
+        // 等待云端合并写入 localStorage 后再让 load 序列继续，
+        // 这样主页「等云同步完成再 initializeTasksForToday」的逻辑才真正发生在写入之后。
+        return _initFetch;
       }).catch(function (error) {
         self._initialized = true;
         console.warn('Cloud sync init failed:', error);
@@ -577,10 +580,49 @@
       return clean;
     },
 
+    // 把云端合并后的 localStorage.dudu_tasks「调和」回内存 TASKS_DATA.items：
+    // 1) 按 sourceId / 文本匹配，叠加 done 态（任一侧为 true 即完成）；
+    // 2) 云端独有（其它设备新增）的任务补齐进当前列表。
+    // 这是跨设备同步「今日安排」真正生效的关键——renderTasks 只读内存 TASKS_DATA.items，
+    // 不调这一步，同步来的勾选 / 新增任务永远显示不出来。
+    _reconcileTasks: function () {
+      try {
+        if (typeof window.TASKS_DATA === 'undefined' || !Array.isArray(window.TASKS_DATA.items)) return;
+        var saved = [];
+        try { saved = JSON.parse(localStorage.getItem('dudu_tasks') || '[]'); } catch (e) {}
+        if (!Array.isArray(saved) || !saved.length) return;
+        function keyOf(t) {
+          if (!t) return null;
+          if (t.sourceId) return 'id:' + t.sourceId;
+          if (typeof taskTextKey === 'function') { var k = taskTextKey(t); if (k) return 'txt:' + k; }
+          var txt = String(t.text || '').replace(/^\d+[.、：:)）-]\s+/, '').trim().toLowerCase();
+          return txt ? ('txt:' + txt) : null;
+        }
+        var items = window.TASKS_DATA.items;
+        var seen = {};
+        items.forEach(function (t) { var k = keyOf(t); if (k) seen[k] = true; });
+        saved.forEach(function (t) {
+          var k = keyOf(t);
+          if (!k) return;
+          var existing = null;
+          for (var i = 0; i < items.length; i += 1) { if (keyOf(items[i]) === k) { existing = items[i]; break; } }
+          if (existing) {
+            existing.done = (t.done === true) || (existing.done === true);
+          } else if (!seen[k]) {
+            items.push(JSON.parse(JSON.stringify(t)));
+            seen[k] = true;
+          }
+        });
+        window.TASKS_DATA.items = items;
+      } catch (e) {}
+    },
+
     _safeRerender: function () {
       // 只重渲染依赖云端同步数据的部件；绝不整页重渲染，避免弱网/脏数据导致白屏。
-      // 不调用 initializeTasksForToday，避免用合并后数据重置今日任务。
-      try { if (typeof renderTasks === 'function') renderTasks(); } catch (error) {}
+      try {
+        this._reconcileTasks();
+        if (typeof renderTasks === 'function') renderTasks();
+      } catch (error) {}
       try { if (typeof renderInspirations === 'function') renderInspirations(); } catch (error) {}
       try { if (typeof renderSleep === 'function') renderSleep(); } catch (error) {}
       try { if (typeof window.renderMonthlyGoals === 'function') window.renderMonthlyGoals(); } catch (error) {}
