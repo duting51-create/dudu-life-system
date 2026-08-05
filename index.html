@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-1455" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-1535" as="script">
   <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-1255" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -2466,8 +2466,8 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-2230" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260805-1455" defer></script>
+  <script src="cloud-sync.js?v=sync-20260805-1535" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260805-1535" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-1255" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
@@ -3383,7 +3383,7 @@
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
           const checkHtml = isToggle
-            ? `<div class="inspire-check ${isStruck ? 'done' : ''}" onclick='toggleInspireCheck(${JSON.stringify(item.id)}, ${JSON.stringify(item.fp)})'></div>`
+            ? `<div class="inspire-check ${isStruck ? 'done' : ''}" onclick='toggleInspireCheck(${JSON.stringify(item.id)}, ${JSON.stringify(item.fp)}, ${JSON.stringify(item.type)}, ${JSON.stringify(item.text)}, ${JSON.stringify(item.date)})'></div>`
             : `<div class="inspire-check" style="visibility:hidden"></div>`;
           return `<div class="inspire-check-item ${isStruck ? 'struck' : ''}" data-id="${item.id}" data-type="${item.type}">
             ${checkHtml}
@@ -3404,7 +3404,7 @@
         }).join('') + '</div>';
     }
 
-    function toggleInspireCheck(id, fpOverride) {
+    function toggleInspireCheck(id, fpOverride, itemType, itemText, itemDate) {
       var feishuItem = findInspireItemById(id);
       // 优先用渲染时的指纹(fp)作为 done 态主键，保证与 renderInspirations 读取的键一致；
       // 否则嵌入式/本地灵感项的合成 id 与指纹不匹配，导致划掉后刷新又出现（经典 bug）。
@@ -3417,12 +3417,11 @@
       localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
       localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
       if (window.CloudSync) window.CloudSync.saveNow();
-      // 划掉 → 在飞书对应列写「删除线（划线）」，与用户习惯一致（不再用 ✅ 前缀）；
-      // 飞书划线即为跨设备一致的「已完成」真相源。
-      if (feishuItem && window.FeishuSync) {
-        window.FeishuSync.mutate({ action: nowDone ? 'done' : 'undone', id: feishuItem.id }).catch(function (e) {
-          console.warn('划线同步飞书失败（本地已保留）:', e);
-        });
+      // 划掉 → 在飞书对应列「该条内容」上写删除线（精准到行）；飞书划线即跨设备一致的「已完成」真相源。
+      // 仅用户显式划掉时才写飞书，渲染/展示绝不触发写飞书（避免重复写）。
+      if (window.FeishuSync && itemType && itemText && itemDate) {
+        window.FeishuSync.mutate({ action: nowDone ? 'done' : 'undone', type: itemType, text: itemText, date: itemDate })
+          .catch(function (e) { console.warn('划线同步飞书失败（本地已保留）:', e); });
       }
       if (id.startsWith('local_')) {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');

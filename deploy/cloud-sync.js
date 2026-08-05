@@ -601,14 +601,41 @@
     }
   };
 
-  // 飞书实时数据源（原 Worker）已下线，灵感宝箱改以内置 INSPIRATIONS_DATA + 本地 done 态（经 GitHub 跨端同步）为准。
+  // 飞书实时数据源：本地 server.py（端口 3847）拥有飞书写入能力（OpenAPI + lark-cli）。
+  // 网页上的「新增 / 划掉」通过它写回飞书对应列；server.py 未运行（如手机端）时静默降级到本地。
   var FeishuSync = {
     refresh: function (notify) {
-      // 不覆盖 window.LIVE_INSPIRATIONS_DATA，确保 renderInspirations 回退到内置数据。
       return Promise.resolve({ status: 'ok', items: [] });
     },
     mutate: function (payload) {
-      // 无飞书后端：done 态由 toggleInspireCheck 写入 dudu_inspire_done，并由 cloud-sync 跨端同步。
+      var action = payload && payload.action;
+      function post(path, body) {
+        return fetch('http://localhost:3847' + path, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }).then(function (r) {
+          return r.json().then(function (d) { return { ok: r.ok && d.status === 'ok', data: d }; });
+        });
+      }
+      if (action === 'create') {
+        // 新增任务/灵感/收获/情绪 → 写飞书对应列（今天）
+        return post('/api/write-inspiration', { type: payload.type, text: payload.text })
+          .then(function (res) {
+            if (!res.ok) throw new Error((res.data && res.data.message) || '写入飞书失败');
+            return { status: 'ok' };
+          });
+      }
+      if (action === 'done' || action === 'undone') {
+        // 划掉 / 取消划掉 → 飞书对应列指定行加 / 去删除线（精准到行）
+        return post('/api/strike-inspiration', {
+          type: payload.type, text: payload.text, date: payload.date, struck: action === 'done'
+        }).then(function (res) {
+          if (!res.ok) throw new Error((res.data && res.data.message) || '写回飞书失败');
+          return { status: 'ok' };
+        });
+      }
+      // delete / update / reclassify：暂不写飞书（保持本地），避免误改飞书单元格
       return Promise.resolve({ status: 'ok' });
     }
   };

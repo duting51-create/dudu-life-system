@@ -385,6 +385,331 @@ def _read_strike_map():
     return strike
 
 
+# ═══════════════════════════════════════════════════════
+# 飞书写回：把网页上的「划掉 / 新增」写回飞书表格对应列
+# 单元格可能含多行（多个任务），按行文本精准匹配，只改目标行。
+# ═══════════════════════════════════════════════════════
+
+SHEET_URL = 'https://my.feishu.cn/sheets/TnOCsqGGVhgjRyt5Jj3cV9FFnhg'
+SHEET_ID = 'e7d0c4'
+
+# 类型 → 飞书列
+TYPE_TO_COL = {
+    'task': 'E',        # 临时任务
+    'inspiration': 'D', # 备忘提醒（灵感）
+    'harvest': 'F',     # 今日收获
+    'mood': 'G',        # 情绪波动
+}
+
+
+def _normalize_line(text):
+    """去掉行首编号（1. 1、 1） ❶ 等）并去首尾空白，用于跨源匹配。"""
+    if not text:
+        return ''
+    line = str(text).strip()
+    line = re.sub(r'^\d+[.、）)\-\s]+', '', line)
+    line = re.sub(r'^[❶❷❸❹❺❻❼❽❾❿]+\s*', '', line)
+    return line.strip()
+
+
+def _cells_set(range_str, cells_obj):
+    """用 lark-cli 写单元格（支持 rich_text）。cells_obj 是 2D 数组。"""
+    tmp = os.path.join(WORKSPACE, '_feishu_write_tmp.json')
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(cells_obj, f, ensure_ascii=False)
+    try:
+        stdout, stderr = run_lark([
+            'lark-cli', 'sheets', '+cells-set',
+            '--url', SHEET_URL,
+            '--sheet-id', SHEET_ID,
+            '--range', range_str,
+            '--cells', '@_feishu_write_tmp.json',
+            '--format', 'json'
+        ])
+    finally:
+        try:
+            os.unlink(tmp)
+        except Exception:
+            pass
+    return stdout, stderr
+
+
+def _find_row_by_date(date_str):
+    """根据日期文本（如 '8月3日'）找到飞书表格中的真实行号（1-based），找不到返回 None。"""
+    if not date_str:
+        return None
+    stdout, _ = run_lark([
+        'lark-cli', 'sheets', '+cells-get',
+        '--url', SHEET_URL,
+        '--sheet-id', SHEET_ID,
+        '--range', 'A1:A125',
+        '--format', 'json'
+    ])
+    if not stdout:
+        return None
+    data = json.loads(stdout)
+    target = _normalize_line(date_str)
+    for rng in data.get('data', {}).get('ranges', []):
+        row_indices = rng.get('row_indices', [])
+        cells = rng.get('cells', [])
+        for ri, cell in enumerate(cells):
+            if ri >= len(row_indices):
+                continue
+            cell_obj = cell[0] if (cell and len(cell) > 0) else {}
+            raw = (cell_obj or {}).get('value') or ''
+            if _normalize_line(raw) == target:
+                return row_indices[ri]
+    return None
+
+
+def _parse_cell_strike(cell_obj):
+    """从单元格对象解析 (lines, struck_normalized_set)。
+    兼容整格 font_line 与富文本逐段 font_line 两种情况。"""
+    lines = []
+    struck = set()
+    if not cell_obj:
+        return lines, struck
+    # 整格删除线 → 所有行划掉
+    cell_styles = cell_obj.get('cell_styles', {}) or {}
+    whole_struck = cell_styles.get('font_line') == 'line-through'
+    rich = cell_obj.get('rich_text')
+    if rich:
+        for run in rich:
+            t = run.get('text', '') or ''
+            style = run.get('style', {}) or {}
+            run_struck = style.get('font_line') == 'line-through'
+            for ln in t.split('\n'):
+                if ln == '':
+                    continue
+                lines.append(ln)
+                if run_struck:
+                    struck.add(_normalize_line(ln))
+    else:
+        value = cell_obj.get('value') or ''
+        for ln in value.split('\n'):
+            if ln == '':
+                continue
+            lines.append(ln)
+            if whole_struck:
+                struck.add(_normalize_line(ln))
+    return lines, struck
+
+
+def _read_cell_lines_strike(col, row_no):
+    """读取某单元格：返回 (lines, struck_normalized_set)。"""
+    stdout, _ = run_lark([
+        'lark-cli', 'sheets', '+cells-get',
+        '--url', SHEET_URL,
+        '--sheet-id', SHEET_ID,
+        '--range', f'{col}{row_no}:{col}{row_no}',
+        '--include', 'style',
+        '--format', 'json'
+    ])
+    if not stdout:
+        return [], set()
+    data = json.loads(stdout)
+    cell = None
+    for rng in data.get('data', {}).get('ranges', []):
+        cs = rng.get('cells', [])
+        if cs and len(cs) > 0:
+            cell = cs[0][0] if (cs[0] and len(cs[0]) > 0) else None
+            break
+    return _parse_cell_strike(cell)
+
+
+def _read_strike_lines_map():
+    """批量读取 D/E/G 三列删除线，返回 {row_no: {col: set_of_struck_normalized_texts}}。
+    支持逐行（富文本）删除线，避免 cell-level 漏读。"""
+    strike = {}
+    for col in ['D', 'E', 'G']:
+        try:
+            stdout, _ = run_lark([
+                'lark-cli', 'sheets', '+cells-get',
+                '--url', SHEET_URL,
+                '--sheet-id', SHEET_ID,
+                '--range', f'{col}1:{col}125',
+                '--include', 'style',
+                '--format', 'json'
+            ])
+            if not stdout:
+                continue
+            data = json.loads(stdout)
+            for rng in data.get('data', {}).get('ranges', []):
+                row_indices = rng.get('row_indices', [])
+                cells = rng.get('cells', [])
+                for ri, cell in enumerate(cells):
+                    if ri >= len(row_indices):
+                        continue
+                    row_no = row_indices[ri]
+                    cell_obj = cell[0] if (cell and len(cell) > 0) else {}
+                    _, struck = _parse_cell_strike(cell_obj)
+                    if struck:
+                        strike.setdefault(row_no, {})[col] = struck
+        except Exception as e:
+            print(f"  ⚠️ 读取 {col} 列删除线失败: {e}")
+    return strike
+
+
+def _build_rich_text(lines, struck_set):
+    """把行列表 + 划掉集合重建为 rich_text（每段一行，目标行加 font_line）。"""
+    runs = []
+    for idx, line in enumerate(lines):
+        text = line if idx == 0 else ('\n' + line)
+        run = {'type': 'text', 'text': text}
+        if _normalize_line(line) in struck_set:
+            run['style'] = {'font_line': 'line-through'}
+        runs.append(run)
+    return runs
+
+
+def write_strike_to_feishu(date_str, col, line_text, struck):
+    """在飞书单元格的某一行上设置/取消删除线（精准到行）。返回是否成功。"""
+    row_no = _find_row_by_date(date_str)
+    if not row_no:
+        return False, f'未找到日期行: {date_str}'
+    lines, struck_set = _read_cell_lines_strike(col, row_no)
+    norm_target = _normalize_line(line_text)
+    if not any(_normalize_line(ln) == norm_target for ln in lines):
+        return False, f'该行未找到匹配内容: {line_text}'
+    # 更新目标行的划掉状态
+    new_struck = set()
+    for ln in lines:
+        is_target = _normalize_line(ln) == norm_target
+        if is_target:
+            if struck:
+                new_struck.add(_normalize_line(ln))
+        else:
+            if ln in struck_set:  # 注意：struck_set 已归一化，这里用归一化比对
+                new_struck.add(_normalize_line(ln))
+    # 重新用归一化集合判定（兼容上面 struck_set 已归一化）
+    target_norm = norm_target
+    final_struck = set()
+    for ln in lines:
+        n = _normalize_line(ln)
+        if n == target_norm:
+            if struck:
+                final_struck.add(n)
+        elif n in struck_set:
+            final_struck.add(n)
+    rich = _build_rich_text(lines, final_struck)
+    _, stderr = _cells_set(f'{col}{row_no}:{col}{row_no}', [[{'rich_text': rich}]])
+    return True, ''
+
+
+def append_to_feishu_cell(date_str, col, text):
+    """把一行新内容追加到飞书单元格末尾（若已存在则跳过）。返回是否成功。"""
+    row_no = _find_row_by_date(date_str)
+    if not row_no:
+        return False, f'未找到日期行: {date_str}'
+    lines, struck_set = _read_cell_lines_strike(col, row_no)
+    norm_new = _normalize_line(text)
+    if any(_normalize_line(ln) == norm_new for ln in lines):
+        return True, '已存在，跳过'
+    # 保留原划掉状态，追加新行
+    new_lines = list(lines)
+    new_lines.append(text)
+    # 旧行的划掉状态用 struck_set，新行不划
+    final_struck = set(struck_set)
+    rich = _build_rich_text(new_lines, final_struck)
+    _, stderr = _cells_set(f'{col}{row_no}:{col}{row_no}', [[{'rich_text': rich}]])
+    return True, ''
+
+
+def sync_cloud_strikes_to_feishu():
+    """批量把 GitHub 云端保存的「划掉」状态写回飞书（跨设备：手机划掉→飞书）。
+    幂等：飞书已划掉的行不会重复写。"""
+    token = os.environ.get('DUDU_SYNC_GITHUB_TOKEN')
+    if not token:
+        print('  ⚠️ 未配置 DUDU_SYNC_GITHUB_TOKEN，跳过云端划掉写回飞书')
+        return
+    import base64
+    import urllib.request
+    import urllib.error
+    api = 'https://api.github.com/repos/duting51-create/dudu-life-system/contents/sync_state.json?ref=sync'
+    req = urllib.request.Request(api, headers={'Authorization': f'Bearer {token}', 'Accept': 'application/vnd.github+json'})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            d = json.loads(r.read().decode())
+    except Exception as e:
+        print(f'  ⚠️ 读取云端状态失败: {e}')
+        return
+    content = d.get('content')
+    if not content:
+        return
+    try:
+        state = json.loads(base64.b64decode(content).decode())
+    except Exception:
+        return
+    done = state.get('dudu_inspire_done', {})
+    written = 0
+    for key, val in done.items():
+        if not val:
+            continue
+        if ':' not in key:
+            continue
+        dtype, text = key.split(':', 1)
+        col = TYPE_TO_COL.get(dtype)
+        if not col:
+            continue
+        # 找该行文本所在的日期行：遍历该列所有行，匹配文本
+        row_no = _find_cell_with_text(col, text)
+        if not row_no:
+            continue
+        try:
+            ok, msg = write_strike_to_feishu_by_row(row_no, col, text, True)
+            if ok:
+                written += 1
+        except Exception as e:
+            print(f'  ⚠️ 写回失败 {key}: {e}')
+    print(f'  ✅ 云端划掉写回飞书: {written} 条')
+
+
+def _find_cell_with_text(col, text):
+    """在该列所有行里找包含该归一化文本的行号（用于跨设备写回，无需日期）。"""
+    norm = _normalize_line(text)
+    stdout, _ = run_lark([
+        'lark-cli', 'sheets', '+cells-get',
+        '--url', SHEET_URL,
+        '--sheet-id', SHEET_ID,
+        '--range', f'{col}1:{col}125',
+        '--include', 'style',
+        '--format', 'json'
+    ])
+    if not stdout:
+        return None
+    data = json.loads(stdout)
+    for rng in data.get('data', {}).get('ranges', []):
+        row_indices = rng.get('row_indices', [])
+        cells = rng.get('cells', [])
+        for ri, cell in enumerate(cells):
+            if ri >= len(row_indices):
+                continue
+            cell_obj = cell[0] if (cell and len(cell) > 0) else {}
+            raw = (cell_obj or {}).get('value') or ''
+            for ln in raw.split('\n'):
+                if _normalize_line(ln) == norm:
+                    return row_indices[ri]
+    return None
+
+
+def write_strike_to_feishu_by_row(row_no, col, line_text, struck):
+    lines, struck_set = _read_cell_lines_strike(col, row_no)
+    norm_target = _normalize_line(line_text)
+    if not any(_normalize_line(ln) == norm_target for ln in lines):
+        return False, f'未找到匹配: {line_text}'
+    final_struck = set()
+    for ln in lines:
+        n = _normalize_line(ln)
+        if n == norm_target:
+            if struck:
+                final_struck.add(n)
+        elif n in struck_set:
+            final_struck.add(n)
+    rich = _build_rich_text(lines, final_struck)
+    _cells_set(f'{col}{row_no}:{col}{row_no}', [[{'rich_text': rich}]])
+    return True, ''
+
+
 def fetch_inspirations():
     """获取灵感宝箱数据（灵感 + 今日收获 + 临时任务 + 情绪波动）"""
     print("💡 Fetching inspirations...")
@@ -407,8 +732,8 @@ def fetch_inspirations():
             today = datetime.now()
             today_str = f"{today.month}月{today.day}日"
 
-            # 飞书删除线（真相源）：D=灵感/备忘，E=临时任务，G=情绪波动
-            strike = _read_strike_map()
+            # 飞书删除线（真相源，逐行）：D=灵感/备忘，E=临时任务，G=情绪波动
+            strike = _read_strike_lines_map()
 
             for row in rows[1:]:
                 if not row or not row[0]:
@@ -433,17 +758,17 @@ def fetch_inspirations():
                     for index, text in enumerate(inspiration_lines)
                 )
 
-                # 生成 done_map（飞书删除线 = 已完成）
-                # 注意：D列灵感必须用「cleaned inspiration」文本生成指纹，
-                # 否则 raw memo(含💡/未重新编号) 与前端 inspireFp 对不上。
+                # 生成 done_map（飞书删除线 = 已完成）。
+                # 逐行匹配：只把「被删除线划掉的那一行」标为已完成，其余行保持未完成。
                 if row_no and row_no in strike:
-                    col_struck = strike[row_no]
                     for col, dtype in [('D', 'inspiration'), ('E', 'task'), ('G', 'mood')]:
-                        if not col_struck.get(col):
+                        struck_set = strike[row_no].get(col)
+                        if not struck_set:
                             continue
                         cell_text = {'D': inspiration, 'E': task, 'G': mood}[col]
                         for line in _split_inspiration_lines(cell_text):
-                            inspirations['done_map'][f"{dtype}:{line}"] = True
+                            if _normalize_line(line) in struck_set:
+                                inspirations['done_map'][f"{dtype}:{line}"] = True
 
                 if inspiration or harvest or task or mood:
                     inspirations['items'].append({
@@ -2011,5 +2336,48 @@ def main():
     print(f"  ✅ 同步完成 {datetime.now().strftime('%H:%M')}")
     print(f"{'='*50}\n")
 
+    # 10b. 把云端（手机/网页）划掉状态批量写回飞书（跨设备），幂等
+    try:
+        sync_cloud_strikes_to_feishu()
+    except Exception as e:
+        print(f"  ⚠️ 云端划掉写回飞书失败（不影响主同步）: {e}")
+
+
+def _cli_strike_or_append():
+    import argparse
+    p = argparse.ArgumentParser()
+    sub = p.add_subparsers(dest='cmd')
+    sp = sub.add_parser('strike')
+    sp.add_argument('--date', required=True)
+    sp.add_argument('--type', required=True)
+    sp.add_argument('--text', required=True)
+    sp.add_argument('--unstrike', action='store_true', help='取消删除线')
+    ap = sub.add_parser('append')
+    ap.add_argument('--date', required=True)
+    ap.add_argument('--type', required=True)
+    ap.add_argument('--text', required=True)
+    args = p.parse_args()
+    if args.cmd == 'strike':
+        col = TYPE_TO_COL.get(args.type)
+        if not col:
+            print(json.dumps({'ok': False, 'error': f'未知类型: {args.type}'}, ensure_ascii=False))
+            return
+        ok, msg = write_strike_to_feishu(args.date, col, args.text, not args.unstrike)
+        print(json.dumps({'ok': ok, 'msg': msg}, ensure_ascii=False))
+    elif args.cmd == 'append':
+        col = TYPE_TO_COL.get(args.type)
+        if not col:
+            print(json.dumps({'ok': False, 'error': f'未知类型: {args.type}'}, ensure_ascii=False))
+            return
+        ok, msg = append_to_feishu_cell(args.date, col, args.text)
+        print(json.dumps({'ok': ok, 'msg': msg}, ensure_ascii=False))
+    else:
+        p.print_help()
+
+
 if __name__ == '__main__':
-    main()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] in ('strike', 'append'):
+        _cli_strike_or_append()
+    else:
+        main()
