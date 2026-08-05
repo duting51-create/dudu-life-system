@@ -480,14 +480,15 @@ def fetch_finance():
             finance['year_expense'] = f'¥{int(total_expense):,}'
 
             # 年收入目标（杜婷婷收入 2026 全年求和）& 本年累计收入（截至当前月）
+            # 列映射：index 5 = 赵晗收入, index 6 = 杜婷婷收入（见 +field-list）
             # 用于「人生五维进度」中「收入」维度：目标=年收入，实际=本年累计
-            income_annual = round(total_income, 2)
+            income_annual = round(sum(to_num(r[6]) for r in year_records if len(r) > 6), 2)
             income_ytd = 0.0
             for r in year_records:
-                if len(r) > 5:
+                if len(r) > 6:
                     ym = _parse_month(r[0])
                     if ym and ym[1] <= now.month:
-                        income_ytd += to_num(r[5])
+                        income_ytd += to_num(r[6])
             finance['income_annual'] = income_annual
             finance['income_ytd'] = round(income_ytd, 2)
             print(f"  ✅ 收入维度: 年收入目标 {income_annual:,.2f}, 本年累计 {income_ytd:,.2f}")

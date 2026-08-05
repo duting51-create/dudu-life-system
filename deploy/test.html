@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>测试</title>
+<style>
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: sans-serif;
+  background: #fff;
+}
+.box {
+  background: #f0f0f0;
+  padding: 20px;
+  margin: 10px 0;
+  border: 2px solid #333;
+}
+h1 {
+  color: #333;
+  font-size: 24px;
+}
+p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>✅ 页面加载成功</h1>
+  <p>如果你能看到这段文字，说明基础 HTML/CSS 工作正常。</p>
+</div>
+
+<div class="box">
+  <h1>设备信息</h1>
+  <p id="info">加载中...</p>
+</div>
+
+<div class="box">
+  <h1>JavaScript 测试</h1>
+  <p id="js">测试中...</p>
+</div>
+
+<script>
+try {
+  document.getElementById('info').innerHTML =
+    '屏幕: ' + window.innerWidth + 'x' + window.innerHeight + '<br>' +
+    'UA: ' + navigator.userAgent.substring(0, 100);
+
+  document.getElementById('js').innerHTML = '✅ JavaScript 工作正常<br>时间: ' + new Date().toLocaleString();
+} catch(e) {
+  document.getElementById('js').innerHTML = '❌ 错误: ' + e.message;
+}
+</script>
+</body>
+</html>
