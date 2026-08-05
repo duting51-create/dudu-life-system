@@ -2,6 +2,13 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <script>
+  (function(){
+    try{var ls=window.localStorage;if(!ls)return;var g=ls.getItem.bind(ls),s=ls.setItem.bind(ls),r=ls.removeItem.bind(ls),c=ls.clear.bind(ls),k=ls.key.bind(ls);ls.getItem=function(x){try{return g(x);}catch(e){return null;}};ls.setItem=function(x,v){try{s(x,v);}catch(e){console.warn('LS set blocked',e);}};ls.removeItem=function(x){try{r(x);}catch(e){}};ls.clear=function(){try{c();}catch(e){}};ls.key=function(i){try{return k(i);}catch(e){return null;}};}catch(e){}
+    window.addEventListener('error',function(e){try{var msg=(e&&(e.message||(e.error&&e.error.message)))||String(e);var where=(e&&e.filename||'')+':'+(e&&e.lineno||'');var bar=document.getElementById('dudu-fatal-bar');if(!bar){bar=document.createElement('div');bar.id='dudu-fatal-bar';bar.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:2147483647;background:#c0392b;color:#fff;font:13px/1.5 -apple-system,system-ui,sans-serif;padding:12px;white-space:pre-wrap;max-height:45%;overflow:auto;';var p=document.body||document.documentElement;if(p)p.appendChild(bar);else window.addEventListener('DOMContentLoaded',function(){document.body.appendChild(bar);});}bar.textContent='⚠️ 加载出错（页面仍会尽量显示）：'+msg+' @ '+where;}catch(_){}});
+  })();
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="杜杜的小巴士">
