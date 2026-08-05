@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-1255" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-1455" as="script">
   <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-1255" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -2467,7 +2467,7 @@
   </section>
 
   <script src="cloud-sync.js?v=sync-20260805-2230" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260805-1255" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260805-1455" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-1255" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
@@ -3338,6 +3338,19 @@
 
       // Load done state
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
+
+      // 飞书删除线 = 已完成真相源：把后台同步下来的 done_map 合并进本地（不覆盖用户当天显式操作）
+      const feishuDone = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.inspirations_done) || {};
+      let _feishuMerged = false;
+      Object.keys(feishuDone).forEach(function (k) {
+        if (feishuDone[k] === true && doneMap[k] === undefined) { doneMap[k] = true; _feishuMerged = true; }
+      });
+      if (_feishuMerged) {
+        try {
+          localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
+          if (window.CloudSync) window.CloudSync.saveNow();
+        } catch (e) {}
+      }
 
       // 任务/灵感：当天无论是否划掉都展示（划掉显示删除线），非当天仅未划掉的继续展示；收获/情绪仍按当天展示。
       items = items.filter(function (item) {
@@ -5127,10 +5140,41 @@
 
     /* ---------- 生活管理：观影 / 旅行 / 重要日子 ---------- */
     var doubanTab = 'wish';
+
+    // 修复 UTF-8 被当 Latin-1 解码产生的乱码（Mojibake）：如 "Ã¥Â­Â©" → "孩"
+    function fixMojibake(str) {
+      if (!str || typeof str !== 'string') return str;
+      var prev, cur = str;
+      for (var i = 0; i < 5; i++) {
+        prev = cur;
+        try { cur = decodeURIComponent(escape(cur)); } catch (e) { break; }
+        if (cur === prev) break;
+        // 已无可疑 Latin-1 扩展字符时停止，避免误伤正常文本
+        if (!/[Ã¥Ã§Ã©Ã¨ÃªÃ¯Ã±Ã¼Ã¢Ã£Ã¤Ã¶ÃµÃ¸Å¾Å¸Ã¿Â]/.test(cur)) break;
+      }
+      return cur;
+    }
+    function normalizeMovieTitle(t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); }
+
+    // 读取并修复/去重用户手动添加的影片（兼容历史乱码）
     function getUserMovies() {
+      function cleanList(list) {
+        var seen = {};
+        var out = [];
+        (list || []).forEach(function (m) {
+          if (!m || typeof m.title !== 'string') return;
+          var fixed = fixMojibake(m.title).trim();
+          if (!fixed) return;
+          var key = normalizeMovieTitle(fixed);
+          if (seen[key]) return;
+          seen[key] = true;
+          out.push({ title: fixed, link: m.link || '', year: m.year || '', rating: m.rating || '' });
+        });
+        return out;
+      }
       return {
-        wish: nm('dudu_movies_wish', []),
-        collect: nm('dudu_movies_collect', [])
+        wish: cleanList(nm('dudu_movies_wish', [])),
+        collect: cleanList(nm('dudu_movies_collect', []))
       };
     }
     function saveUserMovies(user) {
@@ -5157,7 +5201,6 @@
       if (!userFirst) orderedUserList.forEach(function (m) { push(m, 'user'); });
       return out;
     }
-    function normalizeMovieTitle(t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); }
     function renderDouban() {
       var dd = window.DOUBAN_DATA; var box = $('movieList'); if (!box) return;
       var user = getUserMovies();

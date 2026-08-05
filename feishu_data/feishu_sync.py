@@ -322,6 +322,69 @@ def fetch_today_tasks_and_memos():
     return tasks, memos
 
 
+def _split_inspiration_lines(text):
+    """把带编号的文本拆成多行（1. / 1、等），无编号则整体返回。与前端 splitNumberedText 行为一致。"""
+    if not text:
+        return []
+    lines = text.split('\n')
+    items = []
+    current = ''
+    has_numbered = False
+    for raw in lines:
+        line = raw.strip()
+        if not line:
+            continue
+        is_numbered = bool(re.match(r'^\d+[.、）)\-\s]', line)) or re.match(r'^[❶❷❸❹❺❻❼❽❾❿]', line)
+        if is_numbered:
+            if current:
+                items.append(current.strip())
+            current = re.sub(r'^\d+[.、）)\-\s]+', '', line)
+            current = re.sub(r'^[❶❷❸❹❺❻❼❽❾❿]+\s*', '', current).strip()
+            has_numbered = True
+        else:
+            current += (current and ' ') + line
+    if current:
+        items.append(current.strip())
+    return items if (has_numbered and len(items) > 1) else [text]
+
+
+def _read_strike_map():
+    """读取飞书 Sheet 的 D/E/G 列删除线状态（单元格级）。
+    返回 {row_no: {'D': bool, 'E': bool, 'G': bool}}，用于判定灵感/任务/情绪是否「已完成」。
+    D列=备忘/灵感，E列=临时任务，G列=情绪波动。删除线即「已完成」真相源。
+    """
+    strike = {}
+    sheet_url = 'https://my.feishu.cn/sheets/TnOCsqGGVhgjRyt5Jj3cV9FFnhg'
+    sheet_id = 'e7d0c4'
+    for col in ['D', 'E', 'G']:
+        try:
+            stdout, _ = run_lark([
+                'lark-cli', 'sheets', '+cells-get',
+                '--url', sheet_url,
+                '--sheet-id', sheet_id,
+                '--range', f'{col}1:{col}125',
+                '--include', 'style',
+                '--format', 'json'
+            ])
+            if not stdout:
+                continue
+            data = json.loads(stdout)
+            for rng in data.get('data', {}).get('ranges', []):
+                row_indices = rng.get('row_indices', [])
+                cells = rng.get('cells', [])
+                for ri, cell in enumerate(cells):
+                    if ri >= len(row_indices):
+                        continue
+                    row_no = row_indices[ri]
+                    cell_obj = cell[0] if (cell and len(cell) > 0) else {}
+                    styles = (cell_obj or {}).get('cell_styles', {}) or {}
+                    is_struck = styles.get('font_line') == 'line-through'
+                    strike.setdefault(row_no, {})[col] = is_struck
+        except Exception as e:
+            print(f"  ⚠️ 读取 {col} 列删除线失败: {e}")
+    return strike
+
+
 def fetch_inspirations():
     """获取灵感宝箱数据（灵感 + 今日收获 + 临时任务 + 情绪波动）"""
     print("💡 Fetching inspirations...")
@@ -333,7 +396,7 @@ def fetch_inspirations():
         '--range', 'A1:G125'
     ])
 
-    inspirations = {'items': [], 'last_updated': '', 'today_updated': False}
+    inspirations = {'items': [], 'last_updated': '', 'today_updated': False, 'done_map': {}}
 
     if stdout:
         try:
@@ -344,14 +407,22 @@ def fetch_inspirations():
             today = datetime.now()
             today_str = f"{today.month}月{today.day}日"
 
+            # 飞书删除线（真相源）：D=灵感/备忘，E=临时任务，G=情绪波动
+            strike = _read_strike_map()
+
             for row in rows[1:]:
                 if not row or not row[0]:
                     continue
+                m = re.search(r'\[row=(\d+)\]', row[0])
+                row_no = int(m.group(1)) if m else None
                 memo = row[3].strip() if len(row) > 3 else ''     # D列 = 备忘提醒
                 task = row[4].strip() if len(row) > 4 else ''     # E列 = 临时任务
                 harvest = row[5].strip() if len(row) > 5 else ''  # F列 = 今日收获
                 mood = row[6].strip() if len(row) > 6 else ''     # G列 = 情绪波动
                 date_str = clean_date(row[0])
+
+                # 先构建 cleaned inspiration 字段（与前端 splitNumberedText 输入一致），
+                # 用于保证 done_map 的指纹与前端 inspireFp 完全对齐。
                 inspiration_lines = []
                 for line in memo.splitlines():
                     cleaned = re.sub(r'^\s*\d+[.、）)\-\s]+', '', line).strip()
@@ -361,6 +432,18 @@ def fetch_inspirations():
                     f'{index + 1}.{text}'
                     for index, text in enumerate(inspiration_lines)
                 )
+
+                # 生成 done_map（飞书删除线 = 已完成）
+                # 注意：D列灵感必须用「cleaned inspiration」文本生成指纹，
+                # 否则 raw memo(含💡/未重新编号) 与前端 inspireFp 对不上。
+                if row_no and row_no in strike:
+                    col_struck = strike[row_no]
+                    for col, dtype in [('D', 'inspiration'), ('E', 'task'), ('G', 'mood')]:
+                        if not col_struck.get(col):
+                            continue
+                        cell_text = {'D': inspiration, 'E': task, 'G': mood}[col]
+                        for line in _split_inspiration_lines(cell_text):
+                            inspirations['done_map'][f"{dtype}:{line}"] = True
 
                 if inspiration or harvest or task or mood:
                     inspirations['items'].append({
@@ -377,7 +460,7 @@ def fetch_inspirations():
             if inspirations['items']:
                 inspirations['last_updated'] = inspirations['items'][0]['date']
 
-            print(f"  ✅ Inspirations: {len(inspirations['items'])} 条，今日有更新: {inspirations['today_updated']}")
+            print(f"  ✅ Inspirations: {len(inspirations['items'])} 条，今日有更新: {inspirations['today_updated']}，删除线标记: {len(inspirations['done_map'])}")
 
             # 如果今日有更新，发送飞书提醒（通过日志标记，由 cron 触发通知）
             if inspirations['today_updated']:
@@ -1796,6 +1879,13 @@ def generate_dashboard():
     # ── 合并热点资讯：统一使用 camelCase key ──
     hot_topics = all_sources.get('hot_topics', {})
     all_sources['hotTopics'] = hot_topics
+
+    # ── 飞书删除线 = 灵感宝箱「已完成」真相源：把 done_map 暴露给前端 ──
+    _insp = all_sources.get('inspirations')
+    if isinstance(_insp, dict) and _insp.get('done_map'):
+        all_sources['inspirations_done'] = dict(_insp['done_map'])
+        _insp.pop('done_map', None)
+        print(f"  ✅ 灵感删除线真相源: {len(all_sources['inspirations_done'])} 条已完成标记")
 
     # 深度合并（保留旧数据，失败的数据源不影响）
     dashboard_path = os.path.join(WORKSPACE, 'dashboard_data.js')
