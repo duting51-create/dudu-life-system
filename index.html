@@ -1752,7 +1752,7 @@
   <div class="nav-overlay" id="navOverlay"></div>
 
   <!-- ====== S0: HERO ====== -->
-  <section class="full-section section-cream" id="hero-section" data-section="s0">
+  <section class="full-section section-cream active-view" id="hero-section" data-section="s0">
     <div class="hero-grid">
       <div class="hero-left">
         <p class="hero-label reveal">🚐 欢迎登上小巴士～</p>
@@ -1808,7 +1808,7 @@
   </section>
 
   <!-- ====== S0B: 首页 DASHBOARD ====== -->
-  <section class="full-section section-cream" id="dashboard" data-section="dashboard">
+  <section class="full-section section-cream active-view" id="dashboard" data-section="dashboard">
     <div class="section-inner">
       <div class="section-header reveal">
         <span class="section-number">🏠 00</span>
@@ -5355,12 +5355,14 @@
       function apply() {
         if (isMobile()) {
           document.body.classList.add('mobile-view');
-          restoreMobileMenuPosition();
+          // 先确保至少有一个视图可见（关键：绝不能让所有 section 处于 display:none）
           if (!document.querySelector('.full-section.active-view')) {
             var savedView = 'hero-section';
             try { savedView = sessionStorage.getItem('dudu_mobile_view') || savedView; } catch (e) {}
             setActiveView(GROUPS[savedView] ? savedView : 'hero-section');
           }
+          // 菜单定位等装饰性操作，抛错也不能影响内容显示
+          try { restoreMobileMenuPosition(); } catch (e) {}
         } else { document.body.classList.remove('mobile-view'); document.querySelectorAll('.full-section').forEach(function (s) { s.classList.remove('active-view'); }); }
       }
       initDraggableMobileMenu();
