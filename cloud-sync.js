@@ -57,11 +57,19 @@
     catch (e) { return btoa(str); }
   }
 
-  // 从 GitHub 读取同步状态（公开仓库 sync 分支，跨域可用）
+  // 从 GitHub 读取同步状态（带鉴权的 API 读取，实时无 CDN 缓存；raw 分支读取会被 CDN 缓存导致读到旧数据）
   function _githubReadState() {
-    return fetch(GITHUB_RAW, { cache: 'no-store' }).then(function (r) {
+    return fetch(GITHUB_API, {
+      headers: { 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github+json' }
+    }).then(function (r) {
+      if (r.status === 404) return {};
       if (!r.ok) return {};
-      return r.json().catch(function () { return {}; });
+      return r.json().then(function (d) {
+        var c = d && d.content;
+        if (!c) return {};
+        try { return JSON.parse(atob(c.replace(/\s/g, ''))); }
+        catch (e) { return {}; }
+      });
     }).catch(function () { return {}; });
   }
 
@@ -71,7 +79,7 @@
       headers: { 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github+json' }
     }).then(function (r) { return r.json(); }).then(function (meta) {
       var sha = meta && meta.sha;
-      var body = { message: 'sync update ' + new Date().toISOString(), content: b64encodeUnicode(content) };
+      var body = { message: 'sync update ' + new Date().toISOString(), content: b64encodeUnicode(content), branch: 'sync' };
       if (sha) body.sha = sha;
       return fetch(GITHUB_API, {
         method: 'PUT',
