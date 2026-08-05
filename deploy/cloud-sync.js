@@ -410,19 +410,40 @@
         if (key === 'dudu_tasks') {
           var cloudDate = cloud.dudu_last_tasks_date || '';
           var localDate = local.dudu_last_tasks_date || '';
+          var cloudTaskTime = Number(cloud.dudu_tasks_updated_at || 0);
+          var localTaskTime = Number(local.dudu_tasks_updated_at || 0);
+          var pickLocal;
           if (cloudDate === localDate && cloudDate) {
-            var cloudTaskTime = Number(cloud.dudu_tasks_updated_at || 0);
-            var localTaskTime = Number(local.dudu_tasks_updated_at || 0);
-            if (localTaskTime > cloudTaskTime) {
-              merged[key] = localValue;
-            } else if (cloudTaskTime > localTaskTime) {
-              merged[key] = cloudValue;
-            } else {
-              merged[key] = localValue !== undefined ? localValue : cloudValue;
-            }
+            pickLocal = localTaskTime >= cloudTaskTime;
           } else {
-            merged[key] = localDate >= cloudDate ? (localValue || cloudValue) : (cloudValue || localValue);
+            pickLocal = (localDate || '') >= (cloudDate || '');
           }
+          var baseTasks = Array.isArray(pickLocal ? localValue : cloudValue) ? (pickLocal ? localValue : cloudValue).slice() : [];
+          var otherTasks = Array.isArray(pickLocal ? cloudValue : localValue) ? (pickLocal ? cloudValue : localValue) : [];
+          var taskDoneMap = {};
+          function taskDoneKey(t) {
+            if (!t) return '';
+            if (t.sourceId) return 'id:' + t.sourceId;
+            var text = String(t.text || '')
+              .replace(/^[✅❌]\s*/, '')
+              .replace(/^\d+[.、：:)）)\-\s]+/, '')
+              .trim()
+              .toLowerCase();
+            return 'txt:' + text;
+          }
+          function collectDone(tasks) {
+            (Array.isArray(tasks) ? tasks : []).forEach(function (task) {
+              var k = taskDoneKey(task);
+              if (k && task.done === true) taskDoneMap[k] = true;
+            });
+          }
+          collectDone(baseTasks);
+          collectDone(otherTasks);
+          baseTasks.forEach(function (task) {
+            var k = taskDoneKey(task);
+            if (k && taskDoneMap[k]) task.done = true;
+          });
+          merged[key] = baseTasks;
           return;
         }
 
@@ -581,9 +602,8 @@
       try {
         // 重新初始化今日任务：从云同步后的 dudu_tasks 恢复 done 状态并合并飞书当前任务
         if (window.TASKS_DATA && typeof initializeTasksForToday === 'function') {
-          var tasks = localStorage.getItem('dudu_tasks');
-          var parsed = tasks ? JSON.parse(tasks) : [];
-          initializeTasksForToday(parsed);
+          var feedTasks = (window.getTodayFeedTasks && window.getTodayFeedTasks()) || [];
+          initializeTasksForToday(feedTasks);
         }
       } catch (error) {}
       try { if (typeof renderTasks === 'function') renderTasks(); } catch (error) {}

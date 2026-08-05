@@ -194,30 +194,33 @@
           self._initialized = true;
           return;
         }
-        // 【防白屏核心改动】首屏完全由本地数据渲染（index.html 的 load 回调已用本地数据
-        // 完成 loadData / initializeTasksForToday）。云同步在此阶段【绝不】用云端数据覆盖本地
-        // 存储、也【绝不】整页重渲染；因此无论 VPN / 网络是否连通，手机端都不会因云同步读取
-        // 成功或失败而白屏。多端「已完成态」的拉取改由后台 _refresh（每 10s / 切前台时）以
-        // 「只合并轻量 done 态、绝不替换整块内容」的安全方式完成。
-        self._initialized = true;
-        // 安全恢复云端睡眠历史（异步、不阻塞首屏、仅重渲染睡眠卡片，绝不整页重渲染）。
-        self._restoreSleepHistory();
-        if (self._queuedChanges) {
-          self._queuedChanges = false;
-          self.save();
-        }
-        setInterval(function () { self._refresh(); }, 10000);
-        setInterval(function () { try { FeishuSync.refresh(false); } catch (e) {} }, 30000);
-        document.addEventListener('visibilitychange', function () {
-          if (!document.hidden) {
-            self._refresh(true);
-            self._restoreSleepHistory();
-            try { FeishuSync.refresh(false); } catch (e) {}
+        self._loading = true;
+        return self._fetchCloud().then(function (cloudState) {
+          var merged = self._merge(cloudState || {}, self._readLocal());
+          var mergedChanged = JSON.stringify(self._stripMeta(merged)) !== JSON.stringify(self._stripMeta(cloudState || {}));
+          self._writeLocal(merged);
+          self._loading = false;
+          self._initialized = true;
+          self._rerender();
+          if (!cloudState || !Object.keys(cloudState).length || self._queuedChanges || mergedChanged) {
+            self._queuedChanges = false;
+            return self.save();
           }
+        }).then(function () {
+          setInterval(function () { self._refresh(); }, 10000);
+          setInterval(function () { FeishuSync.refresh(false).catch(function () {}); }, 30000);
+          document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) {
+              self._refresh(true);
+              FeishuSync.refresh(false);
+            }
+          });
         });
       }).catch(function (error) {
+        self._loading = false;
         self._initialized = true;
-        console.warn('Cloud sync init skipped:', error);
+        console.warn('Cloud sync init failed:', error);
+        syncToast('云同步连接失败：' + error.message);
       });
     },
 
@@ -407,19 +410,40 @@
         if (key === 'dudu_tasks') {
           var cloudDate = cloud.dudu_last_tasks_date || '';
           var localDate = local.dudu_last_tasks_date || '';
+          var cloudTaskTime = Number(cloud.dudu_tasks_updated_at || 0);
+          var localTaskTime = Number(local.dudu_tasks_updated_at || 0);
+          var pickLocal;
           if (cloudDate === localDate && cloudDate) {
-            var cloudTaskTime = Number(cloud.dudu_tasks_updated_at || 0);
-            var localTaskTime = Number(local.dudu_tasks_updated_at || 0);
-            if (localTaskTime > cloudTaskTime) {
-              merged[key] = localValue;
-            } else if (cloudTaskTime > localTaskTime) {
-              merged[key] = cloudValue;
-            } else {
-              merged[key] = localValue !== undefined ? localValue : cloudValue;
-            }
+            pickLocal = localTaskTime >= cloudTaskTime;
           } else {
-            merged[key] = localDate >= cloudDate ? (localValue || cloudValue) : (cloudValue || localValue);
+            pickLocal = (localDate || '') >= (cloudDate || '');
           }
+          var baseTasks = Array.isArray(pickLocal ? localValue : cloudValue) ? (pickLocal ? localValue : cloudValue).slice() : [];
+          var otherTasks = Array.isArray(pickLocal ? cloudValue : localValue) ? (pickLocal ? cloudValue : localValue) : [];
+          var taskDoneMap = {};
+          function taskDoneKey(t) {
+            if (!t) return '';
+            if (t.sourceId) return 'id:' + t.sourceId;
+            var text = String(t.text || '')
+              .replace(/^[✅❌]\s*/, '')
+              .replace(/^\d+[.、：:)）)\-\s]+/, '')
+              .trim()
+              .toLowerCase();
+            return 'txt:' + text;
+          }
+          function collectDone(tasks) {
+            (Array.isArray(tasks) ? tasks : []).forEach(function (task) {
+              var k = taskDoneKey(task);
+              if (k && task.done === true) taskDoneMap[k] = true;
+            });
+          }
+          collectDone(baseTasks);
+          collectDone(otherTasks);
+          baseTasks.forEach(function (task) {
+            var k = taskDoneKey(task);
+            if (k && taskDoneMap[k]) task.done = true;
+          });
+          merged[key] = baseTasks;
           return;
         }
 
@@ -555,95 +579,15 @@
       var self = this;
       if (this._saveTimer && !force) return;
       this._fetchCloud().then(function (cloud) {
-        // 安全合并：只叠加云端「已完成态」等轻量键，绝不重写整块内容，避免白屏。
-        self._applyCloudDoneStates(cloud || {});
-      }).catch(function () {});
-    },
-
-    // 安全恢复云端睡眠历史：把云端 dudu_sleep 与本地 dudu_sleep 按日期 union（双向不丢），
-    // 写回本地并重渲染睡眠卡片。只在「云端数据比本地多」时写入，避免无谓覆写；
-    // 完全不触碰其他模块、不整页重渲染，因此不会引发白屏。
-    _restoreSleepHistory: function () {
-      var self = this;
-      this._fetchCloud().then(function (cloud) {
-        try {
-          if (!cloud || !Array.isArray(cloud.dudu_sleep) || !cloud.dudu_sleep.length) return;
-          var localSleep = [];
-          try { var ls = localStorage.getItem('dudu_sleep'); if (ls) localSleep = JSON.parse(ls) || []; } catch (e) {}
-          if (!Array.isArray(localSleep)) localSleep = [];
-          var byDate = {};
-          localSleep.forEach(function (s) { if (s && s.date) byDate[s.date] = s; });
-          cloud.dudu_sleep.forEach(function (s) { if (s && s.date) byDate[s.date] = s; });
-          var merged = Object.keys(byDate).sort().map(function (d) { return byDate[d]; });
-          if (merged.length > localSleep.length) {
-            localStorage.setItem('dudu_sleep', JSON.stringify(merged));
-            try { if (typeof renderSleep === 'function') renderSleep(); } catch (e) {}
-          }
-        } catch (e) {}
-      }).catch(function () {});
-    },
-
-    // 安全合并：只把云端「已完成态」等轻量键合并进本地，绝不替换整块内容数组，
-    // 因此即使云端数据异常也不会导致白屏 / 内容被清空。
-    _applyCloudDoneStates: function (cloud) {
-      try {
-        if (!cloud || typeof cloud !== 'object' || Array.isArray(cloud)) return;
-        var SAFE_KEYS = [
-          'dudu_inspire_done', 'dudu_inspire_done_meta',
-          'dudu_tasks_updated_at', 'dudu_travel_updated_at', 'dudu_monthly_goals_updated_at'
-        ];
-        var changed = false;
-        SAFE_KEYS.forEach(function (k) {
-          if (cloud[k] === undefined) return;
-          try {
-            var cur = localStorage.getItem(k);
-            var next = typeof cloud[k] === 'string' ? cloud[k] : JSON.stringify(cloud[k]);
-            if (cur === null || cur !== next) {
-              localStorage.setItem(k, next);
-              changed = true;
-            }
-          } catch (e) {}
-        });
-        // 运动打卡勾选态（exercise_checked_*，非 meta）只在本地缺失时补全，不覆盖本地已有。
-        Object.keys(cloud).forEach(function (k) {
-          if (k.indexOf('exercise_checked_') !== 0 || k.indexOf('_meta_') !== -1) return;
-          try {
-            if (localStorage.getItem(k) === null) {
-              localStorage.setItem(k, JSON.stringify(cloud[k]));
-              changed = true;
-            }
-          } catch (e) {}
-        });
-        // 任务「已完成」态按 sourceId 把云端 done 标记合入本地任务（只改 done 标记，不替换数组）。
-        if (Array.isArray(cloud.dudu_tasks)) {
-          try {
-            var localTasks = localStorage.getItem('dudu_tasks');
-            if (localTasks) {
-              var arr = JSON.parse(localTasks);
-              if (Array.isArray(arr)) {
-                var cloudDone = {};
-                cloud.dudu_tasks.forEach(function (t) { if (t && t.sourceId) cloudDone[t.sourceId] = t.done; });
-                var mutated = false;
-                arr.forEach(function (t) {
-                  if (t && t.sourceId && cloudDone[t.sourceId] !== undefined && cloudDone[t.sourceId] !== t.done) {
-                    t.done = cloudDone[t.sourceId];
-                    mutated = true;
-                  }
-                });
-                if (mutated) {
-                  localStorage.setItem('dudu_tasks', JSON.stringify(arr));
-                  changed = true;
-                }
-              }
-            }
-          } catch (e) {}
+        var local = self._readLocal();
+        var merged = self._merge(cloud || {}, local);
+        if (JSON.stringify(self._stripMeta(merged)) !== JSON.stringify(self._stripMeta(local))) {
+          self._loading = true;
+          self._writeLocal(merged);
+          self._loading = false;
+          self._rerender();
         }
-        if (changed) {
-          try { if (typeof renderInspirations === 'function') renderInspirations(); } catch (e) {}
-          try { if (typeof renderTasks === 'function') renderTasks(); } catch (e) {}
-          try { if (typeof updateTodoProgress === 'function') updateTodoProgress(); } catch (e) {}
-        }
-      } catch (e) { console.warn('applyCloudDoneStates skipped:', e); }
+      }).catch(function () {});
     },
 
     _stripMeta: function (state) {
@@ -658,9 +602,8 @@
       try {
         // 重新初始化今日任务：从云同步后的 dudu_tasks 恢复 done 状态并合并飞书当前任务
         if (window.TASKS_DATA && typeof initializeTasksForToday === 'function') {
-          var tasks = localStorage.getItem('dudu_tasks');
-          var parsed = tasks ? JSON.parse(tasks) : [];
-          initializeTasksForToday(parsed);
+          var feedTasks = (window.getTodayFeedTasks && window.getTodayFeedTasks()) || [];
+          initializeTasksForToday(feedTasks);
         }
       } catch (error) {}
       try { if (typeof renderTasks === 'function') renderTasks(); } catch (error) {}
