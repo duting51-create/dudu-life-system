@@ -114,9 +114,9 @@
 
   // 写入同步状态到 GitHub（需内嵌 Token）。
   // 关键修复：遇到 409 并发冲突时不再直接失败，而是短暂退避后自动重试同一内容
-  // （content 已包含「本地改动 + 最新云端」的合并结果），最多 5 次。
-  // 这样勾选任务 / 新增任务 / 改本月目标时不再出现「并发写入冲突」报错，
-  // 也保证改动一定写进云端，刷新或另一设备能拉到最新数据。
+  // （content 已包含「本地改动 + 最新云端」的合并结果），最多 10 次；
+  // PUT 超时放宽到 12s，退避间隔 400ms*(n+1)，弱网下也能写进去。
+  // 配合外层 save() 串行化锁，杜绝并发自抢 sha → 409 → 改动丢失。
   function _githubWriteState(content, attempt) {
     attempt = attempt || 0;
     return _fetchWithTimeout(GITHUB_API, {
@@ -134,11 +134,11 @@
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(body)
-      }, 8000);
+      }, 12000);
     }).then(function (r) {
       if (r.status === 409) {
-        if (attempt < 5) {
-          return new Promise(function (res) { setTimeout(res, 500 * (attempt + 1)); })
+        if (attempt < 10) {
+          return new Promise(function (res) { setTimeout(res, 400 * (attempt + 1)); })
             .then(function () { return _githubWriteState(content, attempt + 1); });
         }
         throw new Error('并发写入冲突，稍后自动重试');
@@ -186,6 +186,10 @@
     _saveTimer: null,
     _lastSaveContent: '',
     _pendingDeletes: {},
+    // 串行化锁：同一时刻只允许一个 save 在飞，避免并发 GET 同一 sha → PUT 互相 409
+    _saveChain: null,
+    // 脏标记：本地有尚未成功写入云端的改动时为 true，init/refresh/pagehide 据此主动补推
+    _dirty: false,
 
     _interceptLocalStorage: function () {
       var self = this;
@@ -213,13 +217,32 @@
             var merged = self._merge(cloudState, self._readLocal());
             self._writeLocal(merged);
             self._safeRerender();
+            // 主动 push：若本地有云端还没有的改动（例如本地刚划掉的任务、
+            // 或上次保存失败遗留的 dirty 数据），立即把合并结果写回云端，
+            // 根治「刷新后划掉的任务又变回未完成」。
+            var cloudStr = JSON.stringify(self._stripMeta(cloudState));
+            var mergedStr = JSON.stringify(self._stripMeta(merged));
+            if (cloudStr !== mergedStr) {
+              self._dirty = true;
+              self.save();
+            }
           }
         }).catch(function () {});
         // 周期轻量刷新（只合并轻量 done 态，不整页重渲染、不阻塞首屏）。
-        setInterval(function () { self._refresh(); }, 30000);
+        // 10s 轮询让手机端改动更快出现在电脑端。
+        setInterval(function () { self._refresh(); }, 10000);
         document.addEventListener('visibilitychange', function () {
-          if (!document.hidden) self._refresh();
+          if (!document.hidden) {
+            // 回到前台时若有未保存改动先补推，再拉取云端最新
+            if (self._dirty) self.save();
+            self._refresh();
+          }
         });
+        // 页面隐藏 / 关闭前兜底 flush：用 keepalive fetch 把 dirty 改动写进云端，
+        // 防止手机切后台、关闭页面时本地改动丢失（手机端尤其关键）。
+        function _flushOnHide() { try { self._flushKeepalive(); } catch (e) {} }
+        window.addEventListener('pagehide', _flushOnHide);
+        window.addEventListener('beforeunload', _flushOnHide);
         // 等待云端合并写入 localStorage 后再让 load 序列继续，
         // 这样主页「等云同步完成再 initializeTasksForToday」的逻辑才真正发生在写入之后。
         return _initFetch;
@@ -554,6 +577,7 @@
 
     scheduleSave: function () {
       var self = this;
+      this._dirty = true;
       clearTimeout(this._saveTimer);
       this._saveTimer = setTimeout(function () {
         self._saveTimer = null;
@@ -562,6 +586,7 @@
     },
 
     saveNow: function () {
+      this._dirty = true;
       clearTimeout(this._saveTimer);
       this._saveTimer = null;
       return this.save();
@@ -570,16 +595,39 @@
     markDeleted: function (key, id) {
       this._pendingDeletes[key] = this._pendingDeletes[key] || [];
       if (this._pendingDeletes[key].indexOf(id) === -1) this._pendingDeletes[key].push(id);
+      this._dirty = true;
     },
 
-    save: function (attempt) {
+    // save 串行化：同一时刻只跑一个 _doSave；期间若又有新改动（_dirty 被重新置 true），
+    // 当前 _doSave 完成后会自动再保存一次，确保不丢改动。
+    save: function () {
       var self = this;
-      attempt = attempt || 0;
+      if (this._saveChain) return this._saveChain;
+      if (!this._dirty) return Promise.resolve();
+      function loop() {
+        self._dirty = false;
+        return self._doSave().then(function () {
+          // 保存期间又有新 setItem → _dirty 重新置 true，再保存一轮
+          if (self._dirty) return loop();
+        }, function (error) {
+          // 失败：保留 dirty，等待下一次 scheduleSave / refresh / pagehide 重试，
+          // 不再 toast 打扰用户（后台静默重试）。
+          self._dirty = true;
+          console.warn('Cloud save failed (will retry on next change/refresh):', error && error.message);
+        });
+      }
+      this._saveChain = loop().then(function () { self._saveChain = null; });
+      return this._saveChain;
+    },
+
+    // 实际保存逻辑：读本地 → 拉云端 → 合并 → PUT。409 冲突由 _githubWriteState 内部重试。
+    _doSave: function () {
+      var self = this;
       var local = this._readLocal();
       return this._fetchCloud().then(function (cloud) {
         var merged = self._merge(cloud || {}, local);
         var content = JSON.stringify(merged);
-        if (content === self._lastSaveContent && attempt === 0) return;
+        if (content === self._lastSaveContent) return;
         return apiRequest('/api/state', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -590,17 +638,7 @@
           self._loading = true;
           self._writeLocal(merged);
           self._loading = false;
-          syncToast('已同步到手机和电脑');
         });
-      }).catch(function (error) {
-        var msg = (error && error.message) || '';
-        // 并发冲突兜底重试：重新拉云端 + 重新合并本地（含最新改动）再写
-        if (msg.indexOf('冲突') >= 0 && attempt < 3) {
-          return new Promise(function (res) { setTimeout(res, 600 * (attempt + 1)); })
-            .then(function () { return self.save(attempt + 1); });
-        }
-        console.warn('Cloud save failed:', error);
-        syncToast('云同步失败：' + msg);
       });
     },
 
@@ -614,7 +652,42 @@
           self._writeLocal(merged);
           self._safeRerender();
         }
+        // 若本地有未保存改动（如上次 save 失败），顺带补推一次
+        if (self._dirty) self.save();
       }).catch(function () {});
+    },
+
+    // 页面隐藏 / 关闭前的兜底 flush：用 keepalive fetch 保证请求在页面卸载后仍能发出。
+    // 不依赖 _doSave（它用 _fetchWithTimeout + AbortController，卸载时会被中断）。
+    _flushKeepalive: function () {
+      var self = this;
+      if (!this._dirty) return;
+      var local = this._readLocal();
+      _fetchWithTimeout(GITHUB_API, {
+        method: 'GET',
+        headers: { 'Authorization': 'Bearer ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github+json' }
+      }, 6000).then(function (r) { return r.json(); }).then(function (meta) {
+        var sha = meta && meta.sha;
+        var cloud = {};
+        try { if (meta && meta.content) cloud = JSON.parse(atob(meta.content.replace(/\s/g, ''))); } catch (e) {}
+        var merged = self._merge(cloud, local);
+        var body = {
+          message: 'sync flush ' + new Date().toISOString(),
+          content: b64encodeUnicode(JSON.stringify(merged)),
+          branch: 'sync'
+        };
+        if (sha) body.sha = sha;
+        return fetch(GITHUB_API, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + GITHUB_TOKEN,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body),
+          keepalive: true
+        });
+      }).then(function () { self._dirty = false; }).catch(function () {});
     },
 
     _stripMeta: function (state) {
