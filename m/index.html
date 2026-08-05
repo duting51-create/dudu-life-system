@@ -3236,6 +3236,12 @@
       renderInspirations();
     }
 
+    // 稳定的灵感指纹（类型 + 归一化文本），作为 done 态持久化的 key，
+    // 避免 LIVE 实时数据(飞书 id) 与嵌入式兜底数据(行索引 id) 两套 id 体系切换导致划掉态丢失。
+    function inspireFp(type, text) {
+      return (type || '') + ':' + String(text || '').trim().replace(/\s+/g, ' ').replace(/[~✅]/g, '');
+    }
+
     function renderInspirations() {
       const container = document.getElementById('inspirationContainer');
       if (!container) return;
@@ -3252,19 +3258,20 @@
       const feishuItems = window.LIVE_INSPIRATIONS_DATA?.items || INSPIRATIONS_DATA?.items || [];
       feishuItems.forEach((i, di) => {
         // 实时数据（worker /api/inspirations）为「单条」结构 {id, date, type, text}
-        if (i && i.type) {
-          const t = i.type;
-          const txt = (i.text != null ? i.text : '').trim();
-          if (!txt) return;
-          const isToday = i.date && i.date.includes(todayStr);
-          // 收获 / 情绪：仅展示「当天」；任务 / 灵感：跨天保留（未划掉就展示）
-          if (t === 'harvest' || t === 'mood') {
-            if (isToday) items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, ts: i.ts });
-          } else {
-            items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, done: i.done, ts: i.ts });
+          if (i && i.type) {
+            const t = i.type;
+            const txt = (i.text != null ? i.text : '').trim();
+            if (!txt) return;
+            const isToday = i.date && i.date.includes(todayStr);
+            const fp = inspireFp(t, txt);
+            // 收获 / 情绪：仅展示「当天」；任务 / 灵感：跨天保留（未划掉就展示）
+            if (t === 'harvest' || t === 'mood') {
+              if (isToday) items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, ts: i.ts, fp: fp });
+            } else {
+              items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, done: i.done, ts: i.ts, fp: fp });
+            }
+            return;
           }
-          return;
-        }
         if (hasLiveItems) return;
         // 嵌入式兜底数据为「行」结构 {date, inspiration, harvest, task, mood}
         const isToday = i.date && i.date.includes(todayStr);
@@ -3274,7 +3281,7 @@
           harvestParts.forEach((t, hi) => {
             const id = `feishu_h_${di}_${hi}`;
             if (!deletedFeishuIds.includes(id)) {
-              items.push({ id, date: i.date, type: 'harvest', text: t });
+              items.push({ id, date: i.date, type: 'harvest', text: t, fp: inspireFp('harvest', t) });
             }
           });
         }
@@ -3283,7 +3290,7 @@
           moodParts.forEach((t, mi) => {
             const id = `feishu_md_${di}_${mi}`;
             if (!deletedFeishuIds.includes(id)) {
-              items.push({ id, date: i.date, type: 'mood', text: t });
+              items.push({ id, date: i.date, type: 'mood', text: t, fp: inspireFp('mood', t) });
             }
           });
         }
@@ -3292,7 +3299,7 @@
           splitNumberedText(i.task).forEach((t, ti) => {
             const id = `feishu_t_${di}_${ti}`;
             if (!deletedFeishuIds.includes(id)) {
-              items.push({ id, date: i.date, type: 'task', text: t });
+              items.push({ id, date: i.date, type: 'task', text: t, fp: inspireFp('task', t) });
             }
           });
         }
@@ -3300,7 +3307,7 @@
           splitNumberedText(i.inspiration).forEach((t, ii) => {
             const id = `feishu_i_${di}_${ii}`;
             if (!deletedFeishuIds.includes(id)) {
-              items.push({ id, date: i.date, type: 'inspiration', text: t });
+              items.push({ id, date: i.date, type: 'inspiration', text: t, fp: inspireFp('inspiration', t) });
             }
           });
         }
@@ -3309,12 +3316,13 @@
       const localJots = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
       localJots.forEach(j => {
         const isToday = j.date && j.date.includes(todayStr);
+        const jfp = inspireFp(j.type, j.text);
         // 收获 / 情绪：仅当天展示；任务 / 灵感：跨天保留（未划掉就展示）
         if (j.type === 'harvest' || j.type === 'mood') {
-          if (isToday) items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts });
+          if (isToday) items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts, fp: jfp });
         } else {
           if (isToday || j.syncPending) {
-            items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts, syncPending: j.syncPending });
+            items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts, syncPending: j.syncPending, fp: jfp });
           }
         }
       });
@@ -3337,7 +3345,7 @@
       items = items.filter(function (item) {
         if (item.type !== 'task' && item.type !== 'inspiration') return true;
         const isToday = item.date && item.date.indexOf(todayStr) !== -1;
-        const isStruck = doneMap[item.id] === true || item.done === true ||
+        const isStruck = (item.fp && doneMap[item.fp] === true) || doneMap[item.id] === true || item.done === true ||
           (item.text && (item.text.includes('✅') || item.text.includes('~~')));
         if (isToday || item.syncPending) return true;
         return !isStruck;
@@ -3359,7 +3367,7 @@
       container.innerHTML = '<div class="inspire-check-list">' +
         items.map(item => {
           // 划线（删除线）判定：本地划掉 / 飞书划线 / 旧 ✅~~ 文本 都视为「已完成」显示划线
-          const isStruck = doneMap[item.id] === true || item.done === true ||
+          const isStruck = (item.fp && doneMap[item.fp] === true) || doneMap[item.id] === true || item.done === true ||
             (item.text && (item.text.includes('✅') || item.text.includes('~~')));
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
@@ -3386,17 +3394,18 @@
     }
 
     function toggleInspireCheck(id) {
+      var feishuItem = findInspireItemById(id);
+      var fp = feishuItem ? inspireFp(feishuItem.type, feishuItem.text) : id;
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
       const doneMeta = JSON.parse(localStorage.getItem('dudu_inspire_done_meta') || '{}');
-      const nowDone = doneMap[id] !== true;
-      doneMap[id] = nowDone;
-      doneMeta[id] = Date.now();
+      const nowDone = doneMap[fp] !== true;
+      doneMap[fp] = nowDone;
+      doneMeta[fp] = Date.now();
       localStorage.setItem('dudu_inspire_done', JSON.stringify(doneMap));
       localStorage.setItem('dudu_inspire_done_meta', JSON.stringify(doneMeta));
       if (window.CloudSync) window.CloudSync.saveNow();
       // 划掉 → 在飞书对应列写「删除线（划线）」，与用户习惯一致（不再用 ✅ 前缀）；
       // 飞书划线即为跨设备一致的「已完成」真相源。
-      var feishuItem = findInspireItemById(id);
       if (feishuItem && window.FeishuSync) {
         window.FeishuSync.mutate({ action: nowDone ? 'done' : 'undone', id: feishuItem.id }).catch(function (e) {
           console.warn('划线同步飞书失败（本地已保留）:', e);
