@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-04",
+  "updated": "2026-08-05",
   "list": [
     {
       "name": "嗨咻",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "我跟金钱的关系，被谁影响了？| Vol.173"
+      "latest": "医生，我咋算自己是哪天怀孕的？|有点小事61"
     },
     {
       "name": "Alison Yu心理",
@@ -158,10 +158,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "曾盛开过一朵，曾不会败落，曾在他眼中流淌过浩瀚的银河。",
-  "source": "不痛"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"

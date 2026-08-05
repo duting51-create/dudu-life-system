@@ -1468,7 +1468,7 @@
 
     /* 睡眠 */
     .sleep-form textarea { width: 100%; margin-top: 8px; resize: vertical; }
-    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+    .sleep-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; max-height: 260px; overflow-y: auto; padding-right: 4px; }
     .sleep-row { display: grid; grid-template-columns: 50px 1fr auto auto; grid-template-areas: "date time dur quality" "note note note note"; gap: 4px 10px; align-items: center; background: var(--cream); border-radius: 10px; padding: 9px 12px; font-size: .82rem; }
     .sleep-row .sr-date { grid-area: date; font-weight: 700; color: var(--purple); font-size: .8rem; }
     .sleep-row .sr-time { grid-area: time; color: var(--ink); }
@@ -4814,6 +4814,7 @@
       var arr = nm('dudu_sleep', []);
       arr.push({ date: $('sleep-date').value || todayKey(), bed: $('sleep-bed').value, wake: $('sleep-wake').value, quality: $('sleep-quality').value, note: $('sleep-note').value });
       sv('dudu_sleep', arr); $('sleepForm').style.display = 'none'; $('sleep-note').value = ''; renderSleep();
+      if (window.CloudSync) window.CloudSync.saveNow();
     };
 
     /* ---------- 英语学习打卡 ---------- */
