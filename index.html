@@ -2473,7 +2473,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-2130" defer></script>
+  <script src="cloud-sync.js?v=sync-20260805-2205" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260805-1535" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-1255" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -4572,6 +4572,19 @@
         savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
         if (!Array.isArray(savedTasks)) savedTasks = [];
       } catch(e) {}
+
+      // 关键修复：feed 未就绪（getTodayFeedTasks 因 TASKS_DATA.date 尚未设置而返回空数组）时，
+      // 不要清空任务列表、也不要用空数组覆盖 localStorage.dudu_tasks —— 否则每次刷新都会把
+      // 已保存的「划掉(done)」态抹掉，导致「划掉的任务刷新后又变成未完成」。
+      // 此时优先用已保存的 localStorage 恢复任务（保留 done 态），且不写云端以免冲掉数据。
+      if (preparedFeed.length === 0) {
+        if (savedTasks.length && (!Array.isArray(window.TASKS_DATA.items) || !window.TASKS_DATA.items.length)) {
+          window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
+          window.TASKS_DATA.date = todayLabel;
+        }
+        renderTasks();
+        return;
+      }
 
       let nextTasks = [];
 

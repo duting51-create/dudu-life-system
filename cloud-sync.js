@@ -446,7 +446,7 @@
             if (t.sourceId) return 'id:' + t.sourceId;
             var text = String(t.text || '')
               .replace(/^[✅❌]\s*/, '')
-              .replace(/^\d+[.、：:)）-]\s+/, '')
+              .replace(/^\d+[.、：:）)\-\s]+/, '')
               .trim().toLowerCase();
             return text ? ('txt:' + text) : null;
           }
@@ -454,7 +454,7 @@
             if (!t) return null;
             var text = String(t.text || '')
               .replace(/^[✅❌]\s*/, '')
-              .replace(/^\d+[.、：:)）-]\s+/, '')
+              .replace(/^\d+[.、：:）)\-\s]+/, '')
               .trim().toLowerCase();
             return text || null;
           }
@@ -527,16 +527,17 @@
         }
 
         if (key === 'dudu_monthly_goals') {
-          // 本月目标由用户主动设置，云端（通常来自电脑端设置）应作为权威值。
-          // 改为逐字段「云端优先」合并：云端有有效值用云端，否则用本地。
-          // 这样能避免手机端首次打开时被 mergePublishedPersonalDefaults 注入的默认值(如 wealth:250000)
-          // 用「本地时间戳较新」的规则覆盖掉云端用户填的正确值。
+          // 本月目标由用户主动设置，以「当前设备的最新编辑」为准（本地优先）：
+          // 这样用户在电脑端把被污染的默认值(如 wealth=250000)改成正确值后，能真正写回云端，
+          // 不会被「云端优先」逻辑锁死在旧脏值上；云端仅在本地为空时兜底。
           var cloudGoals = cloudValue && typeof cloudValue === 'object' ? cloudValue : {};
           var localGoals = localValue && typeof localValue === 'object' ? localValue : {};
           var mergedGoals = {};
           Object.keys(cloudGoals).concat(Object.keys(localGoals)).forEach(function (k) {
-            if (cloudGoals[k] != null && cloudGoals[k] !== '') mergedGoals[k] = cloudGoals[k];
-            else if (localGoals[k] != null && localGoals[k] !== '') mergedGoals[k] = localGoals[k];
+            var lv = localGoals[k];
+            var cv = cloudGoals[k];
+            if (lv != null && lv !== '') mergedGoals[k] = lv;
+            else if (cv != null && cv !== '') mergedGoals[k] = cv;
           });
           merged[key] = mergedGoals;
           return;
@@ -716,7 +717,7 @@
           var txt = null;
           if (typeof taskTextKey === 'function') { txt = taskTextKey(t); }
           if (!txt) {
-            txt = String(t.text || '').replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）-]\s+/, '').trim().toLowerCase();
+            txt = String(t.text || '').replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:）)\-\s]+/, '').trim().toLowerCase();
           }
           if (txt) keys['txt:' + txt] = true;
           return keys;
