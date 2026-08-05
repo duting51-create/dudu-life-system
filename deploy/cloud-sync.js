@@ -351,6 +351,19 @@
           return;
         }
 
+        if (key === 'dudu_sleep') {
+          var cloudSleep = Array.isArray(cloudValue) ? cloudValue : [];
+          var localSleep = Array.isArray(localValue) ? localValue : [];
+          var sleepByDate = {};
+          cloudSleep.forEach(function (s) { if (s && s.date) sleepByDate[s.date] = s; });
+          // 同日期以本地（当场录入）为准，云端独有日期补全，保证两端汇总不丢历史
+          localSleep.forEach(function (s) { if (s && s.date) sleepByDate[s.date] = s; });
+          merged[key] = Object.keys(sleepByDate)
+            .map(function (d) { return sleepByDate[d]; })
+            .sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+          return;
+        }
+
         if (key === 'dudu_tasks') {
           var cloudDate = cloud.dudu_last_tasks_date || '';
           var localDate = local.dudu_last_tasks_date || '';
