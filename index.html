@@ -2612,6 +2612,27 @@
       }
       if (!Array.isArray(window.TASKS_DATA.items)) window.TASKS_DATA.items = [];
       if (!Array.isArray(window.TASKS_DATA.tasks)) window.TASKS_DATA.tasks = [];
+
+      // 关键修复：dashboard_data.js 里的默认任务会带上飞书 feed 的 done 态，
+      // 如果不恢复本地已保存的 done，用户每次刷新都会看到默认状态，划掉操作被覆盖。
+      // 这里在 assignData 加载完默认任务后，立即用 localStorage.dudu_tasks 的 done 覆盖回去。
+      try {
+        const savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
+        if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
+          const savedDoneMap = {};
+          savedTasks.forEach(function (t) {
+            const key = t.sourceId || String(t.text || '').replace(/^\d+[.、：:)）\-\s]+/, '').trim();
+            if (key) savedDoneMap[key] = Boolean(t.done);
+          });
+          window.TASKS_DATA.items.forEach(function (task) {
+            const key = task.sourceId || String(task.text || '').replace(/^\d+[.、：:)）\-\s]+/, '').trim();
+            if (key && Object.prototype.hasOwnProperty.call(savedDoneMap, key)) {
+              task.done = savedDoneMap[key];
+            }
+          });
+        }
+      } catch (e) {}
+
       window.INSPIRATIONS_DATA = dashboardData.inspirations || { items: [] };
       const rawReading = dashboardData.reading || {};
       const weeklyData = rawReading.weekly_data || rawReading.week_data || rawReading;
