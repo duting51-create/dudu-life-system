@@ -402,9 +402,11 @@
         }
 
         if (key === 'dudu_tasks') {
-          // 双向同步：按稳定 ID（sourceId 或归一化文本）合并两端任务，
-          // done 态「任一侧为 true 即完成」，避免整体替换导致一端任务丢失。
+          // 双向同步：按 sourceId 或归一化文本合并两端任务。
+          // 关键修复：同一任务在一端有 sourceId、另一端没有时，仍按文本去重，
+          // 避免任务编辑器/跨设备同步后把同一任务变成两条。
           var byId = {};
+          var byText = {};
           function taskKeyOf(t) {
             if (!t) return null;
             if (t.sourceId) return 'id:' + t.sourceId;
@@ -414,20 +416,50 @@
               .trim().toLowerCase();
             return text ? ('txt:' + text) : null;
           }
+          function taskTextKeyOf(t) {
+            if (!t) return null;
+            var text = String(t.text || '')
+              .replace(/^[✅❌]\s*/, '')
+              .replace(/^\d+[.、：:)）-]\s+/, '')
+              .trim().toLowerCase();
+            return text || null;
+          }
+          function mergeTask(cur, t) {
+            if (t.done === true) cur.done = true;
+            // 保留 sourceId，优先采用更稳定的值
+            if (t.sourceId && !cur.sourceId) cur.sourceId = t.sourceId;
+            var lt = Number(t.updatedAt || t.ts || 0);
+            var mt = Number(cur.updatedAt || cur.ts || 0);
+            if (lt > mt) { cur.updatedAt = t.updatedAt; cur.ts = t.ts; }
+          }
           function ingest(list) {
             (Array.isArray(list) ? list : []).forEach(function (t) {
-              var k = taskKeyOf(t);
-              if (!k) return;
-              var cur = byId[k] || (byId[k] = JSON.parse(JSON.stringify(t)));
-              if (t.done === true) cur.done = true;
-              var lt = Number(t.updatedAt || t.ts || 0);
-              var mt = Number(cur.updatedAt || cur.ts || 0);
-              if (lt > mt) { cur.updatedAt = t.updatedAt; cur.ts = t.ts; }
+              var idKey = t.sourceId ? ('id:' + t.sourceId) : null;
+              var textKey = taskTextKeyOf(t);
+              var cur = null;
+              if (idKey && byId[idKey]) cur = byId[idKey];
+              else if (textKey && byText[textKey]) cur = byText[textKey];
+              if (!cur) {
+                cur = JSON.parse(JSON.stringify(t));
+                if (idKey) byId[idKey] = cur;
+                if (textKey) byText[textKey] = cur;
+              } else {
+                mergeTask(cur, t);
+              }
             });
           }
           ingest(cloudValue);
           ingest(localValue);
-          merged[key] = Object.keys(byId).map(function (k) { return byId[k]; });
+          var seenTasks = {};
+          merged[key] = [];
+          [byId, byText].forEach(function (map) {
+            Object.keys(map).forEach(function (k) {
+              var t = map[k];
+              if (seenTasks[t]) return;
+              seenTasks[t] = true;
+              merged[key].push(t);
+            });
+          });
           return;
         }
 
@@ -591,26 +623,50 @@
         var saved = [];
         try { saved = JSON.parse(localStorage.getItem('dudu_tasks') || '[]'); } catch (e) {}
         if (!Array.isArray(saved) || !saved.length) return;
-        function keyOf(t) {
-          if (!t) return null;
-          if (t.sourceId) return 'id:' + t.sourceId;
-          if (typeof taskTextKey === 'function') { var k = taskTextKey(t); if (k) return 'txt:' + k; }
-          var txt = String(t.text || '').replace(/^\d+[.、：:)）-]\s+/, '').trim().toLowerCase();
-          return txt ? ('txt:' + txt) : null;
+        function keysOf(t) {
+          var keys = {};
+          if (!t) return keys;
+          if (t.sourceId) keys['id:' + t.sourceId] = true;
+          var txt = null;
+          if (typeof taskTextKey === 'function') { txt = taskTextKey(t); }
+          if (!txt) {
+            txt = String(t.text || '').replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）-]\s+/, '').trim().toLowerCase();
+          }
+          if (txt) keys['txt:' + txt] = true;
+          return keys;
         }
         var items = window.TASKS_DATA.items;
-        var seen = {};
-        items.forEach(function (t) { var k = keyOf(t); if (k) seen[k] = true; });
+        function findMatch(t) {
+          if (t && t.sourceId) {
+            for (var i = 0; i < items.length; i += 1) {
+              if (items[i] && items[i].sourceId === t.sourceId) return items[i];
+            }
+          }
+          var tKeys = keysOf(t);
+          for (var i = 0; i < items.length; i += 1) {
+            var iKeys = keysOf(items[i]);
+            for (var k in tKeys) { if (iKeys[k]) return items[i]; }
+          }
+          return null;
+        }
+        var seenKeys = {};
+        items.forEach(function (t) {
+          var k = keysOf(t);
+          for (var key in k) seenKeys[key] = true;
+        });
         saved.forEach(function (t) {
-          var k = keyOf(t);
-          if (!k) return;
-          var existing = null;
-          for (var i = 0; i < items.length; i += 1) { if (keyOf(items[i]) === k) { existing = items[i]; break; } }
+          var existing = findMatch(t);
           if (existing) {
             existing.done = (t.done === true) || (existing.done === true);
-          } else if (!seen[k]) {
-            items.push(JSON.parse(JSON.stringify(t)));
-            seen[k] = true;
+            if (t.sourceId && !existing.sourceId) existing.sourceId = t.sourceId;
+          } else {
+            var tKeys = keysOf(t);
+            var isNew = true;
+            for (var k in tKeys) { if (seenKeys[k]) { isNew = false; break; } }
+            if (isNew) {
+              items.push(JSON.parse(JSON.stringify(t)));
+              for (var k in tKeys) seenKeys[k] = true;
+            }
           }
         });
         window.TASKS_DATA.items = items;
@@ -645,24 +701,27 @@
           body: JSON.stringify(body)
         }).then(function (r) {
           return r.json().then(function (d) { return { ok: r.ok && d.status === 'ok', data: d }; });
+        }).catch(function (error) {
+          // 本地服务未运行（手机端 / server.py 未启动）时避免抛错中断页面
+          return { ok: false, network: true, data: { message: '本地飞书服务未运行' } };
         });
+      }
+      function handleRes(res) {
+        if (res.ok) return { status: 'ok' };
+        // 网络不可达（如手机端）静默降级，让本地保存 + 云端同步兜底
+        if (res.network) return { status: 'ok', deferred: true };
+        throw new Error((res.data && res.data.message) || '飞书操作失败');
       }
       if (action === 'create') {
         // 新增任务/灵感/收获/情绪 → 写飞书对应列（今天）
         return post('/api/write-inspiration', { type: payload.type, text: payload.text })
-          .then(function (res) {
-            if (!res.ok) throw new Error((res.data && res.data.message) || '写入飞书失败');
-            return { status: 'ok' };
-          });
+          .then(handleRes);
       }
       if (action === 'done' || action === 'undone') {
         // 划掉 / 取消划掉 → 飞书对应列指定行加 / 去删除线（精准到行）
         return post('/api/strike-inspiration', {
           type: payload.type, text: payload.text, date: payload.date, struck: action === 'done'
-        }).then(function (res) {
-          if (!res.ok) throw new Error((res.data && res.data.message) || '写回飞书失败');
-          return { status: 'ok' };
-        });
+        }).then(handleRes);
       }
       // delete / update / reclassify：暂不写飞书（保持本地），避免误改飞书单元格
       return Promise.resolve({ status: 'ok' });

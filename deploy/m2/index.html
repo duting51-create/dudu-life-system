@@ -8,7 +8,6 @@
     window.addEventListener('error',function(e){try{var msg=(e&&(e.message||(e.error&&e.error.message)))||String(e);var where=(e&&e.filename||'')+':'+(e&&e.lineno||'');var bar=document.getElementById('dudu-fatal-bar');if(!bar){bar=document.createElement('div');bar.id='dudu-fatal-bar';bar.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:2147483647;background:#c0392b;color:#fff;font:13px/1.5 -apple-system,system-ui,sans-serif;padding:12px;white-space:pre-wrap;max-height:45%;overflow:auto;';var p=document.body||document.documentElement;if(p)p.appendChild(bar);else window.addEventListener('DOMContentLoaded',function(){document.body.appendChild(bar);});}bar.textContent='⚠️ 加载出错（页面仍会尽量显示）：'+msg+' @ '+where;}catch(_){}});
   })();
   </script>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="杜杜的小巴士">
@@ -2474,7 +2473,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-1915" defer></script>
+  <script src="cloud-sync.js?v=sync-20260805-1945" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260805-1535" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-1255" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -3054,9 +3053,25 @@
       const ta = document.getElementById('task-editor-ta');
       if (!ta) return;
       const lines = ta.value.split('\n').filter(l => l.trim());
+      const existingTasks = window.TASKS_DATA?.items || [];
+      const usedIndexes = new Set();
       const newTasks = lines.map(line => {
         const isDone = line.trim().startsWith('✅');
         const text = line.replace(/^✅\s*/, '').trim();
+        // 尽量保留原任务的 sourceId，避免云端合并时把同一任务当成两条
+        const normalizedText = cleanTaskText(text).toLocaleLowerCase('zh-CN');
+        let matchedIndex = -1;
+        for (let i = 0; i < existingTasks.length; i += 1) {
+          if (usedIndexes.has(i)) continue;
+          if (cleanTaskText(existingTasks[i]?.text).toLocaleLowerCase('zh-CN') === normalizedText) {
+            matchedIndex = i;
+            break;
+          }
+        }
+        if (matchedIndex >= 0) {
+          usedIndexes.add(matchedIndex);
+          return { ...existingTasks[matchedIndex], text, done: isDone };
+        }
         return { text, done: isDone, priority: 'mid' };
       });
       if (!window.TASKS_DATA) window.TASKS_DATA = {};
@@ -3129,19 +3144,23 @@
       const parts = splitNumberedText(text);
       const submitBtn = document.getElementById('jot-submit-btn');
       submitBtn.disabled = true;
-      submitBtn.textContent = '正在写入飞书…';
+      submitBtn.textContent = '正在保存…';
 
-      try {
-        if (!window.FeishuSync) throw new Error('同步服务尚未加载');
-        for (const part of parts) {
-          await window.FeishuSync.mutate({ action: 'create', type, text: part });
-        }
-        textarea.value = '';
-        document.querySelectorAll('.jot-tag').forEach(t => t.classList.remove('selected'));
-        selectedJotType = null;
-        showToast('✅ 已写入飞书，手机和电脑将自动同步');
-      } catch (error) {
-        // 网络临时不可用时保留本地副本，避免用户刚输入的内容丢失。
+      // 1) 先本地保存：任务类型写入 dudu_tasks（立即出现在「今日安排」），
+      //    其它类型写入 dudu_jots。这样即使飞书服务未运行（尤其手机端），
+      //    内容也不会丢失，且能通过 cloud-sync.js 同步到其它设备。
+      if (type === 'task') {
+        const currentTasks = window.TASKS_DATA?.items || [];
+        const newTasks = parts.map((part, index) => ({
+          text: part,
+          done: false,
+          priority: 'mid',
+          sourceId: `local:${localDateKey()}:${now.getTime()}:${index}`
+        }));
+        window.TASKS_DATA.items = currentTasks.concat(newTasks);
+        persistTaskOperation();
+        renderTasks();
+      } else {
         const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
         const newItems = parts.map((part, index) => ({
           id: `local_${now.getTime()}_${index}`,
@@ -3154,9 +3173,22 @@
         }));
         newItems.reverse().forEach(item => jotData.unshift(item));
         localStorage.setItem('dudu_jots', JSON.stringify(jotData));
-        textarea.value = '';
         renderInspirations();
-        showToast('⚠️ 飞书暂时无法连接，内容已保存在本机');
+      }
+      textarea.value = '';
+      document.querySelectorAll('.jot-tag').forEach(t => t.classList.remove('selected'));
+      selectedJotType = null;
+
+      // 2) 再尝试写回飞书（桌面端 server.py 运行时可用）
+      try {
+        if (!window.FeishuSync) throw new Error('同步服务尚未加载');
+        for (const part of parts) {
+          await window.FeishuSync.mutate({ action: 'create', type, text: part });
+        }
+        showToast('✅ 已保存并同步');
+      } catch (error) {
+        console.warn('飞书写入降级为本地:', error);
+        showToast('⚠️ 已保存在本机，飞书将在电脑端同步后写入');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = '📤 提交';
