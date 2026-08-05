@@ -18,6 +18,16 @@
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
+  <script>
+    document.documentElement.className += ' js';
+    // 兜底：即便后续主脚本崩溃，1.5s 后也强制显示所有内容，杜绝白屏「打不开」
+    setTimeout(function () {
+      try {
+        var els = document.querySelectorAll('.reveal');
+        for (var i = 0; i < els.length; i++) els[i].classList.add('visible');
+      } catch (_) {}
+    }, 1500);
+  </script>
   <style>
     :root {
       --purple:  #C9B1D0;
@@ -1347,8 +1357,11 @@
     @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(7px); } }
 
     /* ====== SCROLL REVEAL ====== */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* 默认可见：JS 未执行/失败时内容照常显示，杜绝移动端白屏「打不开」 */
+    .reveal { opacity: 1; transform: none; }
+    /* 仅当 JS 成功运行（<html> 带 .js 类）时，才启用入场淡入动画 */
+    html.js .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    html.js .reveal.visible { opacity: 1; transform: none; }
     .reveal-d1 { transition-delay: 0.1s; }
     .reveal-d2 { transition-delay: 0.2s; }
     .reveal-d3 { transition-delay: 0.3s; }
@@ -1388,7 +1401,7 @@
       .ex-blocks-grid { grid-template-columns: 1fr; }
       .section-number { font-size: 1.5rem; }
     }
-    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .scroll-hint { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { html.js .reveal { opacity: 1; transform: none; transition: none; } .scroll-hint { animation: none; } }
 
     /* ====== 新增模块样式（2026-08-03） ====== */
     .nav-toggle { display: none; position: fixed; top: 14px; left: 14px; z-index: 70; width: 44px; height: 44px; border-radius: 12px; border: none; background: var(--purple); color: #fff; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.18); }
