@@ -169,8 +169,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "猛兽是单独的，牛羊则结队。",
-  "source": "坟"
+  "content": "她轻轻唱起来宛如天籁，让我的梦似翅膀心似海。",
+  "source": "天边外"
 };
 window.updated = {
   "name": "嗨咻",
