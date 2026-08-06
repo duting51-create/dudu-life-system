@@ -474,8 +474,25 @@
             if (t.sourceId && !cur.sourceId) cur.sourceId = t.sourceId;
             if (lt > mt) { cur.updatedAt = t.updatedAt; cur.ts = t.ts; }
           }
+          // 过滤 UTF-8 误读乱码任务（旧版 bug 会写入 Ã/Â/�，或把 UTF-8 字节当 Latin1 解码为 è/¿/å 等）
+          function isValidTaskText(t) {
+            if (!t || typeof t.text !== 'string') return false;
+            var txt = t.text.trim();
+            if (!txt) return false;
+            // 明确的双重编码标志
+            if (/[ÃÂ�]/.test(txt)) return false;
+            // UTF-8 字节被误读为 Latin1：Latin1 扩展字符(0x80-0xFF)占比过高
+            var latin1Ext = 0;
+            for (var i = 0; i < txt.length; i++) {
+              var cp = txt.charCodeAt(i);
+              if (cp >= 0x80 && cp <= 0xFF) latin1Ext++;
+            }
+            if (latin1Ext / txt.length > 0.3) return false;
+            return true;
+          }
           function ingest(list) {
             (Array.isArray(list) ? list : []).forEach(function (t) {
+              if (!isValidTaskText(t)) return;
               var idKey = t.sourceId ? ('id:' + t.sourceId) : null;
               var textKey = taskTextKeyOf(t);
               var cur = null;

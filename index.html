@@ -2476,7 +2476,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260806-1100" defer></script>
+  <script src="cloud-sync.js?v=sync-20260807-0010" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260806-0930" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -2625,6 +2625,7 @@
         const savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
         const savedByKey = {};
         if (Array.isArray(savedTasks)) {
+          savedTasks = savedTasks.filter(isValidTaskText);
           savedTasks.forEach(function (t) {
             taskMatchKeys(t).forEach(function (key) {
               if (!savedByKey[key]) savedByKey[key] = t;
@@ -2657,6 +2658,7 @@
           if (!task.updatedAt) task.updatedAt = Date.now();
         });
         // 固化回 localStorage（含 done 恢复 + 时间戳），保证 CloudSync.init 异步合并时本地已占优
+        window.TASKS_DATA.items = window.TASKS_DATA.items.filter(isValidTaskText);
         try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
       } catch (e) {}
 
@@ -4629,6 +4631,22 @@
       var txt = cleanTaskText(task && task.text).toLocaleLowerCase('zh-CN');
       if (txt) keys.push('txt:' + txt);
       return keys;
+    }
+
+    // 过滤 UTF-8 误读乱码任务（旧版云同步把脏数据原样写回产生 Ã/Â/Â½ 等双重编码字符）。
+    // 这类任务本身无意义，直接丢弃，避免今日安排出现乱码。
+    function isValidTaskText(t) {
+      if (!t || typeof t.text !== 'string') return false;
+      var txt = t.text.trim();
+      if (!txt) return false;
+      if (/[ÃÂ]/.test(txt)) return false;
+      var latin1Ext = 0;
+      for (var i = 0; i < txt.length; i++) {
+        var cp = txt.charCodeAt(i);
+        if (cp >= 0x80 && cp <= 0xFF) latin1Ext++;
+      }
+      if (txt.length > 0 && latin1Ext / txt.length > 0.3) return false;
+      return true;
     }
 
     function prepareFeedTasks(tasks, today) {
