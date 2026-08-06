@@ -169,8 +169,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "会不会我们的青春，只是一个关于追求更好的途中，却失去最好的故事。",
-  "source": "你值得更好的"
+  "content": "我会把历史欠你的都给你还回来，我要让褚嬴的名字传遍大江南北，让你成为真正的棋王！",
+  "source": "棋魂"
 };
 window.updated = {
   "name": "嗨咻",
