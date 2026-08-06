@@ -2476,7 +2476,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260806-1045" defer></script>
+  <script src="cloud-sync.js?v=sync-20260806-1100" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260806-0930" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -2618,32 +2618,40 @@
 
       // 关键修复：dashboard_data.js 里的默认任务会带上飞书 feed 的 done 态，
       // 如果不恢复本地已保存的 done，用户每次刷新都会看到默认状态，划掉操作被覆盖。
-      // 这里在 assignData 加载完默认任务后，立即用 localStorage.dudu_tasks 的 done 覆盖回去。
+      // 这里在 assignData 加载完默认任务后，用 localStorage.dudu_tasks 的 done / updatedAt / sourceId 覆盖回去。
       // 用 taskMatchKeys（同时含 sourceId 与归一化文本）匹配，避免 feed 任务(飞书 sourceId)
       // 与本地保存(task: 文本 sourceId) 因 sourceId 不同而无法恢复划掉态。
       try {
         const savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
-        if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
-          const savedDoneMap = {};
+        const savedByKey = {};
+        if (Array.isArray(savedTasks)) {
           savedTasks.forEach(function (t) {
-            taskMatchKeys(t).forEach(function (key) { savedDoneMap[key] = Boolean(t.done); });
-          });
-          window.TASKS_DATA.items.forEach(function (task) {
-            var matched = false;
-            taskMatchKeys(task).forEach(function (key) {
-              if (!matched && Object.prototype.hasOwnProperty.call(savedDoneMap, key)) {
-                task.done = savedDoneMap[key];
-                matched = true;
-              }
+            taskMatchKeys(t).forEach(function (key) {
+              if (!savedByKey[key]) savedByKey[key] = t;
             });
+          });
+        }
+        if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
+          window.TASKS_DATA.items.forEach(function (task) {
+            if (!task || !task.text) return;
+            var matchedSaved = null;
+            taskMatchKeys(task).forEach(function (key) {
+              if (!matchedSaved && savedByKey[key]) matchedSaved = savedByKey[key];
+            });
+            if (matchedSaved) {
+              task.done = Boolean(matchedSaved.done);
+              // 关键：保留本地保存的 updatedAt，绝不能统一刷成现在——否则每次刷新全员同戳，
+              // 会重现「哪个设备最后加载/操作，谁的全局时间戳就整批压过另一端」的跨设备冲突。
+              if (matchedSaved.updatedAt) task.updatedAt = matchedSaved.updatedAt;
+              if (!task.sourceId && matchedSaved.sourceId) task.sourceId = matchedSaved.sourceId;
+            }
           });
         } else if (Array.isArray(savedTasks) && savedTasks.length && !window.TASKS_DATA.items.length) {
           window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
         }
-        // 始终给任务补稳定的 sourceId + updatedAt 时间戳：本地时间戳永远 >= 云端旧值，
-        // 使 _merge 的「时间戳优先」逻辑生效，彻底消除「运动1小时被云端 done=true 焊死」的问题。
+        // 只为「真正全新的任务」补 sourceId + updatedAt；已匹配到本地保存的任务保留其原有时间戳。
         window.TASKS_DATA.items.forEach(function (task) {
-          if (!task.text) return;
+          if (!task || !task.text) return;
           var k = String(task.text).replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）\-\s]+/, '').trim().toLowerCase();
           if (!task.sourceId) task.sourceId = 'task:' + k;
           if (!task.updatedAt) task.updatedAt = Date.now();
@@ -3032,14 +3040,15 @@
     }
 
     function persistTaskOperation() {
-      // 给每个任务补一个稳定 sourceId（基于归一化文本）和 updatedAt 时间戳，
-      // 这样跨设备 / 跨刷新合并时 done 态能稳定匹配，且「取消划掉」也能按时间戳生效。
+      // 给每个任务补一个稳定 sourceId（基于归一化文本），并写入 localStorage + 触发云端同步。
+      // ⚠️ 不再统一刷新 updatedAt：updatedAt 必须是「每任务独立」的最后修改时间，
+      // 只在该任务真正被改动时（toggleTask / saveTaskText / submitJot / saveTaskEditor）单独刷新，
+      // 否则跨设备合并会变成「哪个设备最后动过，谁的全局时间戳就整批压过另一端」。
       var items = window.TASKS_DATA?.items || [];
       items.forEach(function (t) {
         if (t && t.text) {
           var k = String(t.text).replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）\-\s]+/, '').trim().toLowerCase();
           if (!t.sourceId) t.sourceId = 'task:' + k;
-          t.updatedAt = Date.now();
         }
       });
       localStorage.setItem('dudu_tasks', JSON.stringify(items));
@@ -3051,6 +3060,7 @@
       if (!window.TASKS_DATA?.items?.[index]) return;
       const task = window.TASKS_DATA.items[index];
       task.done = !task.done;
+      task.updatedAt = Date.now();   // 只刷新被改动这一条的时间戳（per-task last-write-wins）
       el.classList.toggle('done', task.done);
       const textEl = el.closest('.todo-item')?.querySelector('.todo-text');
       if (textEl) textEl.classList.toggle('done', task.done);
@@ -3061,6 +3071,7 @@
     function saveTaskText(index, text) {
       if (window.TASKS_DATA?.items?.[index]) {
         window.TASKS_DATA.items[index].text = text.trim();
+        window.TASKS_DATA.items[index].updatedAt = Date.now();
         if (window.TASKS_DATA?.tasks?.[index]) window.TASKS_DATA.tasks[index].text = text.trim();
         persistTaskOperation();
       }
@@ -3120,9 +3131,10 @@
         }
         if (matchedIndex >= 0) {
           usedIndexes.add(matchedIndex);
-          return { ...existingTasks[matchedIndex], text, done: isDone };
+          const sv = existingTasks[matchedIndex];
+          return { ...sv, text, done: isDone, updatedAt: Date.now() };
         }
-        return { text, done: isDone, priority: 'mid' };
+        return { text, done: isDone, priority: 'mid', updatedAt: Date.now() };
       });
       if (!window.TASKS_DATA) window.TASKS_DATA = {};
       window.TASKS_DATA.items = newTasks;
@@ -3205,7 +3217,8 @@
           text: part,
           done: false,
           priority: 'mid',
-          sourceId: `local:${localDateKey()}:${now.getTime()}:${index}`
+          sourceId: `local:${localDateKey()}:${now.getTime()}:${index}`,
+          updatedAt: now.getTime()
         }));
         window.TASKS_DATA.items = currentTasks.concat(newTasks);
         persistTaskOperation();
@@ -4698,7 +4711,10 @@
           }
           if (matchedIndex >= 0) {
             usedSavedIndexes.add(matchedIndex);
-            return { ...task, done: savedNormalized[matchedIndex].done };
+            const sv = savedNormalized[matchedIndex];
+            // 保留本地保存任务的 updatedAt / sourceId，避免 feed 重建时丢失 per-task 时间戳，
+            // 否则跨设备合并会退化成「全员同戳」，重新出现互相覆盖。
+            return { ...task, done: Boolean(sv.done), updatedAt: sv.updatedAt || task.updatedAt, sourceId: task.sourceId || sv.sourceId };
           }
           return task;
         });
