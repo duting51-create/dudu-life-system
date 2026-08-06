@@ -563,12 +563,20 @@
 
         if (key === 'dudu_movies_wish' || key === 'dudu_movies_collect') {
           var norm = function (t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); };
+          // 过滤空标题与 UTF-8 误读乱码（Ã/Â/�/C1 控制字符等）
+          var isValidMovie = function (item) {
+            if (!item || typeof item.title !== 'string') return false;
+            var t = item.title.trim();
+            if (!t) return false;
+            if (/[ÃÂ�\x80-\x9f]/.test(t)) return false;
+            return true;
+          };
           var arrA = Array.isArray(cloudValue) ? cloudValue : [];
           var arrB = Array.isArray(localValue) ? localValue : [];
           var seen = {};
           merged[key] = [];
           arrA.concat(arrB).forEach(function (item) {
-            if (!item || !item.title) return;
+            if (!isValidMovie(item)) return;
             var k = norm(item.title);
             if (seen[k]) return;
             seen[k] = true;

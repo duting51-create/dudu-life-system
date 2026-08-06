@@ -9,6 +9,9 @@
   })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="杜杜的小巴士">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -20,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-1535" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-1255" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-2236" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-2236" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2473,9 +2476,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-2330" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260805-1535" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260805-1255" defer></script>
+  <script src="cloud-sync.js?v=sync-20260806-0915" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260805-2236" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -2612,6 +2615,39 @@
       }
       if (!Array.isArray(window.TASKS_DATA.items)) window.TASKS_DATA.items = [];
       if (!Array.isArray(window.TASKS_DATA.tasks)) window.TASKS_DATA.tasks = [];
+
+      // 关键修复：dashboard_data.js 里的默认任务会带上飞书 feed 的 done 态，
+      // 如果不恢复本地已保存的 done，用户每次刷新都会看到默认状态，划掉操作被覆盖。
+      // 这里在 assignData 加载完默认任务后，立即用 localStorage.dudu_tasks 的 done 覆盖回去。
+      try {
+        const savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
+        if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
+          const savedDoneMap = {};
+          savedTasks.forEach(function (t) {
+            const key = t.sourceId || String(t.text || '').replace(/^\d+[.、：:)）\-\s]+/, '').trim();
+            if (key) savedDoneMap[key] = Boolean(t.done);
+          });
+          window.TASKS_DATA.items.forEach(function (task) {
+            const key = task.sourceId || String(task.text || '').replace(/^\d+[.、：:)）\-\s]+/, '').trim();
+            if (key && Object.prototype.hasOwnProperty.call(savedDoneMap, key)) {
+              task.done = savedDoneMap[key];
+            }
+          });
+        } else if (Array.isArray(savedTasks) && savedTasks.length && !window.TASKS_DATA.items.length) {
+          window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
+        }
+        // 始终给任务补稳定的 sourceId + updatedAt 时间戳：本地时间戳永远 >= 云端旧值，
+        // 使 _merge 的「时间戳优先」逻辑生效，彻底消除「运动1小时被云端 done=true 焊死」的问题。
+        window.TASKS_DATA.items.forEach(function (task) {
+          if (!task.text) return;
+          var k = String(task.text).replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）\-\s]+/, '').trim().toLowerCase();
+          if (!task.sourceId) task.sourceId = 'task:' + k;
+          if (!task.updatedAt) task.updatedAt = Date.now();
+        });
+        // 固化回 localStorage（含 done 恢复 + 时间戳），保证 CloudSync.init 异步合并时本地已占优
+        try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
+      } catch (e) {}
+
       window.INSPIRATIONS_DATA = dashboardData.inspirations || { items: [] };
       const rawReading = dashboardData.reading || {};
       const weeklyData = rawReading.weekly_data || rawReading.week_data || rawReading;
@@ -2992,7 +3028,17 @@
     }
 
     function persistTaskOperation() {
-      localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA?.items || []));
+      // 给每个任务补一个稳定 sourceId（基于归一化文本）和 updatedAt 时间戳，
+      // 这样跨设备 / 跨刷新合并时 done 态能稳定匹配，且「取消划掉」也能按时间戳生效。
+      var items = window.TASKS_DATA?.items || [];
+      items.forEach(function (t) {
+        if (t && t.text) {
+          var k = String(t.text).replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）\-\s]+/, '').trim().toLowerCase();
+          if (!t.sourceId) t.sourceId = 'task:' + k;
+          t.updatedAt = Date.now();
+        }
+      });
+      localStorage.setItem('dudu_tasks', JSON.stringify(items));
       localStorage.setItem('dudu_tasks_updated_at', String(Date.now()));
       if (window.CloudSync) window.CloudSync.saveNow();
     }
@@ -4573,6 +4619,38 @@
         if (!Array.isArray(savedTasks)) savedTasks = [];
       } catch(e) {}
 
+      // 关键修复：feed 未就绪（首刷时 assignData 把 TASKS_DATA.date 设为空，
+      // 导致 getTodayFeedTasks 返回 []）时，必须基于已保存的 localStorage.dudu_tasks
+      // 恢复「划掉(done)」态。注意：此时 TASKS_DATA.items 可能已被 assignData 填成
+      // 默认任务（非空、done=false），所以不能只在 items 为空时才恢复，否则刷新后
+      // 划掉的任务会回退为未完成。
+      if (preparedFeed.length === 0) {
+        if (savedTasks.length) {
+          if (!Array.isArray(window.TASKS_DATA.items) || !window.TASKS_DATA.items.length) {
+            window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
+          } else {
+            // items 已有默认任务：按 sourceId / 归一化文本 把已保存的 done 态叠加回去
+            var savedDoneMap = {};
+            savedTasks.forEach(function (t) {
+              if (!t) return;
+              var k = t.sourceId ? ('id:' + t.sourceId) : ('txt:' + cleanTaskText(t.text).toLowerCase());
+              savedDoneMap[k] = Boolean(t.done);
+            });
+            window.TASKS_DATA.items = window.TASKS_DATA.items.map(function (it) {
+              if (!it) return it;
+              var k = it.sourceId ? ('id:' + it.sourceId) : ('txt:' + cleanTaskText(it.text).toLowerCase());
+              if (Object.prototype.hasOwnProperty.call(savedDoneMap, k)) it.done = savedDoneMap[k];
+              return it;
+            });
+          }
+          window.TASKS_DATA.date = todayLabel;
+          // 固化：把叠加了 done 态的 items 写回 localStorage，保证 CloudSync 与下次刷新读到正确值
+          try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
+        }
+        renderTasks();
+        return;
+      }
+
       let nextTasks = [];
 
       if (lastDate === today && savedTasks.length) {
@@ -5196,6 +5274,12 @@
     function normalizeMovieTitle(t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); }
 
     // 读取并修复/去重用户手动添加的影片（兼容历史乱码）
+    // 判断字符串是否仍残留 UTF-8 误读乱码（Ã/Â/�/C1 控制字符）
+    function isCorruptedText(t) {
+      if (!t || typeof t !== 'string') return true;
+      if (/[ÃÂ�\x80-\x9f]/.test(t)) return true;
+      return false;
+    }
     function getUserMovies() {
       function cleanList(list) {
         var seen = {};
@@ -5203,7 +5287,7 @@
         (list || []).forEach(function (m) {
           if (!m || typeof m.title !== 'string') return;
           var fixed = fixMojibake(m.title).trim();
-          if (!fixed) return;
+          if (!fixed || isCorruptedText(fixed)) return;
           var key = normalizeMovieTitle(fixed);
           if (seen[key]) return;
           seen[key] = true;
@@ -5229,10 +5313,13 @@
       var seen = {};
       var out = [];
       function push(item, source) {
-        var key = normalizeMovieTitle(item.title);
+        if (!item || typeof item.title !== 'string') return;
+        var title = fixMojibake(item.title).trim();
+        if (!title || isCorruptedText(title)) return;
+        var key = normalizeMovieTitle(title);
         if (seen[key] || exclude[key]) return;
         seen[key] = true;
-        out.push({ title: item.title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source });
+        out.push({ title: title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source });
       }
       var orderedUserList = userList.slice().reverse();
       if (userFirst) orderedUserList.forEach(function (m) { push(m, 'user'); });

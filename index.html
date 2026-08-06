@@ -2476,7 +2476,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260805-2330" defer></script>
+  <script src="cloud-sync.js?v=sync-20260806-0915" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260805-2236" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -2633,13 +2633,19 @@
               task.done = savedDoneMap[key];
             }
           });
-          // 关键：恢复 done 态后立即固化回 localStorage，确保紧接着 CloudSync.init 的
-          // _readLocal 读到的是含正确 done 的完整列表，避免被云端旧数据覆盖后刷新丢失。
-          try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
         } else if (Array.isArray(savedTasks) && savedTasks.length && !window.TASKS_DATA.items.length) {
           window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
-          try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
         }
+        // 始终给任务补稳定的 sourceId + updatedAt 时间戳：本地时间戳永远 >= 云端旧值，
+        // 使 _merge 的「时间戳优先」逻辑生效，彻底消除「运动1小时被云端 done=true 焊死」的问题。
+        window.TASKS_DATA.items.forEach(function (task) {
+          if (!task.text) return;
+          var k = String(task.text).replace(/^[✅❌]\s*/, '').replace(/^\d+[.、：:)）\-\s]+/, '').trim().toLowerCase();
+          if (!task.sourceId) task.sourceId = 'task:' + k;
+          if (!task.updatedAt) task.updatedAt = Date.now();
+        });
+        // 固化回 localStorage（含 done 恢复 + 时间戳），保证 CloudSync.init 异步合并时本地已占优
+        try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
       } catch (e) {}
 
       window.INSPIRATIONS_DATA = dashboardData.inspirations || { items: [] };
@@ -5268,6 +5274,12 @@
     function normalizeMovieTitle(t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); }
 
     // 读取并修复/去重用户手动添加的影片（兼容历史乱码）
+    // 判断字符串是否仍残留 UTF-8 误读乱码（Ã/Â/�/C1 控制字符）
+    function isCorruptedText(t) {
+      if (!t || typeof t !== 'string') return true;
+      if (/[ÃÂ�\x80-\x9f]/.test(t)) return true;
+      return false;
+    }
     function getUserMovies() {
       function cleanList(list) {
         var seen = {};
@@ -5275,7 +5287,7 @@
         (list || []).forEach(function (m) {
           if (!m || typeof m.title !== 'string') return;
           var fixed = fixMojibake(m.title).trim();
-          if (!fixed) return;
+          if (!fixed || isCorruptedText(fixed)) return;
           var key = normalizeMovieTitle(fixed);
           if (seen[key]) return;
           seen[key] = true;
@@ -5301,10 +5313,13 @@
       var seen = {};
       var out = [];
       function push(item, source) {
-        var key = normalizeMovieTitle(item.title);
+        if (!item || typeof item.title !== 'string') return;
+        var title = fixMojibake(item.title).trim();
+        if (!title || isCorruptedText(title)) return;
+        var key = normalizeMovieTitle(title);
         if (seen[key] || exclude[key]) return;
         seen[key] = true;
-        out.push({ title: item.title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source });
+        out.push({ title: title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source });
       }
       var orderedUserList = userList.slice().reverse();
       if (userFirst) orderedUserList.forEach(function (m) { push(m, 'user'); });
