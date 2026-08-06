@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260805-2236" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260806-0930" as="script">
   <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-2236" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -2476,8 +2476,8 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260806-0915" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260805-2236" defer></script>
+  <script src="cloud-sync.js?v=sync-20260806-0930" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260806-0930" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
@@ -2619,19 +2619,23 @@
       // 关键修复：dashboard_data.js 里的默认任务会带上飞书 feed 的 done 态，
       // 如果不恢复本地已保存的 done，用户每次刷新都会看到默认状态，划掉操作被覆盖。
       // 这里在 assignData 加载完默认任务后，立即用 localStorage.dudu_tasks 的 done 覆盖回去。
+      // 用 taskMatchKeys（同时含 sourceId 与归一化文本）匹配，避免 feed 任务(飞书 sourceId)
+      // 与本地保存(task: 文本 sourceId) 因 sourceId 不同而无法恢复划掉态。
       try {
         const savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
         if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
           const savedDoneMap = {};
           savedTasks.forEach(function (t) {
-            const key = t.sourceId || String(t.text || '').replace(/^\d+[.、：:)）\-\s]+/, '').trim();
-            if (key) savedDoneMap[key] = Boolean(t.done);
+            taskMatchKeys(t).forEach(function (key) { savedDoneMap[key] = Boolean(t.done); });
           });
           window.TASKS_DATA.items.forEach(function (task) {
-            const key = task.sourceId || String(task.text || '').replace(/^\d+[.、：:)）\-\s]+/, '').trim();
-            if (key && Object.prototype.hasOwnProperty.call(savedDoneMap, key)) {
-              task.done = savedDoneMap[key];
-            }
+            var matched = false;
+            taskMatchKeys(task).forEach(function (key) {
+              if (!matched && Object.prototype.hasOwnProperty.call(savedDoneMap, key)) {
+                task.done = savedDoneMap[key];
+                matched = true;
+              }
+            });
           });
         } else if (Array.isArray(savedTasks) && savedTasks.length && !window.TASKS_DATA.items.length) {
           window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
@@ -4591,6 +4595,18 @@
       return cleanTaskText(task?.text).toLocaleLowerCase('zh-CN');
     }
 
+    // 任务的全部匹配键：优先 sourceId，并始终附带「归一化文本」键。
+    // 关键：feed 任务(来自飞书)的 sourceId 形如 feishu:日期:序号，而本地保存的
+    // sourceId 形如 task:归一化文本，两者永不相等；但两者的归一化文本一致，
+    // 所以必须同时用文本键匹配，否则刷新后划掉(done)态无法恢复。
+    function taskMatchKeys(task) {
+      var keys = [];
+      if (task && task.sourceId) keys.push('id:' + task.sourceId);
+      var txt = cleanTaskText(task && task.text).toLocaleLowerCase('zh-CN');
+      if (txt) keys.push('txt:' + txt);
+      return keys;
+    }
+
     function prepareFeedTasks(tasks, today) {
       var prepared = [];
       (Array.isArray(tasks) ? tasks : []).forEach(function (task, index) {
@@ -4629,23 +4645,31 @@
           if (!Array.isArray(window.TASKS_DATA.items) || !window.TASKS_DATA.items.length) {
             window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
           } else {
-            // items 已有默认任务：按 sourceId / 归一化文本 把已保存的 done 态叠加回去
+            // items 已有默认任务：按 sourceId / 归一化文本 把已保存的 done 态叠加回去。
+            // 用 taskMatchKeys（同时含 sourceId 与文本键），避免 feed 任务(飞书 sourceId)
+            // 与本地保存(task: 文本 sourceId) 永不匹配导致划掉态丢失。
             var savedDoneMap = {};
             savedTasks.forEach(function (t) {
               if (!t) return;
-              var k = t.sourceId ? ('id:' + t.sourceId) : ('txt:' + cleanTaskText(t.text).toLowerCase());
-              savedDoneMap[k] = Boolean(t.done);
+              taskMatchKeys(t).forEach(function (k) { savedDoneMap[k] = Boolean(t.done); });
             });
             window.TASKS_DATA.items = window.TASKS_DATA.items.map(function (it) {
               if (!it) return it;
-              var k = it.sourceId ? ('id:' + it.sourceId) : ('txt:' + cleanTaskText(it.text).toLowerCase());
-              if (Object.prototype.hasOwnProperty.call(savedDoneMap, k)) it.done = savedDoneMap[k];
+              var matched = false;
+              taskMatchKeys(it).forEach(function (k) {
+                if (!matched && Object.prototype.hasOwnProperty.call(savedDoneMap, k)) {
+                  it.done = savedDoneMap[k];
+                  matched = true;
+                }
+              });
               return it;
             });
           }
           window.TASKS_DATA.date = todayLabel;
           // 固化：把叠加了 done 态的 items 写回 localStorage，保证 CloudSync 与下次刷新读到正确值
           try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
+          // 把恢复出的 done 态也写回云端，确保跨设备（手机/电脑）一致
+          if (window.CloudSync) window.CloudSync.saveNow();
         }
         renderTasks();
         return;
