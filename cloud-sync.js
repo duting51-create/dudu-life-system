@@ -492,16 +492,22 @@
           }
           ingest(cloudValue);
           ingest(localValue);
-          var seenTasks = {};
-          merged[key] = [];
+          // ⚠️ 致命 bug 修复（2026-08-06）：原实现用 seenTasks[t] 去重，t 是「对象」，
+          // 作为对象属性键会被 JS 强制转成字符串 "[object Object]"——于是第 1 条任务写入后，
+          // 其余任务全部被判定为「已存在」而丢弃，合并结果永远只剩 1 条任务。
+          // 表现：刷新后今日安排只保留云端第一条（如「运动1小时」done=true），
+          // 用户勾选的其它任务在下一次同步中被静默抹掉，怎么勾都会变回原样。
+          // 正确做法：按对象引用去重（任务量很小，indexOf 足够且保持插入顺序）。
+          var outTasks = [];
           [byId, byText].forEach(function (map) {
             Object.keys(map).forEach(function (k) {
               var t = map[k];
-              if (seenTasks[t]) return;
-              seenTasks[t] = true;
-              merged[key].push(t);
+              if (!t) return;
+              if (outTasks.indexOf(t) !== -1) return;
+              outTasks.push(t);
             });
           });
+          merged[key] = outTasks;
           return;
         }
 
@@ -760,7 +766,10 @@
         saved.forEach(function (t) {
           var existing = findMatch(t);
           if (existing) {
-            existing.done = (t.done === true) || (existing.done === true);
+            // 不能用 OR 合并（done 只增不减）——那会让「取消划掉」被旧的 true 永久压回。
+            // saved 是 _merge 之后写回 localStorage 的权威结果（已按时间戳择新），直接采用。
+            existing.done = Boolean(t.done);
+            if (t.updatedAt) existing.updatedAt = t.updatedAt;
             if (t.sourceId && !existing.sourceId) existing.sourceId = t.sourceId;
           } else {
             var tKeys = keysOf(t);
