@@ -2476,7 +2476,7 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260807-0010" defer></script>
+  <script src="cloud-sync.js?v=sync-20260807-0806" defer></script>
   <script src="feishu_data/dashboard_data.js?v=data-20260806-0930" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
@@ -2622,7 +2622,7 @@
       // 用 taskMatchKeys（同时含 sourceId 与归一化文本）匹配，避免 feed 任务(飞书 sourceId)
       // 与本地保存(task: 文本 sourceId) 因 sourceId 不同而无法恢复划掉态。
       try {
-        const savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
+        let savedTasks = JSON.parse(localStorage.getItem('dudu_tasks') || '[]');
         const savedByKey = {};
         if (Array.isArray(savedTasks)) {
           savedTasks = savedTasks.filter(isValidTaskText);
