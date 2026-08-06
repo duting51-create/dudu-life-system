@@ -169,8 +169,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "夜正长，路也正长，我不如忘却，不说的好罢。",
-  "source": "为了忘却的记念"
+  "content": "会不会我们的青春，只是一个关于追求更好的途中，却失去最好的故事。",
+  "source": "你值得更好的"
 };
 window.updated = {
   "name": "嗨咻",
