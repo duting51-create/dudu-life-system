@@ -3441,6 +3441,7 @@
 
       // Load done state
       const doneMap = JSON.parse(localStorage.getItem('dudu_inspire_done') || '{}');
+      const doneMeta = JSON.parse(localStorage.getItem('dudu_inspire_done_meta') || '{}');
 
       // 飞书删除线 = 已完成真相源：把后台同步下来的 done_map 合并进本地（不覆盖用户当天显式操作）
       const feishuDone = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.inspirations_done) || {};
@@ -3455,14 +3456,24 @@
         } catch (e) {}
       }
 
-      // 任务/灵感：当天无论是否划掉都展示（划掉显示删除线），非当天仅未划掉的继续展示；收获/情绪仍按当天展示。
+      // 任务/灵感：当天展示、隔天消失。「当天」按两种情形判定：
+      // ① 条目本身的日期是今天（来自飞书/本地）；② 划掉动作发生在今天（doneMeta 时间戳）。
+      // 满足任一，划掉后当天仍展示（带删除线）；都不满足才隔天消失。
       items = items.filter(function (item) {
         if (item.type !== 'task' && item.type !== 'inspiration') return true;
         const isToday = item.date && item.date.indexOf(todayStr) !== -1;
         const isStruck = (item.fp && doneMap[item.fp] === true) || doneMap[item.id] === true || item.done === true ||
           (item.text && (item.text.includes('✅') || item.text.includes('~~')));
-        if (isToday || item.syncPending) return true;
-        return !isStruck;
+        if (!isStruck) return true;                       // 没划掉 → 永远展示
+        if (isToday || item.syncPending) return true;     // ① 项本身是今天 → 当天展示
+        // ② 项非今天，但「划掉动作发生在今天」→ 当天仍展示（隔天再消失）
+        const metaTs = (item.fp && doneMeta[item.fp]) || doneMeta[item.id];
+        if (metaTs) {
+          const sd = new Date(metaTs);
+          const struckToday = (sd.getMonth() + 1) + '月' + sd.getDate() + '日' === todayStr;
+          if (struckToday) return true;
+        }
+        return false;                                      // 隔天且非今天划掉 → 消失
       });
 
       const typeLabelMap = {
