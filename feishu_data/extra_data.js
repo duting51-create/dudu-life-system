@@ -169,8 +169,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我会把历史欠你的都给你还回来，我要让褚嬴的名字传遍大江南北，让你成为真正的棋王！",
-  "source": "棋魂"
+  "content": "猛兽是单独的，牛羊则结队。",
+  "source": "坟"
 };
 window.updated = {
   "name": "嗨咻",
