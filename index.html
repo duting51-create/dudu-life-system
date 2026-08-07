@@ -2476,8 +2476,8 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260807-0806" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260806-0930" defer></script>
+  <script src="cloud-sync.js?v=sync-20260807-1210" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260807-1210" defer></script>
   <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
@@ -3226,7 +3226,7 @@
         persistTaskOperation();
         renderTasks();
       } else {
-        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
         const newItems = parts.map((part, index) => ({
           id: `local_${now.getTime()}_${index}`,
           date: dateStr,
@@ -3279,7 +3279,7 @@
           showToast('❌ 分类同步失败：' + error.message);
         }
       } else if (id.startsWith('local_')) {
-        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
         const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
         if (jot) {
           jot.type = newType;
@@ -3300,7 +3300,7 @@
           showToast('❌ 修改同步失败：' + error.message);
         }
       } else if (id.startsWith('local_')) {
-        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
         const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
         if (jot) {
           jot.text = newText;
@@ -3319,7 +3319,7 @@
           showToast('❌ 删除失败：' + error.message);
         }
       } else if (id.startsWith('local_')) {
-        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
         const filtered = jotData.filter(j => (j.id || `local_${j.ts}`) !== id);
         localStorage.setItem('dudu_jots', JSON.stringify(filtered));
         // ★ 关键修复：标记为待删除并立即同步到云端，避免刷新后恢复
@@ -3416,7 +3416,7 @@
         }
       });
 
-      const localJots = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+      const localJots = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
       localJots.forEach(j => {
         const isToday = j.date && j.date.includes(todayStr);
         const jfp = inspireFp(j.type, j.text);
@@ -3540,7 +3540,7 @@
           .catch(function (e) { console.warn('划线同步飞书失败（本地已保留）:', e); });
       }
       if (id.startsWith('local_')) {
-        const jotData = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+        const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
         const jot = jotData.find(function (j) { return (j.id || ('local_' + j.ts)) === id; });
         if (jot) { jot.done = nowDone; localStorage.setItem('dudu_jots', JSON.stringify(jotData)); }
       }
@@ -4633,20 +4633,30 @@
       return keys;
     }
 
-    // 过滤 UTF-8 误读乱码任务（旧版云同步把脏数据原样写回产生 Ã/Â/Â½ 等双重编码字符）。
-    // 这类任务本身无意义，直接丢弃，避免今日安排出现乱码。
-    function isValidTaskText(t) {
-      if (!t || typeof t.text !== 'string') return false;
-      var txt = t.text.trim();
+    // 过滤 UTF-8 误读乱码字符串（Ã/Â/� 或 Latin1 扩展字符占比过高）。
+    function isValidText(s) {
+      if (typeof s !== 'string') return false;
+      var txt = s.trim();
       if (!txt) return false;
-      if (/[ÃÂ]/.test(txt)) return false;
+      if (/[ÃÂ�]/.test(txt)) return false;
       var latin1Ext = 0;
       for (var i = 0; i < txt.length; i++) {
         var cp = txt.charCodeAt(i);
         if (cp >= 0x80 && cp <= 0xFF) latin1Ext++;
       }
-      if (txt.length > 0 && latin1Ext / txt.length > 0.3) return false;
+      if (latin1Ext / txt.length > 0.3) return false;
       return true;
+    }
+
+    // 过滤 UTF-8 误读乱码任务（旧版云同步把脏数据原样写回产生 Ã/Â/Â½ 等双重编码字符）。
+    // 这类任务本身无意义，直接丢弃，避免今日安排出现乱码。
+    function isValidTaskText(t) {
+      return !!t && isValidText(t.text);
+    }
+
+    // 灵感宝箱条目：text 和 date 都不能是乱码
+    function isValidJotItem(j) {
+      return !!j && isValidText(j.text) && isValidText(j.date);
     }
 
     function prepareFeedTasks(tasks, today) {
@@ -4682,10 +4692,21 @@
       // 恢复「划掉(done)」态。注意：此时 TASKS_DATA.items 可能已被 assignData 填成
       // 默认任务（非空、done=false），所以不能只在 items 为空时才恢复，否则刷新后
       // 划掉的任务会回退为未完成。
+      //  today's local tasks prefix
+      const todayLocalPrefix = 'local:' + today + ':';
+      const localTodayTasks = savedTasks.filter(function (t) {
+        return t && t.sourceId && String(t.sourceId).indexOf(todayLocalPrefix) === 0;
+      });
+
       if (preparedFeed.length === 0) {
         if (savedTasks.length) {
+          // feed 未就绪时，绝对不能把昨天/更早的任务直接显示为「今日安排」。
+          // 同日期 fallback 到保存的任务；跨日期只保留今天手动添加的本地任务。
+          var fallbackTasks = (lastDate === today)
+            ? savedTasks.filter(isValidTaskText)
+            : localTodayTasks.filter(isValidTaskText);
           if (!Array.isArray(window.TASKS_DATA.items) || !window.TASKS_DATA.items.length) {
-            window.TASKS_DATA.items = savedTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
+            window.TASKS_DATA.items = fallbackTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
           } else {
             // items 已有默认任务：按 sourceId / 归一化文本 把已保存的 done 态叠加回去。
             // 用 taskMatchKeys（同时含 sourceId 与文本键），避免 feed 任务(飞书 sourceId)
@@ -4708,6 +4729,7 @@
             });
           }
           window.TASKS_DATA.date = todayLabel;
+          window.TASKS_DATA.items = window.TASKS_DATA.items.filter(isValidTaskText);
           // 固化：把叠加了 done 态的 items 写回 localStorage，保证 CloudSync 与下次刷新读到正确值
           try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
           // 把恢复出的 done 态也写回云端，确保跨设备（手机/电脑）一致
@@ -4750,6 +4772,18 @@
       } else {
         nextTasks = preparedFeed;
       }
+
+      // 追加今天手动添加的本地任务（去重：文本键相同不再追加）
+      const existingKeys = new Set();
+      nextTasks.forEach(function (t) { existingKeys.add(taskTextKey(t)); });
+      localTodayTasks.forEach(function (t) {
+        if (!t || !isValidTaskText(t)) return;
+        const k = taskTextKey(t);
+        if (k && !existingKeys.has(k)) {
+          existingKeys.add(k);
+          nextTasks.push({ ...t });
+        }
+      });
 
       window.TASKS_DATA.items = nextTasks;
       window.TASKS_DATA.date = todayLabel;

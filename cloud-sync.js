@@ -57,6 +57,36 @@
     catch (e) { return btoa(str); }
   }
 
+  function localDateKey() {
+    var now = new Date();
+    return now.getFullYear() + '-' +
+      String(now.getMonth() + 1).padStart(2, '0') + '-' +
+      String(now.getDate()).padStart(2, '0');
+  }
+
+  // 过滤 UTF-8 误读产生的乱码字符串（Ã/Â/� 或 Latin1 扩展字符占比过高）
+  function isValidText(s) {
+    if (typeof s !== 'string') return false;
+    var txt = s.trim();
+    if (!txt) return false;
+    if (/[ÃÂ�]/.test(txt)) return false;
+    var latin1Ext = 0;
+    for (var i = 0; i < txt.length; i++) {
+      var cp = txt.charCodeAt(i);
+      if (cp >= 0x80 && cp <= 0xFF) latin1Ext++;
+    }
+    if (latin1Ext / txt.length > 0.3) return false;
+    return true;
+  }
+
+  function isValidTaskText(t) {
+    return !!t && isValidText(t.text);
+  }
+
+  function isValidJotItem(j) {
+    return !!j && isValidText(j.text) && isValidText(j.date);
+  }
+
   // 带超时的 fetch：避免弱网/被墙的 api.github.com 把初始化或保存挂死（导致页面长时间空白）
   function _fetchWithTimeout(url, options, ms) {
     var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
@@ -360,6 +390,7 @@
           (Array.isArray(cloudValue) ? cloudValue : [])
             .concat(Array.isArray(localValue) ? localValue : [])
             .forEach(function (note) {
+              if (!isValidJotItem(note)) return;
               var id = note.id || ('local_' + note.ts);
               notes[id] = notes[id] || note;
             });
@@ -381,6 +412,8 @@
             .forEach(function (id) { doneIds[id] = true; });
           merged[key] = {};
           Object.keys(doneIds).forEach(function (id) {
+            // 丢弃乱码 key（旧版 bug 把 mojibake 文本作为 key 写入）
+            if (!isValidText(id)) return;
             var cloudTime = Number(cloudDoneMeta[id] || 0);
             var localTime = Number(localDoneMeta[id] || 0);
             if (localTime > cloudTime) {
@@ -405,6 +438,8 @@
             .forEach(function (id) { metaIds[id] = true; });
           merged[key] = {};
           Object.keys(metaIds).forEach(function (id) {
+            // 丢弃乱码 key
+            if (!isValidText(id)) return;
             merged[key][id] = Math.max(
               Number(cloudMeta[id] || 0),
               Number(localMeta[id] || 0)
@@ -780,6 +815,9 @@
           var k = keysOf(t);
           for (var key in k) seenKeys[key] = true;
         });
+        // 只把「当天」的云端独有任务补齐进今日安排；跨天旧任务不追加，防止昨天/更早的任务
+        // 在云端没被清理时混入今日安排。
+        var todayLocalPrefix = 'local:' + localDateKey() + ':';
         saved.forEach(function (t) {
           var existing = findMatch(t);
           if (existing) {
@@ -792,7 +830,8 @@
             var tKeys = keysOf(t);
             var isNew = true;
             for (var k in tKeys) { if (seenKeys[k]) { isNew = false; break; } }
-            if (isNew) {
+            // 仅追加今天手动添加的本地任务（sourceId 以 local:YYYY-MM-DD: 开头且为今天）
+            if (isNew && t && t.sourceId && String(t.sourceId).indexOf(todayLocalPrefix) === 0) {
               items.push(JSON.parse(JSON.stringify(t)));
               for (var k in tKeys) seenKeys[k] = true;
             }
