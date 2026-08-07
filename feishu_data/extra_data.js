@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们所爱之物昭示着我们究竟是谁。",
-  "source": "托马斯·阿奎纳"
+  "content": "你们的方向上有千万颗恒星，只要不回答，这个世界就无法定位发射源。",
+  "source": "三体I: 地球往事"
 };
 window.updated = {
   "name": "嗨咻",
