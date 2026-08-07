@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "其实我们无处可去，身上背负着伤痛，没有救赎，没有解脱，可这才是人生啊。",
-  "source": "海边的曼彻斯特"
+  "content": "我们所爱之物昭示着我们究竟是谁。",
+  "source": "托马斯·阿奎纳"
 };
 window.updated = {
   "name": "嗨咻",
