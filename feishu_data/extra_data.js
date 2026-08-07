@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "你们的方向上有千万颗恒星，只要不回答，这个世界就无法定位发射源。",
-  "source": "三体I: 地球往事"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
