@@ -37,7 +37,10 @@ window.MORTGAGE_DATA = {
   "pay_day": 21,
   "paid_months": 42,
   "total_months": 360,
-  "progress": 0.1007
+  "progress": 0.1007,
+  "next_pay_date": "2026-08-20",
+  "auto_computed": true,
+  "anchor_date": "2026-08-01"
 };
 window.INVEST_DATA = {
   "updated": "2026-08-03",
@@ -169,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "弱水三千，我只取一瓢饮。",
-  "source": "红楼梦·第九十一回"
+  "content": "应该在肩膀上长着自己的脑袋。",
+  "source": "弗拉基米尔.伊里奇.列宁"
 };
 window.updated = {
   "name": "嗨咻",

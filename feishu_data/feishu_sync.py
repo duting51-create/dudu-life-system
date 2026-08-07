@@ -931,9 +931,10 @@ def fetch_finance():
         except Exception as e:
             print(f"  ⚠️ Finance parse error: {e}")
 
-    # ── 从交易明细获取昨日支出 ──
+    # ── 从交易明细获取昨日 / 本月支出 ──
     yesterday = now - timedelta(days=1)
-    ym_str = f"{yesterday.year}-{yesterday.month}"
+    # 本月支出按「当前月份」统计，避免跨月时（如 8/1 仍去查 7 月）口径错位
+    ym_str = f"{now.year}-{now.month}"
     yesterday_str = f"{yesterday.year}年{yesterday.month}月{yesterday.day}日"
 
     stdout2, _ = run_lark([
@@ -954,6 +955,8 @@ def fetch_finance():
             yesterday_count = 0
             month_total = 0.0
             month_count = 0
+            current_month_total = 0.0
+            current_month_count = 0
             today_day = now.day
             # JSON 格式输出，records 是字段值数组，列顺序同表格字段
             # fields顺序: 0=日期, 1=流水, 2=备注, 3=日, 4=收支类型, 5=二级分类, 6=金额, 7=账单分类, 8=年, 9=年月, 10=月
@@ -971,17 +974,30 @@ def fetch_finance():
                     if 1 <= day < today_day:
                         month_count += 1
                         month_total += amount
+                    # 本月实时支出（含今天已记的账），对应看板「本月支出」
+                    if 1 <= day <= today_day:
+                        current_month_count += 1
+                        current_month_total += amount
 
             if yesterday_count > 0:
                 finance['yesterday_expense'] = f'¥{yesterday_total:.2f}'
                 print(f"  ✅ 昨日 ({yesterday.day}日) 支出: {finance['yesterday_expense']} ({yesterday_count} 笔)")
             else:
-                print(f"  ℹ️ 昨日无支出记录")
+                # 同步成功但昨日确实无支出：显示 ¥0 而非 ¥--（¥-- 仅用于「数据尚未同步/加载」占位）
+                finance['yesterday_expense'] = '¥0.00'
+                print(f"  ℹ️ 昨日 ({yesterday.day}日) 无支出记录，显示为 ¥0.00")
             if month_count > 0:
                 finance['month_expense_to_yesterday'] = f'¥{month_total:.2f}'
                 print(f"  ✅ 本月截至昨日累计支出: {finance['month_expense_to_yesterday']} ({month_count} 笔)")
+            # 本月实时支出（含今日），用于财务看板「本月支出」
+            if current_month_count > 0:
+                finance['current_month_expense'] = f'¥{current_month_total:.2f}'
+                print(f"  ✅ 本月实时支出: {finance['current_month_expense']} ({current_month_count} 笔)")
+            else:
+                finance['current_month_expense'] = '¥0.00'
+                print(f"  ℹ️ 本月暂无支出记录")
         except Exception as e:
-            print(f"  ⚠️ Yesterday expense error: {e}")
+            print(f"  ⚠️ 支出明细 error: {e}")
 
     save_json('finance.json', finance)
     return finance
@@ -2063,26 +2079,116 @@ def fetch_podcast_episodes():
     return out
 
 
+# ── 房贷：固定锚点 + 等额本息自动摊销 ──────────────────────────────
+# ⚠️ anchor_* 是「不随同步变化」的基准点，千万不要写成 datetime.now()，
+#    否则每次同步都把基准刷成今天，自动推进永远算出 0 期（历史 bug）。
+MORTGAGE_ANCHOR = {
+    "anchor_date": "2026-08-01",   # 该日之前已还 42 期、剩余本金如下
+    "anchor_paid_months": 42,
+    "anchor_balance": 1717726.07,
+    "total": 1910000.0,
+    "monthly": 7927.4,
+    "rate": 3.1,                   # 年利率 %
+    "start": "2023-01-04",
+    "end": "2053-01-04",
+    "method": "等额本息",
+    "pay_day": 20,                 # 每月 20 号还款
+    "total_months": 360,
+}
+
+
+def _pay_date(year, month, pay_day):
+    """返回某年某月的还款日；遇到 2 月 30 号这类非法日期时回退到当月最后一天。"""
+    day = pay_day
+    while day > 28:
+        try:
+            return datetime(year, month, day).date()
+        except ValueError:
+            day -= 1
+    return datetime(year, month, day).date()
+
+
+def compute_mortgage(today=None):
+    """从固定锚点出发，按每月还款日推进等额本息摊销，得到当前房贷状态。
+
+    每经过一个还款日（默认每月 20 号）推进一期：
+        当期利息 = 剩余本金 × 月利率
+        当期本金 = 月供 − 当期利息
+        剩余本金 −= 当期本金
+    """
+    base = MORTGAGE_ANCHOR
+    today = today or datetime.now().date()
+    anchor = datetime.strptime(base['anchor_date'], '%Y-%m-%d').date()
+    pay_day = base['pay_day']
+    monthly = base['monthly']
+    monthly_rate = base['rate'] / 100.0 / 12.0
+
+    # 统计 (anchor, today] 区间里经过了几个还款日
+    periods = 0
+    y, m = anchor.year, anchor.month
+    while True:
+        pd = _pay_date(y, m, pay_day)
+        if pd > today:
+            break
+        if pd > anchor:
+            periods += 1
+        m += 1
+        if m > 12:
+            m, y = 1, y + 1
+        if y > today.year + 1:
+            break
+
+    balance = base['anchor_balance']
+    paid_months = base['anchor_paid_months']
+    for _ in range(periods):
+        if balance <= 0 or paid_months >= base['total_months']:
+            break
+        interest = balance * monthly_rate
+        principal = monthly - interest
+        if principal <= 0:      # 月供还不上利息，防御性退出
+            break
+        balance = max(0.0, balance - principal)
+        paid_months += 1
+
+    # 下一个还款日
+    ny, nm_ = today.year, today.month
+    next_pay = _pay_date(ny, nm_, pay_day)
+    if next_pay <= today:
+        nm_ += 1
+        if nm_ > 12:
+            nm_, ny = 1, ny + 1
+        next_pay = _pay_date(ny, nm_, pay_day)
+
+    paid_principal = base['total'] - balance
+    result = {
+        "updated": datetime.now().strftime('%Y-%m-%d'),
+        "total": base['total'],
+        "balance": round(balance, 2),
+        "paid_principal": round(paid_principal, 2),
+        "monthly": monthly,
+        "rate": base['rate'],
+        "start": base['start'],
+        "end": base['end'],
+        "method": base['method'],
+        "pay_day": pay_day,
+        "paid_months": paid_months,
+        "total_months": base['total_months'],
+        "progress": round(paid_principal / base['total'], 4),
+        "next_pay_date": next_pay.strftime('%Y-%m-%d'),
+        "auto_computed": True,
+        "anchor_date": base['anchor_date'],
+    }
+    print(f"  🏠 房贷：锚点后推进 {periods} 期 → 已还 {paid_months}/{base['total_months']} 期，"
+          f"剩余 ¥{balance:,.2f}，下次还款 {result['next_pay_date']}")
+    return result
+
+
 def generate_extra_data():
     """生成 extra_data.js（静态模块数据 + 每日金句 + 播客最新单集）。"""
     print("📦 Generating extra_data.js...")
 
-    # 基础静态数据
-    mortgage = {
-        "updated": datetime.now().strftime('%Y-%m-%d'),
-        "total": 1910000.0,
-        "balance": 1717726.07,
-        "paid_principal": 192273.93,
-        "monthly": 7927.4,
-        "rate": 3.1,
-        "start": "2023-01-04",
-        "end": "2053-01-04",
-        "method": "等额本息",
-        "pay_day": 21,
-        "paid_months": 42,
-        "total_months": 360,
-        "progress": 0.1007
-    }
+    # 基础静态数据（房贷按还款日自动推进，见 compute_mortgage）
+    mortgage = compute_mortgage()
     invest = {
         "updated": datetime.now().strftime('%Y-%m-%d'),
         "gold": False,

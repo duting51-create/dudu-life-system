@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260807-1210" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260805-2236" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260807-1310" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260807-1310" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2328,7 +2328,7 @@
           <div class="finance-item"><span class="fl">月均支出</span><span class="fv" id="fin-avg-monthly-expense">¥--</span></div>
           <div class="finance-item"><span class="fl">已过月份</span><span class="fv" id="fin-months-passed">7 / 12</span></div>
           <div class="finance-item"><span class="fl">昨日支出</span><span class="fv" style="color:#C47070;" id="fin-yesterday-expense">¥--</span></div>
-          <div class="finance-item"><span class="fl">日均支出</span><span class="fv" id="fin-daily-avg-expense">¥--</span></div>
+          <div class="finance-item"><span class="fl">本月支出</span><span class="fv" id="fin-current-month-expense">¥--</span></div>
         </div>
       </div>
       <div class="finance-yesterday reveal">
@@ -2476,9 +2476,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260807-1210" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260807-1210" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260805-2236" defer></script>
+  <script src="cloud-sync.js?v=sync-20260807-1310" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260807-1310" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260807-1310" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3196,6 +3196,18 @@
       return (hasNumbered && items.length > 1) ? items : [text];
     }
 
+    // 灵感宝箱展示用拆分：任务/灵感/备忘允许按换行直接分条，收获/情绪只按编号拆（保留长文本）
+    function splitJotText(text, type) {
+      if (!text) return [''];
+      if (type === 'task' || type === 'inspiration' || type === 'urgent') {
+        const byNumber = splitNumberedText(text);
+        if (byNumber.length > 1) return byNumber;
+        // 无编号时，按换行分条（过滤空行）
+        return text.split('\n').map(function (s) { return s.trim(); }).filter(function (s) { return s; });
+      }
+      return splitNumberedText(text);
+    }
+
     async function submitJot() {
       const textarea = document.getElementById('jot-area');
       const text = textarea?.value.trim();
@@ -3267,6 +3279,22 @@
       menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
     }
 
+    // 灵感宝箱分条展示后，子条目 id 形如 `<父id>#<序号>`。
+    // 解析出父 id 与子序号，供编辑 / 删除 / 划掉时定位到 localStorage 里的原始 jot。
+    function parseJotId(id) {
+      const s = String(id || '');
+      const i = s.lastIndexOf('#');
+      if (i > 0 && /^\d+$/.test(s.slice(i + 1))) {
+        return { baseId: s.slice(0, i), index: parseInt(s.slice(i + 1), 10) };
+      }
+      return { baseId: s, index: -1 };
+    }
+
+    // 按父 id 找到原始 jot，并返回它拆分后的子条目数组
+    function findJotByBaseId(jotData, baseId) {
+      return jotData.find(j => (j.id || `local_${j.ts}`) === baseId);
+    }
+
     async function reclassifyJot(id, newType) {
       // Close all menus
       document.querySelectorAll('.reclassify-menu').forEach(m => m.style.display = 'none');
@@ -3280,10 +3308,12 @@
         }
       } else if (id.startsWith('local_')) {
         const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
-        const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
+        const { baseId } = parseJotId(id);
+        const jot = findJotByBaseId(jotData, baseId);
         if (jot) {
           jot.type = newType;
           localStorage.setItem('dudu_jots', JSON.stringify(jotData));
+          if (window.CloudSync) window.CloudSync.saveNow();
         }
       }
       // Re-render
@@ -3301,10 +3331,19 @@
         }
       } else if (id.startsWith('local_')) {
         const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
-        const jot = jotData.find(j => (j.id || `local_${j.ts}`) === id);
+        const { baseId, index } = parseJotId(id);
+        const jot = findJotByBaseId(jotData, baseId);
         if (jot) {
-          jot.text = newText;
+          const subs = splitJotText(jot.text, jot.type);
+          if (index >= 0 && subs.length > 1 && index < subs.length) {
+            // 多条拆分时，只替换被编辑的那一行
+            subs[index] = newText;
+            jot.text = subs.join('\n');
+          } else {
+            jot.text = newText;
+          }
           localStorage.setItem('dudu_jots', JSON.stringify(jotData));
+          if (window.CloudSync) window.CloudSync.saveNow();
         }
       }
     }
@@ -3320,12 +3359,23 @@
         }
       } else if (id.startsWith('local_')) {
         const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
-        const filtered = jotData.filter(j => (j.id || `local_${j.ts}`) !== id);
-        localStorage.setItem('dudu_jots', JSON.stringify(filtered));
-        // ★ 关键修复：标记为待删除并立即同步到云端，避免刷新后恢复
-        if (window.CloudSync) {
-          window.CloudSync.markDeleted('dudu_jots', id);
-          window.CloudSync.saveNow();
+        const { baseId, index } = parseJotId(id);
+        const jot = findJotByBaseId(jotData, baseId);
+        const subs = jot ? splitJotText(jot.text, jot.type) : [];
+        if (jot && index >= 0 && subs.length > 1 && index < subs.length) {
+          // 多条拆分时，只删掉被点的那一行，父记录保留
+          subs.splice(index, 1);
+          jot.text = subs.join('\n');
+          localStorage.setItem('dudu_jots', JSON.stringify(jotData));
+          if (window.CloudSync) window.CloudSync.saveNow();
+        } else {
+          const filtered = jotData.filter(j => (j.id || `local_${j.ts}`) !== baseId);
+          localStorage.setItem('dudu_jots', JSON.stringify(filtered));
+          // ★ 关键修复：标记为待删除并立即同步到云端，避免刷新后恢复
+          if (window.CloudSync) {
+            window.CloudSync.markDeleted('dudu_jots', baseId);
+            window.CloudSync.saveNow();
+          }
         }
       } else if (id.startsWith('feishu_')) {
         // 用 localStorage 标记飞书条目为已删除，下次渲染时过滤掉
@@ -3398,8 +3448,9 @@
           });
         }
         // 任务 / 灵感：不按日期过滤，遵从「没划掉就继续展示」——未划掉的跨天保留
+        // 用 splitJotText 分条展示（无编号时按换行拆）
         if (i.task) {
-          splitNumberedText(i.task).forEach((t, ti) => {
+          splitJotText(i.task, 'task').forEach((t, ti) => {
             const id = `feishu_t_${di}_${ti}`;
             if (!deletedFeishuIds.includes(id)) {
               items.push({ id, date: i.date, type: 'task', text: t, fp: inspireFp('task', t) });
@@ -3407,7 +3458,7 @@
           });
         }
         if (i.inspiration) {
-          splitNumberedText(i.inspiration).forEach((t, ii) => {
+          splitJotText(i.inspiration, 'inspiration').forEach((t, ii) => {
             const id = `feishu_i_${di}_${ii}`;
             if (!deletedFeishuIds.includes(id)) {
               items.push({ id, date: i.date, type: 'inspiration', text: t, fp: inspireFp('inspiration', t) });
@@ -3419,15 +3470,42 @@
       const localJots = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
       localJots.forEach(j => {
         const isToday = j.date && j.date.includes(todayStr);
-        const jfp = inspireFp(j.type, j.text);
-        // 收获 / 情绪：仅当天展示；任务 / 灵感：跨天保留（未划掉就展示）
+        const baseId = j.id || `local_${j.ts}`;
+        // 收获 / 情绪：仅当天展示，不拆条（保留长文本）
         if (j.type === 'harvest' || j.type === 'mood') {
-          if (isToday) items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, ts: j.ts, fp: jfp });
-        } else {
-          if (isToday || j.syncPending) {
-            items.push({ id: j.id || `local_${j.ts}`, date: j.date, type: j.type, text: j.text, done: j.done, ts: j.ts, syncPending: j.syncPending, fp: jfp });
-          }
+          if (isToday) items.push({ id: baseId, date: j.date, type: j.type, text: j.text, ts: j.ts, fp: inspireFp(j.type, j.text) });
+          return;
         }
+        // 任务 / 灵感 / 备忘：分条展示，一条一个复选框
+        // 子条目 id 形如 `<父id>#<序号>`（用 # 而非 :，因为 ts 里含冒号）
+        const subTexts = splitJotText(j.text, j.type);
+        const isMulti = subTexts.length > 1;
+        subTexts.forEach((subText, idx) => {
+          if (isToday || j.syncPending) {
+            items.push({
+              id: baseId + '#' + idx,
+              parentId: baseId,
+              date: j.date,
+              type: j.type,
+              text: subText,
+              // 多条时不继承父级 done，避免划掉一条就全部变成划掉；单条时保留旧行为
+              done: isMulti ? undefined : j.done,
+              ts: j.ts,
+              syncPending: j.syncPending,
+              fp: inspireFp(j.type, subText)
+            });
+          }
+        });
+      });
+
+      // 去重：本地待同步项(syncPending)与飞书回流的同一条内容指纹相同，只保留先出现的一条，
+      // 避免「写进网站立刻看到」之后，下一次同步把同样内容再显示一遍。
+      const _seenFp = {};
+      items = items.filter(function (it) {
+        const key = it.fp || (it.type + ':' + it.text);
+        if (_seenFp[key]) return false;
+        _seenFp[key] = true;
+        return true;
       });
 
       // Filter
@@ -3541,8 +3619,14 @@
       }
       if (id.startsWith('local_')) {
         const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
-        const jot = jotData.find(function (j) { return (j.id || ('local_' + j.ts)) === id; });
-        if (jot) { jot.done = nowDone; localStorage.setItem('dudu_jots', JSON.stringify(jotData)); }
+        const parsed = parseJotId(id);
+        const jot = findJotByBaseId(jotData, parsed.baseId);
+        // 只有「单条」jot 才回写 done 到原始记录；多条拆分时以 fp 指纹为准，
+        // 否则划掉一条会把整条 jot 标记完成，导致同组其它条目也变成划掉。
+        if (jot && splitJotText(jot.text, jot.type).length <= 1) {
+          jot.done = nowDone;
+          localStorage.setItem('dudu_jots', JSON.stringify(jotData));
+        }
       }
       renderInspirations();
     }
@@ -3880,10 +3964,10 @@
       }
       const monthsEl = document.getElementById('fin-months-passed');
       if (monthsEl) monthsEl.textContent = monthsCompleted + ' / 12';
-      const dailyEl = document.getElementById('fin-daily-avg-expense');
-      if (dailyEl && yearExpenseVal > 0) {
-        const daysPassed = 31 + 28 + 31 + 30 + 31 + 30; // Jan-Jun total days
-        dailyEl.textContent = '¥' + Math.round(yearExpenseVal / daysPassed).toLocaleString();
+      // 本月实时支出（来自飞书 2026 记账本【交易明细】当月支出求和）
+      const currentMonthEl = document.getElementById('fin-current-month-expense');
+      if (currentMonthEl) {
+        currentMonthEl.textContent = fin.current_month_expense || '¥0.00';
       }
 
       // ====== 支出分类排名（Top 7）======
@@ -5218,13 +5302,25 @@
     }
     function renderMortgage() {
       var m = window.MORTGAGE_DATA; var grid = $('mortgageGrid'); if (!m || !grid) return;
-      var baseBalance = parseFloat(nm('dudu_mortgage_balance', m.balance));
-      // 自动月更新：自数据更新日以来，每月还款日过后自动扣减一期本金
-      var updated = m.updated ? new Date(m.updated) : new Date();
-      var avgPrincipalPerMonth = m.paid_months > 0 ? (m.total - baseBalance) / m.paid_months : 0;
-      var autoMonths = Math.max(0, monthsSincePayDay([updated.getFullYear(), updated.getMonth() + 1], m.pay_day || 1));
-      var balance = Math.max(0, baseBalance - avgPrincipalPerMonth * autoMonths);
-      var paidMonths = m.paid_months + autoMonths;
+      var manual = nm('dudu_mortgage_balance', null);
+      var hasManual = manual !== null && manual !== undefined && !isNaN(parseFloat(manual));
+      var balance, paidMonths;
+
+      if (m.auto_computed && !hasManual) {
+        // 后端已按固定锚点 + 每月还款日(pay_day)做过等额本息摊销，前端不再二次推进
+        balance = m.balance;
+        paidMonths = m.paid_months;
+      } else {
+        // 兼容旧数据 / 用户手动修正过余额：从锚点日（无锚点则回退 updated）起按月推进
+        var baseBalance = hasManual ? parseFloat(manual) : m.balance;
+        var refStr = m.anchor_date || m.updated;
+        var ref = refStr ? new Date(refStr) : new Date();
+        var avgPrincipalPerMonth = m.paid_months > 0 ? (m.total - baseBalance) / m.paid_months : 0;
+        var autoMonths = Math.max(0, monthsSincePayDay([ref.getFullYear(), ref.getMonth() + 1], m.pay_day || 1));
+        balance = Math.max(0, baseBalance - avgPrincipalPerMonth * autoMonths);
+        paidMonths = m.paid_months + autoMonths;
+      }
+
       var progress = ((m.total - balance) / m.total * 100);
       var cells = [
         ['贷款总额', '¥' + m.total.toLocaleString(), ''],
@@ -5234,7 +5330,7 @@
         ['还款进度', progress.toFixed(1) + '%', ''],
         ['已还期数', paidMonths + ' / ' + m.total_months, ''],
         ['年利率', m.rate + '%', ''],
-        ['起始日期', m.start, ''],
+        ['下次还款', m.next_pay_date || ('每月' + (m.pay_day || 20) + '号'), ''],
         ['到期日期', m.end, '']
       ];
       grid.innerHTML = cells.map(function (c) { return '<div class="mortgage-cell ' + esc(c[2]) + '"><div class="mc-val">' + esc(c[1]) + '</div><div class="mc-name">' + esc(c[0]) + '</div></div>'; }).join('');

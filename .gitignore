@@ -1,1 +1,4 @@
 .git-credentials
+__pycache__/
+*.pyc
+.amw
