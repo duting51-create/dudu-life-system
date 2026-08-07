@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260807-1310" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260807-1310" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260807-1400" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260807-1400" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2476,9 +2476,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260807-1310" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260807-1310" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260807-1310" defer></script>
+  <script src="cloud-sync.js?v=sync-20260807-1400" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260807-1400" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260807-1400" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -2694,8 +2694,47 @@
       window.MEMOS_DATA = dashboardData.memos || {};
     }
 
+    // 云端每日抓取覆盖：若 Cloudflare Worker 已生成当天的 daily_board.js，
+    // 用它覆盖 dashboard_data 里的「今日安排 / 灵感宝箱 / 备忘」，从而本地 Mac / 代理断网也不影响每日更新。
+    function shanghaiTodayKey() {
+      try {
+        return new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit",
+        }).format(new Date());
+      } catch (e) {
+        const d = new Date();
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+      }
+    }
+
+    async function applyDailyBoardOverlay() {
+      try {
+        const base = (typeof DASHBOARD_SCRIPT_URL !== "undefined" && DASHBOARD_SCRIPT_URL)
+          ? DASHBOARD_SCRIPT_URL
+          : "feishu_data/data_latest.js";
+        const url = base.replace("data_latest.js", "daily_board.js");
+        const res = await fetch(`${url}?ts=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) return;
+        const text = await res.text();
+        const board = extractDashboardObjectFromScript(text);
+        if (!board || !board.date) return;
+        if (board.date !== shanghaiTodayKey()) return; // 只覆盖「今天」的看板
+        window.DASHBOARD_DATA = window.DASHBOARD_DATA || {};
+        if (board.tasks) window.DASHBOARD_DATA.tasks = board.tasks;
+        if (board.inspirations) window.DASHBOARD_DATA.inspirations = board.inspirations;
+        if (board.inspirations && board.inspirations.done_map) {
+          window.DASHBOARD_DATA.inspirations_done = board.inspirations.done_map;
+        }
+        if (board.memos) window.DASHBOARD_DATA.memos = board.memos;
+        console.log("[daily_board] 已覆盖今日看板:", board.date);
+      } catch (e) {
+        console.warn("[daily_board] 覆盖跳过:", e);
+      }
+    }
+
     async function loadData() {
       mergePublishedPersonalDefaults();
+      await applyDailyBoardOverlay();
       // 先渲染页面自带数据，首屏不主动追远端，避免首次打开时额外网络请求拖慢展示。
       assignData();
       renderAll();

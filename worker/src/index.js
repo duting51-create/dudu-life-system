@@ -73,6 +73,20 @@ export default {
       );
     }
   },
+
+  // 每日定时（由 wrangler.jsonc 的 triggers.crons 触发，UTC 时间）：
+  // 从飞书「每日表格」拉取今天的行，生成 feishu_data/daily_board.js 并写回 GitHub Pages 仓库。
+  // 这样「今日安排 / 灵感宝箱 / 备忘」不再依赖本地 Mac 与代理，云端定时即可更新。
+  async scheduled(event, env) {
+    try {
+      const board = await buildDailyBoard(env);
+      const js = `window.DAILY_BOARD = ${JSON.stringify(board, null, 2)};\n`;
+      await writeToGithub(env, "feishu_data/daily_board.js", js);
+      console.log("daily board written:", board.date);
+    } catch (err) {
+      console.error("scheduled daily-board failed:", err);
+    }
+  },
 };
 
 function corsHeaders(origin, env) {
@@ -552,4 +566,197 @@ async function mutateInspiration(env, body) {
   }
 
   throw new Error(`不支持的操作：${action}`);
+}
+
+// ═══════════════════════════════════════════════════════
+// 每日定时抓取：把飞书「每日表格」写成 daily_board.js 写回 GitHub Pages
+// ═══════════════════════════════════════════════════════
+
+// UTF-8 安全的 base64（Cloudflare Workers 的 btoa 仅支持 Latin1）
+function toBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = "";
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin);
+}
+
+// 通过 GitHub Contents API 写回仓库文件（存在则带 sha 更新，不存在则新建）
+async function writeToGithub(env, path, content) {
+  const token = env.GITHUB_TOKEN;
+  if (!token) throw new Error("缺少 GITHUB_TOKEN，无法写回 daily_board.js");
+  const repo = env.GITHUB_REPO || "duting51-create/dudu-life-system";
+  const branch = env.GITHUB_BRANCH || "main";
+  const api = "https://api.github.com";
+  const url = `${api}/repos/${repo}/contents/${path}?ref=${branch}`;
+  let sha;
+  try {
+    const head = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+    });
+    if (head.ok) sha = (await head.json()).sha;
+  } catch (e) {
+    // 新文件：无 sha
+  }
+  const body = {
+    message: `chore: daily board auto-update ${new Date().toISOString()}`,
+    content: toBase64(content),
+    branch,
+  };
+  if (sha) body.sha = sha;
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      Accept: "application/vnd.github+json",
+    },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(`GitHub 写回失败 ${res.status}: ${t}`);
+  }
+  return res.json();
+}
+
+// 解析「今日安排」单元格（C 列）为任务项，与 feishu_sync.py 的 parse_tasks 行为一致
+function parseTasksJs(value) {
+  const text = cellText(value);
+  if (!text) return [];
+  const out = [];
+  for (const raw of text.split("\n")) {
+    const line = raw.trim();
+    if (!line) continue;
+    const isDone = line.includes("✅");
+    const isCancelled = line.includes("❌");
+    let cleaned = line
+      .replace(/^[✅❌]\s*/, "")
+      .trim()
+      .replace(/^\d+[.、：:）)\-\s]+/, "")
+      .trim();
+    if (!cleaned) continue;
+    const priority = /必须完成|紧急|重要/.test(cleaned)
+      ? "high"
+      : /考虑|设计|整理/.test(cleaned)
+        ? "mid"
+        : "low";
+    out.push({ text: cleaned, done: isDone, cancelled: isCancelled, priority });
+  }
+  return out;
+}
+
+// 把日期单元格归一化为「M月D日」（与 feishu_sync 的 clean_date 输出格式一致）
+function cleanDateJs(value) {
+  const text = cellText(value);
+  let m = text.match(/(\d{1,2})月(\d{1,2})[日号]?/);
+  if (m) return `${Number(m[1])}月${Number(m[2])}日`;
+  m = text.match(/(\d{4})[-/年](\d{1,2})[-/月](\d{1,2})/);
+  if (m) return `${Number(m[2])}月${Number(m[3])}日`;
+  return text.trim();
+}
+
+// 扫描所有行，构建灵感宝箱（D=💡灵感 / E=临时任务 / F=今日收获 / G=情绪波动）+ 删除线 done_map
+function buildInspirationsJs(rows, today) {
+  const items = [];
+  const done_map = {};
+  const todayStr = `${today.month}月${today.day}日`;
+  for (let i = 1; i < rows.length; i += 1) {
+    const row = rows[i];
+    if (!row || !row[0]) continue;
+    const dateStr = cleanDateJs(row[0]);
+    const memo = cellText(row[3] || "");
+    const task = cellText(row[4] || "");
+    const harvest = cellText(row[5] || "");
+    const mood = cellText(row[6] || "");
+    if (!memo && !task && !harvest && !mood) continue;
+
+    const inspLines = memo
+      .split("\n")
+      .map((l) => l.replace(/^\s*\d+[.、）)\-\s]+/, "").trim())
+      .filter((l) => l.startsWith("💡"))
+      .map((l) => l.slice(1).trim());
+    const inspiration = inspLines.map((t, idx) => `${idx + 1}.${t}`).join("\n");
+
+    // 飞书删除线 = 已完成真相源
+    const struckD = getColumnLinesWithStyle(row[3]).filter((l) => l.struck).map((l) => stripLeadingNumber(l.raw).trim());
+    const struckE = getColumnLinesWithStyle(row[4]).filter((l) => l.struck).map((l) => stripLeadingNumber(l.raw).trim());
+    const struckG = getColumnLinesWithStyle(row[6]).filter((l) => l.struck).map((l) => stripLeadingNumber(l.raw).trim());
+    struckD.forEach((l) => { if (l) done_map[`inspiration:${l}`] = true; });
+    struckE.forEach((l) => { if (l) done_map[`task:${l}`] = true; });
+    struckG.forEach((l) => { if (l) done_map[`mood:${l}`] = true; });
+
+    items.push({ date: dateStr, inspiration, harvest, task, mood });
+  }
+  return {
+    items: items.slice(0, 30),
+    last_updated: items.length ? items[0].date : "",
+    today_updated: items.some((it) => it.date === todayStr),
+    done_map,
+  };
+}
+
+// 备忘提醒（D 列非 💡、未划掉，最近 10 条），与 feishu_sync 的 parse_active_memo_lines 一致
+function buildMemosJs(rows) {
+  const items = [];
+  for (let i = rows.length - 1; i >= 1; i -= 1) {
+    const row = rows[i];
+    if (!row || row.length < 4) continue;
+    const dateStr = cleanDateJs(row[0]);
+    const lines = getColumnLinesWithStyle(row[3]);
+    for (let li = lines.length - 1; li >= 0; li -= 1) {
+      const l = lines[li];
+      const clean = stripLeadingNumber(l.raw)
+        .replace(/^[○◦▪●❖◆🔹🔸1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟❶❷❸❹❺❻❼❽❾❿]+\s*/, "")
+        .trim();
+      if (
+        !clean ||
+        l.struck ||
+        clean.startsWith("💡") ||
+        clean.startsWith("🌿全部待做事项") ||
+        (clean.startsWith("~~") && clean.endsWith("~~"))
+      ) {
+        continue;
+      }
+      items.push({ date: dateStr, text: clean, id: `memo_${i}_${li}` });
+    }
+    if (items.length >= 10) break;
+  }
+  return { items: items.slice(0, 10), total: items.length };
+}
+
+async function buildDailyBoard(env) {
+  const token = await getTenantToken(env);
+  const rows = await readSheet(env, token);
+  const today = shanghaiToday();
+  const todayKey = shanghaiDateKey(today);
+
+  // 今日安排（C 列 = index 2）
+  let todayRow = null;
+  for (let i = 0; i < rows.length; i += 1) {
+    if (rows[i]?.[0] && dateCellMatches(rows[i][0], today)) {
+      todayRow = rows[i];
+      break;
+    }
+  }
+  const tasks = {
+    date: `${today.month}月${today.day}日`,
+    items: todayRow ? parseTasksJs(todayRow[2]) : [],
+    raw_text: todayRow ? cellText(todayRow[2]) : "",
+    tasks: [],
+    raw_tasks_text: "",
+  };
+  tasks.tasks = tasks.items.slice();
+  tasks.raw_tasks_text = tasks.raw_text;
+
+  const inspirations = buildInspirationsJs(rows, today);
+  const memos = buildMemosJs(rows);
+
+  return {
+    updated_at: new Date().toISOString(),
+    date: todayKey,
+    source: "cloudflare-worker",
+    tasks,
+    inspirations,
+    memos,
+  };
 }

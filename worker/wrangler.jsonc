@@ -10,9 +10,16 @@
       "id": "89c10c62c82643caa78da65022cdce26"
     }
   ],
+  "triggers": {
+    "crons": [
+      "0 23 * * *"
+    ]
+  },
   "vars": {
     "SITE_ORIGIN": "https://duting51-create.github.io",
     "SPREADSHEET_TOKEN": "TnOCsqGGVhgjRyt5Jj3cV9FFnhg",
-    "SHEET_ID": "e7d0c4"
+    "SHEET_ID": "e7d0c4",
+    "GITHUB_REPO": "duting51-create/dudu-life-system",
+    "GITHUB_BRANCH": "main"
   }
 }
