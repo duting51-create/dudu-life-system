@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "医生，我咋算自己是哪天怀孕的？|有点小事61"
+      "latest": "听友来信17 | 「我在健康上踩过的那些坑……」| Vol.174"
     },
     {
       "name": "Alison Yu心理",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "应该在肩膀上长着自己的脑袋。",
-  "source": "弗拉基米尔.伊里奇.列宁"
+  "content": "其实我们无处可去，身上背负着伤痛，没有救赎，没有解脱，可这才是人生啊。",
+  "source": "海边的曼彻斯特"
 };
 window.updated = {
   "name": "嗨咻",
