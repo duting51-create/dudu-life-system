@@ -50,13 +50,38 @@
       "mood": ""
     },
     {
-      "date": "8月4日",
+      "date": "8月5日",
       "inspiration": "",
       "harvest": "",
-      "task": "1.上架新产品，做 3 个 sku",
+      "task": "1.上架新产品，做 3 个 sku\n2.看有什么渠道/网站提升审美，现在作图和网页真的需要审美和提供给 AI 的素材\n3.扫地",
+      "mood": ""
+    },
+    {
+      "date": "8月6日",
+      "inspiration": "",
+      "harvest": "1.实拍图生图步骤，尽量和 AI 一个系列一个系列的做，而不是一次性做几种风格\n2.写了就发的网站作图很方便，但是容易被系统判为 AI 创作，暂时先不用。",
+      "task": "",
+      "mood": ""
+    },
+    {
+      "date": "8月7日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "找之前的排卵监测报告，看内膜长的情况\n看不二的个人网站，学习一下",
       "mood": ""
     }
   ],
   "last_updated": "6月24日",
-  "today_updated": true
+  "today_updated": true,
+  "done_map": {
+    "task:挂周一的号-北京妇产医院": true,
+    "task:买山药粉": true,
+    "task:做鸡肉干": true,
+    "task:确认一下 AI 资讯数据来源和已发布笔记数据是否正确": true,
+    "task:和杜爽爽视频": true,
+    "task:调研一下爆款笔记，关键词：生育、成为妈妈、怀孕": true,
+    "task:把我的人生系统这个网站做一下优化迭代": true,
+    "task:上架新产品，做 3 个 sku": true,
+    "task:扫地": true
+  }
 }

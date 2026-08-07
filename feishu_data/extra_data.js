@@ -169,8 +169,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "快乐的时候不要想以后，痛苦的时候多想想将来。",
-  "source": "琦殿"
+  "content": "弱水三千，我只取一瓢饮。",
+  "source": "红楼梦·第九十一回"
 };
 window.updated = {
   "name": "嗨咻",
