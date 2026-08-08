@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260808-1300" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260808-1300" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260808-1305" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260808-1305" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2476,9 +2476,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260808-1300" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260808-1300" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260808-1300" defer></script>
+  <script src="cloud-sync.js?v=sync-20260808-1305" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260808-1305" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260808-1305" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -4826,42 +4826,38 @@
       });
 
       if (preparedFeed.length === 0) {
-        if (savedTasks.length) {
-          // feed 未就绪时，绝对不能把昨天/更早的任务直接显示为「今日安排」。
-          // 同日期 fallback 到保存的任务；跨日期只保留今天手动添加的本地任务。
-          var fallbackTasks = (lastDate === today)
-            ? savedTasks.filter(isValidTaskText)
-            : localTodayTasks.filter(isValidTaskText);
-          if (!Array.isArray(window.TASKS_DATA.items) || !window.TASKS_DATA.items.length) {
-            window.TASKS_DATA.items = fallbackTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
-          } else {
-            // items 已有默认任务：按 sourceId / 归一化文本 把已保存的 done 态叠加回去。
-            // 用 taskMatchKeys（同时含 sourceId 与文本键），避免 feed 任务(飞书 sourceId)
-            // 与本地保存(task: 文本 sourceId) 永不匹配导致划掉态丢失。
-            var savedDoneMap = {};
-            savedTasks.forEach(function (t) {
-              if (!t) return;
-              taskMatchKeys(t).forEach(function (k) { savedDoneMap[k] = Boolean(t.done); });
-            });
-            window.TASKS_DATA.items = window.TASKS_DATA.items.map(function (it) {
-              if (!it) return it;
-              var matched = false;
-              taskMatchKeys(it).forEach(function (k) {
-                if (!matched && Object.prototype.hasOwnProperty.call(savedDoneMap, k)) {
-                  it.done = savedDoneMap[k];
-                  matched = true;
-                }
-              });
-              return it;
-            });
-          }
-          window.TASKS_DATA.date = todayLabel;
-          window.TASKS_DATA.items = window.TASKS_DATA.items.filter(isValidTaskText);
-          // 固化：把叠加了 done 态的 items 写回 localStorage，保证 CloudSync 与下次刷新读到正确值
-          try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
-          // 把恢复出的 done 态也写回云端，确保跨设备（手机/电脑）一致
-          if (window.CloudSync) window.CloudSync.saveNow();
+        // 飞书今日无任何安排（如周六/周日没排任务）：
+        // 只显示「今天手动添加的本地任务」（sourceId 以 local:today: 开头），
+        // 绝不把昨天/更早的历史任务 fallback 成「今日安排」回显。
+        // （8/8 修复：之前 lastDate===today 会把全部 savedTasks 当成今日任务展示）
+        var fallbackTasks = localTodayTasks.filter(isValidTaskText);
+        window.TASKS_DATA.date = todayLabel;
+        if (Array.isArray(window.TASKS_DATA.items) && window.TASKS_DATA.items.length) {
+          // 已有默认/异常任务：只保留当天本地任务，并叠加已保存的 done 态
+          var savedDoneMap = {};
+          savedTasks.forEach(function (t) {
+            if (!t) return;
+            taskMatchKeys(t).forEach(function (k) { savedDoneMap[k] = Boolean(t.done); });
+          });
+          var merged = fallbackTasks.map(function (t) {
+            var done = savedDoneMap[t.sourceId] != null ? savedDoneMap[t.sourceId]
+              : (function () {
+                  var r = false;
+                  taskMatchKeys(t).forEach(function (k) { if (savedDoneMap[k] != null) r = savedDoneMap[k]; });
+                  return r;
+                })();
+            return { ...t, done: Boolean(done) };
+          });
+          window.TASKS_DATA.items = merged;
+        } else {
+          window.TASKS_DATA.items = fallbackTasks.map(function (t) { return { ...t, done: Boolean(t.done) }; });
         }
+        window.TASKS_DATA.items = window.TASKS_DATA.items.filter(isValidTaskText);
+        // 固化：只保存当天任务，把历史旧任务从 localStorage 清掉（下次 CloudSync.saveNow 会同步到云端），
+        // 防止跨设备反复把旧任务回显成今日安排。
+        try { localStorage.setItem('dudu_tasks', JSON.stringify(window.TASKS_DATA.items)); } catch (e) {}
+        try { localStorage.setItem('dudu_last_tasks_date', today); } catch (e) {}
+        if (window.CloudSync) window.CloudSync.saveNow();
         renderTasks();
         return;
       }
