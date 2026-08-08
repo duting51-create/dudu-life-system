@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "雁字回时，月满西楼，花自飘零水自流。一种相思，两处闲愁。此情无计可消除，才下眉头，却上心头。",
-  "source": "一剪梅·红藕香残玉簟秋"
+  "content": "热爱是人最本真质朴的品质与财富，它无关年龄、职业、身份，也不在于大小和高贵平庸之分。",
+  "source": "人民日报"
 };
 window.updated = {
   "name": "嗨咻",
