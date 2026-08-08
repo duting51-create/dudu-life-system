@@ -2740,6 +2740,10 @@
       renderAll();
       if (window.renderDashboard) { try { window.renderDashboard(); } catch (e) { console.error('renderDashboard error:', e); } }
       if (window.renderMonthlyGoals) { try { window.renderMonthlyGoals(); } catch (e) {} }
+      // 初次打开也强制用 no-store 拉一次最新数据（fetchPublishedDashboardData 走 cache:'no-store'），
+      // 避免浏览器磁盘缓存了旧版 dashboard_data.js（cache-buster key 未变时仍可能吐旧内容），
+      // 否则用户会先看到昨天/更早的任务，要等自动刷新间隔才纠正。
+      refreshPublishedDashboard('init', { silent: true });
     }
 
     function extractDashboardObjectFromScript(text) {
