@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "热爱是人最本真质朴的品质与财富，它无关年龄、职业、身份，也不在于大小和高贵平庸之分。",
-  "source": "人民日报"
+  "content": "须知政权是由枪杆子中取得的。",
+  "source": "八七会议报告"
 };
 window.updated = {
   "name": "嗨咻",
