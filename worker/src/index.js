@@ -63,6 +63,13 @@ export default {
         return json({ status: "ok", ...result }, 200, cors);
       }
 
+      if (url.pathname === "/api/trigger-daily" && request.method === "POST") {
+        const board = await buildDailyBoard(env);
+        const js = `window.DAILY_BOARD = ${JSON.stringify(board, null, 2)};\n`;
+        await writeToGithub(env, "feishu_data/daily_board.js", js);
+        return json({ status: "ok", date: board.date, written: "feishu_data/daily_board.js" }, 200, cors);
+      }
+
       return json({ status: "error", message: "Not found" }, 404, cors);
     } catch (error) {
       console.error(error);
@@ -74,7 +81,7 @@ export default {
     }
   },
 
-  // 每日定时（由 wrangler.jsonc 的 triggers.crons 触发，UTC 时间）：
+  // 每日定时（由 wrangler.jsonc 的 triggers.crons 触发，UTC 01:00 = 北京时间 09:00）：
   // 从飞书「每日表格」拉取今天的行，生成 feishu_data/daily_board.js 并写回 GitHub Pages 仓库。
   // 这样「今日安排 / 灵感宝箱 / 备忘」不再依赖本地 Mac 与代理，云端定时即可更新。
   async scheduled(event, env) {

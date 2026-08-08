@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260807-1400" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260807-1400" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260808-1130" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260808-1130" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2476,9 +2476,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260807-1400" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260807-1400" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260807-1400" defer></script>
+  <script src="cloud-sync.js?v=sync-20260808-1130" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260808-1130" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260808-1130" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -5417,6 +5417,45 @@
       var entry = gains[todayKey()] || {};
       return parseFloat(entry[accountName]) || 0;
     }
+
+    // 中国股市交易日判断：周末休市，法定节假日休市，调休上班日开市。
+    // 数据来源：国务院办公厅 2026 年节假日安排；每年需更新一次。
+    var CHINA_HOLIDAYS_2026 = new Set([
+      '2026-01-01','2026-01-02','2026-01-03',
+      '2026-02-15','2026-02-16','2026-02-17','2026-02-18','2026-02-19','2026-02-20','2026-02-21','2026-02-22','2026-02-23',
+      '2026-04-04','2026-04-05','2026-04-06',
+      '2026-05-01','2026-05-02','2026-05-03','2026-05-04','2026-05-05',
+      '2026-06-19','2026-06-20','2026-06-21',
+      '2026-09-25','2026-09-26','2026-09-27',
+      '2026-10-01','2026-10-02','2026-10-03','2026-10-04','2026-10-05','2026-10-06','2026-10-07'
+    ]);
+    var CHINA_WORKDAYS_2026 = new Set([
+      '2026-01-04','2026-02-14','2026-02-28','2026-05-09','2026-09-20','2026-10-10'
+    ]);
+    function isChinaTradingDay(dateStr) {
+      var d = new Date(dateStr + 'T00:00:00+08:00');
+      var y = d.getFullYear();
+      if (y === 2026) {
+        if (CHINA_HOLIDAYS_2026.has(dateStr)) return false;
+        if (CHINA_WORKDAYS_2026.has(dateStr)) return true;
+      }
+      var day = d.getDay();
+      return day !== 0 && day !== 6;
+    }
+    function getLastTradingDays(count, fromDate) {
+      var days = [];
+      var d = fromDate ? new Date(fromDate + 'T00:00:00+08:00') : new Date();
+      var checked = 0;
+      var maxBack = 60;
+      while (days.length < count && checked < maxBack) {
+        var ds = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        if (isChinaTradingDay(ds)) days.unshift(ds);
+        d.setDate(d.getDate() - 1);
+        checked++;
+      }
+      return days;
+    }
+
     function renderInvest() {
       var inv = window.INVEST_DATA; if (!inv) return;
       var ac = $('investAccounts'); if (!ac) return;
@@ -5450,15 +5489,10 @@
           '<span>今日 <b>' + (a.today >= 0 ? '+' : '') + a.today.toLocaleString() + '</b></span>' +
           '<span class="' + cls + '">持仓 ' + (a.hold >= 0 ? '+' : '') + a.hold.toLocaleString() + '</span></div></div>';
       }).join('');
-      // 趋势
+      // 趋势：仅展示交易日（剔除周末与中国法定节假日）
       var trend = $('investTrend'); if (trend) {
         var rangeDays = 14;
-        var now = new Date();
-        var allDays = [];
-        for (var i = rangeDays - 1; i >= 0; i--) {
-          var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
-          allDays.push(d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'));
-        }
+        var allDays = getLastTradingDays(rangeDays);
         var vals = allDays.map(function (d) { return sumInvestDayGain(gains[d] || {}); });
         var maxAbs = Math.max(1, Math.max.apply(null, vals.map(function (v) { return Math.abs(v); })));
         var maxPercent = 44;
