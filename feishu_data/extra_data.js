@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "好好学习，天天向上。",
-  "source": "毛主席语录"
+  "content": "人是悬挂在自己编织的意义之网上的动物。",
+  "source": "文化的阐释"
 };
 window.updated = {
   "name": "嗨咻",
