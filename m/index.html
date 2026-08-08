@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260808-1328" as="script">
-  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260808-1328" as="script">
+  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260808-1802" as="script">
+  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260808-1802" as="script">
   <link rel="preload" href="../feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -1628,6 +1628,7 @@
     .movie-row .mr-title a { color: inherit; text-decoration: none; font-weight: inherit; }
     .movie-row .mr-year { color: var(--ink-faint); font-size: .74rem; margin-left: 6px; }
     .movie-row .mr-rate { color: #E0A100; font-size: .74rem; margin-left: 6px; }
+    .movie-row .mr-bump { color: var(--purple); font-size: .72rem; margin-left: 6px; background: var(--pink-light, #fbeef3); border-radius: 6px; padding: 1px 5px; flex-shrink: 0; }
     .movie-row .mr-del { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: none; background: transparent; color: var(--ink-faint); cursor: pointer; font-size: .9rem; line-height: 1; }
     .movie-row .mr-del:hover { background: var(--pink-light); color: #c47070; }
     .travel-row { background: var(--cream); border-radius: 9px; padding: 9px 11px; font-size: .84rem; }
@@ -2476,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="../cloud-sync.js?v=sync-20260808-1328" defer></script>
-  <script src="../feishu_data/dashboard_data.js?v=data-20260808-1328" defer></script>
-  <script src="../feishu_data/extra_data.js?v=extra-20260808-1328" defer></script>
+  <script src="../cloud-sync.js?v=sync-20260808-1802" defer></script>
+  <script src="../feishu_data/dashboard_data.js?v=data-20260808-1802" defer></script>
+  <script src="../feishu_data/extra_data.js?v=extra-20260808-1802" defer></script>
   <script src="../feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -5568,7 +5569,7 @@
           var key = normalizeMovieTitle(fixed);
           if (seen[key]) return;
           seen[key] = true;
-          out.push({ title: fixed, link: m.link || '', year: m.year || '', rating: m.rating || '' });
+          out.push({ title: fixed, link: m.link || '', year: m.year || '', rating: m.rating || '', bump: !!m.bump });
         });
         return out;
       }
@@ -5596,7 +5597,7 @@
         var key = normalizeMovieTitle(title);
         if (seen[key] || exclude[key]) return;
         seen[key] = true;
-        out.push({ title: title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source });
+        out.push({ title: title, link: item.link || '', year: item.year || '', rating: item.rating || '', source: source, bump: !!item.bump });
       }
       var orderedUserList = userList.slice().reverse();
       if (userFirst) orderedUserList.forEach(function (m) { push(m, 'user'); });
@@ -5616,12 +5617,14 @@
       box.innerHTML = list.map(function (m, idx) {
         var isUser = m.source === 'user';
         var checkHtml = isWish ? '<input type="checkbox" class="mr-check" title="标记为看过" onchange="checkMovie(' + idx + ')">' : '';
+        var bumpHtml = (isUser && m.bump) ? '<span class="mr-bump" title="最近重提，优先看">🔝</span>' : '';
         var delHtml = isUser ? '<button class="mr-del" title="删除" onclick="deleteUserMovie(' + idx + ', \'' + doubanTab + '\')">×</button>' : '';
         var titleHtml = m.link ? '<a href="' + esc(m.link) + '" target="_blank" rel="noopener">' + esc(m.title) + '</a>' : '<span>' + esc(m.title) + '</span>';
         return '<div class="movie-row">' + checkHtml +
           '<span class="mr-title">' + titleHtml +
           (m.year ? '<span class="mr-year">' + esc(m.year) + '</span>' : '') +
-          (m.rating ? '<span class="mr-rate">★' + esc(m.rating) + '</span>' : '') + '</span>' + delHtml + '</div>';
+          (m.rating ? '<span class="mr-rate">★' + esc(m.rating) + '</span>' : '') + '</span>' +
+          bumpHtml + delHtml + '</div>';
       }).join('');
     }
     window.switchDouban = function (tab, btn) {
@@ -5640,16 +5643,33 @@
       f.style.display = f.style.display === 'none' ? 'flex' : 'none';
       if (f.style.display === 'flex') setTimeout(function () { $('movieAddTitle').focus(); }, 50);
     };
+    // 新增影片：查重 + 把旧条目重提到最前（push 到末尾 → 渲染时排在最前）
+    // 若很久以前加过、现在又加，则标记 bump=🔝，提示「最近非看不可」
     window.saveManualMovie = function () {
       var title = $('movieAddTitle').value.trim(); if (!title) return;
       var type = $('movieAddType').value;
       var user = getUserMovies();
-      var item = { title: title, link: '', year: '', rating: '' };
+      var key = normalizeMovieTitle(title);
+      var existed = false;
+      var item = { title: title, link: '', year: '', rating: '', bump: false };
       if (type === 'collect') {
-        user.collect.push(item);
-        user.wish = user.wish.filter(function (m) { return normalizeMovieTitle(m.title) !== normalizeMovieTitle(title); });
+        // 若已在「想看」，先移除避免重复
+        user.wish = user.wish.filter(function (m) { return normalizeMovieTitle(m.title) !== key; });
+        // 查重：已存在于「看过」则移出旧条目并标记重提
+        var ci = -1;
+        user.collect.forEach(function (m, i) { if (normalizeMovieTitle(m.title) === key) { ci = i; existed = true; } });
+        if (ci >= 0) user.collect.splice(ci, 1);
+        item.bump = existed;
+        user.collect.push(item);  // 末尾 → 渲染时排最前
       } else {
-        user.wish.push(item);
+        // 若已在「看过」，先移除避免重复
+        user.collect = user.collect.filter(function (m) { return normalizeMovieTitle(m.title) !== key; });
+        // 查重：已存在于「想看」则移出旧条目（无论多久以前添加）→ 重新排到最前，并标记🔝重提
+        var wi = -1;
+        user.wish.forEach(function (m, i) { if (normalizeMovieTitle(m.title) === key) { wi = i; existed = true; } });
+        if (wi >= 0) user.wish.splice(wi, 1);
+        item.bump = existed;
+        user.wish.push(item);  // 末尾 → 渲染时排最前
       }
       saveUserMovies(user);
       $('movieAddTitle').value = '';
