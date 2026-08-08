@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-07",
+  "updated": "2026-08-08",
   "list": [
     {
       "name": "嗨咻",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区"
     },
     {
       "name": "当个事儿",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-07",
+  "updated": "2026-08-08",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "生活的首要目标就是爱，就是审美经历的创造和体验，就是对知识的追求。",
+  "source": "我的早期信仰"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
