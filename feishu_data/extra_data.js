@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生活的首要目标就是爱，就是审美经历的创造和体验，就是对知识的追求。",
-  "source": "我的早期信仰"
+  "content": "好好学习，天天向上。",
+  "source": "毛主席语录"
 };
 window.updated = {
   "name": "嗨咻",
