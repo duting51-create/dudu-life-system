@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "list": [
     {
       "name": "嗨咻",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-08",
+  "updated": "2026-08-09",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "须知政权是由枪杆子中取得的。",
-  "source": "八七会议报告"
+  "content": "洪水般的爱情像灾难，爱在一点点时，最珍贵！",
+  "source": "失笑"
 };
 window.updated = {
   "name": "嗨咻",
