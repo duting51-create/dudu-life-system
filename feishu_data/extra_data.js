@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "洪水般的爱情像灾难，爱在一点点时，最珍贵！",
-  "source": "失笑"
+  "content": "人生到处知何似，应似飞鸿踏雪泥。",
+  "source": "和子由渑池怀旧"
 };
 window.updated = {
   "name": "嗨咻",
