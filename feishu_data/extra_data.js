@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "这短短的一生我们终将会失去，你不妨大胆一点，爱一个人，攀一座山，追一个梦。",
-  "source": "大鱼海棠"
+  "content": "友情其实和爱情一样，很多的时候，距离才可以让彼此更懂得彼此。",
+  "source": "左手倒影右手年华"
 };
 window.updated = {
   "name": "嗨咻",
