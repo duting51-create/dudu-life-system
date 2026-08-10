@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人生到处知何似，应似飞鸿踏雪泥。",
-  "source": "和子由渑池怀旧"
+  "content": "这世界如此寂静，是因为我一直在等你的声音。",
+  "source": "我有一座恐怖屋"
 };
 window.updated = {
   "name": "嗨咻",
