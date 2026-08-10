@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "友情其实和爱情一样，很多的时候，距离才可以让彼此更懂得彼此。",
-  "source": "左手倒影右手年华"
+  "content": "相思一夜梅花发，忽到窗前疑是君。",
+  "source": "有所思"
 };
 window.updated = {
   "name": "嗨咻",
