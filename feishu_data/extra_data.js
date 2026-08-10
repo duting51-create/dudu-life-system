@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "这世界如此寂静，是因为我一直在等你的声音。",
-  "source": "我有一座恐怖屋"
+  "content": "明月出天山，苍茫云海间。",
+  "source": "关山月"
 };
 window.updated = {
   "name": "嗨咻",
