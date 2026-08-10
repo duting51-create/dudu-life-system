@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "青年时期，他们觉得人群遗弃了自己；成年之后，却觉得自己逃离了人群。",
-  "source": "人生的智慧"
+  "content": "认真的思索，真诚的明辨是非，有这种态度，大概可算是善良吧。",
+  "source": "沉默的大多数"
 };
 window.updated = {
   "name": "嗨咻",
