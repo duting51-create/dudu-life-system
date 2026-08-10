@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "认真的思索，真诚的明辨是非，有这种态度，大概可算是善良吧。",
-  "source": "沉默的大多数"
+  "content": "这短短的一生我们终将会失去，你不妨大胆一点，爱一个人，攀一座山，追一个梦。",
+  "source": "大鱼海棠"
 };
 window.updated = {
   "name": "嗨咻",
