@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260810-1303" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260810-1303" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260810-1322" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260810-1322" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2477,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260810-1303" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260810-1303" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260810-1303" defer></script>
+  <script src="cloud-sync.js?v=sync-20260810-1322" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260810-1322" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260810-1322" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -2655,6 +2655,26 @@
           window.TASKS_DATA.items = savedTasks
             .filter(function (t) { return t && t.sourceId && String(t.sourceId).indexOf(todayLocalPrefix) === 0; })
             .map(function (t) { return { ...t, done: Boolean(t.done) }; });
+        }
+        // 🔥 8/10 关键修复：feed 非空时，上面的分支只遍历 feed 任务恢复状态，
+        // 「今天在网页手动新增、飞书 feed 还没抓到」的本地任务（sourceId = local:YYYY-MM-DD:…）
+        // 会被整条丢弃，并被下方 setItem('dudu_tasks') 永久抹掉，随后推送覆盖云端。
+        // 这里把今天新增、且 feed 中不存在的本地任务补回今日安排。
+        if (Array.isArray(savedTasks) && savedTasks.length) {
+          const todayLocalPrefix2 = 'local:' + localDateKey() + ':';
+          const existKeys = {};
+          window.TASKS_DATA.items.forEach(function (t) {
+            taskMatchKeys(t).forEach(function (k) { existKeys[k] = true; });
+          });
+          savedTasks.forEach(function (t) {
+            if (!t || !t.sourceId) return;
+            if (String(t.sourceId).indexOf(todayLocalPrefix2) !== 0) return;
+            var dup = false;
+            taskMatchKeys(t).forEach(function (k) { if (existKeys[k]) dup = true; });
+            if (dup) return;
+            window.TASKS_DATA.items.push(Object.assign({}, t, { done: Boolean(t.done) }));
+            taskMatchKeys(t).forEach(function (k) { existKeys[k] = true; });
+          });
         }
         // 只为「真正全新的任务」补 sourceId + updatedAt；已匹配到本地保存的任务保留其原有时间戳。
         window.TASKS_DATA.items.forEach(function (task) {
@@ -3167,6 +3187,12 @@
       const lines = ta.value.split('\n').filter(l => l.trim());
       const existingTasks = window.TASKS_DATA?.items || [];
       const usedIndexes = new Set();
+      // 🔥 8/10 修复：编辑器里「新加的一行」必须带 local:YYYY-MM-DD: 前缀的 sourceId，
+      // 否则 persistTaskOperation 会补成 task:文本，assignData 在飞书 feed 非空时
+      // 只认 feed 任务 + local:今天: 本地任务，这条新任务会在刷新后被整条丢弃。
+      const editorStamp = Date.now();
+      const editorLocalPrefix = 'local:' + localDateKey() + ':' + editorStamp + ':';
+      let newSeq = 0;
       const newTasks = lines.map(line => {
         const isDone = line.trim().startsWith('✅');
         const text = line.replace(/^✅\s*/, '').trim();
@@ -3185,7 +3211,15 @@
           const sv = existingTasks[matchedIndex];
           return { ...sv, text, done: isDone, updatedAt: Date.now() };
         }
-        return { text, done: isDone, priority: 'mid', updatedAt: Date.now() };
+        // 全新任务：带上今天的 local: sourceId，保证刷新后不被 feed 覆盖丢弃
+        newSeq += 1;
+        return {
+          text,
+          done: isDone,
+          priority: 'mid',
+          sourceId: editorLocalPrefix + newSeq,
+          updatedAt: editorStamp
+        };
       });
       if (!window.TASKS_DATA) window.TASKS_DATA = {};
       window.TASKS_DATA.items = newTasks;
@@ -3262,7 +3296,7 @@
       const text = textarea?.value.trim();
       if (!text) return;
       const type = selectedJotType || 'inspiration';
-      const destLabel = { task: '今日安排', inspiration: '灵感宝箱', harvest: '收获', mood: '情绪' }[type] || '灵感宝箱';
+      const destLabel = { task: '灵感宝箱·任务', inspiration: '灵感宝箱', harvest: '收获', mood: '情绪' }[type] || '灵感宝箱';
       // 新增后强制回到「全部」筛选，确保刚写的内容一定可见（避免被某个分类筛选藏起来）
       currentInspireFilter = 'all';
       document.querySelectorAll('.inspire-action-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
@@ -3275,22 +3309,15 @@
       submitBtn.disabled = true;
       submitBtn.textContent = '正在保存…';
 
-      // 1) 先本地保存：任务类型写入 dudu_tasks（立即出现在「今日安排」），
-      //    其它类型写入 dudu_jots。这样即使飞书服务未运行（尤其手机端），
+      // 1) 先本地保存到 dudu_jots（灵感宝箱）。这样即使飞书服务未运行（尤其手机端），
       //    内容也不会丢失，且能通过 cloud-sync.js 同步到其它设备。
-      if (type === 'task') {
-        const currentTasks = window.TASKS_DATA?.items || [];
-        const newTasks = parts.map((part, index) => ({
-          text: part,
-          done: false,
-          priority: 'mid',
-          sourceId: `local:${localDateKey()}:${now.getTime()}:${index}`,
-          updatedAt: now.getTime()
-        }));
-        window.TASKS_DATA.items = currentTasks.concat(newTasks);
-        persistTaskOperation();
-        renderTasks();
-      } else {
+      // 🔥 8/10 关键修复：过去 type==='task' 会写入 dudu_tasks（今日安排），
+      //    但写回飞书时 COL_MAP['task'] = 'E'（临时任务列，属于「灵感宝箱」的任务分类，
+      //    而今日安排读的是 C 列计划任务）。本地与飞书去向不一致，导致：
+      //    刷新时今日安排被 C 列 feed 覆盖 → 本地这条被丢弃；灵感宝箱本地又没存 →
+      //    两边都看不到，但飞书里确实有（就是「飞书有了、网页没有」的根因）。
+      //    现统一写入 dudu_jots，与飞书 E 列保持一致，下次同步按 inspireFp 去重不会重复。
+      {
         const jotData = (JSON.parse(localStorage.getItem('dudu_jots') || '[]')).filter(isValidJotItem);
         const newItems = parts.map((part, index) => ({
           id: `local_${now.getTime()}_${index}`,
@@ -3303,7 +3330,8 @@
         }));
         newItems.reverse().forEach(item => jotData.unshift(item));
         localStorage.setItem('dudu_jots', JSON.stringify(jotData));
-        renderInspirations();
+        // 渲染失败不能连累落云与飞书写入（否则一处 UI 报错 = 内容彻底不同步）
+        try { renderInspirations(); } catch (e) { console.warn('renderInspirations 失败:', e); }
         // 新增后立即落云，避免依赖 1.5s 防抖（关页/切后台可能错过），保证跨设备即时可见
         if (window.CloudSync) window.CloudSync.saveNow();
       }

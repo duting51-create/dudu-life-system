@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "明月出天山，苍茫云海间。",
-  "source": "关山月"
+  "content": "青年时期，他们觉得人群遗弃了自己；成年之后，却觉得自己逃离了人群。",
+  "source": "人生的智慧"
 };
 window.updated = {
   "name": "嗨咻",
