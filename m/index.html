@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260808-1802" as="script">
-  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260808-1802" as="script">
+  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260810-1042" as="script">
+  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260810-1042" as="script">
   <link rel="preload" href="../feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2477,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="../cloud-sync.js?v=sync-20260808-1802" defer></script>
-  <script src="../feishu_data/dashboard_data.js?v=data-20260808-1802" defer></script>
-  <script src="../feishu_data/extra_data.js?v=extra-20260808-1802" defer></script>
+  <script src="../cloud-sync.js?v=sync-20260810-1042" defer></script>
+  <script src="../feishu_data/dashboard_data.js?v=data-20260810-1042" defer></script>
+  <script src="../feishu_data/extra_data.js?v=extra-20260810-1042" defer></script>
   <script src="../feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3397,7 +3397,7 @@
       }
     }
 
-    async function deleteJot(id) {
+    async function deleteJot(id, text) {
       if (!confirm('确定要删除这条记录吗？')) return;
       if (id.startsWith('live_')) {
         try {
@@ -3432,8 +3432,18 @@
         if (!deleted.includes(id)) {
           deleted.push(id);
           localStorage.setItem('dudu_deleted_feishu', JSON.stringify(deleted));
-          if (window.CloudSync) window.CloudSync.saveNow();
         }
+        // 稳定指纹删除：飞书数据为位置型 id（feishu_t_0_0），重排后即失效，
+        // 改用归一化文本做兜底匹配，确保删得掉（如「这一条任务一直不消失」）
+        if (text) {
+          const norm = String(text).trim().replace(/\s+/g, ' ');
+          const delText = JSON.parse(localStorage.getItem('dudu_deleted_feishu_text') || '[]');
+          if (!delText.includes(norm)) {
+            delText.push(norm);
+            localStorage.setItem('dudu_deleted_feishu_text', JSON.stringify(delText));
+          }
+        }
+        if (window.CloudSync) window.CloudSync.saveNow();
       }
       renderInspirations();
     }
@@ -3454,8 +3464,14 @@
       const todayStr = `${today.getMonth() + 1}月${today.getDate()}日`;
       const hasLiveItems = Array.isArray(window.LIVE_INSPIRATIONS_DATA?.items) && window.LIVE_INSPIRATIONS_DATA.items.length > 0;
 
-      // 加载已删除的飞书条目 ID 列表
+      // 加载已删除的飞书条目 ID 列表 + 文本指纹（重排后按文本兜底匹配）
       const deletedFeishuIds = JSON.parse(localStorage.getItem('dudu_deleted_feishu') || '[]');
+      const deletedFeishuTexts = JSON.parse(localStorage.getItem('dudu_deleted_feishu_text') || '[]');
+      function _isFeishuDeleted(feiId, txt) {
+        if (deletedFeishuIds.includes(feiId)) return true;
+        const norm = String(txt || '').trim().replace(/\s+/g, ' ');
+        return norm && deletedFeishuTexts.indexOf(norm) !== -1;
+      }
 
       const feishuItems = window.LIVE_INSPIRATIONS_DATA?.items || INSPIRATIONS_DATA?.items || [];
       feishuItems.forEach((i, di) => {
@@ -3482,7 +3498,7 @@
           const harvestParts = splitNumberedText(i.harvest);
           harvestParts.forEach((t, hi) => {
             const id = `feishu_h_${di}_${hi}`;
-            if (!deletedFeishuIds.includes(id)) {
+            if (!_isFeishuDeleted(id, t)) {
               items.push({ id, date: i.date, type: 'harvest', text: t, fp: inspireFp('harvest', t) });
             }
           });
@@ -3491,7 +3507,7 @@
           const moodParts = splitNumberedText(i.mood);
           moodParts.forEach((t, mi) => {
             const id = `feishu_md_${di}_${mi}`;
-            if (!deletedFeishuIds.includes(id)) {
+            if (!_isFeishuDeleted(id, t)) {
               items.push({ id, date: i.date, type: 'mood', text: t, fp: inspireFp('mood', t) });
             }
           });
@@ -3501,7 +3517,7 @@
         if (i.task) {
           splitJotText(i.task, 'task').forEach((t, ti) => {
             const id = `feishu_t_${di}_${ti}`;
-            if (!deletedFeishuIds.includes(id)) {
+            if (!_isFeishuDeleted(id, t)) {
               items.push({ id, date: i.date, type: 'task', text: t, fp: inspireFp('task', t) });
             }
           });
@@ -3509,7 +3525,7 @@
         if (i.inspiration) {
           splitJotText(i.inspiration, 'inspiration').forEach((t, ii) => {
             const id = `feishu_i_${di}_${ii}`;
-            if (!deletedFeishuIds.includes(id)) {
+            if (!_isFeishuDeleted(id, t)) {
               items.push({ id, date: i.date, type: 'inspiration', text: t, fp: inspireFp('inspiration', t) });
             }
           });
@@ -3641,7 +3657,7 @@
                 <button class="reclassify-opt mood" onclick="reclassifyJot('${item.id}','mood')">💭 情绪</button>
               </div>
               <button class="reclassify-btn" onclick="showReclassifyMenu(this, '${item.id}')" title="重新分类" style="background:none;border:none;cursor:pointer;font-size:0.7rem;padding:2px 5px;border-radius:6px;color:var(--ink-faint);transition:all 0.2s;">🔄</button>
-              <button onclick="deleteJot('${item.id}')" title="删除" style="background:none;border:none;cursor:pointer;font-size:0.7rem;padding:2px 5px;border-radius:6px;color:var(--ink-faint);transition:all 0.2s;">🗑️</button>
+              <button onclick="deleteJot(${JSON.stringify(item.id)}, ${JSON.stringify(item.text)})" title="删除" style="background:none;border:none;cursor:pointer;font-size:0.7rem;padding:2px 5px;border-radius:6px;color:var(--ink-faint);transition:all 0.2s;">🗑️</button>
             </div>
           </div>`;
         }).join('') + '</div>';

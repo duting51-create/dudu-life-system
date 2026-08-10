@@ -15,6 +15,9 @@
   // 公开站点仍会暴露此 Token，建议后续在 GitHub 后台生成一个「仅限本仓库 Contents:Read&Write」的细粒度 PAT 替换它。
   var GITHUB_TOKEN = ['ghp_', 'CFQXYad3R5edmsl2fF0goQ3', 'U2aoCY54eD6Lu'].join('');
   var KEY_STORAGE = 'dudu_sync_key';
+  // 待删除集合的持久化键：markDeleted 默认只存内存，刷新后丢失 → 云端残留项回流「删了又出现」。
+  // 落地到 localStorage 后，删除意图跨刷新/跨设备持续生效，直到云端成功落库才清除。
+  var PENDING_DELETES_KEY = 'dudu_pending_deletes';
   var SYNC_KEYS = [
     'dudu_tasks',
     'dudu_tasks_updated_at',
@@ -33,7 +36,8 @@
     'dudu_invest_gains',
     'dudu_mortgage_balance',
     'dudu_movies_wish',
-    'dudu_movies_collect'
+    'dudu_movies_collect',
+    'dudu_deleted_feishu_text'
   ];
   var SYNC_PREFIXES = ['exercise_checked_'];
   var pendingKeyPromise = null;
@@ -242,6 +246,8 @@
         // 首屏渲染不依赖云端：立即标记已初始化，云端读取在后台进行，
         // 成功与否都绝不阻塞首屏、绝不整页重渲染（避免弱网/VPN 下白屏）。
         self._initialized = true;
+        // 恢复上次会话持久化的待删除集合，确保刷新后删除意图不丢失（根治「删了又出现」）
+        self._pendingDeletes = self._loadPendingDeletes();
         var _initFetch = self._fetchCloud().then(function (cloudState) {
           if (cloudState && typeof cloudState === 'object') {
             var merged = self._merge(cloudState, self._readLocal());
@@ -386,14 +392,20 @@
         }
 
         if (key === 'dudu_jots') {
+          var cloudJots = Array.isArray(cloudValue) ? cloudValue : [];
           var notes = {};
-          (Array.isArray(cloudValue) ? cloudValue : [])
-            .concat(Array.isArray(localValue) ? localValue : [])
-            .forEach(function (note) {
-              if (!isValidJotItem(note)) return;
-              var id = note.id || ('local_' + note.ts);
-              notes[id] = notes[id] || note;
-            });
+          cloudJots.concat(Array.isArray(localValue) ? localValue : []).forEach(function (note) {
+            if (!isValidJotItem(note)) return;
+            var id = note.id || ('local_' + note.ts);
+            if (!notes[id]) {
+              notes[id] = note;
+              // 已存在于云端 = 已同步完成：关闭 syncPending，避免「本地待同步」永久显示；
+              // 同时让「划掉的非当天灵感」按正常规则消失，而非因 syncPending 一直挂着。
+              if (cloudJots.some(function (c) { return (c.id || ('local_' + c.ts)) === id; })) {
+                notes[id].syncPending = false;
+              }
+            }
+          });
           (self._pendingDeletes[key] || []).forEach(function (id) { delete notes[id]; });
           merged[key] = Object.keys(notes).map(function (id) { return notes[id]; });
           return;
@@ -668,9 +680,37 @@
     },
 
     markDeleted: function (key, id) {
+      if (!id) return;
       this._pendingDeletes[key] = this._pendingDeletes[key] || [];
       if (this._pendingDeletes[key].indexOf(id) === -1) this._pendingDeletes[key].push(id);
+      // 持久化待删除集合：刷新后内存态不丢失，云端残留项不再回流导致「删了又出现」
+      this._persistPendingDeletes();
+      // dudu_jots：立即从本地数组摘除，即使云端写入因弱网失败也保证当次不回显
+      if (key === 'dudu_jots') {
+        try {
+          var arr = JSON.parse(localStorage.getItem('dudu_jots') || '[]');
+          var before = arr.length;
+          var self = this;
+          arr = arr.filter(function (j) {
+            var jid = j.id || ('local_' + j.ts);
+            return self._pendingDeletes['dudu_jots'].indexOf(jid) === -1;
+          });
+          if (arr.length !== before) localStorage.setItem('dudu_jots', JSON.stringify(arr));
+        } catch (e) {}
+      }
       this._dirty = true;
+    },
+
+    _loadPendingDeletes: function () {
+      try {
+        var saved = localStorage.getItem(PENDING_DELETES_KEY);
+        if (saved) return JSON.parse(saved) || {};
+      } catch (e) {}
+      return {};
+    },
+
+    _persistPendingDeletes: function () {
+      try { localStorage.setItem(PENDING_DELETES_KEY, JSON.stringify(this._pendingDeletes)); } catch (e) {}
     },
 
     // save 串行化：同一时刻只跑一个 _doSave；期间若又有新改动（_dirty 被重新置 true），
@@ -710,6 +750,7 @@
         }).then(function () {
           self._lastSaveContent = content;
           self._pendingDeletes = {};
+          self._persistPendingDeletes();
           self._loading = true;
           self._writeLocal(merged);
           self._loading = false;
