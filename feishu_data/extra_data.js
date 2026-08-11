@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "跟你在一起的时光都，很耀眼，因为天气好，因为天气不好，因为天气刚刚好，每一天，都很美好。",
-  "source": "孤单又灿烂的神：鬼怪"
+  "content": "草原大得孤独，白云美得忧愁，我不知道是不是碰到了最好的马，也许我还没有走遍草原。",
+  "source": "洗澡"
 };
 window.updated = {
   "name": "嗨咻",
