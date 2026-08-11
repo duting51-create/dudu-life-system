@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "精神病院的围墙外是疯狂，墙内才是清醒。",
-  "source": "我在精神病院学斩神"
+  "content": "历史的发展是不以人的意志为转移的。",
+  "source": "毛泽东"
 };
 window.updated = {
   "name": "嗨咻",
