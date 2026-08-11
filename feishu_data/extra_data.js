@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "草原大得孤独，白云美得忧愁，我不知道是不是碰到了最好的马，也许我还没有走遍草原。",
-  "source": "洗澡"
+  "content": "精神病院的围墙外是疯狂，墙内才是清醒。",
+  "source": "我在精神病院学斩神"
 };
 window.updated = {
   "name": "嗨咻",
