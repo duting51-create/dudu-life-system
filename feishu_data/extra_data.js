@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "历史的发展是不以人的意志为转移的。",
-  "source": "毛泽东"
+  "content": "博学而笃志，切问而近思。",
+  "source": "论语·子张"
 };
 window.updated = {
   "name": "嗨咻",
