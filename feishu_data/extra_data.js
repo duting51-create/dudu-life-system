@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "不是每一次出走，都能再回去的。",
-  "source": "残次品"
+  "content": "一本书上每多一个公式，就会减少一半读者。",
+  "source": "名人名言"
 };
 window.updated = {
   "name": "嗨咻",
