@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "世事变幻无常，而近乎永恒不变者，唯你我头上的同一片星空。",
-  "source": "万国志"
+  "content": "不是每一次出走，都能再回去的。",
+  "source": "残次品"
 };
 window.updated = {
   "name": "嗨咻",
