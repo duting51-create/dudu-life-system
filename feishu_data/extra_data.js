@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们的生命不是和这种孩子的悲伤一样，迅速地消逝在夜色中吗？",
-  "source": "暗店街"
+  "content": "世事变幻无常，而近乎永恒不变者，唯你我头上的同一片星空。",
+  "source": "万国志"
 };
 window.updated = {
   "name": "嗨咻",
