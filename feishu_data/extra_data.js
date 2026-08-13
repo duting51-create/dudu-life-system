@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们都做了自己的选择，我们都许下了自己的誓言。我们每个人都要在黑暗中死去。认命。",
-  "source": "SCP基金会"
+  "content": "她那时候还太年轻,不知道所有命运赠予的礼物,早已在暗中标好了价格。",
+  "source": "断头皇后"
 };
 window.updated = {
   "name": "嗨咻",
