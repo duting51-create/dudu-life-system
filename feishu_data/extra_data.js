@@ -4,23 +4,23 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "101.和桂律师聊天｜从大S的离婚到遗产，结婚究竟改变了什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
-      "latest": "101.经典回顾｜中西方带娃理念禁忌大比拼"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "畅所育言",
-      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
-      "latest": "白带答疑：性生活后变多？变黄？异味儿？瘙痒？口服益生菌？|Vol.175"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "只羡忘羡不羡仙，说是天天就天天",
-  "source": "魔道祖师"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
