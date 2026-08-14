@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "医生，我这是赌赢了，还是输了？| 有点小事62"
+      "latest": "白带答疑：性生活后变多？变黄？异味儿？瘙痒？口服益生菌？|Vol.175"
     },
     {
       "name": "Alison Yu心理",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "对我来说，风光无限的是你，跌落尘埃的也是你。重点是“你”，而不是“怎样”的你。",
-  "source": "天官赐福"
+  "content": "只羡忘羡不羡仙，说是天天就天天",
+  "source": "魔道祖师"
 };
 window.updated = {
   "name": "嗨咻",
