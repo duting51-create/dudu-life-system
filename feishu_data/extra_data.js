@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-13",
+  "updated": "2026-08-14",
   "list": [
     {
       "name": "嗨咻",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-13",
+  "updated": "2026-08-14",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "天不老，情难绝。心似双丝网，中有千千结。",
-  "source": "千秋岁·数声鶗鴂"
+  "content": "对我来说，风光无限的是你，跌落尘埃的也是你。重点是“你”，而不是“怎样”的你。",
+  "source": "天官赐福"
 };
 window.updated = {
   "name": "嗨咻",
