@@ -1,26 +1,26 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-14",
+  "updated": "2026-08-15",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "101.和桂律师聊天｜从大S的离婚到遗产，结婚究竟改变了什么？"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "101.经典回顾｜中西方带娃理念禁忌大比拼"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "白带答疑：性生活后变多？变黄？异味儿？瘙痒？口服益生菌？|Vol.175"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-14",
+  "updated": "2026-08-15",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "有的人，袖里能定乾坤；有的人，春风桃李，俯首为火种；有的人，浪子回头，成为星河里最亮的一颗。",
+  "source": "网剧棋魂"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
