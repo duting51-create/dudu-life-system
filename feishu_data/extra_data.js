@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "所谓“大家”，就是无视并牺牲了一部分弱势群体后所达到的虚伪的和平与共识",
-  "source": "我的青春恋爱物语绝对有问题"
+  "content": "一切已失去，不可以再追。",
+  "source": "梦伴"
 };
 window.updated = {
   "name": "嗨咻",
