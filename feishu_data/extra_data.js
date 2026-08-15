@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "有的人，袖里能定乾坤；有的人，春风桃李，俯首为火种；有的人，浪子回头，成为星河里最亮的一颗。",
-  "source": "网剧棋魂"
+  "content": "游蕲水清泉寺，寺临兰溪，溪水西流。",
+  "source": "浣溪沙"
 };
 window.updated = {
   "name": "嗨咻",
