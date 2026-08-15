@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "游蕲水清泉寺，寺临兰溪，溪水西流。",
-  "source": "浣溪沙"
+  "content": "所谓“大家”，就是无视并牺牲了一部分弱势群体后所达到的虚伪的和平与共识",
+  "source": "我的青春恋爱物语绝对有问题"
 };
 window.updated = {
   "name": "嗨咻",
