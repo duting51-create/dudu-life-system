@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "贾维斯，在我们学会走之前，要先学会跑！",
-  "source": "钢铁侠"
+  "content": "我该如何爱你？风吹动岁月的经幡，近也不能，远也不能。",
+  "source": "月光落在左手上"
 };
 window.updated = {
   "name": "嗨咻",
