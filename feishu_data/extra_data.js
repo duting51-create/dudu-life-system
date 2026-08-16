@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "如果预计中的不幸没有发生的话，我们就会收获意外的喜悦。",
-  "source": "人生的智慧"
+  "content": "贾维斯，在我们学会走之前，要先学会跑！",
+  "source": "钢铁侠"
 };
 window.updated = {
   "name": "嗨咻",
