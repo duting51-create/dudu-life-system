@@ -4527,15 +4527,15 @@
       var src = String(text || '').replace(/\r/g, '').trim();
       if (!src) return [];
       var normalized = src
-        .replace(/([。！？；])\s*(?=\d+[.、：:）)\-])/g, '$1\n')
-        .replace(/\s+(?=\d+[.、：:）)\-])/g, '\n');
+        .replace(/([。！？；])\s*(?=\d+[.、：:）)\-](?!\d))/g, '$1\n')
+        .replace(/\s+(?=\d+[.、：:）)\-](?!\d))/g, '\n');
       var parts = normalized
         .split(/\n+/)
         .map(function (line) { return cleanTaskText(line); })
         .filter(Boolean);
       if (parts.length > 1) return parts;
       var inlineParts = src
-        .split(/(?=\d+[.、：:）)\-]\s*)/g)
+        .split(/(?=\d+[.、：:）)\-](?!\d)\s*)/g)
         .map(function (line) { return cleanTaskText(line); })
         .filter(Boolean);
       return inlineParts.length > 1 ? inlineParts : [cleanTaskText(src)];
