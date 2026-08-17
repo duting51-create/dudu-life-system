@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "那就是在梦里，找一个很高很高的地方，然后往下跳，不管再恐怖的噩梦都会结束。",
-  "source": "想加你"
+  "content": "所谓无底深渊，下去，也是前程万里。",
+  "source": "素履之往"
 };
 window.updated = {
   "name": "嗨咻",
