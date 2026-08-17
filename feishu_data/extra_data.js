@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-16",
+  "updated": "2026-08-17",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "101.和桂律师聊天｜从大S的离婚到遗产，结婚究竟改变了什么？"
+      "latest": "101.跟桂律师聊天｜为什么感情越好，越该把钱说清楚？"
     },
     {
       "name": "头回当妈",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-16",
+  "updated": "2026-08-17",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我该如何爱你？风吹动岁月的经幡，近也不能，远也不能。",
-  "source": "月光落在左手上"
+  "content": "希望，希望，用这希望的盾，抗拒那空虚中的暗夜的袭来。",
+  "source": "希望"
 };
 window.updated = {
   "name": "嗨咻",
