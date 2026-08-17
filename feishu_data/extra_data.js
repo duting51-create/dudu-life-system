@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "所谓无底深渊，下去，也是前程万里。",
-  "source": "素履之往"
+  "content": "此生此夜不长好，明月明年何处看。",
+  "source": "阳关曲 / 中秋月"
 };
 window.updated = {
   "name": "嗨咻",
