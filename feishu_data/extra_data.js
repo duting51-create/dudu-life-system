@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
+      "latest": "ep91 | 如何找回自己的勇气和力量，走出气馁"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "鹰击长空，鱼翔浅底，万类霜天竞自由。怅寥廓，问苍茫大地，谁主沉浮？",
-  "source": "沁园春·长沙"
+  "content": "那就是在梦里，找一个很高很高的地方，然后往下跳，不管再恐怖的噩梦都会结束。",
+  "source": "想加你"
 };
 window.updated = {
   "name": "嗨咻",
