@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260817-1016" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260817-1016" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20260817-1036" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20260817-1036" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2477,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20260817-1016" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20260817-1016" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20260817-1016" defer></script>
+  <script src="cloud-sync.js?v=sync-20260817-1036" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20260817-1036" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20260817-1036" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -2633,6 +2633,37 @@
             });
           });
         }
+        // 8/17 清理：feed 非空时，干掉明显是碎片的本地/云端脏数据。
+        // 包括：① sourceId 以 task: 开头但已不在 feed 中的旧覆盖；② 长度≤3 或纯数字/金额碎片。
+        if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
+          const feedKeys = {};
+          window.TASKS_DATA.items.forEach(function (t) {
+            if (!t || !t.text) return;
+            taskMatchKeys(t).forEach(function (k) { feedKeys[k] = true; });
+          });
+          savedTasks = savedTasks.filter(function (t) {
+            if (!t || !isValidTaskText(t)) return false;
+            const txt = String(t.text || '').trim();
+            // 明显碎片：纯数字/金额/长度≤3
+            if (txt.length <= 3 || /^\d+(\.\d*)?元?$|^\.\d+元?$/.test(txt)) return false;
+            // sourceId 是 task: 开头的旧 feed 覆盖，但当前 feed 已不存在 → 清理
+            const sid = String(t.sourceId || '');
+            if (sid.indexOf('task:') === 0) {
+              var stillInFeed = false;
+              taskMatchKeys(t).forEach(function (k) { if (feedKeys[k]) stillInFeed = true; });
+              return stillInFeed;
+            }
+            return true;
+          });
+          // 重建 savedByKey
+          savedByKey = {};
+          savedTasks.forEach(function (t) {
+            taskMatchKeys(t).forEach(function (key) {
+              if (!savedByKey[key]) savedByKey[key] = t;
+            });
+          });
+        }
+
         if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
           window.TASKS_DATA.items.forEach(function (task) {
             if (!task || !task.text) return;
