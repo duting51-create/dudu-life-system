@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260817-1036" as="script">
-  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260817-1036" as="script">
+  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260817-1101" as="script">
+  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260817-1101" as="script">
   <link rel="preload" href="../feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2477,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="../cloud-sync.js?v=sync-20260817-1036" defer></script>
-  <script src="../feishu_data/dashboard_data.js?v=data-20260817-1036" defer></script>
-  <script src="../feishu_data/extra_data.js?v=extra-20260817-1036" defer></script>
+  <script src="../cloud-sync.js?v=sync-20260817-1101" defer></script>
+  <script src="../feishu_data/dashboard_data.js?v=data-20260817-1101" defer></script>
+  <script src="../feishu_data/extra_data.js?v=extra-20260817-1101" defer></script>
   <script src="../feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -2634,7 +2634,8 @@
           });
         }
         // 8/17 清理：feed 非空时，干掉明显是碎片的本地/云端脏数据。
-        // 包括：① sourceId 以 task: 开头但已不在 feed 中的旧覆盖；② 长度≤3 或纯数字/金额碎片。
+        // 包括：① sourceId 以 task: 开头但已不在 feed 中的旧覆盖；② 长度≤3 或纯数字/金额碎片；
+        // ③ sourceId 匹配但文本被截断/篡改的脏数据（如 feed 是"定价为39.9元"，本地却是"定价为"）。
         if (Array.isArray(savedTasks) && savedTasks.length && window.TASKS_DATA.items.length) {
           const feedKeys = {};
           window.TASKS_DATA.items.forEach(function (t) {
@@ -4902,6 +4903,14 @@
         if (!Array.isArray(savedTasks)) savedTasks = [];
       } catch(e) {}
 
+      // 8/17 加固：先过滤本地保存的碎片/截断脏数据（如"3""9元""定价为"）。
+      savedTasks = savedTasks.filter(function (t) {
+        if (!t || !isValidTaskText(t)) return false;
+        const txt = String(t.text || '').trim();
+        if (txt.length <= 3 || /^\d+(\.\d*)?元?$|^\.\d+元?$/.test(txt)) return false;
+        return true;
+      });
+
       // 关键修复：feed 未就绪（首刷时 assignData 把 TASKS_DATA.date 设为空，
       // 导致 getTodayFeedTasks 返回 []）时，必须基于已保存的 localStorage.dudu_tasks
       // 恢复「划掉(done)」态。注意：此时 TASKS_DATA.items 可能已被 assignData 填成
@@ -4974,9 +4983,10 @@
           if (matchedIndex >= 0) {
             usedSavedIndexes.add(matchedIndex);
             const sv = savedNormalized[matchedIndex];
-            // 保留本地保存任务的 updatedAt / sourceId，避免 feed 重建时丢失 per-task 时间戳，
+            // 保留本地保存任务的 done / updatedAt / sourceId，避免 feed 重建时丢失 per-task 时间戳，
             // 否则跨设备合并会退化成「全员同戳」，重新出现互相覆盖。
-            return { ...task, done: Boolean(sv.done), updatedAt: sv.updatedAt || task.updatedAt, sourceId: task.sourceId || sv.sourceId };
+            // 8/17 加固：文本始终以 feed 为准，防止本地脏数据（如被截断的"定价为"）覆盖正确文本。
+            return { ...task, text: task.text, done: Boolean(sv.done), updatedAt: sv.updatedAt || task.updatedAt, sourceId: task.sourceId || sv.sourceId };
           }
           return task;
         });
