@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "希望，希望，用这希望的盾，抗拒那空虚中的暗夜的袭来。",
-  "source": "希望"
+  "content": "鹰击长空，鱼翔浅底，万类霜天竞自由。怅寥廓，问苍茫大地，谁主沉浮？",
+  "source": "沁园春·长沙"
 };
 window.updated = {
   "name": "嗨咻",
