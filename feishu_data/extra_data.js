@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "101.跟桂律师聊天｜为什么感情越好，越该把钱说清楚？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生活和漫画里面的那种热血还是不一样的。",
-  "source": "影视飓风"
+  "content": "世界是一场空虚的宇宙，有时候仍像是一个梦。",
+  "source": "少女诗人小冰"
 };
 window.updated = {
   "name": "嗨咻",
