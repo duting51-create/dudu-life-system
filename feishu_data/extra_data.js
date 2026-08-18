@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "只想拥有一颗赤色的心脏，拱卫那赤诚的善良。",
-  "source": "只为善良"
+  "content": "生活和漫画里面的那种热血还是不一样的。",
+  "source": "影视飓风"
 };
 window.updated = {
   "name": "嗨咻",
