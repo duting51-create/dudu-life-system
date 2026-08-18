@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-17",
+  "updated": "2026-08-18",
   "list": [
     {
       "name": "嗨咻",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-17",
+  "updated": "2026-08-18",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "此生此夜不长好，明月明年何处看。",
-  "source": "阳关曲 / 中秋月"
+  "content": "只想拥有一颗赤色的心脏，拱卫那赤诚的善良。",
+  "source": "只为善良"
 };
 window.updated = {
   "name": "嗨咻",
