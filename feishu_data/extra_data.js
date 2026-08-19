@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep91 | 如何找回自己的勇气和力量，走出气馁"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我的生命，本来就在不假思索地奔向死亡。",
-  "source": "弥留之国的爱丽丝"
+  "content": "平生不会相思，才会相思，便害相思。",
+  "source": "折桂令·春情"
 };
 window.updated = {
   "name": "嗨咻",
