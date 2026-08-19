@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-18",
+  "updated": "2026-08-19",
   "list": [
     {
       "name": "嗨咻",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "白带答疑：性生活后变多？变黄？异味儿？瘙痒？口服益生菌？|Vol.175"
+      "latest": "人类为何没有「发情期」？| 有点小事63"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-18",
+  "updated": "2026-08-19",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "世界是一场空虚的宇宙，有时候仍像是一个梦。",
-  "source": "少女诗人小冰"
+  "content": "她记不清船儿划了多远，或许划过了银河，划过了彼岸，直到那满江的桃花，伴着那皎白的碎月，一起流远……",
+  "source": "自创"
 };
 window.updated = {
   "name": "嗨咻",
