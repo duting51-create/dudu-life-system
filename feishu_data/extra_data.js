@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "101.跟桂律师聊天｜为什么感情越好，越该把钱说清楚？"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep91 | 如何找回自己的勇气和力量，走出气馁"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "她记不清船儿划了多远，或许划过了银河，划过了彼岸，直到那满江的桃花，伴着那皎白的碎月，一起流远……",
-  "source": "自创"
+  "content": "我的生命，本来就在不假思索地奔向死亡。",
+  "source": "弥留之国的爱丽丝"
 };
 window.updated = {
   "name": "嗨咻",
