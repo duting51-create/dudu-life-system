@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "平生不会相思，才会相思，便害相思。",
-  "source": "折桂令·春情"
+  "content": "黑云翻墨未遮山，白雨跳珠乱入船。",
+  "source": "六月二十七日望湖楼醉书"
 };
 window.updated = {
   "name": "嗨咻",
