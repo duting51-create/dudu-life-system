@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "黑云翻墨未遮山，白雨跳珠乱入船。",
-  "source": "六月二十七日望湖楼醉书"
+  "content": "所爱隔山海，山海皆可平。",
+  "source": "山木诗词"
 };
 window.updated = {
   "name": "嗨咻",
