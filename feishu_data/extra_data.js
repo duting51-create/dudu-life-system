@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "大多人都活在平静的绝望中，不要逆来顺受，要破茧而出。",
-  "source": "死亡诗社"
+  "content": "叶底藏花一度，梦里踏雪几回。",
+  "source": "一代宗师"
 };
 window.updated = {
   "name": "嗨咻",
