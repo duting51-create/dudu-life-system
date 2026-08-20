@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "叶底藏花一度，梦里踏雪几回。",
-  "source": "一代宗师"
+  "content": "极霸矛，湘阿痕响啊。",
+  "source": "中华inm"
 };
 window.updated = {
   "name": "嗨咻",
