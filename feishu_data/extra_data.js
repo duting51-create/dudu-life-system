@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-19",
+  "updated": "2026-08-20",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "101.跟桂律师聊天｜为什么感情越好，越该把钱说清楚？"
+      "latest": "102.和柱子哥阿娇聊天｜横竖都是死，我为什么不做我？"
     },
     {
       "name": "头回当妈",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-19",
+  "updated": "2026-08-20",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "所爱隔山海，山海皆可平。",
-  "source": "山木诗词"
+  "content": "大多人都活在平静的绝望中，不要逆来顺受，要破茧而出。",
+  "source": "死亡诗社"
 };
 window.updated = {
   "name": "嗨咻",
