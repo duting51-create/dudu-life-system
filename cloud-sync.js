@@ -895,43 +895,124 @@
     }
   };
 
-  // 飞书实时数据源：本地 server.py（端口 3847）拥有飞书写入能力（OpenAPI + lark-cli）。
-  // 网页上的「新增 / 划掉」通过它写回飞书对应列；server.py 未运行（如手机端）时静默降级到本地。
+  // 飞书写入有两条后端路线，按环境自动选择：
+  //   路线 A：本地 server.py（端口 3847）—— 仅当页面本身跑在 localhost/file:// 时启用。
+  //   路线 B：Cloudflare Worker（dudu-life-sync）—— 手机端、以及从 https 线上站点打开时走它，
+  //           由 Worker 直接调飞书 OpenAPI 写 D/E/F/G 列，不依赖本机、不依赖代理。
+  //
+  // ⚠️ 8/21 修复的根因 bug：过去只有路线 A，且无条件 fetch('http://localhost:3847')。
+  //    手机端根本没有这个服务；而线上是 https 页面，请求 http://localhost 还会被浏览器
+  //    当混合内容拦掉。更致命的是 catch 里把失败静默降级成 { status:'ok' }，
+  //    于是 UI 提示「已同步飞书」，内容却只留在本机 localStorage —— 这就是
+  //    「手机端灵感宝箱写的内容网站看得到、飞书里没有」的真正原因。
+  var FEISHU_WORKER_BASE = 'https://dudu-life-sync.duting51.workers.dev';
+  var FEISHU_WORKER_KEY = 'dudu-life-sync-key-2026-stable';
+  var LOCAL_FEISHU_BASE = 'http://localhost:3847';
+
+  // 只有页面自身就在本地时才尝试 server.py，避免 https→http 混合内容被拦
+  function _canUseLocalFeishu() {
+    try {
+      var host = window.location.hostname;
+      return host === 'localhost' || host === '127.0.0.1' || window.location.protocol === 'file:';
+    } catch (e) { return false; }
+  }
+
+  // 文本归一化：去掉行首编号与全部空白，用于把前端条目匹配到飞书行内的同一条
+  function _normalizeJotText(value) {
+    return String(value == null ? '' : value)
+      .replace(/^\s*\d+\s*[.、：:）)\-]\s*/, '')
+      .replace(/\s+/g, '');
+  }
+
+  function _readJsonResult(response) {
+    return response.json().then(function (data) {
+      return { ok: response.ok && data && data.status === 'ok', data: data || {} };
+    }).catch(function () {
+      return { ok: false, data: {} };
+    });
+  }
+
+  function _postLocalFeishu(path, body) {
+    return _fetchWithTimeout(LOCAL_FEISHU_BASE + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }, 4000).then(_readJsonResult).catch(function () {
+      return { ok: false, unreachable: true, data: {} };
+    });
+  }
+
+  function _workerFeishu(method, body) {
+    var options = { method: method, headers: { 'X-Dudu-Sync-Key': FEISHU_WORKER_KEY } };
+    if (body) {
+      options.headers['Content-Type'] = 'application/json';
+      options.body = JSON.stringify(body);
+    }
+    return _fetchWithTimeout(FEISHU_WORKER_BASE + '/api/inspirations', options, 20000)
+      .then(_readJsonResult).catch(function () {
+        return { ok: false, unreachable: true, data: {} };
+      });
+  }
+
+  // 划掉 / 取消划掉走 Worker 需要飞书行内精确 id（live_<行号>_<列>_<序号>），
+  // 而前端手里只有 {type, text}，所以先读今天那一行按归一化文本反查 id。
+  function _workerResolveItemId(type, text) {
+    return _workerFeishu('GET', null).then(function (res) {
+      var items = (res.data && res.data.items) || [];
+      var want = _normalizeJotText(text);
+      for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        if (it && it.type === type && _normalizeJotText(it.text) === want) return it.id;
+      }
+      return null;
+    }).catch(function () { return null; });
+  }
+
   var FeishuSync = {
     refresh: function (notify) {
       return Promise.resolve({ status: 'ok', items: [] });
     },
     mutate: function (payload) {
-      var action = payload && payload.action;
-      function post(path, body) {
-        return fetch('http://localhost:3847' + path, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body)
-        }).then(function (r) {
-          return r.json().then(function (d) { return { ok: r.ok && d.status === 'ok', data: d }; });
-        }).catch(function (error) {
-          // 本地服务未运行（手机端 / server.py 未启动）时避免抛错中断页面
-          return { ok: false, network: true, data: { message: '本地飞书服务未运行' } };
+      var action = (payload && payload.action) || 'create';
+
+      if (action === 'create') {
+        var type = payload.type || 'inspiration';
+        var text = payload.text;
+        var localCreate = _canUseLocalFeishu()
+          ? _postLocalFeishu('/api/write-inspiration', { type: type, text: text })
+          : Promise.resolve({ ok: false, unreachable: true, data: {} });
+        return localCreate.then(function (res) {
+          if (res.ok) return { status: 'ok', via: 'local' };
+          // 关键：Worker 失败必须抛错，让调用方提示「飞书稍后同步」，
+          // 绝不再假装成功（假成功正是内容悄悄丢失的根源）。
+          return _workerFeishu('POST', { action: 'create', type: type, text: text })
+            .then(function (wres) {
+              if (wres.ok) return { status: 'ok', via: 'worker' };
+              throw new Error((wres.data && wres.data.message) || '飞书写入失败');
+            });
         });
       }
-      function handleRes(res) {
-        if (res.ok) return { status: 'ok' };
-        // 网络不可达（如手机端）静默降级，让本地保存 + 云端同步兜底
-        if (res.network) return { status: 'ok', deferred: true };
-        throw new Error((res.data && res.data.message) || '飞书操作失败');
-      }
-      if (action === 'create') {
-        // 新增任务/灵感/收获/情绪 → 写飞书对应列（今天）
-        return post('/api/write-inspiration', { type: payload.type, text: payload.text })
-          .then(handleRes);
-      }
+
       if (action === 'done' || action === 'undone') {
-        // 划掉 / 取消划掉 → 飞书对应列指定行加 / 去删除线（精准到行）
-        return post('/api/strike-inspiration', {
-          type: payload.type, text: payload.text, date: payload.date, struck: action === 'done'
-        }).then(handleRes);
+        var strikeType = payload.type;
+        var strikeText = payload.text;
+        var localStrike = _canUseLocalFeishu()
+          ? _postLocalFeishu('/api/strike-inspiration', {
+              type: strikeType, text: strikeText, date: payload.date, struck: action === 'done'
+            })
+          : Promise.resolve({ ok: false, unreachable: true, data: {} });
+        return localStrike.then(function (res) {
+          if (res.ok) return { status: 'ok', via: 'local' };
+          return _workerResolveItemId(strikeType, strikeText).then(function (id) {
+            // 匹配不到（例如条目不是今天的）就保持本地态，不阻塞划掉交互
+            if (!id) return { status: 'ok', deferred: true };
+            return _workerFeishu('POST', { action: action, id: id }).then(function (wres) {
+              return wres.ok ? { status: 'ok', via: 'worker' } : { status: 'ok', deferred: true };
+            });
+          });
+        });
       }
+
       // delete / update / reclassify：暂不写飞书（保持本地），避免误改飞书单元格
       return Promise.resolve({ status: 'ok' });
     }
