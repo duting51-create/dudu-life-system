@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-20",
+  "updated": "2026-08-21",
   "list": [
     {
       "name": "嗨咻",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "人类为何没有「发情期」？| 有点小事63"
+      "latest": "这期「乳房自救指南」，夯爆了！| Vol.176"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-20",
+  "updated": "2026-08-21",
   "list": [
     {
       "name": "爽",
