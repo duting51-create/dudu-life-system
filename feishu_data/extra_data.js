@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "远望如梯步步高，身临谷底进岩槽。",
-  "source": "过三峡五级船闸"
+  "content": "近乡情更怯，不敢问来人。",
+  "source": "渡汉江"
 };
 window.updated = {
   "name": "嗨咻",
