@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
+      "latest": "113入园大作战：准备好书包，也准备好第一次告别"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "让时光静静悄悄的流，把所有遗憾和失落都带走。",
-  "source": "bilibili"
+  "content": "远望如梯步步高，身临谷底进岩槽。",
+  "source": "过三峡五级船闸"
 };
 window.updated = {
   "name": "嗨咻",
