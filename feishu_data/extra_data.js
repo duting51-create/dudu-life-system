@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人皆荒醉，但唱观音。",
-  "source": "唐大和上东征传"
+  "content": "让时光静静悄悄的流，把所有遗憾和失落都带走。",
+  "source": "bilibili"
 };
 window.updated = {
   "name": "嗨咻",
