@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "仰天大笑出门去，我辈岂是蓬蒿人。",
-  "source": "南陵别儿童入京"
+  "content": "人皆荒醉，但唱观音。",
+  "source": "唐大和上东征传"
 };
 window.updated = {
   "name": "嗨咻",

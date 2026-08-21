@@ -1,6 +1,6 @@
 // 豆瓣观影清单（由 feishu_sync.py fetch_douban() 生成）
 window.DOUBAN_DATA = {
-  "updated": "2026-08-21",
+  "updated": "2026-08-18",
   "wish": [
     {
       "title": "戏梦巴黎",
