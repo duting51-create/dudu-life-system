@@ -1,5 +1,5 @@
 {
-  "year_income": "¥551,774",
+  "year_income": "¥595,774",
   "year_expense": "¥236,821",
   "monthly_data": [
     {
@@ -33,9 +33,12 @@
       "expense": 27747.77
     }
   ],
-  "yesterday_expense": "¥31.49",
-  "month_expense_to_yesterday": "¥166.91",
-  "last_updated": "2026-08-04",
+  "yesterday_expense": "¥79.10",
+  "month_expense_to_yesterday": "¥9647.03",
+  "last_updated": "2026-08-21",
+  "income_annual": 24973,
+  "income_ytd": 24973.0,
   "last_month_expense": "¥23,304.58",
-  "last_month_income": "¥34,711.87"
+  "last_month_income": "¥34,711.87",
+  "current_month_expense": "¥9666.03"
 }

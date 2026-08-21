@@ -56,160 +56,137 @@
       "hotness": "🎧"
     },
     {
-      "title": "🎙 当个事儿 | 我跟金钱的关系，被谁影响了？| Vol.173",
+      "title": "🎙 当个事儿 | 这期「乳房自救指南」，夯爆了！| Vol.176",
       "url": "https://www.xiaoyuzhoufm.com/podcast/60d2d172afc14743da181066",
       "source": "当个事儿",
       "category": "播客",
       "hotness": "🎧",
-      "time_ago": "3天前"
+      "time_ago": "今天"
     },
     {
-      "title": "🎙 嗨咻 | 100. 为什么越想表现自己，越容易在社交中露怯？",
+      "title": "🎙 嗨咻 | 102.和柱子哥阿娇聊天｜横竖都是死，我为什么不做我？",
       "url": "https://www.xiaoyuzhoufm.com/podcast/631812fe43274df80456d001",
       "source": "嗨咻",
-      "category": "播客",
-      "hotness": "🎧",
-      "time_ago": "5天前"
-    },
-    {
-      "title": "🎙 头回当妈 | 100. 特别节目｜头回当妈的101问 第一弹",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/6484fbe126fd9f4b4347ad04",
-      "source": "头回当妈",
-      "category": "播客",
-      "hotness": "🎧",
-      "time_ago": "6天前"
-    },
-    {
-      "title": "🎙 畅所育言 | 111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区",
-      "url": "https://www.xiaoyuzhoufm.com/podcast/64d25bd580c9ec4c5fbb0da4",
-      "source": "畅所育言",
       "category": "播客",
       "hotness": "🎧",
       "time_ago": "昨天"
     },
     {
-      "title": "🎙 Alison Yu心理 | ep90 | 边界：主体性的表达，真实关系的开始",
+      "title": "🎙 头回当妈 | 101.经典回顾｜中西方带娃理念禁忌大比拼",
+      "url": "https://www.xiaoyuzhoufm.com/podcast/6484fbe126fd9f4b4347ad04",
+      "source": "头回当妈",
+      "category": "播客",
+      "hotness": "🎧",
+      "time_ago": "2周前"
+    },
+    {
+      "title": "🎙 畅所育言 | 112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘",
+      "url": "https://www.xiaoyuzhoufm.com/podcast/64d25bd580c9ec4c5fbb0da4",
+      "source": "畅所育言",
+      "category": "播客",
+      "hotness": "🎧",
+      "time_ago": "1周前"
+    },
+    {
+      "title": "🎙 Alison Yu心理 | ep91 | 如何找回自己的勇气和力量，走出气馁",
       "url": "https://www.xiaoyuzhoufm.com/podcast/67c8dd34d6c2a59e23f2d932",
       "source": "Alison Yu心理",
       "category": "播客",
       "hotness": "🎧",
-      "time_ago": "2周前"
+      "time_ago": "4天前"
     }
   ],
   "ai_news": [
     {
-      "title": "AirLLM 实现单块 4GB GPU 运行 70B 模型推理",
-      "url": "https://aihot.virxact.com/items/cmsdg55m700l4roca3x3gtfb1",
-      "published": "Mon, 03 Aug 2026 16:24:45 GMT",
-      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
+      "title": "Claude Platform 正式上线 Computer Use、Skills API 与 Files API，新增浏览器操作工具",
+      "url": "https://aihot.virxact.com/items/cmt1z1q5n0c93roovlvh40tew",
+      "published": "Thu, 20 Aug 2026 20:27:01 GMT",
+      "source": "Claude：Blog（网页）",
       "time_ago": "今天"
     },
     {
-      "title": "OpenRouter 推出 Ori Eval 简化评估流程",
-      "url": "https://aihot.virxact.com/items/cmsdexxu702xbrotjockerya6",
-      "published": "Mon, 03 Aug 2026 15:31:21 GMT",
-      "source": "X：OpenRouter (@OpenRouter)",
+      "title": "Anthropic 如何开展 AI 教学",
+      "url": "https://aihot.virxact.com/items/cmt1tonwa07i9roovrze0ll65",
+      "published": "Thu, 20 Aug 2026 17:56:58 GMT",
+      "source": "Claude：Blog（网页）",
       "time_ago": "今天"
     },
     {
-      "title": "商汤发布 SenseNova U1.5-Lite-Preview 开源模型",
-      "url": "https://aihot.virxact.com/items/cmsdczxnl0138rotj8fjenm4b",
-      "published": "Mon, 03 Aug 2026 14:40:59 GMT",
-      "source": "X：商汤 SenseTime (@SenseTime_AI)",
+      "title": "Hugging Face 发布 LFM2.5 系列 DSpark 草稿模型，推理速度最高提升 3.18 倍",
+      "url": "https://aihot.virxact.com/items/cmt1rv5n8066iroovaxgoej1b",
+      "published": "Thu, 20 Aug 2026 16:52:57 GMT",
+      "source": "Hugging Face：Blog（RSS）",
       "time_ago": "今天"
     },
     {
-      "title": "Google Agent Skills 幕后：如何构建、测试与规模化",
-      "url": "https://aihot.virxact.com/items/cmsddya2a01t3rotjo94tdap8",
-      "published": "Mon, 03 Aug 2026 14:33:20 GMT",
-      "source": "Google AI：DEV 作者专属（RSS）",
+      "title": "Mistral 推出 Agentic Search：多步检索提升 AI 系统复杂文档查询准确率",
+      "url": "https://aihot.virxact.com/items/cmt1pkwbj04bxroovzkfca5c7",
+      "published": "Thu, 20 Aug 2026 16:02:07 GMT",
+      "source": "Mistral AI：News（网页）",
       "time_ago": "今天"
     },
     {
-      "title": "Cloudflare 推出 @cloudflare/computer 预览版：为智能体提供虚拟文件系统与多执行环境",
-      "url": "https://aihot.virxact.com/items/cmsdal06c16pxroeu5xtlavmg",
-      "published": "Mon, 03 Aug 2026 13:15:24 GMT",
-      "source": "Cloudflare Blog",
+      "title": "AlloyDB ScaNN 如何将向量搜索扩展到 100 亿向量",
+      "url": "https://aihot.virxact.com/items/cmt1r7jjh05lgroovc4zwypj6",
+      "published": "Thu, 20 Aug 2026 16:00:00 GMT",
+      "source": "Google Cloud：Databases（RSS）",
       "time_ago": "今天"
     },
     {
-      "title": "从实验到产线——AI 工作流的规模化挑战与协作生态 | 2026 ChinaJoy AI未来生态大会",
-      "url": "https://36kr.com/p/3923717502072969?f=rss",
-      "published": "2026-08-03 19:39:13  +0800",
-      "author": "",
-      "source": "36氪",
-      "time_ago": "08-03"
+      "title": "Claude Code 初创公司指南：五大规则与创始人洞见",
+      "url": "https://aihot.virxact.com/items/cmt1k19bn06qgrokx1p75h1gv",
+      "published": "Thu, 20 Aug 2026 13:26:53 GMT",
+      "source": "Claude：Blog（网页）",
+      "time_ago": "今天"
     },
     {
-      "title": "德明利今日跌超9%，36氪企业全情报提前捕捉到这一市场信号",
-      "url": "https://36kr.com/p/3923603053686151?f=rss",
-      "published": "2026-08-03 17:44:31  +0800",
-      "author": "",
-      "source": "36氪",
-      "time_ago": "08-03"
+      "title": "阿里发布 Qwen-UI-Agent，主打让模型真正&quot;会用&quot;每一块屏幕",
+      "url": "https://aihot.virxact.com/items/cmt1di48c04vuro1q95i06dby",
+      "published": "Thu, 20 Aug 2026 09:45:51 GMT",
+      "source": "IT之家（RSS）",
+      "time_ago": "今天"
     },
     {
-      "title": "可灵观察②｜用可灵重现《霸王别姬》：电影感足了，复杂叙事如何更稳？",
-      "url": "https://36kr.com/p/3923465542364545?f=rss",
-      "published": "2026-08-03 16:12:09  +0800",
-      "author": "",
-      "source": "36氪",
-      "time_ago": "08-03"
+      "title": "消息称 OpenAI 首席财务官告知员工：公司最迟将于 2027 年上市",
+      "url": "https://aihot.virxact.com/items/cmt0s2ems0dkxro2oylebzxob",
+      "published": "Thu, 20 Aug 2026 00:17:26 GMT",
+      "source": "IT之家（RSS）",
+      "time_ago": "昨天"
     },
     {
-      "title": "硬氪首发 | 硅光资深团队获数千万天使轮融资，瞄准CPO/OIO下一代光互连解决方案",
-      "url": "https://36kr.com/p/3923374038265217?f=rss",
-      "published": "2026-08-03 13:43:36  +0800",
-      "author": "",
-      "source": "36氪",
-      "time_ago": "08-03"
+      "title": "FastMetal 让 Mac 本地 30 秒生成视频",
+      "url": "https://aihot.virxact.com/items/cmt0kxcuu07f2ro2owuqpbjc8",
+      "published": "Wed, 19 Aug 2026 20:42:57 GMT",
+      "source": "X：Sky Computing Lab (@haoailab)",
+      "time_ago": "昨天"
     },
     {
-      "title": "前安克3D打印业务负责人要做B端工具产品，获数千万融资｜36氪首发",
-      "url": "https://36kr.com/p/3923371035831684?f=rss",
-      "published": "2026-08-03 13:40:12  +0800",
-      "author": "",
-      "source": "36氪",
-      "time_ago": "08-03"
+      "title": "Liquid AI 发布 LFM2.5 系列 QAD Q4_0 量化检查点，恢复 97% 精度损失",
+      "url": "https://aihot.virxact.com/items/cmt05zhyg139trodp6bxsy9e2",
+      "published": "Wed, 19 Aug 2026 13:48:49 GMT",
+      "source": "Hugging Face：Blog（RSS）",
+      "time_ago": "昨天"
     }
   ],
   "one_company_news": [
     {
-      "title": "老股东高价套现离场，新东家用并购贷接盘：欣天科技控制权易主背后的\"冰与火\"",
-      "url": "https://www.tmtpost.com/8089630.html",
-      "published": "Mon, 03 Aug 2026 20:19:32 +0800",
+      "title": "Chinese Mobile-Game Publishers Capture More Than 40 Percent of Global Top-100 Revenue",
+      "url": "https://www.tmtpost.com/8111264.html",
+      "published": "Fri, 21 Aug 2026 08:59:02 +0800",
       "author": "",
       "source": "钛媒体",
       "time_ago": "今天",
       "category": "资讯"
     },
     {
-      "title": "内存奇缺，Macbook Air 或缺货；智元母公司推《魔兽世界》机器人；微信地震预警上线新功能",
-      "url": "http://www.geekpark.net/news/368278",
-      "published": "Mon, 03 Aug 2026 08:13:32 +0800",
+      "title": "曝周杰伦将代言 vivo 手机；华为「阔直板」手机曝光；柯洁透露战胜 AI 秘诀：装弱智｜极客早知道",
+      "url": "http://www.geekpark.net/news/369114",
+      "published": "Fri, 21 Aug 2026 08:05:46 +0800",
       "author": "",
       "source": "极客公园",
       "time_ago": "今天",
       "category": "资讯"
-    },
-    {
-      "title": "一周要闻·阿联酋&卡塔尔｜迪拜国际金融中心2026上半年注册企业增长30%；卡塔尔自由区管理局推出卡塔尔钻石交易所",
-      "url": "https://36kr.com/p/3924021934258308?f=rss",
-      "published": "2026-08-04 00:42:22  +0800",
-      "author": "36氪出海",
-      "source": "36氪",
-      "time_ago": "08-04",
-      "category": "资讯"
-    },
-    {
-      "title": "实测千问办公：阿里这个 AI 专家，真的能帮你带货",
-      "url": "https://www.ifanr.com/1673793?utm_source=rss&utm_medium=rss&utm_campaign=",
-      "published": "Mon, 03 Aug 2026 14:16:52 +0000",
-      "author": "",
-      "source": "爱范儿",
-      "time_ago": "今天",
-      "category": "资讯"
     }
   ],
-  "last_updated": "2026-08-04"
+  "last_updated": "2026-08-21"
 }

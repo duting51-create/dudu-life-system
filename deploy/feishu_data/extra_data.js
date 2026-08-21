@@ -1,26 +1,26 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-04",
+  "updated": "2026-08-21",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
+      "latest": "102.和柱子哥阿娇聊天｜横竖都是死，我为什么不做我？"
     },
     {
       "name": "头回当妈",
-      "latest": "100. 特别节目｜头回当妈的101问 第一弹"
+      "latest": "101.经典回顾｜中西方带娃理念禁忌大比拼"
     },
     {
       "name": "畅所育言",
-      "latest": "111 专访大理溪谷小人国园长：在大理，我们不说幼儿园，我们聊儿童成长社区"
+      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
     },
     {
       "name": "当个事儿",
-      "latest": "我跟金钱的关系，被谁影响了？| Vol.173"
+      "latest": "这期「乳房自救指南」，夯爆了！| Vol.176"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep90 | 边界：主体性的表达，真实关系的开始"
+      "latest": "ep91 | 如何找回自己的勇气和力量，走出气馁"
     }
   ]
 };
@@ -37,7 +37,10 @@ window.MORTGAGE_DATA = {
   "pay_day": 21,
   "paid_months": 42,
   "total_months": 360,
-  "progress": 0.1007
+  "progress": 0.1007,
+  "next_pay_date": "2026-08-20",
+  "auto_computed": true,
+  "anchor_date": "2026-08-01"
 };
 window.INVEST_DATA = {
   "updated": "2026-08-03",
@@ -58,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-03",
+  "updated": "2026-08-21",
   "list": [
     {
       "name": "爽",
@@ -141,6 +144,16 @@ window.IMPORTANT_DATES_DATA = {
       "icon": "🎂"
     },
     {
+      "name": "韩莹",
+      "type": "生日",
+      "calendar": "lunar",
+      "lunar": "8-7",
+      "solar": null,
+      "mode": "countdown",
+      "next_date": "2026-09-17",
+      "icon": "🎂"
+    },
+    {
       "name": "结婚纪念日",
       "type": "纪念日",
       "calendar": "solar",
@@ -159,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们奋力前行，逆水行舟，被不断向后推，直至回到往昔岁月。",
-  "source": "了不起的盖茨比"
+  "content": "仰天大笑出门去，我辈岂是蓬蒿人。",
+  "source": "南陵别儿童入京"
 };
 window.updated = {
   "name": "嗨咻",

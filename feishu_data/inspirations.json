@@ -67,12 +67,40 @@
       "date": "8月7日",
       "inspiration": "",
       "harvest": "",
-      "task": "找之前的排卵监测报告，看内膜长的情况\n看不二的个人网站，学习一下",
+      "task": "找之前的排卵监测报告，看内膜长的情况\n看不二的个人网站，学习一下\n把这台 Mac 的数据都迁移到新 Mac，以后用新 Mac",
+      "mood": ""
+    },
+    {
+      "date": "8月10日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "晚上给杜爽爽视频问国庆要不要去马来西亚\n吃一盒酸奶+苹果桃子",
+      "mood": ""
+    },
+    {
+      "date": "8月12日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "缴7月社保",
+      "mood": ""
+    },
+    {
+      "date": "8月14日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "不做好物博主，看看是阿佳呀、水北山南的账号",
+      "mood": ""
+    },
+    {
+      "date": "8月20日",
+      "inspiration": "",
+      "harvest": "",
+      "task": "用湿纸巾擦一下几个白色桌面",
       "mood": ""
     }
   ],
   "last_updated": "6月24日",
-  "today_updated": true,
+  "today_updated": false,
   "done_map": {
     "task:挂周一的号-北京妇产医院": true,
     "task:买山药粉": true,
@@ -82,6 +110,10 @@
     "task:调研一下爆款笔记，关键词：生育、成为妈妈、怀孕": true,
     "task:把我的人生系统这个网站做一下优化迭代": true,
     "task:上架新产品，做 3 个 sku": true,
-    "task:扫地": true
+    "task:看有什么渠道/网站提升审美，现在作图和网页真的需要审美和提供给 AI 的素材": true,
+    "task:扫地": true,
+    "task:缴7月社保": true,
+    "task:不做好物博主，看看是阿佳呀、水北山南的账号": true,
+    "task:用湿纸巾擦一下几个白色桌面": true
   }
 }

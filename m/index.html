@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260817-1200" as="script">
-  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260817-1200" as="script">
+  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260821-0925" as="script">
+  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260821-0925" as="script">
   <link rel="preload" href="../feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2477,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="../cloud-sync.js?v=sync-20260817-1200" defer></script>
-  <script src="../feishu_data/dashboard_data.js?v=data-20260817-1200" defer></script>
-  <script src="../feishu_data/extra_data.js?v=extra-20260817-1200" defer></script>
+  <script src="../cloud-sync.js?v=sync-20260821-0925" defer></script>
+  <script src="../feishu_data/dashboard_data.js?v=data-20260821-0925" defer></script>
+  <script src="../feishu_data/extra_data.js?v=extra-20260821-0925" defer></script>
   <script src="../feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -5860,6 +5860,28 @@
     window.renderDouban = renderDouban;
     window.renderTravel = renderTravel;
 
+
+    // 8/21 修复：countdown 类日子（生日/纪念日）若 next_date 已过期，自动 +1 年循环到下一年，
+    // 永远显示正数倒计时，不再出现「还有 -N 天」。elapsed 类（已过去N天）不循环。
+    function effectiveNextDate(dateStr, now) {
+      if (!dateStr) return null;
+      var nd = new Date(dateStr + 'T00:00:00');
+      if (isNaN(nd.getTime())) nd = new Date(dateStr);
+      if (isNaN(nd.getTime())) return null;
+      var guard = 0;
+      while (nd.getTime() < now.getTime() && guard < 12) {
+        nd.setFullYear(nd.getFullYear() + 1);
+        guard++;
+      }
+      return nd;
+    }
+    function fmtDate(d) {
+      if (!d || isNaN(d.getTime())) return '';
+      var y = d.getFullYear();
+      var m = ('0' + (d.getMonth() + 1)).slice(-2);
+      var day = ('0' + d.getDate()).slice(-2);
+      return y + '-' + m + '-' + day;
+    }
     function renderImportantDatesReminder() {
       var dd = window.IMPORTANT_DATES_DATA;
       var box = $('importantDatesReminder');
@@ -5869,14 +5891,14 @@
       now.setHours(0, 0, 0, 0);
       var upcoming = dd.list.filter(function (it) {
         if (it.mode === 'elapsed') return false;
-        var nd = new Date(it.next_date);
+        var nd = effectiveNextDate(it.next_date, now);
         nd.setHours(0, 0, 0, 0);
         var days = Math.ceil((nd - now) / 86400000);
         return days >= 0 && days <= 7;
       }).sort(function (a, b) {
-        return new Date(a.next_date) - new Date(b.next_date);
+        return effectiveNextDate(a.next_date, now) - effectiveNextDate(b.next_date, now);
       }).map(function (it) {
-        var nd = new Date(it.next_date);
+        var nd = effectiveNextDate(it.next_date, now);
         nd.setHours(0, 0, 0, 0);
         var days = Math.ceil((nd - now) / 86400000);
         var when = days === 0 ? '今天' : days === 1 ? '明天' : days + '天后';
@@ -5894,7 +5916,7 @@
       var sorted = dd.list.slice().sort(function (a, b) {
         // 倒计时类（生日等）按 next_date 升序，最快到来的放最上面
         if (a.mode !== 'elapsed' && b.mode !== 'elapsed') {
-          return new Date(a.next_date) - new Date(b.next_date);
+          return effectiveNextDate(a.next_date, now) - effectiveNextDate(b.next_date, now);
         }
         // 已过去里程碑按 fixed 日期降序，最近的纪念日放上面
         if (a.mode === 'elapsed' && b.mode === 'elapsed') {
@@ -5909,8 +5931,8 @@
           var fd = new Date(it.fixed); var days = Math.floor((now - fd) / 86400000);
           sub = (it.calendar === 'solar' ? it.fixed : it.fixed) + ' 起'; count = days + ' 天'; cls = 'up';
         } else {
-          var nd = new Date(it.next_date); var days2 = Math.ceil((nd - now) / 86400000);
-          sub = (it.lunar ? '农历 ' + it.lunar : '阳历 ' + it.solar) + ' → ' + it.next_date; count = '还有 ' + days2 + ' 天'; cls = 'down';
+          var nd = effectiveNextDate(it.next_date, now); var days2 = Math.ceil((nd - now) / 86400000);
+          sub = (it.lunar ? '农历 ' + it.lunar : '阳历 ' + it.solar) + ' → ' + fmtDate(nd); count = '还有 ' + days2 + ' 天'; cls = 'down';
         }
         return '<div class="date-row"><span class="dr-icon">' + it.icon + '</span><div class="dr-main"><div class="dr-name">' + esc(it.name) + ' · ' + esc(it.type) + '</div><div class="dr-sub">' + esc(sub) + '</div></div><div class="dr-count ' + cls + '">' + esc(count) + '</div></div>';
       }).join('');

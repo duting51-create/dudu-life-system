@@ -1,0 +1,21 @@
+{
+  "cities": {
+    "beijing": {
+      "name": "北京 · 顺义",
+      "temp": 25.7,
+      "weather_code": 2,
+      "desc": "⛅ 局部多云",
+      "min": 22.1,
+      "max": 30.2
+    },
+    "wuhan": {
+      "name": "武汉 · 洪山",
+      "temp": 30.7,
+      "weather_code": 0,
+      "desc": "☀️ 晴",
+      "min": 27.7,
+      "max": 33.2
+    }
+  },
+  "last_updated": "2026-08-21 09:24"
+}

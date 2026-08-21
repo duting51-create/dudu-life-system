@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "102.和柱子哥阿娇聊天｜横竖都是死，我为什么不做我？"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "112在大理，做个不敷衍孩子和自己的大人｜两个妈妈夏令营复盘"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep91 | 如何找回自己的勇气和力量，走出气馁"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "仰天大笑出门去，我辈岂是蓬蒿人。",
+  "source": "南陵别儿童入京"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
