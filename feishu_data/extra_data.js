@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-22",
+  "updated": "2026-08-23",
   "list": [
     {
       "name": "嗨咻",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-22",
+  "updated": "2026-08-23",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "洛阳亲友如相问，一片冰心在玉壶。",
-  "source": "芙蓉楼送辛渐"
+  "content": "“青铜时代”呼叫“蓝色空间”！“青铜时代”呼叫“蓝色空间”！不要返航，这里不是家！",
+  "source": "三体III: 死神永生"
 };
 window.updated = {
   "name": "嗨咻",
