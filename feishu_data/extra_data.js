@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "Everything ends. But everything begins again too.",
-  "source": "奇异博士"
+  "content": "Brainy is the new sexy.",
+  "source": "神探夏洛克"
 };
 window.updated = {
   "name": "嗨咻",
