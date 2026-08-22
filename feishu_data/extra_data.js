@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-21",
+  "updated": "2026-08-22",
   "list": [
     {
       "name": "嗨咻",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-21",
+  "updated": "2026-08-22",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "近乡情更怯，不敢问来人。",
-  "source": "渡汉江"
+  "content": "Everything ends. But everything begins again too.",
+  "source": "奇异博士"
 };
 window.updated = {
   "name": "嗨咻",
