@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "Brainy is the new sexy.",
-  "source": "神探夏洛克"
+  "content": "心非木石岂无感？吞声踯躅不敢言。",
+  "source": "拟行路难（其四）"
 };
 window.updated = {
   "name": "嗨咻",
