@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "心非木石岂无感？吞声踯躅不敢言。",
-  "source": "拟行路难（其四）"
+  "content": "洛阳亲友如相问，一片冰心在玉壶。",
+  "source": "芙蓉楼送辛渐"
 };
 window.updated = {
   "name": "嗨咻",
