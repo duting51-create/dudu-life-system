@@ -4,23 +4,23 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "102.和柱子哥阿娇聊天｜横竖都是死，我为什么不做我？"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "101.经典回顾｜中西方带娃理念禁忌大比拼"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "113入园大作战：准备好书包，也准备好第一次告别"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "这期「乳房自救指南」，夯爆了！| Vol.176"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep91 | 如何找回自己的勇气和力量，走出气馁"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "不识庐山真面目，只缘身在此山中。",
+  "source": "题西林壁"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
