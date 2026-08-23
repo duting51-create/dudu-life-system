@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "不识庐山真面目，只缘身在此山中。",
-  "source": "题西林壁"
+  "content": "我没有梦想，但我可以守护别人的梦想！",
+  "source": "假面骑士faiz"
 };
 window.updated = {
   "name": "嗨咻",
