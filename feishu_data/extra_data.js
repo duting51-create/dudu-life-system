@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我没有梦想，但我可以守护别人的梦想！",
-  "source": "假面骑士faiz"
+  "content": "本杰明，我们命中注定要失去所爱之人， 不然我们怎么知道，他们在我们的生命中有多重要？",
+  "source": "返老还童"
 };
 window.updated = {
   "name": "嗨咻",
