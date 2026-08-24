@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们都以为雨滴落向地面，其实是我们坠入天空。",
-  "source": "弱智吧"
+  "content": "知道可能面对的困难和痛苦，在死亡的恐惧中不断挣扎，而仍然能战胜自己，选择这条道路，才是真正的勇气。",
+  "source": "明朝那些事儿"
 };
 window.updated = {
   "name": "嗨咻",
