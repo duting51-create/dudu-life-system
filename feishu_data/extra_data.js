@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-23",
+  "updated": "2026-08-24",
   "list": [
     {
       "name": "嗨咻",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep91 | 如何找回自己的勇气和力量，走出气馁"
+      "latest": "ep92 | 我们的每一个选择，都在塑造未来的自己"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-23",
+  "updated": "2026-08-24",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "本杰明，我们命中注定要失去所爱之人， 不然我们怎么知道，他们在我们的生命中有多重要？",
-  "source": "返老还童"
+  "content": "我们都以为雨滴落向地面，其实是我们坠入天空。",
+  "source": "弱智吧"
 };
 window.updated = {
   "name": "嗨咻",
