@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "知道可能面对的困难和痛苦，在死亡的恐惧中不断挣扎，而仍然能战胜自己，选择这条道路，才是真正的勇气。",
-  "source": "明朝那些事儿"
+  "content": "杂耍和唱歌的才需要掌声。",
+  "source": "冰与火之歌"
 };
 window.updated = {
   "name": "嗨咻",
