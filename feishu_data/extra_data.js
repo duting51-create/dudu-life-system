@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "杂耍和唱歌的才需要掌声。",
-  "source": "冰与火之歌"
+  "content": "世界上大部分事，都没有太大意义，真理与热爱除外。",
+  "source": "天才基本法"
 };
 window.updated = {
   "name": "嗨咻",
