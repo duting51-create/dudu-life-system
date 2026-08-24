@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "世界上大部分事，都没有太大意义，真理与热爱除外。",
-  "source": "天才基本法"
+  "content": "三天后，也就是十四日，在凌晨一点钟至四点钟，整个宇宙将为你闪烁。",
+  "source": "三体I: 地球往事"
 };
 window.updated = {
   "name": "嗨咻",
