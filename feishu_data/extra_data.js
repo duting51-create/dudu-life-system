@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "贾维斯，在我们学会走之前，要先学会跑！",
-  "source": "钢铁侠"
+  "content": "就像是一场华尔街的阴谋，透露着优雅的杀戮。",
+  "source": "神探夏洛克"
 };
 window.updated = {
   "name": "嗨咻",
