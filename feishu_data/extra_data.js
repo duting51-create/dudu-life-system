@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "前进！前进！不择手段的前进！",
-  "source": "三体"
+  "content": "我思故我在。",
+  "source": "谈谈方法"
 };
 window.updated = {
   "name": "嗨咻",
