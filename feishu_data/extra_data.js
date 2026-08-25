@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我知这世界，本如露水般短暂。然而，然而。",
-  "source": "然而"
+  "content": "前进！前进！不择手段的前进！",
+  "source": "三体"
 };
 window.updated = {
   "name": "嗨咻",
