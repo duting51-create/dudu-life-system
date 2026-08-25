@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我思故我在。",
-  "source": "谈谈方法"
+  "content": "贾维斯，在我们学会走之前，要先学会跑！",
+  "source": "钢铁侠"
 };
 window.updated = {
   "name": "嗨咻",
