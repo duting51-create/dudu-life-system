@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260826-2101" as="script">
-  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260826-2101" as="script">
+  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260826-2200" as="script">
+  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260826-2200" as="script">
   <link rel="preload" href="../feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2477,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="../cloud-sync.js?v=sync-20260826-2101" defer></script>
-  <script src="../feishu_data/dashboard_data.js?v=data-20260826-2101" defer></script>
-  <script src="../feishu_data/extra_data.js?v=extra-20260826-2101" defer></script>
+  <script src="../cloud-sync.js?v=sync-20260826-2200" defer></script>
+  <script src="../feishu_data/dashboard_data.js?v=data-20260826-2200" defer></script>
+  <script src="../feishu_data/extra_data.js?v=extra-20260826-2200" defer></script>
   <script src="../feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3632,9 +3632,18 @@
 
       // 去重：本地待同步项(syncPending)与飞书回流的同一条内容指纹相同，只保留先出现的一条，
       // 避免「写进网站立刻看到」之后，下一次同步把同样内容再显示一遍。
+      // 修复：dedup 单独算一份去掉编号前缀的归一化 key。
+      // 飞书 E 列保留用户原始输入「1.盘点...」，而本地 dudu_jots 在 submitJot 写入端
+      // 经 splitNumberedText 处理后往往是「盘点...」（不带 1.）。原 inspireFp 只去空白与 ~✅、
+      // 不去编号前缀 → 同一条内容 fp 不同 → 列表里被同时显示两次。item.fp 仍为 inspireFp 不变
+      // （保留 doneMap 划线状态的 key 兼容），仅 dedup 这一层加一道去前缀归一。
+      function _dedupeKey(it) {
+        var t = String(it.text || '').trim().replace(/\s+/g, ' ').replace(/[~✅]/g, '').replace(/^\d+[.、：:）)\-]\s*/, '');
+        return (it.type || '') + ':' + t;
+      }
       const _seenFp = {};
       items = items.filter(function (it) {
-        const key = it.fp || (it.type + ':' + it.text);
+        const key = _dedupeKey(it);
         if (_seenFp[key]) return false;
         _seenFp[key] = true;
         return true;
