@@ -1,26 +1,26 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-25",
+  "updated": "2026-08-26",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "102.和柱子哥阿娇聊天｜横竖都是死，我为什么不做我？"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "101.经典回顾｜中西方带娃理念禁忌大比拼"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "113入园大作战：准备好书包，也准备好第一次告别"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "患者肚子疼来急诊，却被告知卵巢要被切除……| 有点小事64"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep92 | 我们的每一个选择，都在塑造未来的自己"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-25",
+  "updated": "2026-08-26",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "认真的思索，真诚的明辨是非，有这种态度，大概可算是善良吧。",
+  "source": "沉默的大多数"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
