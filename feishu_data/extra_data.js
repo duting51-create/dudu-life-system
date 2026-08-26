@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "认真的思索，真诚的明辨是非，有这种态度，大概可算是善良吧。",
-  "source": "沉默的大多数"
+  "content": "余生，尽是前路。",
+  "source": "夜的命名术"
 };
 window.updated = {
   "name": "嗨咻",
