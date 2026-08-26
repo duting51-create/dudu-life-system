@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "墙角数枝梅，凌寒独自开。",
-  "source": "梅花 / 梅"
+  "content": "悲观的面对生命，乐观的面对生活。",
+  "source": "张慧腾"
 };
 window.updated = {
   "name": "嗨咻",
