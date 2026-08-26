@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "113入园大作战：准备好书包，也准备好第一次告别"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "悲剧的魅力，在于他毁灭的美；悲剧的不幸，在于它往往不仅仅是悲剧，而且是永远的生活。",
-  "source": "骆驼祥子"
+  "content": "墙角数枝梅，凌寒独自开。",
+  "source": "梅花 / 梅"
 };
 window.updated = {
   "name": "嗨咻",
