@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "明明会让人联想到生命、升腾和创造的火焰，其实是痛苦凝结成的实质。 火焰，即痛苦。",
-  "source": "寂静王冠"
+  "content": "生命中所有的绚烂，原来终究，都要用寂寞来偿还。",
+  "source": "百年孤独"
 };
 window.updated = {
   "name": "嗨咻",
