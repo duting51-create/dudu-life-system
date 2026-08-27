@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "色彩和形式的和谐，从严格意义上说必须以触及人类灵魂的原则作为唯一基础。",
-  "source": "论艺术的精神"
+  "content": "人即他人之狼。",
+  "source": "论公民"
 };
 window.updated = {
   "name": "嗨咻",
