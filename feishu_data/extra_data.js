@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "呐，做人呢，最重要的是开心，你饿不饿，我煮碗面给你吃啊。",
-  "source": "大内密探零零发"
+  "content": "明明会让人联想到生命、升腾和创造的火焰，其实是痛苦凝结成的实质。 火焰，即痛苦。",
+  "source": "寂静王冠"
 };
 window.updated = {
   "name": "嗨咻",
