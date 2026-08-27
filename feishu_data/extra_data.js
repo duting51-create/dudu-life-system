@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-26",
+  "updated": "2026-08-27",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "102.和柱子哥阿娇聊天｜横竖都是死，我为什么不做我？"
+      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
     },
     {
       "name": "头回当妈",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-26",
+  "updated": "2026-08-27",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "悲观的面对生命，乐观的面对生活。",
-  "source": "张慧腾"
+  "content": "呐，做人呢，最重要的是开心，你饿不饿，我煮碗面给你吃啊。",
+  "source": "大内密探零零发"
 };
 window.updated = {
   "name": "嗨咻",
