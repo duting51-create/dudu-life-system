@@ -204,10 +204,10 @@ async function writeLinesRich(env, token, column, rowNumber, lines) {
     segments.push({
       type: "text",
       text: `${idx + 1}.${lineObj.text}`,
-      style: { strikeThrough: lineObj.struck === true },
+      segmentStyle: { strikeThrough: lineObj.struck === true },
     });
     if (idx < lines.length - 1) {
-      segments.push({ type: "text", text: "\n", style: {} });
+      segments.push({ type: "text", text: "\n", segmentStyle: {} });
     }
   });
   await updateCellRich(env, token, column, rowNumber, segments);
@@ -347,15 +347,16 @@ function stripLeadingNumber(raw) {
 }
 
 // 将单元格原始值（可能是纯字符串，也可能是富文本段数组）归一化为 {text, strike} 段列表。
-// Feishu 的删除线(划线)以富文本段 style.strikeThrough 形式存在，需从段样式中读取。
+// Feishu 的删除线(划线)以富文本段 segmentStyle.strikeThrough 形式存在，需从段样式中读取。
+// ⚠️ 字段名是 segmentStyle（不是 style），写错飞书会静默忽略，导致划线永远落不下去。
 function normalizeSegments(value) {
   if (value == null) return [];
   if (typeof value === "string") return [{ text: value, strike: false }];
   if (Array.isArray(value)) {
     return value.map((seg) => {
       if (typeof seg === "string") return { text: seg, strike: false };
-      const style = (seg && seg.style) ? seg.style : {};
-      const strike = Boolean(style.strikeThrough) || Boolean(style.strike);
+      const segmentStyle = (seg && seg.segmentStyle) ? seg.segmentStyle : {};
+      const strike = Boolean(segmentStyle.strikeThrough) || Boolean(segmentStyle.strike);
       return { text: seg && typeof seg.text === "string" ? seg.text : "", strike };
     });
   }
