@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,15 +12,15 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "113入园大作战：准备好书包，也准备好第一次告别"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
-      "latest": "患者肚子疼来急诊，却被告知卵巢要被切除……| 有点小事64"
+      "latest": "无性婚姻，能撑多久？| Vol.177"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep92 | 我们的每一个选择，都在塑造未来的自己"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "心似双丝网，中有千千结。",
-  "source": "千秋岁·数声鶗鴂"
+  "content": "看朱成碧思纷纷，憔悴支离为忆君。",
+  "source": "如意娘"
 };
 window.updated = {
   "name": "嗨咻",
