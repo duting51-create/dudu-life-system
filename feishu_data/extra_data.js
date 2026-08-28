@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "看朱成碧思纷纷，憔悴支离为忆君。",
-  "source": "如意娘"
+  "content": "芝兰生于深林，不以无人而不芳；君子修道立德，不为穷困而改节。",
+  "source": "孔子家语·在厄"
 };
 window.updated = {
   "name": "嗨咻",
