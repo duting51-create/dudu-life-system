@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "闪烁的灯光是我在异世界大声地呼唤你。",
-  "source": "怪奇物语"
+  "content": "谁共我，醉明月。",
+  "source": "贺新郎·别茂嘉十二弟"
 };
 window.updated = {
   "name": "嗨咻",
