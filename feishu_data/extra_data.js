@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "凡人皆有一死，凡人皆需供奉。",
-  "source": "冰与火之歌"
+  "content": "宁鸣而死，不默而生。",
+  "source": "《灵乌赋》"
 };
 window.updated = {
   "name": "嗨咻",
