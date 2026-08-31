@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人之生，气之聚也；聚则为生，散则为死。若死生之徒，吾又何患！",
-  "source": "庄子·知北游"
+  "content": "听风雪喧嚷，看流星在飞翔； 我的心向我呼唤：去动荡的远方……",
+  "source": "歌唱动荡的青春"
 };
 window.updated = {
   "name": "嗨咻",
