@@ -1,18 +1,18 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-08-30",
+  "updated": "2026-08-31",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
-      "latest": "101.经典回顾｜中西方带娃理念禁忌大比拼"
+      "latest": "102.不造神不鸡娃，顶尖数学家身上的非典型育儿启示"
     },
     {
       "name": "畅所育言",
-      "latest": "113入园大作战：准备好书包，也准备好第一次告别"
+      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep92 | 我们的每一个选择，都在塑造未来的自己"
+      "latest": "ep93 | 到底什么才是“爱自己”？自我慈悲：如何建立内在安全基地"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-08-30",
+  "updated": "2026-08-31",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "谁共我，醉明月。",
-  "source": "贺新郎·别茂嘉十二弟"
+  "content": "凡人皆有一死，凡人皆需供奉。",
+  "source": "冰与火之歌"
 };
 window.updated = {
   "name": "嗨咻",
