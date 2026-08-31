@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "宁鸣而死，不默而生。",
-  "source": "《灵乌赋》"
+  "content": "人之生，气之聚也；聚则为生，散则为死。若死生之徒，吾又何患！",
+  "source": "庄子·知北游"
 };
 window.updated = {
   "name": "嗨咻",
