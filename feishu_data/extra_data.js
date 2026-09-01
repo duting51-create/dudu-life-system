@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我的东西难道不可随我的意思用吗？",
-  "source": "马太福音20:15"
+  "content": "回首池塘青欲遍，绝似梦中芳草。",
+  "source": "南浦·春水"
 };
 window.updated = {
   "name": "嗨咻",
