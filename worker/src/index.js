@@ -599,7 +599,11 @@ async function writeToGithub(env, path, content) {
   let sha;
   try {
     const head = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "User-Agent": "dudu-life-sync-worker",
+      },
     });
     if (head.ok) sha = (await head.json()).sha;
   } catch (e) {
@@ -617,6 +621,7 @@ async function writeToGithub(env, path, content) {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       Accept: "application/vnd.github+json",
+      "User-Agent": "dudu-life-sync-worker",
     },
     body: JSON.stringify(body),
   });
