@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "回首池塘青欲遍，绝似梦中芳草。",
-  "source": "南浦·春水"
+  "content": "心中是寂然的轰鸣，像是某种巨大的坍塌。",
+  "source": "幻城"
 };
 window.updated = {
   "name": "嗨咻",
