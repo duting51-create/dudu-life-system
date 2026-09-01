@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "咬定青山不放松，立根原在破岩中。",
-  "source": "竹石"
+  "content": "我的东西难道不可随我的意思用吗？",
+  "source": "马太福音20:15"
 };
 window.updated = {
   "name": "嗨咻",
