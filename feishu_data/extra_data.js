@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep93 | 到底什么才是“爱自己”？自我慈悲：如何建立内在安全基地"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "熬得住无人问津的日子，方可配得起诗和远方。",
-  "source": "网络"
+  "content": "我的人生没有彩排，每天都是现场直播。",
+  "source": "爱情公寓"
 };
 window.updated = {
   "name": "嗨咻",
