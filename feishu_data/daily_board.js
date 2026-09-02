@@ -1,11 +1,35 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-01T04:20:54.486Z",
-  "date": "2026-09-01",
+  "updated_at": "2026-09-02T01:00:49.903Z",
+  "date": "2026-09-02",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月1日",
+    "date": "9月2日",
     "items": [
       {
+        "text": "确定红十字会的理论课程的学习计划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写3篇 IP 号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做一下好物分享的选题规划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "拍第一篇好物选题的图片，做好笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
         "text": "列9月计划",
         "done": false,
         "cancelled": false,
@@ -30,15 +54,39 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "写3篇好物拆解笔记",
+        "text": "整理爆款标题投喂给【标题编辑】员工",
         "done": false,
         "cancelled": false,
-        "priority": "low"
+        "priority": "mid"
       }
     ],
-    "raw_text": "1.列9月计划\n2.重新思考【知识库】赛道的运营策略\n3.分析账号数据，规划一下 IP账号的选题、发布时间和频率\n4.看那篇好物分享账号工作流，试试看能不能自动化工作\n5.写3篇好物拆解笔记",
+    "raw_text": "1.确定红十字会的理论课程的学习计划\n2.写3篇 IP 号笔记\n3.做一下好物分享的选题规划\n4.拍第一篇好物选题的图片，做好笔记\n5.列9月计划\n6.重新思考【知识库】赛道的运营策略\n7.分析账号数据，规划一下 IP账号的选题、发布时间和频率\n8.看那篇好物分享账号工作流，试试看能不能自动化工作\n9.整理爆款标题投喂给【标题编辑】员工",
     "tasks": [
       {
+        "text": "确定红十字会的理论课程的学习计划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写3篇 IP 号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做一下好物分享的选题规划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "拍第一篇好物选题的图片，做好笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
         "text": "列9月计划",
         "done": false,
         "cancelled": false,
@@ -63,13 +111,13 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "写3篇好物拆解笔记",
+        "text": "整理爆款标题投喂给【标题编辑】员工",
         "done": false,
         "cancelled": false,
-        "priority": "low"
+        "priority": "mid"
       }
     ],
-    "raw_tasks_text": "1.列9月计划\n2.重新思考【知识库】赛道的运营策略\n3.分析账号数据，规划一下 IP账号的选题、发布时间和频率\n4.看那篇好物分享账号工作流，试试看能不能自动化工作\n5.写3篇好物拆解笔记"
+    "raw_tasks_text": "1.确定红十字会的理论课程的学习计划\n2.写3篇 IP 号笔记\n3.做一下好物分享的选题规划\n4.拍第一篇好物选题的图片，做好笔记\n5.列9月计划\n6.重新思考【知识库】赛道的运营策略\n7.分析账号数据，规划一下 IP账号的选题、发布时间和频率\n8.看那篇好物分享账号工作流，试试看能不能自动化工作\n9.整理爆款标题投喂给【标题编辑】员工"
   },
   "inspirations": {
     "items": [
