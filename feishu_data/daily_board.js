@@ -1,5 +1,5 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-02T01:00:49.903Z",
+  "updated_at": "2026-09-02T07:24:33.179Z",
   "date": "2026-09-02",
   "source": "cloudflare-worker",
   "tasks": {
@@ -357,6 +357,11 @@ window.DAILY_BOARD = {
   "memos": {
     "items": [
       {
+        "date": "46267",
+        "text": "每次做选题，最多10条，太多了后面都会变化没必要，可以收集但是没必要一下子做太多。",
+        "id": "memo_68_0"
+      },
+      {
         "date": "46262",
         "text": "怀孕后开始写「孕期周记」",
         "id": "memo_65_0"
@@ -400,13 +405,8 @@ window.DAILY_BOARD = {
         "date": "46232",
         "text": "流产后身心恢复指南，卖的更好，是不是可以继续开发类似的产品",
         "id": "memo_36_1"
-      },
-      {
-        "date": "46232",
-        "text": "孕期记录工作台：用 Workbuddy 搭孕期记录工具，先分享，如果很多人不会用可以打包成 skill 出售",
-        "id": "memo_36_0"
       }
     ],
-    "total": 10
+    "total": 11
   }
 };
