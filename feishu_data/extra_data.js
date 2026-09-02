@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "无性婚姻，能撑多久？| Vol.177"
+      "latest": "饭后遛弯路过医院，然后就住院了……| 有点小事65"
     },
     {
       "name": "Alison Yu心理",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "长月黄昏后，伫立露沾身；莫问我为谁，我自待伊人。",
-  "source": "万叶集"
+  "content": "糜鹿成群，虎豹避之；飞鸟成列，鹰鹫不击。",
+  "source": "说苑"
 };
 window.updated = {
   "name": "嗨咻",
