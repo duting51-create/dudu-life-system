@@ -2778,12 +2778,15 @@
         if (!board || !board.date) return;
         if (board.date !== shanghaiTodayKey()) return; // 只覆盖「今天」的看板
         window.DASHBOARD_DATA = window.DASHBOARD_DATA || {};
-        if (board.tasks) window.DASHBOARD_DATA.tasks = board.tasks;
-        if (board.inspirations) window.DASHBOARD_DATA.inspirations = board.inspirations;
-        if (board.inspirations && board.inspirations.done_map) {
+        // FAIL-SAFE(2026-09-02): items 必须是数组才覆盖。空对象 {} 在 JS 是 truthy，
+        // 若 daily_board 结构异常会被误当真数据覆盖正常看板（9/2 空覆盖事故同款风险）。
+        // 真空场景（items:[] 数组）仍会覆盖——那是云端确认过的真实结果。
+        if (board.tasks && Array.isArray(board.tasks.items)) window.DASHBOARD_DATA.tasks = board.tasks;
+        if (board.inspirations && Array.isArray(board.inspirations.items)) window.DASHBOARD_DATA.inspirations = board.inspirations;
+        if (board.inspirations && Array.isArray(board.inspirations.items) && board.inspirations.done_map) {
           window.DASHBOARD_DATA.inspirations_done = board.inspirations.done_map;
         }
-        if (board.memos) window.DASHBOARD_DATA.memos = board.memos;
+        if (board.memos && Array.isArray(board.memos.items)) window.DASHBOARD_DATA.memos = board.memos;
         console.log("[daily_board] 已覆盖今日看板:", board.date);
       } catch (e) {
         console.warn("[daily_board] 覆盖跳过:", e);
