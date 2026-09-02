@@ -743,6 +743,13 @@ async function buildDailyBoard(env) {
   const today = shanghaiToday();
   const todayKey = shanghaiDateKey(today);
 
+  // ⚠️ FAIL-SAFE(2026-09-02): 找不到「今天」的行 = 异常（用户每天都建行），
+  // 绝不能用空 items 写 daily_board.js —— 前端 overlay 会拿它覆盖正常的今日安排
+  // （9/2 本地 feishu_sync 已发生同款「空覆盖」事故，commit 88ba615→2b867f5）。
+  // 抛错 → scheduled() catch → 不写文件 → 线上保留昨天的 daily_board → 前端 date 不匹配不覆盖。
+  if (!rows || rows.length < 2) {
+    throw new Error(`buildDailyBoard: sheet 无有效数据行 (rows=${rows ? rows.length : 0})，跳过写入`);
+  }
   // 今日安排（C 列 = index 2）
   let todayRow = null;
   for (let i = 0; i < rows.length; i += 1) {
@@ -750,6 +757,9 @@ async function buildDailyBoard(env) {
       todayRow = rows[i];
       break;
     }
+  }
+  if (!todayRow) {
+    throw new Error(`buildDailyBoard: 未找到今天 ${todayKey} 的行，跳过写入（不覆盖已有看板）`);
   }
   const tasks = {
     date: `${today.month}月${today.day}日`,
