@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-02",
+  "updated": "2026-09-03",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "103.和海狸博士聊天｜关上门后，我终于敢说“我想要”"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
     },
     {
       "name": "当个事儿",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-02",
+  "updated": "2026-09-03",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我的人生没有彩排，每天都是现场直播。",
-  "source": "爱情公寓"
+  "content": "如果一朵花很美，那么有时我会不由自主地想到：“要活下去！”",
+  "source": "川端康成"
 };
 window.updated = {
   "name": "嗨咻",
