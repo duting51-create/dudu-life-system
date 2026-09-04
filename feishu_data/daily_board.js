@@ -1,24 +1,12 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-03T01:00:51.200Z",
-  "date": "2026-09-03",
+  "updated_at": "2026-09-04T01:00:50.321Z",
+  "date": "2026-09-04",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月3日",
+    "date": "9月4日",
     "items": [
       {
-        "text": "做一下好物分享的选题规划",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍第一篇好物选题的图片，做好笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看那篇好物分享账号工作流，试试看能不能自动化工作",
+        "text": "去医院查激素六项看接下来的安排",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -42,22 +30,10 @@ window.DAILY_BOARD = {
         "priority": "low"
       }
     ],
-    "raw_text": "1.做一下好物分享的选题规划\n2.拍第一篇好物选题的图片，做好笔记\n3.看那篇好物分享账号工作流，试试看能不能自动化工作\n4.写5篇博主拆解笔记\n5.写2篇 IP 号笔记\n6.写5篇卖货号笔记",
+    "raw_text": "1.去医院查激素六项看接下来的安排\n2.写5篇博主拆解笔记\n3.写2篇 IP 号笔记\n4.写5篇卖货号笔记",
     "tasks": [
       {
-        "text": "做一下好物分享的选题规划",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍第一篇好物选题的图片，做好笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看那篇好物分享账号工作流，试试看能不能自动化工作",
+        "text": "去医院查激素六项看接下来的安排",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -81,7 +57,7 @@ window.DAILY_BOARD = {
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.做一下好物分享的选题规划\n2.拍第一篇好物选题的图片，做好笔记\n3.看那篇好物分享账号工作流，试试看能不能自动化工作\n4.写5篇博主拆解笔记\n5.写2篇 IP 号笔记\n6.写5篇卖货号笔记"
+    "raw_tasks_text": "1.去医院查激素六项看接下来的安排\n2.写5篇博主拆解笔记\n3.写2篇 IP 号笔记\n4.写5篇卖货号笔记"
   },
   "inspirations": {
     "items": [
@@ -315,7 +291,8 @@ window.DAILY_BOARD = {
       "task:缴7月社保": true,
       "task:不做好物博主，看看是阿佳呀、水北山南的账号": true,
       "task:用湿纸巾擦一下几个白色桌面": true,
-      "task:给妹妹看一下生日礼物要买了": true
+      "task:给妹妹看一下生日礼物要买了": true,
+      "task:写5篇博主拆解笔记": true
     }
   },
   "memos": {
