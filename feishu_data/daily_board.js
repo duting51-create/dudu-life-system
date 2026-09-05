@@ -1,63 +1,27 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-04T01:00:50.321Z",
-  "date": "2026-09-04",
+  "updated_at": "2026-09-05T01:00:49.319Z",
+  "date": "2026-09-05",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月4日",
+    "date": "9月5日",
     "items": [
       {
-        "text": "去医院查激素六项看接下来的安排",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写5篇博主拆解笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写2篇 IP 号笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写5篇卖货号笔记",
+        "text": "记账",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.去医院查激素六项看接下来的安排\n2.写5篇博主拆解笔记\n3.写2篇 IP 号笔记\n4.写5篇卖货号笔记",
+    "raw_text": "1.记账",
     "tasks": [
       {
-        "text": "去医院查激素六项看接下来的安排",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写5篇博主拆解笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写2篇 IP 号笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写5篇卖货号笔记",
+        "text": "记账",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去医院查激素六项看接下来的安排\n2.写5篇博主拆解笔记\n3.写2篇 IP 号笔记\n4.写5篇卖货号笔记"
+    "raw_tasks_text": "1.记账"
   },
   "inspirations": {
     "items": [
