@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-03",
+  "updated": "2026-09-05",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "105. 人到中年，又累又不快乐"
     },
     {
       "name": "头回当妈",
@@ -16,11 +16,11 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "饭后遛弯路过医院，然后就住院了……| 有点小事65"
+      "latest": "声音胶囊01 |成年人的「发疯文学」：我们应该如何直面冲突？|Vol.178"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep93 | 到底什么才是“爱自己”？自我慈悲：如何建立内在安全基地"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-03",
+  "updated": "2026-09-05",
   "list": [
     {
       "name": "爽",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "如果一朵花很美，那么有时我会不由自主地想到：“要活下去！”",
-  "source": "川端康成"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
