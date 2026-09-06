@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-05",
+  "updated": "2026-09-06",
   "list": [
     {
       "name": "嗨咻",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-05",
+  "updated": "2026-09-06",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "掉头一去是风吹黑发，回首再来已雪满白头。",
-  "source": "浪子回头"
+  "content": "人生总是那么痛苦吗?还是只有小时候是这样?",
+  "source": "这个杀手不太冷"
 };
 window.updated = {
   "name": "嗨咻",
