@@ -1,27 +1,39 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-05T01:00:49.319Z",
-  "date": "2026-09-05",
+  "updated_at": "2026-09-06T01:00:49.266Z",
+  "date": "2026-09-06",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月5日",
+    "date": "9月6日",
     "items": [
       {
-        "text": "记账",
+        "text": "1篇博主拆解笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.记账",
+    "raw_text": "1.1篇博主拆解笔记\n2.写1篇 IP 号笔记",
     "tasks": [
       {
-        "text": "记账",
+        "text": "1篇博主拆解笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.记账"
+    "raw_tasks_text": "1.1篇博主拆解笔记\n2.写1篇 IP 号笔记"
   },
   "inspirations": {
     "items": [
