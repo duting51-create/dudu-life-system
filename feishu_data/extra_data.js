@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "当两颗卫星的轨道偶尔交叉时，我们便这样相会了。",
-  "source": "斯普特尼克恋人"
+  "content": "青山一道同云雨，明月何曾是两乡。",
+  "source": "送柴御史"
 };
 window.updated = {
   "name": "嗨咻",
