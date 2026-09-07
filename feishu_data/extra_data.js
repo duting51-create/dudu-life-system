@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-06",
+  "updated": "2026-09-07",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "105. 人到中年，又累又不快乐"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -16,11 +16,11 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "声音胶囊01 |成年人的「发疯文学」：我们应该如何直面冲突？|Vol.178"
+      "latest": "成年人的「发疯文学」：我们应该如何直面冲突？|声音胶囊01|Vol.178"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep93 | 到底什么才是“爱自己”？自我慈悲：如何建立内在安全基地"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-06",
+  "updated": "2026-09-07",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人生总是那么痛苦吗?还是只有小时候是这样?",
-  "source": "这个杀手不太冷"
+  "content": "什么叫正义，正义就是那些赢家所说的冠冕堂皇的话，如果你是个输家，就没什么正义！",
+  "source": "铠甲勇士"
 };
 window.updated = {
   "name": "嗨咻",
