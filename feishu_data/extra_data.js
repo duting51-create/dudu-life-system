@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "105. 人到中年，又累又不快乐"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "青山隐隐水迢迢，秋尽江南草未凋。",
+  "source": "寄扬州韩绰判官"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
