@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "青山隐隐水迢迢，秋尽江南草未凋。",
-  "source": "寄扬州韩绰判官"
+  "content": "当两颗卫星的轨道偶尔交叉时，我们便这样相会了。",
+  "source": "斯普特尼克恋人"
 };
 window.updated = {
   "name": "嗨咻",
