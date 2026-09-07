@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "这是在是我所知物理学中最富诗意的东西：你的一切都是星辰。",
-  "source": "劳伦斯·M·克劳斯"
+  "content": "不患无位，患所以立。不患莫己知，求为可知也。",
+  "source": "论语·里仁篇"
 };
 window.updated = {
   "name": "嗨咻",
