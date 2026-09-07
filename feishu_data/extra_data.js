@@ -8,7 +8,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "头回当妈",
-      "latest": "102.不造神不鸡娃，顶尖数学家身上的非典型育儿启示"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "畅所育言",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "成年人的「发疯文学」：我们应该如何直面冲突？|声音胶囊01|Vol.178"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "Alison Yu心理",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "什么叫正义，正义就是那些赢家所说的冠冕堂皇的话，如果你是个输家，就没什么正义！",
-  "source": "铠甲勇士"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
