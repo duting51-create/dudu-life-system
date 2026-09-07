@@ -1,39 +1,75 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-06T01:00:49.266Z",
-  "date": "2026-09-06",
+  "updated_at": "2026-09-07T01:00:53.428Z",
+  "date": "2026-09-07",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月6日",
+    "date": "9月7日",
     "items": [
       {
-        "text": "1篇博主拆解笔记",
+        "text": "上午运动+洗澡+吃饭",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写1篇 IP 号笔记",
+        "text": "下午去西西弗书店/在家学习",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写5篇卖货号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写4篇博主拆解笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写3篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.1篇博主拆解笔记\n2.写1篇 IP 号笔记",
+    "raw_text": "1.上午运动+洗澡+吃饭\n2.下午去西西弗书店/在家学习\n3.写5篇卖货号笔记\n4.写4篇博主拆解笔记\n5.写3篇 IP 号笔记",
     "tasks": [
       {
-        "text": "1篇博主拆解笔记",
+        "text": "上午运动+洗澡+吃饭",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写1篇 IP 号笔记",
+        "text": "下午去西西弗书店/在家学习",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写5篇卖货号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写4篇博主拆解笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写3篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.1篇博主拆解笔记\n2.写1篇 IP 号笔记"
+    "raw_tasks_text": "1.上午运动+洗澡+吃饭\n2.下午去西西弗书店/在家学习\n3.写5篇卖货号笔记\n4.写4篇博主拆解笔记\n5.写3篇 IP 号笔记"
   },
   "inspirations": {
     "items": [
