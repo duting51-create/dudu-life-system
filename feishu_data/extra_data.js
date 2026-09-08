@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-07",
+  "updated": "2026-09-08",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "105. 人到中年，又累又不快乐"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "社会化：我们拥有比自己想象中更多的选择"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-07",
+  "updated": "2026-09-08",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "不患无位，患所以立。不患莫己知，求为可知也。",
-  "source": "论语·里仁篇"
+  "content": "清风策萍影 远夜如移 纵入冥泥 明镜仍为寄",
+  "source": "魔道祖师"
 };
 window.updated = {
   "name": "嗨咻",
