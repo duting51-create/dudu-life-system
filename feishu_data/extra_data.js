@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "妆罢低声问夫婿，画眉深浅入时无。",
-  "source": "近试上张籍水部 / 近试上张水部 / 闺意献张水部"
+  "content": "生命终有尽头，徒留一颗破碎的心。",
+  "source": "神探夏洛克"
 };
 window.updated = {
   "name": "嗨咻",
