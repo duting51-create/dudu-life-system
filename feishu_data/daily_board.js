@@ -1,75 +1,87 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-07T01:00:53.428Z",
-  "date": "2026-09-07",
+  "updated_at": "2026-09-08T01:00:56.010Z",
+  "date": "2026-09-08",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月7日",
+    "date": "9月8日",
     "items": [
       {
-        "text": "上午运动+洗澡+吃饭",
+        "text": "去医院检查看内膜生长情况",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "下午去西西弗书店/在家学习",
+        "text": "做2篇IP号笔记的图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写5篇卖货号笔记",
+        "text": "做3篇拆解笔记的图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写4篇博主拆解笔记",
+        "text": "思考新的备孕选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写3篇 IP 号笔记",
+        "text": "拍一下好物照片，定一下场景",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.上午运动+洗澡+吃饭\n2.下午去西西弗书店/在家学习\n3.写5篇卖货号笔记\n4.写4篇博主拆解笔记\n5.写3篇 IP 号笔记",
+    "raw_text": "1.去医院检查看内膜生长情况\n2.做2篇IP号笔记的图片\n3.做3篇拆解笔记的图片\n4.思考新的备孕选题\n5.拍一下好物照片，定一下场景\n6.运动1小时",
     "tasks": [
       {
-        "text": "上午运动+洗澡+吃饭",
+        "text": "去医院检查看内膜生长情况",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "下午去西西弗书店/在家学习",
+        "text": "做2篇IP号笔记的图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写5篇卖货号笔记",
+        "text": "做3篇拆解笔记的图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写4篇博主拆解笔记",
+        "text": "思考新的备孕选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写3篇 IP 号笔记",
+        "text": "拍一下好物照片，定一下场景",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.上午运动+洗澡+吃饭\n2.下午去西西弗书店/在家学习\n3.写5篇卖货号笔记\n4.写4篇博主拆解笔记\n5.写3篇 IP 号笔记"
+    "raw_tasks_text": "1.去医院检查看内膜生长情况\n2.做2篇IP号笔记的图片\n3.做3篇拆解笔记的图片\n4.思考新的备孕选题\n5.拍一下好物照片，定一下场景\n6.运动1小时"
   },
   "inspirations": {
     "items": [
