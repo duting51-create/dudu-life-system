@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "105. 人到中年，又累又不快乐"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生命终有尽头，徒留一颗破碎的心。",
-  "source": "神探夏洛克"
+  "content": "我们没有永恒的朋友，也没有永恒的敌人，只有永恒的利益。",
+  "source": "亨利·坦普尔"
 };
 window.updated = {
   "name": "嗨咻",
