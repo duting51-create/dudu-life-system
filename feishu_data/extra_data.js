@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "清风策萍影 远夜如移 纵入冥泥 明镜仍为寄",
-  "source": "魔道祖师"
+  "content": "我们等待着戈多，在等待的过程中发现戈多就是等待本身。",
+  "source": "王希明"
 };
 window.updated = {
   "name": "嗨咻",
