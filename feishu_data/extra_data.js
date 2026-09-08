@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "105. 人到中年，又累又不快乐"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "社会化：我们拥有比自己想象中更多的选择"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们等待着戈多，在等待的过程中发现戈多就是等待本身。",
-  "source": "王希明"
+  "content": "这个世纪疯狂，没人性，腐败；你却一直清醒，温柔，一尘不染。",
+  "source": "弗朗索瓦丝·萨冈"
 };
 window.updated = {
   "name": "嗨咻",
