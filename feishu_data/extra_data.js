@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "105. 人到中年，又累又不快乐"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "这个世纪疯狂，没人性，腐败；你却一直清醒，温柔，一尘不染。",
-  "source": "弗朗索瓦丝·萨冈"
+  "content": "妆罢低声问夫婿，画眉深浅入时无。",
+  "source": "近试上张籍水部 / 近试上张水部 / 闺意献张水部"
 };
 window.updated = {
   "name": "嗨咻",
