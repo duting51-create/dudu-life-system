@@ -1,30 +1,36 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-08T01:00:56.010Z",
-  "date": "2026-09-08",
+  "updated_at": "2026-09-09T01:00:58.368Z",
+  "date": "2026-09-09",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月8日",
+    "date": "9月9日",
     "items": [
       {
-        "text": "去医院检查看内膜生长情况",
+        "text": "运动1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做2篇IP号笔记的图片",
+        "text": "看马来西亚买什么，整理好发给晗哥",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "保存好物分享笔记的照片，整理各种构图思路",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "写2篇好物分享笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做3篇拆解笔记的图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "思考新的备孕选题",
+        "text": "写1篇 IP 号笔记——生活向随意点",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -36,34 +42,40 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "运动1小时",
+        "text": "写1篇拆解笔记——关于选题的",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.去医院检查看内膜生长情况\n2.做2篇IP号笔记的图片\n3.做3篇拆解笔记的图片\n4.思考新的备孕选题\n5.拍一下好物照片，定一下场景\n6.运动1小时",
+    "raw_text": "1.运动1小时\n2.看马来西亚买什么，整理好发给晗哥\n3.保存好物分享笔记的照片，整理各种构图思路\n4.写2篇好物分享笔记\n5.写1篇 IP 号笔记——生活向随意点\n6.拍一下好物照片，定一下场景\n7.写1篇拆解笔记——关于选题的",
     "tasks": [
       {
-        "text": "去医院检查看内膜生长情况",
+        "text": "运动1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做2篇IP号笔记的图片",
+        "text": "看马来西亚买什么，整理好发给晗哥",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "保存好物分享笔记的照片，整理各种构图思路",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "写2篇好物分享笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做3篇拆解笔记的图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "思考新的备孕选题",
+        "text": "写1篇 IP 号笔记——生活向随意点",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -75,13 +87,13 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "运动1小时",
+        "text": "写1篇拆解笔记——关于选题的",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去医院检查看内膜生长情况\n2.做2篇IP号笔记的图片\n3.做3篇拆解笔记的图片\n4.思考新的备孕选题\n5.拍一下好物照片，定一下场景\n6.运动1小时"
+    "raw_tasks_text": "1.运动1小时\n2.看马来西亚买什么，整理好发给晗哥\n3.保存好物分享笔记的照片，整理各种构图思路\n4.写2篇好物分享笔记\n5.写1篇 IP 号笔记——生活向随意点\n6.拍一下好物照片，定一下场景\n7.写1篇拆解笔记——关于选题的"
   },
   "inspirations": {
     "items": [
