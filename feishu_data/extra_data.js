@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "105. 人到中年，又累又不快乐"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "灵气为引，神魄作刃，血战死意，铸剑开锋……",
-  "source": "我在精神病院学斩神"
+  "content": "为什么我眼睛一睁开，你就不是我的了。",
+  "source": "被偷走的那五年"
 };
 window.updated = {
   "name": "嗨咻",
