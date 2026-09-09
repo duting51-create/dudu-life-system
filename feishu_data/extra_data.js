@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生活中没有什么可怕的，只有需要理解的。现在是时候多去理解，这样我们就会少一些恐惧。",
-  "source": "玛丽·居里"
+  "content": "风有约，花不误，岁岁年年不相负。",
+  "source": "网络"
 };
 window.updated = {
   "name": "嗨咻",
