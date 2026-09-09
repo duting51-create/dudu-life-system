@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "洪荒万年，独对穹苍灭绝，谓之大寂寞可也。",
-  "source": "目送"
+  "content": "你不能放弃，就算跛着脚也要爬上高峰。",
+  "source": "楚门的世界"
 };
 window.updated = {
   "name": "嗨咻",
