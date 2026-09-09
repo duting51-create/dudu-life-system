@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-08",
+  "updated": "2026-09-09",
   "list": [
     {
       "name": "嗨咻",
@@ -12,15 +12,15 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
     },
     {
       "name": "当个事儿",
-      "latest": "成年人的「发疯文学」：我们应该如何直面冲突？|声音胶囊01|Vol.178"
+      "latest": "本以为只是月经增多，B超结果却提示……| 有点小事66"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "社会化：我们拥有比自己想象中更多的选择"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-08",
+  "updated": "2026-09-09",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "国家是阶级矛盾不可调和的产物和表现。",
-  "source": "国家与革命"
+  "content": "兴，百姓苦；亡，百姓苦。",
+  "source": "山坡羊·潼关怀古"
 };
 window.updated = {
   "name": "嗨咻",
