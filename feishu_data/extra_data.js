@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "树敌真的很容易，有时候简单到令人痛心",
-  "source": "进化"
+  "content": "めまぐるしい景色の中,君だけが止まって見えた.",
+  "source": "グランドエスケープ"
 };
 window.updated = {
   "name": "嗨咻",
