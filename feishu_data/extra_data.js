@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "恐惧，是弱点劫持了，你身体里的驾驶舱。",
-  "source": "A Minecraft movie"
+  "content": "树敌真的很容易，有时候简单到令人痛心",
+  "source": "进化"
 };
 window.updated = {
   "name": "嗨咻",
