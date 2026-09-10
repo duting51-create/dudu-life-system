@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "东风夜放花千树。更吹落、星如雨。",
-  "source": "青玉案·元夕"
+  "content": "忽有故人心上过，回首山河已是秋，两处相思同淋雪，此生也算共白头。",
+  "source": "己亥杂诗"
 };
 window.updated = {
   "name": "嗨咻",

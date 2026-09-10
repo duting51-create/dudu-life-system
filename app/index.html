@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260910-1207" as="script">
-  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260910-1207" as="script">
+  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20260910-1215" as="script">
+  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20260910-1215" as="script">
   <link rel="preload" href="../feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2477,9 +2477,9 @@
     </div>
   </section>
 
-  <script src="../cloud-sync.js?v=sync-20260910-1207" defer></script>
-  <script src="../feishu_data/dashboard_data.js?v=data-20260910-1207" defer></script>
-  <script src="../feishu_data/extra_data.js?v=extra-20260910-1207" defer></script>
+  <script src="../cloud-sync.js?v=sync-20260910-1215" defer></script>
+  <script src="../feishu_data/dashboard_data.js?v=data-20260910-1215" defer></script>
+  <script src="../feishu_data/extra_data.js?v=extra-20260910-1215" defer></script>
   <script src="../feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -2777,6 +2777,10 @@
         const board = extractDashboardObjectFromScript(text);
         if (!board || !board.date) return;
         if (board.date !== shanghaiTodayKey()) return; // 只覆盖「今天」的看板
+        // 2026-09-10 FIX: 云端看板只做兜底，不抢占本地（本地每小时同步，比云端每日一次更实时）
+        const localTaskDate = window.DASHBOARD_DATA && window.DASHBOARD_DATA.tasks
+          ? window.DASHBOARD_DATA.tasks.date : null;
+        if (localTaskDate && localTaskDate === board.tasks.date) return;
         window.DASHBOARD_DATA = window.DASHBOARD_DATA || {};
         // FAIL-SAFE(2026-09-02): items 必须是数组才覆盖。空对象 {} 在 JS 是 truthy，
         // 若 daily_board 结构异常会被误当真数据覆盖正常看板（9/2 空覆盖事故同款风险）。
@@ -2857,6 +2861,8 @@
       try {
         const previousSync = String(window.DASHBOARD_DATA?.last_sync || '');
         await fetchPublishedDashboardData({ force: true, silent: opts.silent });
+        // 2026-09-10 FIX: 主数据可能停在昨天（本地链路故障），需重新叠加云端今日看板
+        await applyDailyBoardOverlay();
         assignData();
         renderAll();
         initializeTasksForToday(getTodayFeedTasks());
