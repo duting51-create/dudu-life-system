@@ -1,12 +1,36 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-09T01:00:58.368Z",
-  "date": "2026-09-09",
+  "updated_at": "2026-09-10T01:00:47.921Z",
+  "date": "2026-09-10",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月9日",
+    "date": "9月10日",
     "items": [
       {
+        "text": "收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写2篇好物分享笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "拍照定场景（今日最重要的任务）",
+        "done": false,
+        "cancelled": false,
+        "priority": "high"
+      },
+      {
         "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做2篇 IP账号的笔记配图",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -16,42 +40,36 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "mid"
-      },
-      {
-        "text": "保存好物分享笔记的照片，整理各种构图思路",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "写2篇好物分享笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇 IP 号笔记——生活向随意点",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍一下好物照片，定一下场景",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇拆解笔记——关于选题的",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
       }
     ],
-    "raw_text": "1.运动1小时\n2.看马来西亚买什么，整理好发给晗哥\n3.保存好物分享笔记的照片，整理各种构图思路\n4.写2篇好物分享笔记\n5.写1篇 IP 号笔记——生活向随意点\n6.拍一下好物照片，定一下场景\n7.写1篇拆解笔记——关于选题的",
+    "raw_text": "1.收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景\n2.写2篇好物分享笔记\n3.拍照定场景（今日最重要的任务）\n4.运动1小时\n5.做2篇 IP账号的笔记配图\n6.看马来西亚买什么，整理好发给晗哥",
     "tasks": [
       {
+        "text": "收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写2篇好物分享笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "拍照定场景（今日最重要的任务）",
+        "done": false,
+        "cancelled": false,
+        "priority": "high"
+      },
+      {
         "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做2篇 IP账号的笔记配图",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -61,39 +79,9 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "mid"
-      },
-      {
-        "text": "保存好物分享笔记的照片，整理各种构图思路",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "写2篇好物分享笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇 IP 号笔记——生活向随意点",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍一下好物照片，定一下场景",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇拆解笔记——关于选题的",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.运动1小时\n2.看马来西亚买什么，整理好发给晗哥\n3.保存好物分享笔记的照片，整理各种构图思路\n4.写2篇好物分享笔记\n5.写1篇 IP 号笔记——生活向随意点\n6.拍一下好物照片，定一下场景\n7.写1篇拆解笔记——关于选题的"
+    "raw_tasks_text": "1.收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景\n2.写2篇好物分享笔记\n3.拍照定场景（今日最重要的任务）\n4.运动1小时\n5.做2篇 IP账号的笔记配图\n6.看马来西亚买什么，整理好发给晗哥"
   },
   "inspirations": {
     "items": [
@@ -328,7 +316,8 @@ window.DAILY_BOARD = {
       "task:不做好物博主，看看是阿佳呀、水北山南的账号": true,
       "task:用湿纸巾擦一下几个白色桌面": true,
       "task:给妹妹看一下生日礼物要买了": true,
-      "task:写5篇博主拆解笔记": true
+      "task:写5篇博主拆解笔记": true,
+      "task:买手机壳和洗衣液": true
     }
   },
   "memos": {
