@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "应是天仙狂醉，乱把白云揉碎。",
-  "source": "清平乐·画堂晨起"
+  "content": "风啊，你还要吹到何时......",
+  "source": "卡尔·冯·沃尔里奇"
 };
 window.updated = {
   "name": "嗨咻",
