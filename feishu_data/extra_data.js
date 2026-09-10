@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我眺望远方的山峰，却错过转弯的路口，蓦然回首，才发现你在等我，没离开过。",
-  "source": "没离开过"
+  "content": "中缅两地，横跨万里，罪恶的纽带在此刻颓然断裂。这么多年来无数嚎哭的英魂在这一刻超然解脱，升向天际。",
+  "source": "破云"
 };
 window.updated = {
   "name": "嗨咻",
