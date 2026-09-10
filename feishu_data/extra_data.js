@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "中缅两地，横跨万里，罪恶的纽带在此刻颓然断裂。这么多年来无数嚎哭的英魂在这一刻超然解脱，升向天际。",
-  "source": "破云"
+  "content": "休对故人思故国，且将新火试新茶。诗酒趁年华。",
+  "source": "望江南·超然台作"
 };
 window.updated = {
   "name": "嗨咻",
