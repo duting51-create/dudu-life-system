@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "雁过也，正伤心，却是旧时相识。",
-  "source": "声声慢"
+  "content": "朋友的可贵，就在于自由。",
+  "source": "三毛"
 };
 window.updated = {
   "name": "嗨咻",
