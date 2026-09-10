@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "忽有故人心上过，回首山河已是秋，两处相思同淋雪，此生也算共白头。",
-  "source": "己亥杂诗"
+  "content": "死亡是所有人的共同幸福。",
+  "source": "最不幸的人"
 };
 window.updated = {
   "name": "嗨咻",
