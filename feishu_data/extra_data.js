@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "死亡是所有人的共同幸福。",
-  "source": "最不幸的人"
+  "content": "隐约雷鸣，阴霾天空，但盼风雨来，能留你在此。",
+  "source": "万叶集"
 };
 window.updated = {
   "name": "嗨咻",
