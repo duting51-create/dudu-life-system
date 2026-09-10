@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "社会化：我们拥有比自己想象中更多的选择"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "风啊，你还要吹到何时......",
-  "source": "卡尔·冯·沃尔里奇"
+  "content": "我眺望远方的山峰，却错过转弯的路口，蓦然回首，才发现你在等我，没离开过。",
+  "source": "没离开过"
 };
 window.updated = {
   "name": "嗨咻",
