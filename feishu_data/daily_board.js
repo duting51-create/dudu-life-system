@@ -1,87 +1,87 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-10T04:09:56.297Z",
-  "date": "2026-09-10",
+  "updated_at": "2026-09-11T01:00:54.865Z",
+  "date": "2026-09-11",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月10日",
+    "date": "9月11日",
     "items": [
       {
-        "text": "收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景",
+        "text": "去医院抽血查内膜",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇好物分享笔记",
+        "text": "确定红十字会的理论课程的学习计划",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍照定场景（今日最重要的任务）",
+        "text": "交社保",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "认真学习好物博主的标题和图片文档（学习）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看马来西亚要买什么",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "如何提升审美现阶段的重要任务——为了拍照片和视频",
         "done": false,
         "cancelled": false,
         "priority": "high"
-      },
-      {
-        "text": "运动1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做2篇 IP账号的笔记配图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看马来西亚买什么，整理好发给晗哥",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
       }
     ],
-    "raw_text": "1.收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景\n2.写2篇好物分享笔记\n3.拍照定场景（今日最重要的任务）\n4.运动1小时\n5.做2篇 IP账号的笔记配图\n6.看马来西亚买什么，整理好发给晗哥",
+    "raw_text": "1.去医院抽血查内膜\n2.确定红十字会的理论课程的学习计划\n3.交社保\n4.认真学习好物博主的标题和图片文档（学习）\n5.看马来西亚要买什么\n6.如何提升审美现阶段的重要任务——为了拍照片和视频",
     "tasks": [
       {
-        "text": "收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景",
+        "text": "去医院抽血查内膜",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇好物分享笔记",
+        "text": "确定红十字会的理论课程的学习计划",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍照定场景（今日最重要的任务）",
+        "text": "交社保",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "认真学习好物博主的标题和图片文档（学习）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看马来西亚要买什么",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "如何提升审美现阶段的重要任务——为了拍照片和视频",
         "done": false,
         "cancelled": false,
         "priority": "high"
-      },
-      {
-        "text": "运动1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做2篇 IP账号的笔记配图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看马来西亚买什么，整理好发给晗哥",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
       }
     ],
-    "raw_tasks_text": "1.收拾茶几、沙发、书桌、梳妆台这几个地方，打造成拍摄场景\n2.写2篇好物分享笔记\n3.拍照定场景（今日最重要的任务）\n4.运动1小时\n5.做2篇 IP账号的笔记配图\n6.看马来西亚买什么，整理好发给晗哥"
+    "raw_tasks_text": "1.去医院抽血查内膜\n2.确定红十字会的理论课程的学习计划\n3.交社保\n4.认真学习好物博主的标题和图片文档（学习）\n5.看马来西亚要买什么\n6.如何提升审美现阶段的重要任务——为了拍照片和视频"
   },
   "inspirations": {
     "items": [
