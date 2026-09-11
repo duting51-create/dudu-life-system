@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "105. 人到中年，又累又不快乐"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep94 | 社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "如果你执意追逐我的幻影，迟早会被真正的我打败。",
-  "source": "棋魂"
+  "content": "庭前落尽梧桐，水边开彻芙蓉。",
+  "source": "天净沙·秋"
 };
 window.updated = {
   "name": "嗨咻",
