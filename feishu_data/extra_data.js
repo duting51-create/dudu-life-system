@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "105. 人到中年，又累又不快乐"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep94 | 社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "宇宙是蚂蚁的梦。",
-  "source": "the shivering truth"
+  "content": "北方有佳人，绝世而独立。",
+  "source": "李延年歌"
 };
 window.updated = {
   "name": "嗨咻",
