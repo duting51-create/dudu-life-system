@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "105. 人到中年，又累又不快乐"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我宁愿他们在我身上划错千千万万刀，也不希望他们在病人身上下错一刀。",
-  "source": "我有一座恐怖屋"
+  "content": "宇宙是蚂蚁的梦。",
+  "source": "the shivering truth"
 };
 window.updated = {
   "name": "嗨咻",
