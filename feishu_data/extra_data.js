@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人一生下来就会哭，后来才学会笑。所以忧伤是一种本能，而快乐是一种能力。",
-  "source": "日历"
+  "content": "一切都明明白白， 但我们仍匆匆错过， 因为你相信命运， 因为我怀疑生活。",
+  "source": "错过"
 };
 window.updated = {
   "name": "嗨咻",
