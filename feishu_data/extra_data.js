@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "一个人采取何种态度，这或许才是生活中最重要的事情，但这与对事实的学习无关。",
-  "source": "20世纪分析哲学史1"
+  "content": "忽见陌头杨柳色，悔教夫婿觅封侯。",
+  "source": "闺怨"
 };
 window.updated = {
   "name": "嗨咻",
