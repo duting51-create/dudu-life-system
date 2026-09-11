@@ -12,15 +12,15 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
-      "latest": "本以为只是月经增多，B超结果却提示……| 有点小事66"
+      "latest": "关心「白带」健康的，听这期👉🏻 |Vol.179"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep94 | 社会化：我们拥有比自己想象中更多的选择"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "北方有佳人，绝世而独立。",
-  "source": "李延年歌"
+  "content": "世界上有太多孤独的人，都害怕走出第一步。",
+  "source": "绿皮书"
 };
 window.updated = {
   "name": "嗨咻",
