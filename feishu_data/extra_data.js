@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "一切都明明白白， 但我们仍匆匆错过， 因为你相信命运， 因为我怀疑生活。",
-  "source": "错过"
+  "content": "观察的实质是：“不赞美，不责难，甚至也不惋惜，但求了解认识而已。”",
+  "source": "柴静"
 };
 window.updated = {
   "name": "嗨咻",
