@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "105. 人到中年，又累又不快乐"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep94 | 社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "世界上有太多孤独的人，都害怕走出第一步。",
-  "source": "绿皮书"
+  "content": "一个人采取何种态度，这或许才是生活中最重要的事情，但这与对事实的学习无关。",
+  "source": "20世纪分析哲学史1"
 };
 window.updated = {
   "name": "嗨咻",
