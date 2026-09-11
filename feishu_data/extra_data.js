@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep94 | 社会化：我们拥有比自己想象中更多的选择"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "庭前落尽梧桐，水边开彻芙蓉。",
-  "source": "天净沙·秋"
+  "content": "我宁愿他们在我身上划错千千万万刀，也不希望他们在病人身上下错一刀。",
+  "source": "我有一座恐怖屋"
 };
 window.updated = {
   "name": "嗨咻",
