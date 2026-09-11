@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "忽见陌头杨柳色，悔教夫婿觅封侯。",
-  "source": "闺怨"
+  "content": "临死去只落孑然一身，赴阴司始问子孙安在；到头来徒留千古骂名，来地府方知万事皆休。",
+  "source": "剑来"
 };
 window.updated = {
   "name": "嗨咻",
