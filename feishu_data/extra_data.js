@@ -4,23 +4,23 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "105. 人到中年，又累又不快乐"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
-      "latest": "102.不造神不鸡娃，顶尖数学家身上的非典型育儿启示"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "畅所育言",
-      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
-      "latest": "关心「白带」健康的，听这期👉🏻 |Vol.179"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep94 | 社会化：我们拥有比自己想象中更多的选择"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "醉笑陪君三千场，不诉离殇。",
-  "source": "清醒纪"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
