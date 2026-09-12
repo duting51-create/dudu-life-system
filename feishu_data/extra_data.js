@@ -4,11 +4,11 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "105. 人到中年，又累又不快乐"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "102.不造神不鸡娃，顶尖数学家身上的非典型育儿启示"
     },
     {
       "name": "畅所育言",
@@ -16,11 +16,11 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "关心「白带」健康的，听这期👉🏻 |Vol.179"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep94 | 社会化：我们拥有比自己想象中更多的选择"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "热爱是人最本真质朴的品质与财富，它无关年龄、职业、身份，也不在于大小和高贵平庸之分。",
+  "source": "人民日报"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
