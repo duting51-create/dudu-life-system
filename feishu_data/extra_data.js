@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "114《为父则刚》：不是“我帮你带娃”，而是我们一起成为父母｜新晋待产包必备好物"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "热爱是人最本真质朴的品质与财富，它无关年龄、职业、身份，也不在于大小和高贵平庸之分。",
-  "source": "人民日报"
+  "content": "游心于淡，合气于漠，顺物自然而无容私焉。",
+  "source": "庄子·应帝王"
 };
 window.updated = {
   "name": "嗨咻",
