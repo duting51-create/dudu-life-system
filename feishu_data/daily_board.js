@@ -1,87 +1,39 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-11T01:00:54.865Z",
-  "date": "2026-09-11",
+  "updated_at": "2026-09-12T01:00:27.237Z",
+  "date": "2026-09-12",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月11日",
+    "date": "9月12日",
     "items": [
       {
-        "text": "去医院抽血查内膜",
+        "text": "两个华为手机充电，看看电池消耗速度",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "确定红十字会的理论课程的学习计划",
+        "text": "出门去拍些好看的照片和视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "交社保",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "认真学习好物博主的标题和图片文档（学习）",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看马来西亚要买什么",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "如何提升审美现阶段的重要任务——为了拍照片和视频",
-        "done": false,
-        "cancelled": false,
-        "priority": "high"
       }
     ],
-    "raw_text": "1.去医院抽血查内膜\n2.确定红十字会的理论课程的学习计划\n3.交社保\n4.认真学习好物博主的标题和图片文档（学习）\n5.看马来西亚要买什么\n6.如何提升审美现阶段的重要任务——为了拍照片和视频",
+    "raw_text": "1.两个华为手机充电，看看电池消耗速度\n2.出门去拍些好看的照片和视频",
     "tasks": [
       {
-        "text": "去医院抽血查内膜",
+        "text": "两个华为手机充电，看看电池消耗速度",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "确定红十字会的理论课程的学习计划",
+        "text": "出门去拍些好看的照片和视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "交社保",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "认真学习好物博主的标题和图片文档（学习）",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看马来西亚要买什么",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "如何提升审美现阶段的重要任务——为了拍照片和视频",
-        "done": false,
-        "cancelled": false,
-        "priority": "high"
       }
     ],
-    "raw_tasks_text": "1.去医院抽血查内膜\n2.确定红十字会的理论课程的学习计划\n3.交社保\n4.认真学习好物博主的标题和图片文档（学习）\n5.看马来西亚要买什么\n6.如何提升审美现阶段的重要任务——为了拍照片和视频"
+    "raw_tasks_text": "1.两个华为手机充电，看看电池消耗速度\n2.出门去拍些好看的照片和视频"
   },
   "inspirations": {
     "items": [
