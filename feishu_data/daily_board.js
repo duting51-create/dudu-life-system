@@ -1,39 +1,51 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-12T01:00:27.237Z",
-  "date": "2026-09-12",
+  "updated_at": "2026-09-13T01:00:26.346Z",
+  "date": "2026-09-13",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月12日",
+    "date": "9月13日",
     "items": [
       {
-        "text": "两个华为手机充电，看看电池消耗速度",
+        "text": "在家拍100张照片——茶几、沙发、床沿、白色桌面",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "出门去拍些好看的照片和视频",
+        "text": "保证每个产品至少有6张可用图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "整理衣橱——秋冬焕新",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
       }
     ],
-    "raw_text": "1.两个华为手机充电，看看电池消耗速度\n2.出门去拍些好看的照片和视频",
+    "raw_text": "1.在家拍100张照片——茶几、沙发、床沿、白色桌面\n2.保证每个产品至少有6张可用图片\n3.整理衣橱——秋冬焕新",
     "tasks": [
       {
-        "text": "两个华为手机充电，看看电池消耗速度",
+        "text": "在家拍100张照片——茶几、沙发、床沿、白色桌面",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "出门去拍些好看的照片和视频",
+        "text": "保证每个产品至少有6张可用图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "整理衣橱——秋冬焕新",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
       }
     ],
-    "raw_tasks_text": "1.两个华为手机充电，看看电池消耗速度\n2.出门去拍些好看的照片和视频"
+    "raw_tasks_text": "1.在家拍100张照片——茶几、沙发、床沿、白色桌面\n2.保证每个产品至少有6张可用图片\n3.整理衣橱——秋冬焕新"
   },
   "inspirations": {
     "items": [
@@ -270,11 +282,17 @@ window.DAILY_BOARD = {
       "task:用湿纸巾擦一下几个白色桌面": true,
       "task:给妹妹看一下生日礼物要买了": true,
       "task:写5篇博主拆解笔记": true,
-      "task:买手机壳和洗衣液": true
+      "task:买手机壳和洗衣液": true,
+      "task:解决配图费时间的问题，调整做图风格，让文案变成主体，图片能包含更多文案。": true
     }
   },
   "memos": {
     "items": [
+      {
+        "date": "46277",
+        "text": "\udcdd随时记录自己的灵感到备忘录",
+        "id": "memo_78_0"
+      },
       {
         "date": "46267",
         "text": "每次做选题，最多10条，太多了后面都会变化没必要，可以收集但是没必要一下子做太多。",
@@ -319,13 +337,8 @@ window.DAILY_BOARD = {
         "date": "46232",
         "text": "流产后身心恢复指南，卖的更好，是不是可以继续开发类似的产品",
         "id": "memo_36_1"
-      },
-      {
-        "date": "46232",
-        "text": "孕期记录工作台：用 Workbuddy 搭孕期记录工具，先分享，如果很多人不会用可以打包成 skill 出售",
-        "id": "memo_36_0"
       }
     ],
-    "total": 10
+    "total": 11
   }
 };
