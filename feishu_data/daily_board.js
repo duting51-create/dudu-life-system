@@ -1,51 +1,51 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-13T01:00:26.346Z",
-  "date": "2026-09-13",
+  "updated_at": "2026-09-14T01:00:39.678Z",
+  "date": "2026-09-14",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月13日",
+    "date": "9月14日",
     "items": [
       {
-        "text": "在家拍100张照片——茶几、沙发、床沿、白色桌面",
+        "text": "医院复查",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "保证每个产品至少有6张可用图片",
+        "text": "确定一个地方，闲逛拍些照片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "整理衣橱——秋冬焕新",
+        "text": "在手机上看好物博主的拍摄技巧飞书文档",
         "done": false,
         "cancelled": false,
-        "priority": "mid"
+        "priority": "low"
       }
     ],
-    "raw_text": "1.在家拍100张照片——茶几、沙发、床沿、白色桌面\n2.保证每个产品至少有6张可用图片\n3.整理衣橱——秋冬焕新",
+    "raw_text": "1.医院复查\n2.确定一个地方，闲逛拍些照片\n3.在手机上看好物博主的拍摄技巧飞书文档",
     "tasks": [
       {
-        "text": "在家拍100张照片——茶几、沙发、床沿、白色桌面",
+        "text": "医院复查",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "保证每个产品至少有6张可用图片",
+        "text": "确定一个地方，闲逛拍些照片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "整理衣橱——秋冬焕新",
+        "text": "在手机上看好物博主的拍摄技巧飞书文档",
         "done": false,
         "cancelled": false,
-        "priority": "mid"
+        "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.在家拍100张照片——茶几、沙发、床沿、白色桌面\n2.保证每个产品至少有6张可用图片\n3.整理衣橱——秋冬焕新"
+    "raw_tasks_text": "1.医院复查\n2.确定一个地方，闲逛拍些照片\n3.在手机上看好物博主的拍摄技巧飞书文档"
   },
   "inspirations": {
     "items": [
