@@ -1,51 +1,87 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-14T01:00:39.678Z",
-  "date": "2026-09-14",
+  "updated_at": "2026-09-15T01:00:29.668Z",
+  "date": "2026-09-15",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月14日",
+    "date": "9月15日",
     "items": [
       {
-        "text": "医院复查",
+        "text": "先去社区医院，看看能不能开到补佳乐",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "确定一个地方，闲逛拍些照片",
+        "text": "不行的话，去妇产医院开药",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "在手机上看好物博主的拍摄技巧飞书文档",
+        "text": "好物博主的拍摄技巧飞书文档，周三必须开拍",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写2-3篇好物分享笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写3-4篇IP号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "理一理最近的灵感碎片到备忘录",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.医院复查\n2.确定一个地方，闲逛拍些照片\n3.在手机上看好物博主的拍摄技巧飞书文档",
+    "raw_text": "1.先去社区医院，看看能不能开到补佳乐\n2.不行的话，去妇产医院开药\n3.好物博主的拍摄技巧飞书文档，周三必须开拍\n4.写2-3篇好物分享笔记\n5.写3-4篇IP号笔记\n6.理一理最近的灵感碎片到备忘录",
     "tasks": [
       {
-        "text": "医院复查",
+        "text": "先去社区医院，看看能不能开到补佳乐",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "确定一个地方，闲逛拍些照片",
+        "text": "不行的话，去妇产医院开药",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "在手机上看好物博主的拍摄技巧飞书文档",
+        "text": "好物博主的拍摄技巧飞书文档，周三必须开拍",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写2-3篇好物分享笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写3-4篇IP号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "理一理最近的灵感碎片到备忘录",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.医院复查\n2.确定一个地方，闲逛拍些照片\n3.在手机上看好物博主的拍摄技巧飞书文档"
+    "raw_tasks_text": "1.先去社区医院，看看能不能开到补佳乐\n2.不行的话，去妇产医院开药\n3.好物博主的拍摄技巧飞书文档，周三必须开拍\n4.写2-3篇好物分享笔记\n5.写3-4篇IP号笔记\n6.理一理最近的灵感碎片到备忘录"
   },
   "inspirations": {
     "items": [
