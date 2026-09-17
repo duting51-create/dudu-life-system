@@ -1,63 +1,63 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-16T01:00:27.916Z",
-  "date": "2026-09-16",
+  "updated_at": "2026-09-17T01:00:21.260Z",
+  "date": "2026-09-17",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月16日",
+    "date": "9月17日",
     "items": [
       {
-        "text": "好物博主的拍摄技巧飞书文档，周四必须开拍",
+        "text": "给深圳的快递员打电话问能不能改地址",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2-3篇好物分享笔记",
+        "text": "给韩莹发生日祝福，礼物盒子到了就寄快递",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写3-4篇IP号笔记",
+        "text": "做4篇好物分享笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "理一理最近的灵感碎片到备忘录",
+        "text": "写2-3篇IP号笔记（从备忘录灵感里找）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.好物博主的拍摄技巧飞书文档，周四必须开拍\n2.写2-3篇好物分享笔记\n3.写3-4篇IP号笔记\n4.理一理最近的灵感碎片到备忘录",
+    "raw_text": "1.给深圳的快递员打电话问能不能改地址\n2.给韩莹发生日祝福，礼物盒子到了就寄快递\n3.做4篇好物分享笔记\n4.写2-3篇IP号笔记（从备忘录灵感里找）",
     "tasks": [
       {
-        "text": "好物博主的拍摄技巧飞书文档，周四必须开拍",
+        "text": "给深圳的快递员打电话问能不能改地址",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2-3篇好物分享笔记",
+        "text": "给韩莹发生日祝福，礼物盒子到了就寄快递",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写3-4篇IP号笔记",
+        "text": "做4篇好物分享笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "理一理最近的灵感碎片到备忘录",
+        "text": "写2-3篇IP号笔记（从备忘录灵感里找）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.好物博主的拍摄技巧飞书文档，周四必须开拍\n2.写2-3篇好物分享笔记\n3.写3-4篇IP号笔记\n4.理一理最近的灵感碎片到备忘录"
+    "raw_tasks_text": "1.给深圳的快递员打电话问能不能改地址\n2.给韩莹发生日祝福，礼物盒子到了就寄快递\n3.做4篇好物分享笔记\n4.写2-3篇IP号笔记（从备忘录灵感里找）"
   },
   "inspirations": {
     "items": [
