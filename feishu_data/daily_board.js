@@ -1,63 +1,51 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-17T01:00:21.260Z",
-  "date": "2026-09-17",
+  "updated_at": "2026-09-18T01:00:21.621Z",
+  "date": "2026-09-18",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月17日",
+    "date": "9月18日",
     "items": [
       {
-        "text": "给深圳的快递员打电话问能不能改地址",
+        "text": "拍摄产品图（100张）——只做这一件事",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "给韩莹发生日祝福，礼物盒子到了就寄快递",
+        "text": "看一下dazz相机拍照技巧，练习一下",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做4篇好物分享笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写2-3篇IP号笔记（从备忘录灵感里找）",
+        "text": "晚上6点出去买徽州鸭头",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.给深圳的快递员打电话问能不能改地址\n2.给韩莹发生日祝福，礼物盒子到了就寄快递\n3.做4篇好物分享笔记\n4.写2-3篇IP号笔记（从备忘录灵感里找）",
+    "raw_text": "1.拍摄产品图（100张）——只做这一件事\n2.看一下dazz相机拍照技巧，练习一下\n3.晚上6点出去买徽州鸭头",
     "tasks": [
       {
-        "text": "给深圳的快递员打电话问能不能改地址",
+        "text": "拍摄产品图（100张）——只做这一件事",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "给韩莹发生日祝福，礼物盒子到了就寄快递",
+        "text": "看一下dazz相机拍照技巧，练习一下",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做4篇好物分享笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写2-3篇IP号笔记（从备忘录灵感里找）",
+        "text": "晚上6点出去买徽州鸭头",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.给深圳的快递员打电话问能不能改地址\n2.给韩莹发生日祝福，礼物盒子到了就寄快递\n3.做4篇好物分享笔记\n4.写2-3篇IP号笔记（从备忘录灵感里找）"
+    "raw_tasks_text": "1.拍摄产品图（100张）——只做这一件事\n2.看一下dazz相机拍照技巧，练习一下\n3.晚上6点出去买徽州鸭头"
   },
   "inspirations": {
     "items": [
@@ -301,6 +289,16 @@ window.DAILY_BOARD = {
   "memos": {
     "items": [
       {
+        "date": "46282",
+        "text": "每周抽一天时间出去，找一个出片的地方做拍照练习",
+        "id": "memo_83_1"
+      },
+      {
+        "date": "46282",
+        "text": "看到别的博主拍的好看的图就存下来，提升审美，学习构图，定期整理到一个文件夹",
+        "id": "memo_83_0"
+      },
+      {
         "date": "46277",
         "text": "\udcdd随时记录自己的灵感到备忘录",
         "id": "memo_78_0"
@@ -339,18 +337,8 @@ window.DAILY_BOARD = {
         "date": "46239",
         "text": "开发【嘎嘎有用】生活小程序",
         "id": "memo_43_0"
-      },
-      {
-        "date": "46234",
-        "text": "买个摄像头回家（放客厅看爸妈小耳朵）",
-        "id": "memo_38_1"
-      },
-      {
-        "date": "46232",
-        "text": "流产后身心恢复指南，卖的更好，是不是可以继续开发类似的产品",
-        "id": "memo_36_1"
       }
     ],
-    "total": 11
+    "total": 10
   }
 };
