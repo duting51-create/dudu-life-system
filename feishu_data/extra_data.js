@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "桃之夭夭，灼灼其华。",
-  "source": "诗经·周南·桃夭"
+  "content": "原来这世上所有的一切都会失去，全是泡影。不论你多么想留住的东西，最终都会从你手上流走。",
+  "source": "西游日记"
 };
 window.updated = {
   "name": "嗨咻",
