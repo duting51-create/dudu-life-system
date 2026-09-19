@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep95 | 为什么我们接不住别人的情绪？如何提供有效安慰"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "让人类保持理智，确实是种奢求。",
-  "source": "流浪地球"
+  "content": "冬天之所以那么冷是为了告诉大家身边人的温暖有多重要。",
+  "source": "熔炉"
 };
 window.updated = {
   "name": "嗨咻",
