@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep95 | 为什么我们接不住别人的情绪？如何提供有效安慰"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "酒调动着我们自身的温度，我们却糊涂的感谢世界的温暖。",
-  "source": "百家讲坛"
+  "content": "让人类保持理智，确实是种奢求。",
+  "source": "流浪地球"
 };
 window.updated = {
   "name": "嗨咻",
