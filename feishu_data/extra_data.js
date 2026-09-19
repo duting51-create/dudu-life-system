@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "107. 当我跑步时，我在想什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "醉后不知天在水，满船清梦压星河。",
-  "source": "题龙阳县青草湖"
+  "content": "桃之夭夭，灼灼其华。",
+  "source": "诗经·周南·桃夭"
 };
 window.updated = {
   "name": "嗨咻",
