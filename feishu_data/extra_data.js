@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我虚空一生不弱于人！",
-  "source": "遮天"
+  "content": "我们没有永恒的朋友，也没有永恒的敌人，只有永恒的利益。",
+  "source": "亨利·坦普尔"
 };
 window.updated = {
   "name": "嗨咻",
