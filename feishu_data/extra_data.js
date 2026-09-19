@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "107. 当我跑步时，我在想什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep95 | 为什么我们接不住别人的情绪？如何提供有效安慰"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "原来这世上所有的一切都会失去，全是泡影。不论你多么想留住的东西，最终都会从你手上流走。",
-  "source": "西游日记"
+  "content": "生当复来归，死当长相思。",
+  "source": "留别妻"
 };
 window.updated = {
   "name": "嗨咻",
