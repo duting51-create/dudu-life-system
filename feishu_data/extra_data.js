@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我曾听说住在罗生门的恶鬼，是因为害怕人性的残忍而逃走的。",
-  "source": "《罗生门》"
+  "content": "老夫聊发少年狂，左牵黄，右擎苍。",
+  "source": "江城子·密州出猎"
 };
 window.updated = {
   "name": "嗨咻",
