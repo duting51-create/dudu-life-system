@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们没有永恒的朋友，也没有永恒的敌人，只有永恒的利益。",
-  "source": "亨利·坦普尔"
+  "content": "酒调动着我们自身的温度，我们却糊涂的感谢世界的温暖。",
+  "source": "百家讲坛"
 };
 window.updated = {
   "name": "嗨咻",
