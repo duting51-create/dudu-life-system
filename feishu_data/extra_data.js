@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "爱你所爱，行你所行，听从你心，无问西东。",
-  "source": "无问西东"
+  "content": "醉后不知天在水，满船清梦压星河。",
+  "source": "题龙阳县青草湖"
 };
 window.updated = {
   "name": "嗨咻",
