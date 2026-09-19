@@ -1,51 +1,51 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-18T01:00:21.621Z",
-  "date": "2026-09-18",
+  "updated_at": "2026-09-19T01:00:18.982Z",
+  "date": "2026-09-19",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月18日",
+    "date": "9月19日",
     "items": [
       {
-        "text": "拍摄产品图（100张）——只做这一件事",
+        "text": "看看ChatGPT能不能给我出好物分享图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看一下dazz相机拍照技巧，练习一下",
+        "text": "写2-3篇IP笔记（配好图）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "晚上6点出去买徽州鸭头",
+        "text": "小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.拍摄产品图（100张）——只做这一件事\n2.看一下dazz相机拍照技巧，练习一下\n3.晚上6点出去买徽州鸭头",
+    "raw_text": "1.看看ChatGPT能不能给我出好物分享图\n2.写2-3篇IP笔记（配好图）\n3.小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数",
     "tasks": [
       {
-        "text": "拍摄产品图（100张）——只做这一件事",
+        "text": "看看ChatGPT能不能给我出好物分享图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看一下dazz相机拍照技巧，练习一下",
+        "text": "写2-3篇IP笔记（配好图）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "晚上6点出去买徽州鸭头",
+        "text": "小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.拍摄产品图（100张）——只做这一件事\n2.看一下dazz相机拍照技巧，练习一下\n3.晚上6点出去买徽州鸭头"
+    "raw_tasks_text": "1.看看ChatGPT能不能给我出好物分享图\n2.写2-3篇IP笔记（配好图）\n3.小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数"
   },
   "inspirations": {
     "items": [
@@ -283,7 +283,8 @@ window.DAILY_BOARD = {
       "task:给妹妹看一下生日礼物要买了": true,
       "task:写5篇博主拆解笔记": true,
       "task:买手机壳和洗衣液": true,
-      "task:解决配图费时间的问题，调整做图风格，让文案变成主体，图片能包含更多文案。": true
+      "task:解决配图费时间的问题，调整做图风格，让文案变成主体，图片能包含更多文案。": true,
+      "task:用一下黄油相机的【贴图】功能，压字的时候就可以用一块纯色透明边框": true
     }
   },
   "memos": {
