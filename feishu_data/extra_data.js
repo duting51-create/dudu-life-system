@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "桃李不言，下自成蹊。",
-  "source": "史记·李将军列传"
+  "content": "当你真正想做成一件事情的时候，就连天地万物都会帮你。",
+  "source": "网剧棋魂"
 };
 window.updated = {
   "name": "嗨咻",
