@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "当你真正想做成一件事情的时候，就连天地万物都会帮你。",
-  "source": "网剧棋魂"
+  "content": "太好了/在清晨醒来/一个人/不必在已经/不爱的时候/跟谁说/我爱你。",
+  "source": "布劳提根诗选"
 };
 window.updated = {
   "name": "嗨咻",
