@@ -1,51 +1,87 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-19T01:00:18.982Z",
-  "date": "2026-09-19",
+  "updated_at": "2026-09-20T01:00:40.984Z",
+  "date": "2026-09-20",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月19日",
+    "date": "9月20日",
     "items": [
       {
-        "text": "看看ChatGPT能不能给我出好物分享图",
+        "text": "早上10点出发去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2-3篇IP笔记（配好图）",
+        "text": "做移植手术",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数",
+        "text": "等待的过程中拍一下包里东西的照片（作图用）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "补觉or看电视（放轻松）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "把写好的3篇IP笔记配好图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.看看ChatGPT能不能给我出好物分享图\n2.写2-3篇IP笔记（配好图）\n3.小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数",
+    "raw_text": "1.早上10点出发去医院\n2.做移植手术\n3.等待的过程中拍一下包里东西的照片（作图用）\n4.补觉or看电视（放轻松）\n5.在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片\n6.把写好的3篇IP笔记配好图",
     "tasks": [
       {
-        "text": "看看ChatGPT能不能给我出好物分享图",
+        "text": "早上10点出发去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2-3篇IP笔记（配好图）",
+        "text": "做移植手术",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数",
+        "text": "等待的过程中拍一下包里东西的照片（作图用）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "补觉or看电视（放轻松）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "把写好的3篇IP笔记配好图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.看看ChatGPT能不能给我出好物分享图\n2.写2-3篇IP笔记（配好图）\n3.小红书搜索 dazz 相机使用技巧，总结各类相机滤镜的适用场景和拍照参数"
+    "raw_tasks_text": "1.早上10点出发去医院\n2.做移植手术\n3.等待的过程中拍一下包里东西的照片（作图用）\n4.补觉or看电视（放轻松）\n5.在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片\n6.把写好的3篇IP笔记配好图"
   },
   "inspirations": {
     "items": [
