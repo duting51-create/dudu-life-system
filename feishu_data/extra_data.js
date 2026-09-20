@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "在每个银河坠入山谷的梦里，我会醒来，也忘记梦境。",
-  "source": "后会无期"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
