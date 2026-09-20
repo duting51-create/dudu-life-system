@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "太好了/在清晨醒来/一个人/不必在已经/不爱的时候/跟谁说/我爱你。",
-  "source": "布劳提根诗选"
+  "content": "多少事，从来急，天地转，光阴迫，一万年太久，只争朝夕。",
+  "source": "毛泽东语录"
 };
 window.updated = {
   "name": "嗨咻",
