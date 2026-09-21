@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "107. 当我跑步时，我在想什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "且视他人之疑目如盏盏鬼火，大胆地去你的夜路。",
-  "source": "病隙碎笔"
+  "content": "生活中最重要的事情：不是胜利，而是努力；不是征服，而是奋力拼搏。",
+  "source": "Pierre de Coubertin"
 };
 window.updated = {
   "name": "嗨咻",
