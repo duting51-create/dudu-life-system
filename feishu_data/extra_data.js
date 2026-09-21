@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "虽然我和他已十年不见，但我知道我会永远怀念他。",
-  "source": "伴我同行"
+  "content": "流水落花春去也，天上人间。",
+  "source": "浪淘沙令·帘外雨潺潺"
 };
 window.updated = {
   "name": "嗨咻",
