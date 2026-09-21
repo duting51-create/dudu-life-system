@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "107. 当我跑步时，我在想什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生活中最重要的事情：不是胜利，而是努力；不是征服，而是奋力拼搏。",
-  "source": "Pierre de Coubertin"
+  "content": "你呢，是这辈子没故事，想拥有一段故事，我呢，是故事太多，想给故事一个结局。",
+  "source": "飞驰认识"
 };
 window.updated = {
   "name": "嗨咻",
