@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "小楼昨夜又东风，故国不堪回首月明中。",
-  "source": "虞美人·春花秋月何时了"
+  "content": "花褪残红青杏小。燕子飞时，绿水人家绕。",
+  "source": "蝶恋花·春景"
 };
 window.updated = {
   "name": "嗨咻",
