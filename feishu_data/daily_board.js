@@ -1,87 +1,75 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-20T01:00:40.984Z",
-  "date": "2026-09-20",
+  "updated_at": "2026-09-21T01:00:41.161Z",
+  "date": "2026-09-21",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月20日",
+    "date": "9月21日",
     "items": [
       {
-        "text": "早上10点出发去医院",
+        "text": "拍一个好物分享的视频试试看这种效果（参考owow的视频）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做移植手术",
+        "text": "看博主【打工不耐受】的所有视频学习一下",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "等待的过程中拍一下包里东西的照片（作图用）",
+        "text": "写2-3篇IP笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "补觉or看电视（放轻松）",
+        "text": "去打1针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "把写好的3篇IP笔记配好图",
+        "text": "必须要洗碗了",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.早上10点出发去医院\n2.做移植手术\n3.等待的过程中拍一下包里东西的照片（作图用）\n4.补觉or看电视（放轻松）\n5.在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片\n6.把写好的3篇IP笔记配好图",
+    "raw_text": "1.拍一个好物分享的视频试试看这种效果（参考owow的视频）\n2.看博主【打工不耐受】的所有视频学习一下\n3.写2-3篇IP笔记\n4.去打1针\n5.必须要洗碗了",
     "tasks": [
       {
-        "text": "早上10点出发去医院",
+        "text": "拍一个好物分享的视频试试看这种效果（参考owow的视频）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做移植手术",
+        "text": "看博主【打工不耐受】的所有视频学习一下",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "等待的过程中拍一下包里东西的照片（作图用）",
+        "text": "写2-3篇IP笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "补觉or看电视（放轻松）",
+        "text": "去打1针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "把写好的3篇IP笔记配好图",
+        "text": "必须要洗碗了",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.早上10点出发去医院\n2.做移植手术\n3.等待的过程中拍一下包里东西的照片（作图用）\n4.补觉or看电视（放轻松）\n5.在家自拍学会拍照不露脸的方法，以后就可以拍这种类型的照片\n6.把写好的3篇IP笔记配好图"
+    "raw_tasks_text": "1.拍一个好物分享的视频试试看这种效果（参考owow的视频）\n2.看博主【打工不耐受】的所有视频学习一下\n3.写2-3篇IP笔记\n4.去打1针\n5.必须要洗碗了"
   },
   "inspirations": {
     "items": [
