@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "能诚实地承认穷，诚恳地表达对于钱的兴趣，就是穷者的尊严。",
-  "source": "无出路咖啡馆"
+  "content": "丢掉幻想，准备斗争。",
+  "source": "毛泽东选集"
 };
 window.updated = {
   "name": "嗨咻",
