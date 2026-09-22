@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep96 |《蜘蛛侠：崭新之日》心理解读：当能力、关系和记忆都改变了，我还是我吗？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "丢掉幻想，准备斗争。",
-  "source": "毛泽东选集"
+  "content": "人生若无悔，那该多无趣啊。",
+  "source": "一代宗师"
 };
 window.updated = {
   "name": "嗨咻",
