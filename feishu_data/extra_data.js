@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "北方有佳人，绝世而独立。",
-  "source": "李延年歌"
+  "content": "当灾难来临时，精神意志是人类面临危险的第一序列武器。",
+  "source": "第一序列"
 };
 window.updated = {
   "name": "嗨咻",
