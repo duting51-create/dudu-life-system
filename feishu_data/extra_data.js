@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "今夜不知何处宿，平沙万里绝人烟。",
-  "source": "碛中作"
+  "content": "臣心一片磁针石，不指南方不肯休。",
+  "source": "扬子江"
 };
 window.updated = {
   "name": "嗨咻",
