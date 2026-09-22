@@ -1,26 +1,26 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "107. 当我跑步时，我在想什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
-      "latest": "103. 带娃旅行：麻烦翻倍，自由减半，我们为什么还要出发？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "畅所育言",
-      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
-      "latest": "夫妻「避孕分歧」带来的追问：爱到底是什么？|Vol.180"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep96 |《蜘蛛侠：崭新之日》心理解读：当能力、关系和记忆都改变了，我还是我吗？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "list": [
     {
       "name": "爽",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "花褪残红青杏小。燕子飞时，绿水人家绕。",
-  "source": "蝶恋花·春景"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
