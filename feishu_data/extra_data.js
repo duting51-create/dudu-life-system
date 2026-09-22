@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "臣心一片磁针石，不指南方不肯休。",
-  "source": "扬子江"
+  "content": "那天的世界和往常的任何一天一样可爱，可他却在骑着骡子迈向死亡。",
+  "source": "上帝之子"
 };
 window.updated = {
   "name": "嗨咻",
