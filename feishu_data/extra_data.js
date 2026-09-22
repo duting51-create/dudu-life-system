@@ -4,23 +4,23 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "108.和黄翔聊天｜35+女性保养指南，如何养出一颗不老的大脑？"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "103. 带娃旅行：麻烦翻倍，自由减半，我们为什么还要出发？"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "夫妻「避孕分歧」带来的追问：爱到底是什么？|Vol.180"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep96 |《蜘蛛侠：崭新之日》心理解读：当能力、关系和记忆都改变了，我还是我吗？"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "未觉池塘春草梦，阶前梧叶已秋声。",
+  "source": "偶成"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
