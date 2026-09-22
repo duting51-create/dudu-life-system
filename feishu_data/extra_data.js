@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "115 二胎这件事，钱、时间、精力和爱，都不能只是刚刚好"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "梅须逊雪三分白，雪却输梅一段香。",
-  "source": "雪梅·其一"
+  "content": "今夜不知何处宿，平沙万里绝人烟。",
+  "source": "碛中作"
 };
 window.updated = {
   "name": "嗨咻",
