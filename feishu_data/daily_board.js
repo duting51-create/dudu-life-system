@@ -1,75 +1,99 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-21T01:00:41.161Z",
-  "date": "2026-09-21",
+  "updated_at": "2026-09-22T01:00:41.486Z",
+  "date": "2026-09-22",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月21日",
+    "date": "9月22日",
     "items": [
       {
-        "text": "拍一个好物分享的视频试试看这种效果（参考owow的视频）",
+        "text": "写1好物笔记（平价好物）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看博主【打工不耐受】的所有视频学习一下",
+        "text": "看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "去打2针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2-3篇IP笔记",
+        "text": "写2篇IP号笔记（做好配图）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "去打1针",
+        "text": "拍拉屎小包的视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "必须要洗碗了",
+        "text": "剪辑拉屎小包的视频",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看随手 po视频博主的视频学习一下她们的语言表达",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.拍一个好物分享的视频试试看这种效果（参考owow的视频）\n2.看博主【打工不耐受】的所有视频学习一下\n3.写2-3篇IP笔记\n4.去打1针\n5.必须要洗碗了",
+    "raw_text": "1.写1好物笔记（平价好物）\n2.看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理\n3.去打2针\n4.写2篇IP号笔记（做好配图）\n5.拍拉屎小包的视频\n6.剪辑拉屎小包的视频\n7.看随手 po视频博主的视频学习一下她们的语言表达",
     "tasks": [
       {
-        "text": "拍一个好物分享的视频试试看这种效果（参考owow的视频）",
+        "text": "写1好物笔记（平价好物）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看博主【打工不耐受】的所有视频学习一下",
+        "text": "看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "去打2针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2-3篇IP笔记",
+        "text": "写2篇IP号笔记（做好配图）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "去打1针",
+        "text": "拍拉屎小包的视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "必须要洗碗了",
+        "text": "剪辑拉屎小包的视频",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看随手 po视频博主的视频学习一下她们的语言表达",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.拍一个好物分享的视频试试看这种效果（参考owow的视频）\n2.看博主【打工不耐受】的所有视频学习一下\n3.写2-3篇IP笔记\n4.去打1针\n5.必须要洗碗了"
+    "raw_tasks_text": "1.写1好物笔记（平价好物）\n2.看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理\n3.去打2针\n4.写2篇IP号笔记（做好配图）\n5.拍拉屎小包的视频\n6.剪辑拉屎小包的视频\n7.看随手 po视频博主的视频学习一下她们的语言表达"
   },
   "inspirations": {
     "items": [
@@ -308,7 +332,8 @@ window.DAILY_BOARD = {
       "task:写5篇博主拆解笔记": true,
       "task:买手机壳和洗衣液": true,
       "task:解决配图费时间的问题，调整做图风格，让文案变成主体，图片能包含更多文案。": true,
-      "task:用一下黄油相机的【贴图】功能，压字的时候就可以用一块纯色透明边框": true
+      "task:用一下黄油相机的【贴图】功能，压字的时候就可以用一块纯色透明边框": true,
+      "task:整理/处理一下可用的图片": true
     }
   },
   "memos": {
