@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "当灾难来临时，精神意志是人类面临危险的第一序列武器。",
-  "source": "第一序列"
+  "content": "谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳。",
+  "source": "浣溪沙·谁念西风独自凉"
 };
 window.updated = {
   "name": "嗨咻",
