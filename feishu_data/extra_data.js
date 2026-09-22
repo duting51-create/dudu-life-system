@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "108.和黄翔聊天｜35+女性保养指南，如何养出一颗不老的大脑？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "山外青山楼外楼，西湖歌舞几时休？",
-  "source": "题临安邸"
+  "content": "梅须逊雪三分白，雪却输梅一段香。",
+  "source": "雪梅·其一"
 };
 window.updated = {
   "name": "嗨咻",
