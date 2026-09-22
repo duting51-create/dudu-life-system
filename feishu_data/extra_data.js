@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳。",
-  "source": "浣溪沙·谁念西风独自凉"
+  "content": "自能成羽翼，何须仰云梯。",
+  "source": "观内怀仙"
 };
 window.updated = {
   "name": "嗨咻",
