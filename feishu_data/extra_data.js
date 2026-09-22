@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "未觉池塘春草梦，阶前梧叶已秋声。",
-  "source": "偶成"
+  "content": "北方有佳人，绝世而独立。",
+  "source": "李延年歌"
 };
 window.updated = {
   "name": "嗨咻",
