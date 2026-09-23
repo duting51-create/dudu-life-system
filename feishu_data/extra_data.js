@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "殷勤昨夜三更雨，又得浮生一日凉。",
-  "source": "鹧鸪天·林断山明竹隐墙"
+  "content": "将盈耆欲，长好恶，则性命之情病矣。",
+  "source": "庄子·徐无鬼"
 };
 window.updated = {
   "name": "嗨咻",
