@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "只身千里客，孤枕一灯秋。",
-  "source": "陆游"
+  "content": "殷勤昨夜三更雨，又得浮生一日凉。",
+  "source": "鹧鸪天·林断山明竹隐墙"
 };
 window.updated = {
   "name": "嗨咻",
