@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "夫妻「避孕分歧」带来的追问：爱到底是什么？|Vol.180"
+      "latest": "急诊送来的「宫外孕」患者，全程哭得令人揪心……| 有点小事68"
     },
     {
       "name": "Alison Yu心理",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "当一个民族没有退路的时候，它的唯一的退路就是退回自己的内心。",
-  "source": "德国文化史"
+  "content": "只身千里客，孤枕一灯秋。",
+  "source": "陆游"
 };
 window.updated = {
   "name": "嗨咻",
