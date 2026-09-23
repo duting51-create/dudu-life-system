@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "急诊送来的「宫外孕」患者，全程哭得令人揪心……| 有点小事68"
     },
     {
       "name": "Alison Yu心理",
