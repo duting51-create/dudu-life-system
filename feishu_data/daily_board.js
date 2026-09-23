@@ -1,30 +1,36 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-22T01:00:41.486Z",
-  "date": "2026-09-22",
+  "updated_at": "2026-09-23T01:01:07.947Z",
+  "date": "2026-09-23",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月22日",
+    "date": "9月23日",
     "items": [
       {
-        "text": "写1好物笔记（平价好物）",
+        "text": "拍摄日——拍摄3组产品/好物选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "去打2针",
+        "text": "修图等后续压字",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇IP号笔记（做好配图）",
+        "text": "拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "搭好场景后，把场景先拍一下，到时候给ChatGPT",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "去打1针",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -46,30 +52,42 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "整理情绪/母婴图文博主的商单图片",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
       }
     ],
-    "raw_text": "1.写1好物笔记（平价好物）\n2.看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理\n3.去打2针\n4.写2篇IP号笔记（做好配图）\n5.拍拉屎小包的视频\n6.剪辑拉屎小包的视频\n7.看随手 po视频博主的视频学习一下她们的语言表达",
+    "raw_text": "1.拍摄日——拍摄3组产品/好物选题\n2.修图等后续压字\n3.拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋\n4.搭好场景后，把场景先拍一下，到时候给ChatGPT\n5.去打1针\n6.拍拉屎小包的视频\n7.剪辑拉屎小包的视频\n8.看随手 po视频博主的视频学习一下她们的语言表达\n9.整理情绪/母婴图文博主的商单图片",
     "tasks": [
       {
-        "text": "写1好物笔记（平价好物）",
+        "text": "拍摄日——拍摄3组产品/好物选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "去打2针",
+        "text": "修图等后续压字",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇IP号笔记（做好配图）",
+        "text": "拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "搭好场景后，把场景先拍一下，到时候给ChatGPT",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "去打1针",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -91,9 +109,15 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "整理情绪/母婴图文博主的商单图片",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
       }
     ],
-    "raw_tasks_text": "1.写1好物笔记（平价好物）\n2.看一下母婴博主/情绪文案博主的商单场景都是哪些，后面有意识拍这种场景，要留有广告位，做好整理\n3.去打2针\n4.写2篇IP号笔记（做好配图）\n5.拍拉屎小包的视频\n6.剪辑拉屎小包的视频\n7.看随手 po视频博主的视频学习一下她们的语言表达"
+    "raw_tasks_text": "1.拍摄日——拍摄3组产品/好物选题\n2.修图等后续压字\n3.拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋\n4.搭好场景后，把场景先拍一下，到时候给ChatGPT\n5.去打1针\n6.拍拉屎小包的视频\n7.剪辑拉屎小包的视频\n8.看随手 po视频博主的视频学习一下她们的语言表达\n9.整理情绪/母婴图文博主的商单图片"
   },
   "inspirations": {
     "items": [
