@@ -1,123 +1,99 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-23T01:01:07.947Z",
-  "date": "2026-09-23",
+  "updated_at": "2026-09-24T01:00:47.599Z",
+  "date": "2026-09-24",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月23日",
+    "date": "9月24日",
     "items": [
       {
-        "text": "拍摄日——拍摄3组产品/好物选题",
+        "text": "去打2针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "修图等后续压字",
+        "text": "写2篇IP号笔记（做好配图）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋",
+        "text": "平价编织收纳筐好物笔记，做好配图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "搭好场景后，把场景先拍一下，到时候给ChatGPT",
+        "text": "写kitty热水袋的脚本+拍视频+剪辑",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "去打1针",
+        "text": "买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍拉屎小包的视频",
+        "text": "和AI沟通怎么做好物笔记图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "剪辑拉屎小包的视频",
+        "text": "拍拉屎小包的视频+剪辑（配音）",
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "看随手 po视频博主的视频学习一下她们的语言表达",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理情绪/母婴图文博主的商单图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
       }
     ],
-    "raw_text": "1.拍摄日——拍摄3组产品/好物选题\n2.修图等后续压字\n3.拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋\n4.搭好场景后，把场景先拍一下，到时候给ChatGPT\n5.去打1针\n6.拍拉屎小包的视频\n7.剪辑拉屎小包的视频\n8.看随手 po视频博主的视频学习一下她们的语言表达\n9.整理情绪/母婴图文博主的商单图片",
+    "raw_text": "1.去打2针\n2.写2篇IP号笔记（做好配图）\n3.平价编织收纳筐好物笔记，做好配图\n4.写kitty热水袋的脚本+拍视频+剪辑\n5.买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家\n6.和AI沟通怎么做好物笔记图片\n7.拍拉屎小包的视频+剪辑（配音）",
     "tasks": [
       {
-        "text": "拍摄日——拍摄3组产品/好物选题",
+        "text": "去打2针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "修图等后续压字",
+        "text": "写2篇IP号笔记（做好配图）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋",
+        "text": "平价编织收纳筐好物笔记，做好配图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "搭好场景后，把场景先拍一下，到时候给ChatGPT",
+        "text": "写kitty热水袋的脚本+拍视频+剪辑",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "去打1针",
+        "text": "买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍拉屎小包的视频",
+        "text": "和AI沟通怎么做好物笔记图片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "剪辑拉屎小包的视频",
+        "text": "拍拉屎小包的视频+剪辑（配音）",
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "看随手 po视频博主的视频学习一下她们的语言表达",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理情绪/母婴图文博主的商单图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
       }
     ],
-    "raw_tasks_text": "1.拍摄日——拍摄3组产品/好物选题\n2.修图等后续压字\n3.拍摄清单：茶具和茶叶、现有的好吃的、收纳小包、唇膏、重力眼罩、真丝眼罩、虫子玩偶、墨镜、垃圾袋\n4.搭好场景后，把场景先拍一下，到时候给ChatGPT\n5.去打1针\n6.拍拉屎小包的视频\n7.剪辑拉屎小包的视频\n8.看随手 po视频博主的视频学习一下她们的语言表达\n9.整理情绪/母婴图文博主的商单图片"
+    "raw_tasks_text": "1.去打2针\n2.写2篇IP号笔记（做好配图）\n3.平价编织收纳筐好物笔记，做好配图\n4.写kitty热水袋的脚本+拍视频+剪辑\n5.买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家\n6.和AI沟通怎么做好物笔记图片\n7.拍拉屎小包的视频+剪辑（配音）"
   },
   "inspirations": {
     "items": [
