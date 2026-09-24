@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "如今我终于明白，我渡得过万里狂风，渡得过千条性命，渡得过诗酒年华，却渡不过，你不顾而去的目光。",
-  "source": "扶摇皇后"
+  "content": "生命中，再无聊的时光，也都是限量版。",
+  "source": "英语杂刊"
 };
 window.updated = {
   "name": "嗨咻",
