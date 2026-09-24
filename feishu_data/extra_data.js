@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生命中，再无聊的时光，也都是限量版。",
-  "source": "英语杂刊"
+  "content": "吾生三愿，纯朴却激越:一曰渴望爱情，二曰求索知识，三曰悲悯吾类之无尽苦难。",
+  "source": "网络"
 };
 window.updated = {
   "name": "嗨咻",
