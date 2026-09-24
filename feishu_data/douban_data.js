@@ -1,6 +1,6 @@
 // 豆瓣观影清单（由 feishu_sync.py fetch_douban() 生成）
 window.DOUBAN_DATA = {
-  "updated": "2026-09-17",
+  "updated": "2026-09-24",
   "wish": [
     {
       "title": "好朋友们",

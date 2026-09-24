@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "108.和黄翔聊天｜35+女性保养指南，如何养出一颗不老的大脑？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "未经审视的人生是不值得过的。",
-  "source": "苏格拉底"
+  "content": "如今我终于明白，我渡得过万里狂风，渡得过千条性命，渡得过诗酒年华，却渡不过，你不顾而去的目光。",
+  "source": "扶摇皇后"
 };
 window.updated = {
   "name": "嗨咻",
