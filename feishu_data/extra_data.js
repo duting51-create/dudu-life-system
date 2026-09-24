@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "天长地久有时尽，此恨绵绵无绝期。",
-  "source": "长恨歌"
+  "content": "也许世界上也有五千朵和你一模一样的花,但只有你是我独一无二的玫瑰。",
+  "source": "小王子"
 };
 window.updated = {
   "name": "嗨咻",
