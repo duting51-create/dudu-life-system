@@ -1,99 +1,51 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-24T01:00:47.599Z",
-  "date": "2026-09-24",
+  "updated_at": "2026-09-25T01:00:49.551Z",
+  "date": "2026-09-25",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月24日",
+    "date": "9月25日",
     "items": [
       {
-        "text": "去打2针",
+        "text": "去打1针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇IP号笔记（做好配图）",
+        "text": "和晗哥玩",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "平价编织收纳筐好物笔记，做好配图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写kitty热水袋的脚本+拍视频+剪辑",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "和AI沟通怎么做好物笔记图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍拉屎小包的视频+剪辑（配音）",
+        "text": "晗哥扫地拖地",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.去打2针\n2.写2篇IP号笔记（做好配图）\n3.平价编织收纳筐好物笔记，做好配图\n4.写kitty热水袋的脚本+拍视频+剪辑\n5.买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家\n6.和AI沟通怎么做好物笔记图片\n7.拍拉屎小包的视频+剪辑（配音）",
+    "raw_text": "1.去打1针\n2.和晗哥玩\n3.晗哥扫地拖地",
     "tasks": [
       {
-        "text": "去打2针",
+        "text": "去打1针",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇IP号笔记（做好配图）",
+        "text": "和晗哥玩",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "平价编织收纳筐好物笔记，做好配图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写kitty热水袋的脚本+拍视频+剪辑",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "和AI沟通怎么做好物笔记图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍拉屎小包的视频+剪辑（配音）",
+        "text": "晗哥扫地拖地",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去打2针\n2.写2篇IP号笔记（做好配图）\n3.平价编织收纳筐好物笔记，做好配图\n4.写kitty热水袋的脚本+拍视频+剪辑\n5.买要送到鸦鹊岭的东西+提醒妹妹带狗狗沐浴露回家\n6.和AI沟通怎么做好物笔记图片\n7.拍拉屎小包的视频+剪辑（配音）"
+    "raw_tasks_text": "1.去打1针\n2.和晗哥玩\n3.晗哥扫地拖地"
   },
   "inspirations": {
     "items": [
