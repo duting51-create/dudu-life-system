@@ -1,9 +1,9 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-25T01:00:49.551Z",
-  "date": "2026-09-25",
+  "updated_at": "2026-09-26T01:00:42.253Z",
+  "date": "2026-09-26",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月25日",
+    "date": "9月26日",
     "items": [
       {
         "text": "去打1针",
@@ -12,19 +12,25 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "和晗哥玩",
+        "text": "整理一下手机相册，该删删，该传就传到网盘",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "和AI一起规划 AI短剧的学习计化",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "晗哥扫地拖地",
+        "text": "寄旧手机和其他东西回家",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.去打1针\n2.和晗哥玩\n3.晗哥扫地拖地",
+    "raw_text": "1.去打1针\n2.整理一下手机相册，该删删，该传就传到网盘\n3.和AI一起规划 AI短剧的学习计化\n4.寄旧手机和其他东西回家",
     "tasks": [
       {
         "text": "去打1针",
@@ -33,19 +39,25 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "和晗哥玩",
+        "text": "整理一下手机相册，该删删，该传就传到网盘",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "和AI一起规划 AI短剧的学习计化",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "晗哥扫地拖地",
+        "text": "寄旧手机和其他东西回家",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去打1针\n2.和晗哥玩\n3.晗哥扫地拖地"
+    "raw_tasks_text": "1.去打1针\n2.整理一下手机相册，该删删，该传就传到网盘\n3.和AI一起规划 AI短剧的学习计化\n4.寄旧手机和其他东西回家"
   },
   "inspirations": {
     "items": [
