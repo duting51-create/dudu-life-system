@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "108.和黄翔聊天｜35+女性保养指南，如何养出一颗不老的大脑？"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep96 |《蜘蛛侠：崭新之日》心理解读：当能力、关系和记忆都改变了，我还是我吗？"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "直道相思了无益，未妨惆怅是清狂。",
-  "source": "无题"
+  "content": "春蚕到死丝方尽，蜡炬成灰泪始干。",
+  "source": "无题·相见时难别亦难"
 };
 window.updated = {
   "name": "嗨咻",
