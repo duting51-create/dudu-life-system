@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我感谢一切我有权奉承的神明，让我在这个不唯一的世界遇见唯一的你。",
-  "source": "Vitamin少女"
+  "content": "成年人的世界没有容易二字。",
+  "source": "天气预报员"
 };
 window.updated = {
   "name": "嗨咻",
