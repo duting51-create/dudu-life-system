@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "十年前,你爱我,我逃避不见,十年后,我爱你,你不在身边.",
-  "source": "你若盛开，清风自来"
+  "content": "盛年不重来，一日难再晨。",
+  "source": "杂诗·人生无根蒂"
 };
 window.updated = {
   "name": "嗨咻",
