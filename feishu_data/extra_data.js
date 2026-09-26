@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "参差荇菜，左右采之。窈窕淑女，琴瑟友之。",
-  "source": "关雎"
+  "content": "我感谢一切我有权奉承的神明，让我在这个不唯一的世界遇见唯一的你。",
+  "source": "Vitamin少女"
 };
 window.updated = {
   "name": "嗨咻",
