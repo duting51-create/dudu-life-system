@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "list": [
     {
       "name": "嗨咻",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "三个人沐浴在生命的暴雨之中，感受着地球生命的尊严。",
-  "source": "三体I: 地球往事"
+  "content": "参差荇菜，左右采之。窈窕淑女，琴瑟友之。",
+  "source": "关雎"
 };
 window.updated = {
   "name": "嗨咻",
