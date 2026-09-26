@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "108.和黄翔聊天｜35+女性保养指南，如何养出一颗不老的大脑？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep96 |《蜘蛛侠：崭新之日》心理解读：当能力、关系和记忆都改变了，我还是我吗？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "盛年不重来，一日难再晨。",
-  "source": "杂诗·人生无根蒂"
+  "content": "直道相思了无益，未妨惆怅是清狂。",
+  "source": "无题"
 };
 window.updated = {
   "name": "嗨咻",
