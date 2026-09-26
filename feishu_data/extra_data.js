@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "成年人的世界没有容易二字。",
-  "source": "天气预报员"
+  "content": "十年前,你爱我,我逃避不见,十年后,我爱你,你不在身边.",
+  "source": "你若盛开，清风自来"
 };
 window.updated = {
   "name": "嗨咻",
