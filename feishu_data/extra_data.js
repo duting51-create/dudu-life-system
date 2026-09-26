@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "春蚕到死丝方尽，蜡炬成灰泪始干。",
-  "source": "无题·相见时难别亦难"
+  "content": "高调做事，低调做人。",
+  "source": "某电视剧"
 };
 window.updated = {
   "name": "嗨咻",
