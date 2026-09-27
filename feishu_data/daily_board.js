@@ -1,9 +1,9 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-26T01:00:42.253Z",
-  "date": "2026-09-26",
+  "updated_at": "2026-09-27T01:00:41.384Z",
+  "date": "2026-09-27",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月26日",
+    "date": "9月27日",
     "items": [
       {
         "text": "去打1针",
@@ -12,25 +12,19 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "整理一下手机相册，该删删，该传就传到网盘",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "和AI一起规划 AI短剧的学习计化",
+        "text": "写kitty热水袋的脚本+拍视频+剪辑",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "寄旧手机和其他东西回家",
+        "text": "写2-3篇IP号笔记+作图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.去打1针\n2.整理一下手机相册，该删删，该传就传到网盘\n3.和AI一起规划 AI短剧的学习计化\n4.寄旧手机和其他东西回家",
+    "raw_text": "1.去打1针\n2.写kitty热水袋的脚本+拍视频+剪辑\n3.写2-3篇IP号笔记+作图",
     "tasks": [
       {
         "text": "去打1针",
@@ -39,25 +33,19 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "整理一下手机相册，该删删，该传就传到网盘",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "和AI一起规划 AI短剧的学习计化",
+        "text": "写kitty热水袋的脚本+拍视频+剪辑",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "寄旧手机和其他东西回家",
+        "text": "写2-3篇IP号笔记+作图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去打1针\n2.整理一下手机相册，该删删，该传就传到网盘\n3.和AI一起规划 AI短剧的学习计化\n4.寄旧手机和其他东西回家"
+    "raw_tasks_text": "1.去打1针\n2.写kitty热水袋的脚本+拍视频+剪辑\n3.写2-3篇IP号笔记+作图"
   },
   "inspirations": {
     "items": [
