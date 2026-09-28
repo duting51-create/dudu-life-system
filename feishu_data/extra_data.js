@@ -1,18 +1,18 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-27",
+  "updated": "2026-09-28",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "108.和黄翔聊天｜35+女性保养指南，如何养出一颗不老的大脑？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
-      "latest": "103. 带娃旅行：麻烦翻倍，自由减半，我们为什么还要出发？"
+      "latest": "104. 从无微不至到无为而治：当父母，最难的是忍住别管"
     },
     {
       "name": "畅所育言",
-      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep96 |《蜘蛛侠：崭新之日》心理解读：当能力、关系和记忆都改变了，我还是我吗？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-27",
+  "updated": "2026-09-28",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我想要如清泉般的爱。",
-  "source": "飞鸟集"
+  "content": "天地之功不可仓促，艰难之业当累日月。",
+  "source": "后汉书"
 };
 window.updated = {
   "name": "嗨咻",
