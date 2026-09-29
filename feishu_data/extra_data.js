@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "list": [
     {
       "name": "嗨咻",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "天地之功不可仓促，艰难之业当累日月。",
-  "source": "后汉书"
+  "content": "无垢清净光，慧日破诸暗，能伏灾风火，普明照世间。",
+  "source": "法华经"
 };
 window.updated = {
   "name": "嗨咻",
