@@ -1,9 +1,9 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-28T01:00:46.894Z",
-  "date": "2026-09-28",
+  "updated_at": "2026-09-29T01:00:56.897Z",
+  "date": "2026-09-29",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月28日",
+    "date": "9月29日",
     "items": [
       {
         "text": "去打1针",
@@ -16,27 +16,9 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "做一下红十字会的急救课程计划",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "平价编织收纳筐好物笔记，做好配图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍收纳小包的视频+剪辑",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
       }
     ],
-    "raw_text": "1.去打1针\n2.学习AI短剧2小时\n3.做一下红十字会的急救课程计划\n4.平价编织收纳筐好物笔记，做好配图\n5.拍收纳小包的视频+剪辑",
+    "raw_text": "1.去打1针\n2.学习AI短剧2小时",
     "tasks": [
       {
         "text": "去打1针",
@@ -49,27 +31,9 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "做一下红十字会的急救课程计划",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "平价编织收纳筐好物笔记，做好配图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍收纳小包的视频+剪辑",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去打1针\n2.学习AI短剧2小时\n3.做一下红十字会的急救课程计划\n4.平价编织收纳筐好物笔记，做好配图\n5.拍收纳小包的视频+剪辑"
+    "raw_tasks_text": "1.去打1针\n2.学习AI短剧2小时"
   },
   "inspirations": {
     "items": [
