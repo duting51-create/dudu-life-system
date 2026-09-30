@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "list": [
     {
       "name": "嗨咻",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "急诊送来的「宫外孕」患者，全程哭得令人揪心……| 有点小事68"
+      "latest": "乳腺增生/结节/囊肿/肿块，怎么破？| 有点小事69"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "无垢清净光，慧日破诸暗，能伏灾风火，普明照世间。",
-  "source": "法华经"
+  "content": "哪怕一百个愚笨的人在一起聚会，也无法产生一个智慧的人。",
+  "source": "人生的智慧"
 };
 window.updated = {
   "name": "嗨咻",
