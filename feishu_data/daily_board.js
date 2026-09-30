@@ -1,39 +1,13 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-09-29T01:00:56.897Z",
-  "date": "2026-09-29",
+  "updated_at": "2026-09-30T01:00:47.490Z",
+  "date": "2026-09-30",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "9月29日",
-    "items": [
-      {
-        "text": "去打1针",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "学习AI短剧2小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_text": "1.去打1针\n2.学习AI短剧2小时",
-    "tasks": [
-      {
-        "text": "去打1针",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "学习AI短剧2小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_tasks_text": "1.去打1针\n2.学习AI短剧2小时"
+    "date": "9月30日",
+    "items": [],
+    "raw_text": "",
+    "tasks": [],
+    "raw_tasks_text": ""
   },
   "inspirations": {
     "items": [
