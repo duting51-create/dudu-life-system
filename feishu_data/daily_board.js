@@ -1,9 +1,9 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-03T01:01:06.974Z",
-  "date": "2026-10-03",
+  "updated_at": "2026-10-04T01:00:50.178Z",
+  "date": "2026-10-04",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月3日",
+    "date": "10月4日",
     "items": [],
     "raw_text": "",
     "tasks": [],
