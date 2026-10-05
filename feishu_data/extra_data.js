@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "千教万教教人求真，千学万学学做真人。",
-  "source": "陶行知"
+  "content": "忽见陌头杨柳色，悔教夫婿觅封侯。",
+  "source": "闺怨"
 };
 window.updated = {
   "name": "嗨咻",
