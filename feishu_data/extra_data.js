@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人生如逆旅，我亦是行人。",
-  "source": "临江仙·送钱穆父"
+  "content": "千教万教教人求真，千学万学学做真人。",
+  "source": "陶行知"
 };
 window.updated = {
   "name": "嗨咻",
