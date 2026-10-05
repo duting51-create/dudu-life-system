@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "山一程，水一程，身向榆关那畔行，夜深千帐灯。",
-  "source": "长相思·山一程"
+  "content": "纵然变化，依然故我。",
+  "source": "墓志铭"
 };
 window.updated = {
   "name": "嗨咻",
