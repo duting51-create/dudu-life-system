@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "你呢，是这辈子没故事，想拥有一段故事，我呢，是故事太多，想给故事一个结局。",
-  "source": "飞驰认识"
+  "content": "山一程，水一程，身向榆关那畔行，夜深千帐灯。",
+  "source": "长相思·山一程"
 };
 window.updated = {
   "name": "嗨咻",
