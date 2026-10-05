@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "忽见陌头杨柳色，悔教夫婿觅封侯。",
-  "source": "闺怨"
+  "content": "你呢，是这辈子没故事，想拥有一段故事，我呢，是故事太多，想给故事一个结局。",
+  "source": "飞驰认识"
 };
 window.updated = {
   "name": "嗨咻",
