@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "愿你千山暮雪海棠依旧，不为岁月惊扰平添忧愁。",
-  "source": "人民日报"
+  "content": "时间差不多咯。",
+  "source": "周处除三害"
 };
 window.updated = {
   "name": "嗨咻",
