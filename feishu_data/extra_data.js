@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "时间差不多咯。",
-  "source": "周处除三害"
+  "content": "春江潮水连海平，海上明月共潮生。",
+  "source": "春江花月夜"
 };
 window.updated = {
   "name": "嗨咻",
