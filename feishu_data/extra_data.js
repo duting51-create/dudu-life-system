@@ -4,23 +4,23 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "109.别装了高能量人群，你们只是更有选择做取舍"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "104. 从无微不至到无为而治：当父母，最难的是忍住别管"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "乳腺增生/结节/囊肿/肿块，怎么破？| 有点小事69"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep98 | 现代《伤仲永》：“聪明”是怎样伤害孩子的？"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "愿你千山暮雪海棠依旧，不为岁月惊扰平添忧愁。",
+  "source": "人民日报"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
