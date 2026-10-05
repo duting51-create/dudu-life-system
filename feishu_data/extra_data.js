@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-09-30",
+  "updated": "2026-10-05",
   "list": [
     {
       "name": "嗨咻",
@@ -8,7 +8,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "头回当妈",
-      "latest": "104. 从无微不至到无为而治：当父母，最难的是忍住别管"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "畅所育言",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "乳腺增生/结节/囊肿/肿块，怎么破？| 有点小事69"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-09-30",
+  "updated": "2026-10-05",
   "list": [
     {
       "name": "爽",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "哪怕一百个愚笨的人在一起聚会，也无法产生一个智慧的人。",
-  "source": "人生的智慧"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
