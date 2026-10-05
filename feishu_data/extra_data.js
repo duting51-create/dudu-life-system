@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "春江潮水连海平，海上明月共潮生。",
-  "source": "春江花月夜"
+  "content": "圣人不死，大盗不止。",
+  "source": "庄子·外篇·胠箧第十"
 };
 window.updated = {
   "name": "嗨咻",
