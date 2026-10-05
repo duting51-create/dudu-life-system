@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "109.别装了高能量人群，你们只是更有选择做取舍"
+      "latest": "109.高能量人士坦白局，这些事我根本没做"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "圣人不死，大盗不止。",
-  "source": "庄子·外篇·胠箧第十"
+  "content": "等闲变却故人心，却道故人心易变。",
+  "source": "木兰花·拟古决绝词柬友"
 };
 window.updated = {
   "name": "嗨咻",
