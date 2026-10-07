@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "109.高能量人士坦白局，这些事我根本没做"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "爱，就像你一觉醒来看见的晨雾，那时，太阳还未升起；就是那么一会儿，它们就消失了……",
-  "source": "查希尔"
+  "content": "知道为什么婴儿出生的时候都会握着手痛哭吗？因为又要来这世间走一遭。",
+  "source": ""
 };
 window.updated = {
   "name": "嗨咻",
