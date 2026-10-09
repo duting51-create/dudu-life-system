@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "青年时期，他们觉得人群遗弃了自己；成年之后，却觉得自己逃离了人群。",
-  "source": "人生的智慧"
+  "content": "我感谢一切我有权奉承的神明，让我在这个不唯一的世界遇见唯一的你。",
+  "source": "Vitamin少女"
 };
 window.updated = {
   "name": "嗨咻",
