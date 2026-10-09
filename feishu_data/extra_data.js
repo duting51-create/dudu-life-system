@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "思悠悠，恨悠悠，恨到归时方始休。",
-  "source": "长相思·汴水流"
+  "content": "为遇一人而入红尘，人去我亦去，此生不留尘。",
+  "source": "魔道祖师"
 };
 window.updated = {
   "name": "嗨咻",
