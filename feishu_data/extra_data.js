@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "思悠悠，恨悠悠，恨到归时方始休。",
+  "source": "长相思·汴水流"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
