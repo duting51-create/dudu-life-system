@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "你最爱的人，你为他做了很多事，但他不知道，因为你觉得做这些事都是应该的，你忘记跟他说了。",
-  "source": "龙族"
+  "content": "昔我往矣，杨柳依依。",
+  "source": "采薇"
 };
 window.updated = {
   "name": "嗨咻",
