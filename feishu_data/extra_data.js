@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep98 | 现代《伤仲永》：“聪明”是怎样伤害孩子的？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们是独立的个体，却不是孤独的存在。",
-  "source": "千里共良宵"
+  "content": "青年时期，他们觉得人群遗弃了自己；成年之后，却觉得自己逃离了人群。",
+  "source": "人生的智慧"
 };
 window.updated = {
   "name": "嗨咻",
