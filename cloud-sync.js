@@ -631,6 +631,28 @@
           return;
         }
 
+        if (key === 'dudu_invest_gains') {
+          // 每日收益是「按日期累加的日志」，不是可整体覆盖的单值。
+          // 旧默认逻辑(local 整对象覆盖 cloud)会让任意带旧本地数据的设备把云端新增的某天顶掉
+          // （10/8 手动写入被冲掉 → 总收益/持仓不更新）。改为按日期并集：两端任一端有该天就保留，
+          // 同日期同账户冲突时本地优先（设备最新录入），云端独有日期补齐。
+          var cloudG = (cloudValue && typeof cloudValue === 'object') ? cloudValue : {};
+          var localG = (localValue && typeof localValue === 'object') ? localValue : {};
+          var mergedGains = {};
+          Object.keys(cloudG).concat(Object.keys(localG)).forEach(function (date) {
+            var cv = cloudG[date] || {};
+            var lv = localG[date] || {};
+            var entry = {};
+            Object.keys(cv).concat(Object.keys(lv)).forEach(function (acc) {
+              if (lv[acc] !== undefined && lv[acc] !== null && lv[acc] !== '') entry[acc] = lv[acc];
+              else if (cv[acc] !== undefined && cv[acc] !== null && cv[acc] !== '') entry[acc] = cv[acc];
+            });
+            if (Object.keys(entry).length) mergedGains[date] = entry;
+          });
+          merged[key] = mergedGains;
+          return;
+        }
+
         if (key === 'dudu_movies_wish' || key === 'dudu_movies_collect') {
           var norm = function (t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); };
           // 过滤空标题与 UTF-8 误读乱码（Ã/Â/�/C1 控制字符等）
