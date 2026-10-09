@@ -34,6 +34,7 @@
     'dudu_monthly_goals',
     'dudu_monthly_goals_updated_at',
     'dudu_invest_gains',
+    'dudu_memo_done',
     'dudu_mortgage_balance',
     'dudu_movies_wish',
     'dudu_movies_collect',
