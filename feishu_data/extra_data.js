@@ -1,18 +1,18 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-07",
+  "updated": "2026-10-09",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "109.高能量人士坦白局，这些事我根本没做"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
-      "latest": "104. 从无微不至到无为而治：当父母，最难的是忍住别管"
+      "latest": "105. 从备孕到当妈，你需要的“心理待产包”"
     },
     {
       "name": "畅所育言",
-      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-07",
+  "updated": "2026-10-09",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "知道为什么婴儿出生的时候都会握着手痛哭吗？因为又要来这世间走一遭。",
-  "source": ""
+  "content": "所谓宿命，其实都是最好的安排。",
+  "source": "将夜"
 };
 window.updated = {
   "name": "嗨咻",
