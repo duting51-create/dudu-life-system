@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "色彩和形式的和谐，从严格意义上说必须以触及人类灵魂的原则作为唯一基础。",
-  "source": "论艺术的精神"
+  "content": "你最爱的人，你为他做了很多事，但他不知道，因为你觉得做这些事都是应该的，你忘记跟他说了。",
+  "source": "龙族"
 };
 window.updated = {
   "name": "嗨咻",
