@@ -410,67 +410,33 @@ function listItems(rowNumber, row, date = shanghaiToday()) {
   return items;
 }
 
-async function rollInspirationsToToday(env, token, rows, current) {
-  const markerKey = `dudu-inspiration-rollover:${shanghaiDateKey(current.today)}`;
-  let marker = await env.DUDU_STATE.get(markerKey, "json");
-  if (marker?.complete) return { changed: false, count: marker.count || 0 };
-
-  const previous = findPreviousRow(rows, current.today);
-  if (!previous) {
-    await env.DUDU_STATE.put(markerKey, JSON.stringify({ complete: true, count: 0 }));
-    return { changed: false, count: 0 };
-  }
-
-  marker = marker || { sourceRow: previous.rowNumber, completedColumns: [], count: 0 };
-  const completedColumns = new Set(marker.completedColumns || []);
-  let changed = false;
-
-  for (const [type, config] of Object.entries(TYPE_CONFIG)) {
-    if (completedColumns.has(config.column)) continue;
-    const previousLines = getColumnLinesWithStyle(previous.row[config.index]);
-    const carryLines = [];
-    previousLines.forEach((lineObj) => {
-      const cleaned = stripLeadingNumber(lineObj.raw);
-      if (type === "inspiration" && !cleaned.startsWith(config.marker)) return;
-      if (lineObj.struck) return; // 已在飞书划线的（已完成）不滚动到今天
-      carryLines.push({ text: cleaned, struck: false });
-    });
-
-    if (carryLines.length) {
-      const todayLines = getColumnLinesWithStyle(current.row[config.index]).map((l) => ({
-        text: stripLeadingNumber(l.raw),
-        struck: l.struck === true,
-      }));
-      const merged = todayLines.concat(carryLines);
-      await writeLinesRich(env, token, config.column, current.rowNumber, merged);
-      current.row[config.index] = serializeLines(merged.map((l) => l.text));
-      marker.count += carryLines.length;
-      changed = true;
-    }
-
-    completedColumns.add(config.column);
-    marker.completedColumns = Array.from(completedColumns);
-    await env.DUDU_STATE.put(markerKey, JSON.stringify(marker));
-  }
-
-  marker.complete = true;
-  await env.DUDU_STATE.put(markerKey, JSON.stringify(marker));
-  return { changed, count: marker.count };
-}
+// 跨天延续（只读，绝不写回飞书）：
+// 把「昨天没划掉」的任务/灵感继续带出来展示——网站侧本来就靠 dudu_jots 跨天保留，
+// 无需再复制进今天这行的飞书单元格。否则会违反「写回一次就不再重复写」的规则，
+// 导致周五的临时任务被复制进周六的飞书行（2026-09-19 修复）。
+// 划掉延续项时，Worker 按 text 反查到它原本所在的行（昨天）并在该行划线，而非复制到今天再划。
 async function readTodayInspirations(env) {
   const token = await getTenantToken(env);
-  let rows = await readSheet(env, token);
-  let current = findTodayRow(rows);
-  const rollover = await rollInspirationsToToday(env, token, rows, current);
-  if (rollover.changed) {
-    rows = await readSheet(env, token);
-    current = findTodayRow(rows);
+  const rows = await readSheet(env, token);
+  const current = findTodayRow(rows);
+  const items = listItems(current.rowNumber, current.row, current.today);
+  const previous = findPreviousRow(rows, current.today);
+  if (previous) {
+    // 用「今天」作为日期，使延续项在网站侧按当天逻辑展示；id 仍指向它原本所在的行，
+    // 这样划掉时 Worker 能精准定位到原行划线，而不是今天这行。
+    const prevItems = listItems(previous.rowNumber, previous.row, current.today)
+      .filter((it) => !it.done);
+    const seen = new Set(items.map((it) => `${it.type}:${it.text}`));
+    for (const it of prevItems) {
+      const key = `${it.type}:${it.text}`;
+      if (!seen.has(key)) { items.push(it); seen.add(key); }
+    }
   }
   return {
     date: `${current.today.month}月${current.today.day}日`,
     row: current.rowNumber,
-    rolled: rollover.count,
-    items: listItems(current.rowNumber, current.row, current.today),
+    rolled: 0,
+    items,
   };
 }
 
@@ -514,45 +480,67 @@ async function mutateInspiration(env, body) {
     };
   }
 
-  const target = parseItemId(body.id);
-  if (target.rowNumber !== rowNumber) {
-    throw new Error("只能修改今天的记录");
+  // 跨天延续项可能位于「昨天」行：按 id 定位到对应行（今天或昨天），不再强制只能改今天。
+  // 这样周五延续到周六的临时任务，在周六划掉时能精准落到周五那行划线，而非复制到周六再划。
+  const previous = findPreviousRow(rows, today);
+  let targetRowNumber = rowNumber;
+  let targetRowObj = row;
+  let srcColumn = null;
+  let srcIndex = -1;
+  if (body.id) {
+    try {
+      const parsed = parseItemId(body.id);
+      srcColumn = parsed.column;
+      srcIndex = parsed.sourceIndex;
+      if (parsed.rowNumber === rowNumber) { targetRowNumber = rowNumber; targetRowObj = row; }
+      else if (previous && parsed.rowNumber === previous.rowNumber) { targetRowNumber = previous.rowNumber; targetRowObj = previous.row; }
+      else { srcColumn = null; srcIndex = -1; } // 既非今天也非昨天：交给 type/text 兜底
+    } catch (e) { srcColumn = null; srcIndex = -1; }
   }
-  const oldType = Object.keys(TYPE_CONFIG).find(
-    (type) => TYPE_CONFIG[type].column === target.column,
-  );
+  // 分类：优先用 id 解析出的列，否则用前端传入的 type
+  let oldType = srcColumn
+    ? Object.keys(TYPE_CONFIG).find((t) => TYPE_CONFIG[t].column === srcColumn)
+    : (body.type && TYPE_CONFIG[body.type] ? body.type : null);
   if (!oldType) throw new Error("记录分类无效");
   const oldConfig = TYPE_CONFIG[oldType];
-  const oldLines = parseLines(row[oldConfig.index]);
-  if (target.sourceIndex >= oldLines.length) {
-    throw new Error("记录已经变化，请刷新后重试");
-  }
+  const oldLines = parseLines(targetRowObj[oldConfig.index]);
 
   if (action === "done" || action === "undone") {
     const struck = action === "done";
-    const lines = getColumnLinesWithStyle(row[oldConfig.index]);
-    if (target.sourceIndex >= lines.length) {
-      throw new Error("记录已经变化，请刷新后重试");
+    let lines = getColumnLinesWithStyle(targetRowObj[oldConfig.index]);
+    let idx = srcIndex;
+    // 兜底：按 text 在「今天 + 昨天」行里找未划掉的匹配项（跨天延续项原本所在的行）
+    if (idx < 0) {
+      const norm = stripLeadingNumber(displayText(oldType, body.text || "")).trim();
+      const candidates = [{ rn: rowNumber, lines: getColumnLinesWithStyle(row[oldConfig.index]) }];
+      if (previous) candidates.push({ rn: previous.rowNumber, lines: getColumnLinesWithStyle(previous.row[oldConfig.index]) });
+      for (const c of candidates) {
+        const found = c.lines.findIndex((l) => !l.struck && stripLeadingNumber(l.raw).trim() === norm);
+        if (found >= 0) { targetRowNumber = c.rn; lines = c.lines; idx = found; break; }
+      }
     }
-    const rebuilt = lines.map((l, idx) => ({
+    if (idx < 0) throw new Error("记录已经变化，请刷新后重试");
+    const rebuilt = lines.map((l, i) => ({
       text: stripLeadingNumber(l.raw),
-      struck: idx === target.sourceIndex ? struck : (l.struck === true),
+      struck: i === idx ? struck : (l.struck === true),
     }));
-    await writeLinesRich(env, token, oldConfig.column, rowNumber, rebuilt);
-    return { updated: body.id, done: struck };
+    await writeLinesRich(env, token, oldConfig.column, targetRowNumber, rebuilt);
+    return { updated: `live_${targetRowNumber}_${oldConfig.column}_${idx}`, done: struck };
   }
 
   if (action === "delete") {
-    oldLines.splice(target.sourceIndex, 1);
-    await updateCell(env, token, oldConfig.column, rowNumber, serializeLines(oldLines));
+    if (srcIndex < 0 || srcIndex >= oldLines.length) throw new Error("记录已经变化，请刷新后重试");
+    oldLines.splice(srcIndex, 1);
+    await updateCell(env, token, oldConfig.column, targetRowNumber, serializeLines(oldLines));
     return { deleted: body.id };
   }
 
   if (action === "update") {
     const text = String(body.text || "").trim();
     if (!text) throw new Error("内容不能为空");
-    oldLines[target.sourceIndex] = storedText(oldType, text);
-    await updateCell(env, token, oldConfig.column, rowNumber, serializeLines(oldLines));
+    if (srcIndex < 0 || srcIndex >= oldLines.length) throw new Error("记录已经变化，请刷新后重试");
+    oldLines[srcIndex] = storedText(oldType, text);
+    await updateCell(env, token, oldConfig.column, targetRowNumber, serializeLines(oldLines));
     return { updated: body.id };
   }
 
@@ -560,16 +548,17 @@ async function mutateInspiration(env, body) {
     const newType = body.type;
     assertType(newType);
     if (newType === oldType) return { updated: body.id };
-    const text = displayText(oldType, oldLines[target.sourceIndex]);
-    oldLines.splice(target.sourceIndex, 1);
-    await updateCell(env, token, oldConfig.column, rowNumber, serializeLines(oldLines));
+    if (srcIndex < 0 || srcIndex >= oldLines.length) throw new Error("记录已经变化，请刷新后重试");
+    const text = displayText(oldType, oldLines[srcIndex]);
+    oldLines.splice(srcIndex, 1);
+    await updateCell(env, token, oldConfig.column, targetRowNumber, serializeLines(oldLines));
 
     const newConfig = TYPE_CONFIG[newType];
     const freshRows = await readSheet(env, token);
-    const freshRow = freshRows[rowNumber - 1] || [];
+    const freshRow = freshRows[targetRowNumber - 1] || [];
     const newLines = parseLines(freshRow[newConfig.index]);
     newLines.push(storedText(newType, text));
-    await updateCell(env, token, newConfig.column, rowNumber, serializeLines(newLines));
+    await updateCell(env, token, newConfig.column, targetRowNumber, serializeLines(newLines));
     return { updated: body.id };
   }
 

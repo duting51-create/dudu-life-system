@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261009-1039" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261009-1039" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261009-1104" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261009-1104" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -439,7 +439,11 @@
       padding: 5px 6px; border-radius: 10px;
       background: rgba(244,194,194,0.08);
       font-size: 0.82rem; line-height: 1.5;
+      cursor: pointer;
     }
+    .memo-pink-item:active { background: rgba(244,194,194,0.2); }
+    .memo-pink-item.done { opacity: 0.45; }
+    .memo-pink-item.done .memo-pink-text { text-decoration: line-through; }
     .memo-pink-num {
       flex-shrink: 0; width: 20px; height: 20px;
       border-radius: 50%; background: var(--pink); color: white;
@@ -2477,9 +2481,9 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20261009-1039" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20261009-1039" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20261009-1039" defer></script>
+  <script src="cloud-sync.js?v=sync-20261009-1104" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20261009-1104" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20261009-1104" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3075,12 +3079,33 @@
     }
 
     // ====== 长期任务（垂直列表，类似待办项） ======
+    // 稳定的长期任务指纹（归一化文本），作为「已完成」持久化的键，
+    // 避免飞书 id(行索引) 随每日 feed 重建而漂变导致划掉态丢失。
+    function memoFp(text) {
+      return String(text || '').trim()
+        .replace(/^\d+[.、）)]\s*/, '')
+        .replace(/^💡\s*/, '')
+        .replace(/\s+/g, ' ')
+        .replace(/[~✅]/g, '')
+        .toLowerCase();
+    }
+
+    function toggleMemoDone(fp, text) {
+      if (!fp) return;
+      const doneMap = nm('dudu_memo_done', {}) || {};
+      if (doneMap[fp]) delete doneMap[fp]; else doneMap[fp] = true;
+      sv('dudu_memo_done', doneMap);
+      if (window.CloudSync) window.CloudSync.saveNow();
+      renderLatestMemos();
+    }
+
     function renderLatestMemos() {
       const container = document.getElementById('memo-display-list');
       if (!container) return;
 
       // 长期任务 = 飞书表格 D列（备忘提醒）→ DASHBOARD_DATA.memos.items
       const rawMemos = (window.DASHBOARD_DATA && window.DASHBOARD_DATA.memos && window.DASHBOARD_DATA.memos.items) || MEMOS_DATA?.items || [];
+      const doneMap = nm('dudu_memo_done', {}) || {};
       const memos = [];
       for (const item of rawMemos) {
         if (!item.text) continue;
@@ -3097,10 +3122,12 @@
           clean = clean.replace(/^[❶❷❸❹❺❻❼❽❾❿]+\s*/, '');
           clean = clean.trim();
           if (!clean || clean.startsWith('🌿全部待做事项')) continue;
-          memos.push({ text: clean, done: false });
+          const fp = memoFp(clean);
+          memos.push({ text: clean, fp: fp, done: !!doneMap[fp] });
         }
       }
-      const list = memos.slice(0, 10);
+      // 已完成（划掉）的不再占用「最新 10 条」名额：先剔除 done，再取前 10 条活跃项
+      const list = memos.filter(m => !m.done).slice(0, 10);
 
       if (!list.length) {
         container.innerHTML = '<div style="color:var(--ink-faint);font-size:0.82rem;text-align:center;padding:1.5rem 0;">暂无长期任务 📝</div>';
@@ -3108,7 +3135,7 @@
       }
 
       container.innerHTML = list.map((m, i) => `
-        <div class="memo-pink-item${m.done ? ' done' : ''}">
+        <div class="memo-pink-item${m.done ? ' done' : ''}" onclick="toggleMemoDone(${JSON.stringify(m.fp)}, ${JSON.stringify(m.text)})" title="点击划掉 / 恢复">
           <span class="memo-pink-num">${i + 1}</span>
           <span class="memo-pink-text">${esc(m.text)}</span>
         </div>

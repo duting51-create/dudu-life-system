@@ -653,6 +653,19 @@
           return;
         }
 
+        if (key === 'dudu_memo_done') {
+          // 长期任务「已完成(划掉)」标记集：以文本指纹为键，done 只增不减(OR 合并)，
+          // 任一端标记过完成，所有设备都不再展示该项(渲染时按 fp 过滤)。
+          var doneA = (cloudValue && typeof cloudValue === 'object') ? cloudValue : {};
+          var doneB = (localValue && typeof localValue === 'object') ? localValue : {};
+          var mergedDone = {};
+          Object.keys(doneA).concat(Object.keys(doneB)).forEach(function (k) {
+            if (doneA[k] || doneB[k]) mergedDone[k] = true;
+          });
+          merged[key] = mergedDone;
+          return;
+        }
+
         if (key === 'dudu_movies_wish' || key === 'dudu_movies_collect') {
           var norm = function (t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); };
           // 过滤空标题与 UTF-8 误读乱码（Ã/Â/�/C1 控制字符等）
@@ -911,6 +924,8 @@
         if (typeof renderTasks === 'function') renderTasks();
       } catch (error) {}
       try { if (typeof renderInspirations === 'function') renderInspirations(); } catch (error) {}
+      try { if (typeof renderInvest === 'function') renderInvest(); } catch (error) {}
+      try { if (typeof renderLatestMemos === 'function') renderLatestMemos(); } catch (error) {}
       try { if (typeof renderSleep === 'function') renderSleep(); } catch (error) {}
       try { if (typeof window.renderMonthlyGoals === 'function') window.renderMonthlyGoals(); } catch (error) {}
       try { if (typeof window.renderDashboard === 'function') window.renderDashboard(); } catch (error) {}
