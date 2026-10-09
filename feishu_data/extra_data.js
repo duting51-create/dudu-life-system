@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "所谓宿命，其实都是最好的安排。",
-  "source": "将夜"
+  "content": "色彩和形式的和谐，从严格意义上说必须以触及人类灵魂的原则作为唯一基础。",
+  "source": "论艺术的精神"
 };
 window.updated = {
   "name": "嗨咻",
