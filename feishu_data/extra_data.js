@@ -12,11 +12,11 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
-      "latest": "乳腺增生/结节/囊肿/肿块，怎么破？| 有点小事69"
+      "latest": "那一刻，我决定不再沉默 | Vol.181"
     },
     {
       "name": "Alison Yu心理",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "我们是独立的个体，却不是孤独的存在。",
+  "source": "千里共良宵"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
