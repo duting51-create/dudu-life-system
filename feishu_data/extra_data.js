@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
     },
     {
       "name": "当个事儿",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "我们不需要死读硬记，我们需要用基本的知识来发展和增进每个学习者的思考力。",
+  "source": "弗拉基米尔·伊里奇·列宁"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
