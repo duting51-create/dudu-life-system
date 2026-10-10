@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们不需要死读硬记，我们需要用基本的知识来发展和增进每个学习者的思考力。",
-  "source": "弗拉基米尔·伊里奇·列宁"
+  "content": "离歌且莫翻新阕，一曲能教肠寸结。直须看尽洛城花，始共春风容易别。",
+  "source": "玉楼春·尊前拟把归期说"
 };
 window.updated = {
   "name": "嗨咻",
