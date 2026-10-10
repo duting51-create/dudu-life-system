@@ -1,13 +1,99 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-09T01:01:01.509Z",
-  "date": "2026-10-09",
+  "updated_at": "2026-10-10T01:00:51.459Z",
+  "date": "2026-10-10",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月9日",
-    "items": [],
-    "raw_text": "",
-    "tasks": [],
-    "raw_tasks_text": ""
+    "date": "10月10日",
+    "items": [
+      {
+        "text": "继续完成昨天的IP 号笔记——4篇",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看何瑜给我打的生日红包，确定她生日要买什么",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "英语学习方式",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "交上个月社保",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做一下红十字会的急救课程计划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理微信收藏的零碎信息",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_text": "1.继续完成昨天的IP 号笔记——4篇\n2.看何瑜给我打的生日红包，确定她生日要买什么\n3.英语学习方式\n4.交上个月社保\n5.做一下红十字会的急救课程计划\n6.整理微信收藏的零碎信息\n7.看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入",
+    "tasks": [
+      {
+        "text": "继续完成昨天的IP 号笔记——4篇",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看何瑜给我打的生日红包，确定她生日要买什么",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "英语学习方式",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "交上个月社保",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做一下红十字会的急救课程计划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理微信收藏的零碎信息",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_tasks_text": "1.继续完成昨天的IP 号笔记——4篇\n2.看何瑜给我打的生日红包，确定她生日要买什么\n3.英语学习方式\n4.交上个月社保\n5.做一下红十字会的急救课程计划\n6.整理微信收藏的零碎信息\n7.看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入"
   },
   "inspirations": {
     "items": [
@@ -229,7 +315,6 @@ window.DAILY_BOARD = {
       "inspiration:3️⃣自己制作一套提示词/skills，这个要实操一下": true,
       "inspiration:5️⃣孕期报告解读助手的工具，后续可以研究一下怎么变成产品售卖——http://localhost:8501/": true,
       "inspiration:7️⃣孕期知识库，后续可考虑逐步补充待产包、准爸爸参与手册、怀孕书单读书笔记、孕吐缓解指南（正好可以保持持续更新的卖点）": true,
-      "inspiration:1️⃣小程序开发，等做好了小程序再一步步操作": true,
       "task:把我的人生系统这个网站做一下优化迭代": true,
       "inspiration:小红书虚拟产品定位skill用一下": true,
       "task:上架新产品，做 3 个 sku": true,
@@ -252,6 +337,11 @@ window.DAILY_BOARD = {
   },
   "memos": {
     "items": [
+      {
+        "date": "46304",
+        "text": "不断学习赚钱思路，确定一项后要坚持至少3个月",
+        "id": "memo_97_0"
+      },
       {
         "date": "46282",
         "text": "每周抽一天时间出去，找一个出片的地方做拍照练习",
@@ -296,13 +386,8 @@ window.DAILY_BOARD = {
         "date": "46239",
         "text": "workbuddy的一人公司专家团用一下",
         "id": "memo_43_2"
-      },
-      {
-        "date": "46239",
-        "text": "开发【嘎嘎有用】生活小程序",
-        "id": "memo_43_0"
       }
     ],
-    "total": 10
+    "total": 11
   }
 };
