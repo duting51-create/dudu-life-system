@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "相逢一醉是前缘，风雨散、飘然何处。",
-  "source": "鹊桥仙·七夕"
+  "content": "为难当前，唯有责任。",
+  "source": "流浪地球2"
 };
 window.updated = {
   "name": "嗨咻",
