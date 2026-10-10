@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "世界是那么阒寂，而昨天的我已离我远去。",
-  "source": "人间失格·皮肤与心"
+  "content": "众口铄金，积毁销骨。",
+  "source": "史记·张仪列传"
 };
 window.updated = {
   "name": "嗨咻",
