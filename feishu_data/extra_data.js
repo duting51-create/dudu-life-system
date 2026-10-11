@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep98 | 现代《伤仲永》：“聪明”是怎样伤害孩子的？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "死生，命也，其有夜旦之常，天也。人之有所不得与，皆物之情也。",
-  "source": "庄子·大宗师"
+  "content": "你现在的气质里，藏着你走过的路，读过的书和爱过的人。",
+  "source": "卡萨布兰卡"
 };
 window.updated = {
   "name": "嗨咻",
