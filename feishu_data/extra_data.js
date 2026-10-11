@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "想带你去看电影，明天你就不是我女朋友了。",
-  "source": "撒哈拉的故事"
+  "content": "死生，命也，其有夜旦之常，天也。人之有所不得与，皆物之情也。",
+  "source": "庄子·大宗师"
 };
 window.updated = {
   "name": "嗨咻",
