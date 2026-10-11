@@ -1,36 +1,24 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-10T01:00:51.459Z",
-  "date": "2026-10-10",
+  "updated_at": "2026-10-11T01:01:08.782Z",
+  "date": "2026-10-11",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月10日",
+    "date": "10月11日",
     "items": [
       {
-        "text": "继续完成昨天的IP 号笔记——4篇",
+        "text": "记账",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看何瑜给我打的生日红包，确定她生日要买什么",
+        "text": "把114的微信绑定手机号换一下，以后可以直接微信登录",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "英语学习方式",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "交上个月社保",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做一下红十字会的急救课程计划",
+        "text": "做英语学习计划——先背素材+和 AI对话",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -42,40 +30,28 @@ window.DAILY_BOARD = {
         "priority": "mid"
       },
       {
-        "text": "看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入",
+        "text": "提升审美的方式，做一个完整的计划",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.继续完成昨天的IP 号笔记——4篇\n2.看何瑜给我打的生日红包，确定她生日要买什么\n3.英语学习方式\n4.交上个月社保\n5.做一下红十字会的急救课程计划\n6.整理微信收藏的零碎信息\n7.看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入",
+    "raw_text": "1.记账\n2.把114的微信绑定手机号换一下，以后可以直接微信登录\n3.做英语学习计划——先背素材+和 AI对话\n4.整理微信收藏的零碎信息\n5.提升审美的方式，做一个完整的计划",
     "tasks": [
       {
-        "text": "继续完成昨天的IP 号笔记——4篇",
+        "text": "记账",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看何瑜给我打的生日红包，确定她生日要买什么",
+        "text": "把114的微信绑定手机号换一下，以后可以直接微信登录",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "英语学习方式",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "交上个月社保",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做一下红十字会的急救课程计划",
+        "text": "做英语学习计划——先背素材+和 AI对话",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -87,13 +63,13 @@ window.DAILY_BOARD = {
         "priority": "mid"
       },
       {
-        "text": "看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入",
+        "text": "提升审美的方式，做一个完整的计划",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.继续完成昨天的IP 号笔记——4篇\n2.看何瑜给我打的生日红包，确定她生日要买什么\n3.英语学习方式\n4.交上个月社保\n5.做一下红十字会的急救课程计划\n6.整理微信收藏的零碎信息\n7.看看上门遛狗类似的工作，做一些想尝试的工作有一点点收入"
+    "raw_tasks_text": "1.记账\n2.把114的微信绑定手机号换一下，以后可以直接微信登录\n3.做英语学习计划——先背素材+和 AI对话\n4.整理微信收藏的零碎信息\n5.提升审美的方式，做一个完整的计划"
   },
   "inspirations": {
     "items": [
