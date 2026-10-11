@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我曾听说住在罗生门的恶鬼，是因为害怕人性的残忍而逃走的。",
-  "source": "《罗生门》"
+  "content": "循此苦旅，终抵繁星。",
+  "source": "拉丁古谚"
 };
 window.updated = {
   "name": "嗨咻",
