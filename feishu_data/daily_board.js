@@ -1,75 +1,39 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-11T01:01:08.782Z",
-  "date": "2026-10-11",
+  "updated_at": "2026-10-12T01:00:45.020Z",
+  "date": "2026-10-12",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月11日",
+    "date": "10月12日",
     "items": [
       {
-        "text": "记账",
+        "text": "做AI短剧的学习计划",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "把114的微信绑定手机号换一下，以后可以直接微信登录",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做英语学习计划——先背素材+和 AI对话",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理微信收藏的零碎信息",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "提升审美的方式，做一个完整的计划",
+        "text": "看一下线下兼职情况，比如上门遛狗……",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.记账\n2.把114的微信绑定手机号换一下，以后可以直接微信登录\n3.做英语学习计划——先背素材+和 AI对话\n4.整理微信收藏的零碎信息\n5.提升审美的方式，做一个完整的计划",
+    "raw_text": "1.做AI短剧的学习计划\n2.看一下线下兼职情况，比如上门遛狗……",
     "tasks": [
       {
-        "text": "记账",
+        "text": "做AI短剧的学习计划",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "把114的微信绑定手机号换一下，以后可以直接微信登录",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做英语学习计划——先背素材+和 AI对话",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理微信收藏的零碎信息",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "提升审美的方式，做一个完整的计划",
+        "text": "看一下线下兼职情况，比如上门遛狗……",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.记账\n2.把114的微信绑定手机号换一下，以后可以直接微信登录\n3.做英语学习计划——先背素材+和 AI对话\n4.整理微信收藏的零碎信息\n5.提升审美的方式，做一个完整的计划"
+    "raw_tasks_text": "1.做AI短剧的学习计划\n2.看一下线下兼职情况，比如上门遛狗……"
   },
   "inspirations": {
     "items": [
