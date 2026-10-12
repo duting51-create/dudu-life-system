@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "商女不知亡国恨，隔江犹唱后庭花。",
-  "source": "泊秦淮"
+  "content": "你说过，人最大的敌人是自己。",
+  "source": "我的前半生"
 };
 window.updated = {
   "name": "嗨咻",
