@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "比起想念来，千年又何其长。比起相见来，千年又何其短。",
-  "source": "网剧棋魂"
+  "content": "荷叶生时春恨生，荷叶枯时秋恨成。",
+  "source": "暮秋独游曲江"
 };
 window.updated = {
   "name": "嗨咻",
