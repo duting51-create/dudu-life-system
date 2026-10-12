@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生命终有尽头，徒留一颗破碎的心。",
-  "source": "神探夏洛克"
+  "content": "当你真正想做成一件事情的时候，就连天地万物都会帮你。",
+  "source": "网剧棋魂"
 };
 window.updated = {
   "name": "嗨咻",
