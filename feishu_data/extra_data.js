@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "你说过，人最大的敌人是自己。",
-  "source": "我的前半生"
+  "content": "生命终有尽头，徒留一颗破碎的心。",
+  "source": "神探夏洛克"
 };
 window.updated = {
   "name": "嗨咻",
