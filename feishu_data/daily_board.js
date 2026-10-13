@@ -1,39 +1,63 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-12T01:00:45.020Z",
-  "date": "2026-10-12",
+  "updated_at": "2026-10-13T01:00:46.545Z",
+  "date": "2026-10-13",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月12日",
+    "date": "10月13日",
     "items": [
       {
-        "text": "做AI短剧的学习计划",
+        "text": "下午去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看一下线下兼职情况，比如上门遛狗……",
+        "text": "看小红书/B 站的AI短剧视频教程，确定怎么学",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学1小时英语口语",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学1小时审美训练",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.做AI短剧的学习计划\n2.看一下线下兼职情况，比如上门遛狗……",
+    "raw_text": "1.下午去医院\n2.看小红书/B 站的AI短剧视频教程，确定怎么学\n3.学1小时英语口语\n4.学1小时审美训练",
     "tasks": [
       {
-        "text": "做AI短剧的学习计划",
+        "text": "下午去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看一下线下兼职情况，比如上门遛狗……",
+        "text": "看小红书/B 站的AI短剧视频教程，确定怎么学",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学1小时英语口语",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学1小时审美训练",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.做AI短剧的学习计划\n2.看一下线下兼职情况，比如上门遛狗……"
+    "raw_tasks_text": "1.下午去医院\n2.看小红书/B 站的AI短剧视频教程，确定怎么学\n3.学1小时英语口语\n4.学1小时审美训练"
   },
   "inspirations": {
     "items": [
