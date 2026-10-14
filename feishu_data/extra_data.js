@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "知道为什么婴儿出生的时候都会握着手痛哭吗？因为又要来这世间走一遭。",
-  "source": ""
+  "content": "奋斗的目标就是为了躺平，就是为了过上不被闹钟叫醒的日子。",
+  "source": "余华"
 };
 window.updated = {
   "name": "嗨咻",
