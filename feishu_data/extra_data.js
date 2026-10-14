@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "安时而处顺，哀乐不能入也。",
-  "source": "庄子·养生主"
+  "content": "知道为什么婴儿出生的时候都会握着手痛哭吗？因为又要来这世间走一遭。",
+  "source": ""
 };
 window.updated = {
   "name": "嗨咻",
