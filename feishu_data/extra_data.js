@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "青鸟不传云外信，丁香空结雨中愁。",
-  "source": "摊破浣溪沙·手卷真珠上玉钩"
+  "content": "虽有遗憾，绝不后悔。",
+  "source": "古剑奇谭"
 };
 window.updated = {
   "name": "嗨咻",
