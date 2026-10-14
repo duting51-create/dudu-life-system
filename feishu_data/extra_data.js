@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "窗外日光弹指过，席前花影坐前移。",
-  "source": "水浒传·第二回"
+  "content": "人是悬挂在自己编织的意义之网上的动物。",
+  "source": "文化的阐释"
 };
 window.updated = {
   "name": "嗨咻",
