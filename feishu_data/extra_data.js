@@ -4,11 +4,11 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
-      "latest": "105. 从备孕到当妈，你需要的“心理待产包”"
+      "latest": "106. 头回当妈通勤俱乐部 ｜01 陪娃时间少，育儿分歧多，咋整？"
     },
     {
       "name": "畅所育言",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "跑啊！队长！！跑！！只要你能跑赢时间长河，终有一天，我们都会回到你的身后！",
+  "source": "我在精神病院学斩神"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
