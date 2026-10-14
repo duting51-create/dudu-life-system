@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-13",
+  "updated": "2026-10-14",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-13",
+  "updated": "2026-10-14",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "水赤着脚走在潮湿的街上；树叶，像病人般，抱怨那树。",
-  "source": "二十首情诗和一首绝望的歌"
+  "content": "引刀成一快，不负少年头。",
+  "source": "被逮口占"
 };
 window.updated = {
   "name": "嗨咻",
