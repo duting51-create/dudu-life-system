@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "引刀成一快，不负少年头。",
-  "source": "被逮口占"
+  "content": "真正的强者不在于什么无敌，而在于活着，输得再惨都别死了，而是每次都能够站起来，再次愤然出拳出剑！",
+  "source": "剑来"
 };
 window.updated = {
   "name": "嗨咻",
