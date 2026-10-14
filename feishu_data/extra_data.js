@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "奋斗的目标就是为了躺平，就是为了过上不被闹钟叫醒的日子。",
-  "source": "余华"
+  "content": "青鸟不传云外信，丁香空结雨中愁。",
+  "source": "摊破浣溪沙·手卷真珠上玉钩"
 };
 window.updated = {
   "name": "嗨咻",
