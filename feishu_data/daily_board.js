@@ -1,18 +1,12 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-13T01:00:46.545Z",
-  "date": "2026-10-13",
+  "updated_at": "2026-10-14T01:01:06.115Z",
+  "date": "2026-10-14",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月13日",
+    "date": "10月14日",
     "items": [
       {
-        "text": "下午去医院",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看小红书/B 站的AI短剧视频教程，确定怎么学",
+        "text": "写2篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -28,18 +22,30 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "学2小时AI短剧",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理兼职信息，用小号联系问一下",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "看报告在10点前是否出来，出来就去医院",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
       }
     ],
-    "raw_text": "1.下午去医院\n2.看小红书/B 站的AI短剧视频教程，确定怎么学\n3.学1小时英语口语\n4.学1小时审美训练",
+    "raw_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.整理兼职信息，用小号联系问一下\n6.看报告在10点前是否出来，出来就去医院",
     "tasks": [
       {
-        "text": "下午去医院",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看小红书/B 站的AI短剧视频教程，确定怎么学",
+        "text": "写2篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -55,9 +61,27 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "学2小时AI短剧",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理兼职信息，用小号联系问一下",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "看报告在10点前是否出来，出来就去医院",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.下午去医院\n2.看小红书/B 站的AI短剧视频教程，确定怎么学\n3.学1小时英语口语\n4.学1小时审美训练"
+    "raw_tasks_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.整理兼职信息，用小号联系问一下\n6.看报告在10点前是否出来，出来就去医院"
   },
   "inspirations": {
     "items": [
