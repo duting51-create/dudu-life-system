@@ -1,9 +1,9 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-14T01:01:06.115Z",
-  "date": "2026-10-14",
+  "updated_at": "2026-10-15T01:01:07.910Z",
+  "date": "2026-10-15",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月14日",
+    "date": "10月15日",
     "items": [
       {
         "text": "写2篇 IP 号笔记",
@@ -34,15 +34,9 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "mid"
-      },
-      {
-        "text": "看报告在10点前是否出来，出来就去医院",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
       }
     ],
-    "raw_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.整理兼职信息，用小号联系问一下\n6.看报告在10点前是否出来，出来就去医院",
+    "raw_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.整理兼职信息，用小号联系问一下",
     "tasks": [
       {
         "text": "写2篇 IP 号笔记",
@@ -73,15 +67,9 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "mid"
-      },
-      {
-        "text": "看报告在10点前是否出来，出来就去医院",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.整理兼职信息，用小号联系问一下\n6.看报告在10点前是否出来，出来就去医院"
+    "raw_tasks_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.整理兼职信息，用小号联系问一下"
   },
   "inspirations": {
     "items": [
