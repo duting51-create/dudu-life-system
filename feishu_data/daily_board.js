@@ -1,87 +1,51 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-16T01:00:38.677Z",
-  "date": "2026-10-16",
+  "updated_at": "2026-10-17T01:00:35.260Z",
+  "date": "2026-10-17",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月16日",
+    "date": "10月17日",
     "items": [
       {
-        "text": "写2篇 IP 号笔记",
+        "text": "陪晗哥去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学1小时英语口语",
+        "text": "记账9月",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学1小时审美训练",
+        "text": "看窗外是不是有蜜蜂筑巢",
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "学2小时AI短剧",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "去医院抽血",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理兼职信息，用小号联系问一下",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
       }
     ],
-    "raw_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.去医院抽血\n6.整理兼职信息，用小号联系问一下",
+    "raw_text": "1.陪晗哥去医院\n2.记账9月\n3.看窗外是不是有蜜蜂筑巢",
     "tasks": [
       {
-        "text": "写2篇 IP 号笔记",
+        "text": "陪晗哥去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学1小时英语口语",
+        "text": "记账9月",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学1小时审美训练",
+        "text": "看窗外是不是有蜜蜂筑巢",
         "done": false,
         "cancelled": false,
         "priority": "low"
-      },
-      {
-        "text": "学2小时AI短剧",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "去医院抽血",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理兼职信息，用小号联系问一下",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
       }
     ],
-    "raw_tasks_text": "1.写2篇 IP 号笔记\n2.学1小时英语口语\n3.学1小时审美训练\n4.学2小时AI短剧\n5.去医院抽血\n6.整理兼职信息，用小号联系问一下"
+    "raw_tasks_text": "1.陪晗哥去医院\n2.记账9月\n3.看窗外是不是有蜜蜂筑巢"
   },
   "inspirations": {
     "items": [
