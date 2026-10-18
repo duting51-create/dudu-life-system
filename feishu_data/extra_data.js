@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-15",
+  "updated": "2026-10-18",
   "list": [
     {
       "name": "嗨咻",
@@ -8,19 +8,19 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "头回当妈",
-      "latest": "106. 头回当妈通勤俱乐部 ｜01 陪娃时间少，育儿分歧多，咋整？"
+      "latest": "头回当妈通勤俱乐部01. 陪娃时间少，育儿分歧多，咋整？"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
     },
     {
       "name": "当个事儿",
-      "latest": "仰卧位分娩姿势是错的吗？| 有点小事70"
+      "latest": "开小号、藏委屈、逼自己入睡，我们为啥总在为难自己？|声音胶囊02| Vol.182"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-15",
+  "updated": "2026-10-18",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "夹在我女友与前女友与青梅竹马间的果然是修罗场！",
+  "source": "夹在我女友与青梅竹马间的各种修罗场"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
