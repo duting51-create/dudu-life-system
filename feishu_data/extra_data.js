@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "list": [
     {
       "name": "爽",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "跑啊！队长！！跑！！只要你能跑赢时间长河，终有一天，我们都会回到你的身后！",
-  "source": "我在精神病院学斩神"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
