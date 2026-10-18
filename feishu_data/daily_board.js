@@ -1,51 +1,13 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-17T01:00:35.260Z",
-  "date": "2026-10-17",
+  "updated_at": "2026-10-18T01:00:51.889Z",
+  "date": "2026-10-18",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月17日",
-    "items": [
-      {
-        "text": "陪晗哥去医院",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "记账9月",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看窗外是不是有蜜蜂筑巢",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_text": "1.陪晗哥去医院\n2.记账9月\n3.看窗外是不是有蜜蜂筑巢",
-    "tasks": [
-      {
-        "text": "陪晗哥去医院",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "记账9月",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看窗外是不是有蜜蜂筑巢",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_tasks_text": "1.陪晗哥去医院\n2.记账9月\n3.看窗外是不是有蜜蜂筑巢"
+    "date": "10月18日",
+    "items": [],
+    "raw_text": "",
+    "tasks": [],
+    "raw_tasks_text": ""
   },
   "inspirations": {
     "items": [
