@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们办的不是案子，是别人的人生。",
-  "source": "第二十条"
+  "content": "繁星纵变，智慧永恒。",
+  "source": "悉尼大学"
 };
 window.updated = {
   "name": "嗨咻",
