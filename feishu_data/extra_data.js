@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "一生之重，不过饱餐和被爱；一生所求，不过温暖与良人。",
-  "source": "隐入尘烟"
+  "content": "我们办的不是案子，是别人的人生。",
+  "source": "第二十条"
 };
 window.updated = {
   "name": "嗨咻",
