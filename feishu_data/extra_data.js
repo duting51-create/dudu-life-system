@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-18",
+  "updated": "2026-10-19",
   "list": [
     {
       "name": "嗨咻",
@@ -8,11 +8,11 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "头回当妈",
-      "latest": "头回当妈通勤俱乐部01. 陪娃时间少，育儿分歧多，咋整？"
+      "latest": "头回当妈通勤俱乐部02｜升职加薪or生儿育女，女性可以既要又要"
     },
     {
       "name": "畅所育言",
-      "latest": "116 二胎不是“一碗水端平”，而是让每个孩子拥有专属的爱"
+      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep99 | AI会如何改变我们的关系和生活：谁被增强，谁被减弱？"
+      "latest": "ep100 | 电影版 VS 原著版阿拉贡：改对了什么，错过了什么？"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-18",
+  "updated": "2026-10-19",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "夹在我女友与前女友与青梅竹马间的果然是修罗场！",
-  "source": "夹在我女友与青梅竹马间的各种修罗场"
+  "content": "他尸骨犹未凉，我此恨怎能偿。",
+  "source": "汉宫秋"
 };
 window.updated = {
   "name": "嗨咻",

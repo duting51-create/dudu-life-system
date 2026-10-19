@@ -1,13 +1,7 @@
 // 豆瓣观影清单（由 feishu_sync.py fetch_douban() 生成）
 window.DOUBAN_DATA = {
-  "updated": "2026-10-12",
+  "updated": "2026-10-19",
   "wish": [
-    {
-      "title": "好朋友们",
-      "year": "",
-      "rating": "",
-      "link": "https://movie.douban.com/subject/25780578/"
-    },
     {
       "title": "戏梦巴黎",
       "year": "",
@@ -346,6 +340,12 @@ window.DOUBAN_DATA = {
     }
   ],
   "collect": [
+    {
+      "title": "好朋友们",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/25780578/"
+    },
     {
       "title": "一只鸟仔哮啾啾",
       "year": "",
@@ -699,12 +699,6 @@ window.DOUBAN_DATA = {
       "year": "",
       "rating": "",
       "link": "https://movie.douban.com/subject/35354592/"
-    },
-    {
-      "title": "三大队",
-      "year": "",
-      "rating": "",
-      "link": "https://movie.douban.com/subject/35208463/"
     }
   ]
 };
