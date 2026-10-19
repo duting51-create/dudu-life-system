@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "一个随便把别人当朋友的人，往往不会有真正的朋友。一个喜欢嘴上称兄道弟的人，心里其实没有真正的兄弟。",
-  "source": "剑来"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
