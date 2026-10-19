@@ -4,15 +4,15 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
-      "latest": "头回当妈通勤俱乐部02｜升职加薪or生儿育女，女性可以既要又要"
+      "latest": "头回当妈通勤俱乐部02. 升职加薪or生儿育女，女性可以既要又要"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
     },
     {
       "name": "当个事儿",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "一生之重，不过饱餐和被爱；一生所求，不过温暖与良人。",
+  "source": "隐入尘烟"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
