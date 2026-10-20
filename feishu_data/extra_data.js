@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "希望你今后的每一次笑，都是真心的。",
-  "source": "深海"
+  "content": "劝君莫惜花前醉，今年花谢，明年花谢，白了人头。",
+  "source": "青杏儿·风雨替花愁"
 };
 window.updated = {
   "name": "嗨咻",
