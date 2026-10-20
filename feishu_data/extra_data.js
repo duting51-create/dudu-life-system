@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "110. 和大卫翁聊天｜女人如何掌握家庭财政大权？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "在你们身上，寄托着人类和中国的将来。",
-  "source": "致中共中央"
+  "content": "希望你今后的每一次笑，都是真心的。",
+  "source": "深海"
 };
 window.updated = {
   "name": "嗨咻",
