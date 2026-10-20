@@ -1,13 +1,87 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-19T01:00:42.583Z",
-  "date": "2026-10-19",
+  "updated_at": "2026-10-20T01:00:42.318Z",
+  "date": "2026-10-20",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月19日",
-    "items": [],
-    "raw_text": "",
-    "tasks": [],
-    "raw_tasks_text": ""
+    "date": "10月20日",
+    "items": [
+      {
+        "text": "写2篇小红书笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看红十字会课程1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "审美计划30分钟",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_text": "1.写2篇小红书笔记\n2.学英语1小时\n3.运动1小时\n4.看红十字会课程1小时\n5.审美计划30分钟\n6.学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）",
+    "tasks": [
+      {
+        "text": "写2篇小红书笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看红十字会课程1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "审美计划30分钟",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_tasks_text": "1.写2篇小红书笔记\n2.学英语1小时\n3.运动1小时\n4.看红十字会课程1小时\n5.审美计划30分钟\n6.学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）"
   },
   "inspirations": {
     "items": [
