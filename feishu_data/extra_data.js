@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "list": [
     {
       "name": "嗨咻",
@@ -8,15 +8,15 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "头回当妈通勤俱乐部02. 升职加薪or生儿育女，女性可以既要又要"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "开小号、藏委屈、逼自己入睡，我们为啥总在为难自己？|声音胶囊02| Vol.182"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "意义这二字是没有标准的，人生本没有意义，所有的意义是个人自己赋予的，你觉得有意义便有意义。",
+  "source": "一库"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
