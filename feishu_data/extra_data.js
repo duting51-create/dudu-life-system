@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人是万灵之长，智慧的差异是很小的，经历本身也是文化。",
-  "source": "牧马人"
+  "content": "人生就是这样，苦和累，你总得选一样吧，哪有什么好事，都让你佟湘玉一个人占了呢？",
+  "source": "武林外传"
 };
 window.updated = {
   "name": "嗨咻",
