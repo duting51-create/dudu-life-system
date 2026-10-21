@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "Control is Power.",
-  "source": "辛德勒的名单"
+  "content": "我们只有一条出路，那就是胜利！还有另外一条出路，死亡。死亡不属于工人阶级！",
+  "source": "列宁在1918"
 };
 window.updated = {
   "name": "嗨咻",
