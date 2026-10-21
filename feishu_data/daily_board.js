@@ -1,12 +1,18 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-20T01:00:42.318Z",
-  "date": "2026-10-20",
+  "updated_at": "2026-10-21T01:00:42.448Z",
+  "date": "2026-10-21",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月20日",
+    "date": "10月21日",
     "items": [
       {
-        "text": "写2篇小红书笔记",
+        "text": "写1篇小红书笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看红十字会课程1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -24,28 +30,40 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "看红十字会课程1小时",
+        "text": "和AI沟通探索自己未来可以做什么",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "审美计划30分钟",
+        "text": "和AI沟通做饭视频脚本+看 AI剪视频的内容",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）",
+        "text": "审美计划学习30分钟",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看AI短剧 的学习计划30分钟",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.写2篇小红书笔记\n2.学英语1小时\n3.运动1小时\n4.看红十字会课程1小时\n5.审美计划30分钟\n6.学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）",
+    "raw_text": "1.写1篇小红书笔记\n2.看红十字会课程1小时\n3.学英语1小时\n4.运动1小时\n5.和AI沟通探索自己未来可以做什么\n6.和AI沟通做饭视频脚本+看 AI剪视频的内容\n7.审美计划学习30分钟\n8.看AI短剧 的学习计划30分钟",
     "tasks": [
       {
-        "text": "写2篇小红书笔记",
+        "text": "写1篇小红书笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看红十字会课程1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -63,25 +81,31 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "看红十字会课程1小时",
+        "text": "和AI沟通探索自己未来可以做什么",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "审美计划30分钟",
+        "text": "和AI沟通做饭视频脚本+看 AI剪视频的内容",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）",
+        "text": "审美计划学习30分钟",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看AI短剧 的学习计划30分钟",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.写2篇小红书笔记\n2.学英语1小时\n3.运动1小时\n4.看红十字会课程1小时\n5.审美计划30分钟\n6.学习AI短剧或者编剧计划30分钟（知乎那个博主的帖子）"
+    "raw_tasks_text": "1.写1篇小红书笔记\n2.看红十字会课程1小时\n3.学英语1小时\n4.运动1小时\n5.和AI沟通探索自己未来可以做什么\n6.和AI沟通做饭视频脚本+看 AI剪视频的内容\n7.审美计划学习30分钟\n8.看AI短剧 的学习计划30分钟"
   },
   "inspirations": {
     "items": [
@@ -326,6 +350,11 @@ window.DAILY_BOARD = {
   "memos": {
     "items": [
       {
+        "date": "46315",
+        "text": "我的时间要用来提升自己的技能，而不是用体力活赚取廉价收入。",
+        "id": "memo_107_0"
+      },
+      {
         "date": "46304",
         "text": "不断学习赚钱思路，确定一项后要坚持至少3个月",
         "id": "memo_97_0"
@@ -369,13 +398,8 @@ window.DAILY_BOARD = {
         "date": "46249",
         "text": "试管容易违规，尽量不讲",
         "id": "memo_52_0"
-      },
-      {
-        "date": "46239",
-        "text": "workbuddy的一人公司专家团用一下",
-        "id": "memo_43_2"
       }
     ],
-    "total": 11
+    "total": 10
   }
 };
