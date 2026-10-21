@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生命，就是幸存。幸存的表面意义是继续活着，但也是在死后活着。",
-  "source": "最后的谈话：'我向我自己开战'"
+  "content": "实践是检验真理的唯一标准。",
+  "source": "光明日报"
 };
 window.updated = {
   "name": "嗨咻",
