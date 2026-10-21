@@ -3200,7 +3200,9 @@
     function openTaskEditor() {
       const tasks = window.TASKS_DATA?.items || [];
       const rawText = window.TASKS_DATA?.raw_text || window.TASKS_DATA?.raw_tasks_text || '';
-      const existingLines = tasks.map(t => t.text).join('\n') || rawText;
+      // 🔥 10/21 修复：已划掉的任务预填时必须带 ✅ 前缀——否则保存时按「行首无 ✅」
+      // 全部判成未完成，并盖上新时间戳，把用户所有勾选批量打回（云端按时间戳择新）。
+      const existingLines = tasks.map(t => (t.done ? '✅' : '') + t.text).join('\n') || rawText;
 
       const modal = document.createElement('div');
       modal.id = 'task-editor-modal';
@@ -3250,7 +3252,10 @@
         if (matchedIndex >= 0) {
           usedIndexes.add(matchedIndex);
           const sv = existingTasks[matchedIndex];
-          return { ...sv, text, done: isDone, updatedAt: Date.now() };
+          // 🔥 10/21 修复：done/文本真正变化时才刷新 updatedAt——否则每次保存编辑器
+          // 都会给全部任务盖上同批新时间戳，云端合并时把其它设备/更早的勾选压掉。
+          const changed = isDone !== Boolean(sv.done) || text !== sv.text;
+          return { ...sv, text, done: isDone, updatedAt: changed ? Date.now() : (sv.updatedAt || editorStamp) };
         }
         // 全新任务：带上今天的 local: sourceId，保证刷新后不被 feed 覆盖丢弃
         newSeq += 1;
