@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们只有一条出路，那就是胜利！还有另外一条出路，死亡。死亡不属于工人阶级！",
-  "source": "列宁在1918"
+  "content": "自信人生二百年，会当水击三千里。",
+  "source": "残句"
 };
 window.updated = {
   "name": "嗨咻",
