@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我躲在断墙后面 偷看两个少年徒手摘光 星星映在了他们眼里 光却撒在了我身上",
-  "source": "撒野"
+  "content": "人是万灵之长，智慧的差异是很小的，经历本身也是文化。",
+  "source": "牧马人"
 };
 window.updated = {
   "name": "嗨咻",
