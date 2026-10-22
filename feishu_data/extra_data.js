@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人只有活着时，才有肉身。",
-  "source": "海德格尔"
+  "content": "服下红色药丸吧，那是自由的象征。",
+  "source": "黑客帝国"
 };
 window.updated = {
   "name": "嗨咻",
