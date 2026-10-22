@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "这一切，暗无天日。",
-  "source": "三体"
+  "content": "在文化交汇的边缘地带，在文明夹缝中周旋徘徊的他，面对的是风格迥异、色彩斑斓的世界。",
+  "source": "堕落之屋——卡瓦菲斯的现代性危机"
 };
 window.updated = {
   "name": "嗨咻",
