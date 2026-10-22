@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-22",
+  "updated": "2026-10-23",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "111.和安吉林聊天｜残酷名利场，等着看不如主动干？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-22",
+  "updated": "2026-10-23",
   "list": [
     {
       "name": "爽",
