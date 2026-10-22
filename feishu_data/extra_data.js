@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "在文化交汇的边缘地带，在文明夹缝中周旋徘徊的他，面对的是风格迥异、色彩斑斓的世界。",
-  "source": "堕落之屋——卡瓦菲斯的现代性危机"
+  "content": "世事短如春梦，人情薄似秋云。",
+  "source": "西江月·世事短如春梦"
 };
 window.updated = {
   "name": "嗨咻",
