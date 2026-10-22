@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "111.和安吉林聊天｜残酷名利场，等着看不如主动干？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "装作拥有某样品质，实际上就等于承认了自己并没有这样品质。",
-  "source": "人生的智慧"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
