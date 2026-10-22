@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "你所耽误的现在，是将来永远得不到的曾经。",
-  "source": "查理九世"
+  "content": "人只有活着时，才有肉身。",
+  "source": "海德格尔"
 };
 window.updated = {
   "name": "嗨咻",
