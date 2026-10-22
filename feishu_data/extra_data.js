@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "list": [
     {
       "name": "嗨咻",
@@ -8,7 +8,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "头回当妈",
-      "latest": "头回当妈通勤俱乐部02. 升职加薪or生儿育女，女性可以既要又要"
+      "latest": "头回当妈通勤俱乐部03. 玩耍竟然也需要学习 如何陪孩子玩？"
     },
     {
       "name": "畅所育言",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-21",
+  "updated": "2026-10-22",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人生就是这样，苦和累，你总得选一样吧，哪有什么好事，都让你佟湘玉一个人占了呢？",
-  "source": "武林外传"
+  "content": "你所耽误的现在，是将来永远得不到的曾经。",
+  "source": "查理九世"
 };
 window.updated = {
   "name": "嗨咻",
