@@ -1,9 +1,9 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-21T01:00:42.448Z",
-  "date": "2026-10-21",
+  "updated_at": "2026-10-22T01:00:20.670Z",
+  "date": "2026-10-22",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月21日",
+    "date": "10月22日",
     "items": [
       {
         "text": "写1篇小红书笔记",
@@ -12,13 +12,7 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "看红十字会课程1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "学英语1小时",
+        "text": "复习红十字会课程，参加理论考试",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -30,31 +24,37 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "和AI沟通探索自己未来可以做什么",
+        "text": "做IP 号的选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "和AI沟通做饭视频脚本+看 AI剪视频的内容",
+        "text": "上远程办公的网站，看有没有合适的岗位",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "审美计划学习30分钟",
+        "text": "看小红书/B 站上关于 AI漫剧之类的视频，一步步学习",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看AI短剧 的学习计划30分钟",
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看AI剪视频的小红书视频，了解一下 AI的发展",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.写1篇小红书笔记\n2.看红十字会课程1小时\n3.学英语1小时\n4.运动1小时\n5.和AI沟通探索自己未来可以做什么\n6.和AI沟通做饭视频脚本+看 AI剪视频的内容\n7.审美计划学习30分钟\n8.看AI短剧 的学习计划30分钟",
+    "raw_text": "1.写1篇小红书笔记\n2.复习红十字会课程，参加理论考试\n3.运动1小时\n4.做IP 号的选题\n5.上远程办公的网站，看有没有合适的岗位\n6.看小红书/B 站上关于 AI漫剧之类的视频，一步步学习\n7.学英语1小时\n8.看AI剪视频的小红书视频，了解一下 AI的发展",
     "tasks": [
       {
         "text": "写1篇小红书笔记",
@@ -63,13 +63,7 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "看红十字会课程1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "学英语1小时",
+        "text": "复习红十字会课程，参加理论考试",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -81,31 +75,37 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "和AI沟通探索自己未来可以做什么",
+        "text": "做IP 号的选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "和AI沟通做饭视频脚本+看 AI剪视频的内容",
+        "text": "上远程办公的网站，看有没有合适的岗位",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "审美计划学习30分钟",
+        "text": "看小红书/B 站上关于 AI漫剧之类的视频，一步步学习",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看AI短剧 的学习计划30分钟",
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看AI剪视频的小红书视频，了解一下 AI的发展",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.写1篇小红书笔记\n2.看红十字会课程1小时\n3.学英语1小时\n4.运动1小时\n5.和AI沟通探索自己未来可以做什么\n6.和AI沟通做饭视频脚本+看 AI剪视频的内容\n7.审美计划学习30分钟\n8.看AI短剧 的学习计划30分钟"
+    "raw_tasks_text": "1.写1篇小红书笔记\n2.复习红十字会课程，参加理论考试\n3.运动1小时\n4.做IP 号的选题\n5.上远程办公的网站，看有没有合适的岗位\n6.看小红书/B 站上关于 AI漫剧之类的视频，一步步学习\n7.学英语1小时\n8.看AI剪视频的小红书视频，了解一下 AI的发展"
   },
   "inspirations": {
     "items": [
