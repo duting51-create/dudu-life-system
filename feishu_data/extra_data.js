@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "服下红色药丸吧，那是自由的象征。",
-  "source": "黑客帝国"
+  "content": "谎言重复一千遍就成了真理。",
+  "source": "纳粹德国宣传部长"
 };
 window.updated = {
   "name": "嗨咻",
