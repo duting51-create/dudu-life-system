@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "相思相望不相亲，天为谁春。",
-  "source": "画堂春·一生一代一双人"
+  "content": "资本来到世间，从头到脚每个毛孔都滴着血和肮脏的东西。",
+  "source": "资本论"
 };
 window.updated = {
   "name": "嗨咻",
