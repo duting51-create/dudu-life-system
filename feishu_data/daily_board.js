@@ -1,111 +1,87 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-22T01:00:20.670Z",
-  "date": "2026-10-22",
+  "updated_at": "2026-10-23T01:00:20.804Z",
+  "date": "2026-10-23",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月22日",
+    "date": "10月23日",
     "items": [
       {
-        "text": "写1篇小红书笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "复习红十字会课程，参加理论考试",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
         "text": "运动1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做IP 号的选题",
+        "text": "优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "上远程办公的网站，看有没有合适的岗位",
+        "text": "调整一下封面，统一风格，让人能一眼看出来是我",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看小红书/B 站上关于 AI漫剧之类的视频，一步步学习",
+        "text": "尝试一下乌龙盘棍",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学英语1小时",
+        "text": "看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看AI剪视频的小红书视频，了解一下 AI的发展",
+        "text": "写1篇小红书笔记，试着用新的个人封面风格",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.写1篇小红书笔记\n2.复习红十字会课程，参加理论考试\n3.运动1小时\n4.做IP 号的选题\n5.上远程办公的网站，看有没有合适的岗位\n6.看小红书/B 站上关于 AI漫剧之类的视频，一步步学习\n7.学英语1小时\n8.看AI剪视频的小红书视频，了解一下 AI的发展",
+    "raw_text": "1.运动1小时\n2.优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流\n3.调整一下封面，统一风格，让人能一眼看出来是我\n4.尝试一下乌龙盘棍\n5.看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本\n6.写1篇小红书笔记，试着用新的个人封面风格",
     "tasks": [
       {
-        "text": "写1篇小红书笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "复习红十字会课程，参加理论考试",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
         "text": "运动1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做IP 号的选题",
+        "text": "优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "上远程办公的网站，看有没有合适的岗位",
+        "text": "调整一下封面，统一风格，让人能一眼看出来是我",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看小红书/B 站上关于 AI漫剧之类的视频，一步步学习",
+        "text": "尝试一下乌龙盘棍",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学英语1小时",
+        "text": "看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "看AI剪视频的小红书视频，了解一下 AI的发展",
+        "text": "写1篇小红书笔记，试着用新的个人封面风格",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.写1篇小红书笔记\n2.复习红十字会课程，参加理论考试\n3.运动1小时\n4.做IP 号的选题\n5.上远程办公的网站，看有没有合适的岗位\n6.看小红书/B 站上关于 AI漫剧之类的视频，一步步学习\n7.学英语1小时\n8.看AI剪视频的小红书视频，了解一下 AI的发展"
+    "raw_tasks_text": "1.运动1小时\n2.优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流\n3.调整一下封面，统一风格，让人能一眼看出来是我\n4.尝试一下乌龙盘棍\n5.看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本\n6.写1篇小红书笔记，试着用新的个人封面风格"
   },
   "inspirations": {
     "items": [
@@ -350,6 +326,11 @@ window.DAILY_BOARD = {
   "memos": {
     "items": [
       {
+        "date": "46317",
+        "text": "目前的账号三个选题方向-备孕情绪、备孕生活plog、情绪图鉴，再增加一个备孕干货，这个方向做爆款选题，用来涨粉",
+        "id": "memo_109_0"
+      },
+      {
         "date": "46315",
         "text": "我的时间要用来提升自己的技能，而不是用体力活赚取廉价收入。",
         "id": "memo_107_0"
@@ -393,11 +374,6 @@ window.DAILY_BOARD = {
         "date": "46251",
         "text": "拆解博主不是目的是工具，最终是要做好物博主",
         "id": "memo_54_0"
-      },
-      {
-        "date": "46249",
-        "text": "试管容易违规，尽量不讲",
-        "id": "memo_52_0"
       }
     ],
     "total": 10
