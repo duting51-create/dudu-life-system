@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "资本来到世间，从头到脚每个毛孔都滴着血和肮脏的东西。",
-  "source": "资本论"
+  "content": "梦想家只能在月光下找到自己的路，他的惩罚是比其他人更早看到黎明。",
+  "source": "意图集"
 };
 window.updated = {
   "name": "嗨咻",
