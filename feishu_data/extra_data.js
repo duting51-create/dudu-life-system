@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "112.芝加哥马拉松复盘，压力可以变成一种超能力"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "梦想家只能在月光下找到自己的路，他的惩罚是比其他人更早看到黎明。",
-  "source": "意图集"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
