@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "君子不器。",
-  "source": "论语·为政篇"
+  "content": "如果你执意追逐我的幻影，迟早会被真正的我打败。",
+  "source": "棋魂"
 };
 window.updated = {
   "name": "嗨咻",
