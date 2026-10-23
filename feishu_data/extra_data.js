@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "Yes, minister.",
-  "source": "是，大臣"
+  "content": "君子不器。",
+  "source": "论语·为政篇"
 };
 window.updated = {
   "name": "嗨咻",
