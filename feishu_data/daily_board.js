@@ -1,87 +1,13 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-23T01:00:20.804Z",
-  "date": "2026-10-23",
+  "updated_at": "2026-10-24T01:00:31.287Z",
+  "date": "2026-10-24",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月23日",
-    "items": [
-      {
-        "text": "运动1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "调整一下封面，统一风格，让人能一眼看出来是我",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "尝试一下乌龙盘棍",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇小红书笔记，试着用新的个人封面风格",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_text": "1.运动1小时\n2.优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流\n3.调整一下封面，统一风格，让人能一眼看出来是我\n4.尝试一下乌龙盘棍\n5.看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本\n6.写1篇小红书笔记，试着用新的个人封面风格",
-    "tasks": [
-      {
-        "text": "运动1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "调整一下封面，统一风格，让人能一眼看出来是我",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "尝试一下乌龙盘棍",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇小红书笔记，试着用新的个人封面风格",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_tasks_text": "1.运动1小时\n2.优化小红书账号工作流，最好让每个步骤都借助 AI提效，形成一个完整的自动化工作流\n3.调整一下封面，统一风格，让人能一眼看出来是我\n4.尝试一下乌龙盘棍\n5.看小红书上关于AI短剧的分享，总结一下新手经验和流程，做好学习计划，比如先写脚本\n6.写1篇小红书笔记，试着用新的个人封面风格"
+    "date": "10月24日",
+    "items": [],
+    "raw_text": "",
+    "tasks": [],
+    "raw_tasks_text": ""
   },
   "inspirations": {
     "items": [
