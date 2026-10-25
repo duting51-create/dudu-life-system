@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "譬如眼根，不自见眼；性自平等，无平等者。",
-  "source": "大方广圆觉修多罗了义经"
+  "content": "勤學如奮起之苗，不見其增，日有所長；輟學如磨刀之石，不見其損，日有所虧。",
+  "source": "陶淵明"
 };
 window.updated = {
   "name": "嗨咻",
