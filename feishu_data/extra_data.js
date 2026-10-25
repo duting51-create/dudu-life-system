@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "在文化交汇的边缘地带，在文明夹缝中周旋徘徊的他，面对的是风格迥异、色彩斑斓的世界。",
-  "source": "堕落之屋——卡瓦菲斯的现代性危机"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
