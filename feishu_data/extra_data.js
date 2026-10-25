@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep100 | 电影版 VS 原著版阿拉贡：改对了什么，错过了什么？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "勤學如奮起之苗，不見其增，日有所長；輟學如磨刀之石，不見其損，日有所虧。",
-  "source": "陶淵明"
+  "content": "什么是时光？我们穿上的衣服，却再也脱不下来。",
+  "source": "阿多尼斯诗集"
 };
 window.updated = {
   "name": "嗨咻",
