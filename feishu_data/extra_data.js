@@ -1,22 +1,22 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-25",
+  "updated": "2026-10-26",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "112.芝加哥马拉松复盘，压力可以变成一种超能力"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
-      "latest": "头回当妈通勤俱乐部03. 玩耍竟然也需要学习 如何陪孩子玩？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "畅所育言",
-      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
-      "latest": "白天扛住一切，夜里反复崩盘：失眠的夜晚，如何安顿好焦虑？|听友来信19 | Vol.183"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-25",
+  "updated": "2026-10-26",
   "list": [
     {
       "name": "爽",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "什么是时光？我们穿上的衣服，却再也脱不下来。",
-  "source": "阿多尼斯诗集"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
