@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "愿得一心人，白头不相离。",
-  "source": "白头吟"
+  "content": "我放着好好的阳关大道不走，走这阴沟里的独木桥干什么。真这么好走早就有人走了。",
+  "source": "魔道祖师"
 };
 window.updated = {
   "name": "嗨咻",
