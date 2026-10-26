@@ -4,23 +4,23 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "112.芝加哥马拉松复盘，压力可以变成一种超能力"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "头回当妈通勤俱乐部03. 玩耍竟然也需要学习 如何陪孩子玩？"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "白天扛住一切，夜里反复崩盘：失眠的夜晚，如何安顿好焦虑？|听友来信19 | Vol.183"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep101 | 亲人离世后，为什么我们有那么复杂的情绪？"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "愿得一心人，白头不相离。",
+  "source": "白头吟"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
