@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "112.芝加哥马拉松复盘，压力可以变成一种超能力"
     },
     {
       "name": "头回当妈",
