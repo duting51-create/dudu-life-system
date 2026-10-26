@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我放着好好的阳关大道不走，走这阴沟里的独木桥干什么。真这么好走早就有人走了。",
-  "source": "魔道祖师"
+  "content": "沉舟侧畔千帆过，病树前头万木春。",
+  "source": "酬乐天扬州初逢席上见赠"
 };
 window.updated = {
   "name": "嗨咻",
