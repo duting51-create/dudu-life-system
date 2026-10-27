@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep101 | 亲人离世后，为什么我们有那么复杂的情绪？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
