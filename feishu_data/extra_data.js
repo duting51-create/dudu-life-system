@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "毕竟西湖六月中，风光不与四时同。",
-  "source": "晓出净慈寺送林子方"
+  "content": "人性一个最特别的弱点就是：在意别人如何看待自己。",
+  "source": "亚瑟・叔本华"
 };
 window.updated = {
   "name": "嗨咻",
