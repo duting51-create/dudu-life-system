@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "近水楼台先得月，向阳花木易为春。",
-  "source": "断句"
+  "content": "屋外是一排排常绿不拘秋夏冬、居安镇守的香樟树；屋内是年少不更事、兵荒马乱的芳心暗渡 。",
+  "source": "暗格里的秘密"
 };
 window.updated = {
   "name": "嗨咻",
