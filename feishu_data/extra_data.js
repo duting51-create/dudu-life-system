@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人性一个最特别的弱点就是：在意别人如何看待自己。",
-  "source": "亚瑟・叔本华"
+  "content": "天平山上白云泉，云自无心水自闲。",
+  "source": "白云泉"
 };
 window.updated = {
   "name": "嗨咻",
