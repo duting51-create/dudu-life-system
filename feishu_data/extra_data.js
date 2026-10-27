@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep101 | 亲人离世后，为什么我们有那么复杂的情绪？"
     }
   ]
 };
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "谈恋爱我就不派电脑人去，这么好的事派它去干吗啊？",
-  "source": "漫谈人工智能"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
