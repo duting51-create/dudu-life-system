@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "白天扛住一切，夜里反复崩盘：失眠的夜晚，如何安顿好焦虑？|听友来信19 | Vol.183"
+      "latest": "白天扛住一切，夜里反复崩盘：失眠的夜晚，如何安顿好焦虑？|听众来信19 | Vol.183"
     },
     {
       "name": "Alison Yu心理",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我乃死，我乃生。我为暗，我亦为光。",
-  "source": "脑叶公司"
+  "content": "毕竟西湖六月中，风光不与四时同。",
+  "source": "晓出净慈寺送林子方"
 };
 window.updated = {
   "name": "嗨咻",
