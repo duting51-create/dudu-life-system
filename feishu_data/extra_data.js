@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我为我喜爱的东西大费周章，所以我才能快乐如斯。",
-  "source": "太阳照常升起"
+  "content": "我乃死，我乃生。我为暗，我亦为光。",
+  "source": "脑叶公司"
 };
 window.updated = {
   "name": "嗨咻",
