@@ -1,13 +1,99 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-26T01:00:28.626Z",
-  "date": "2026-10-26",
+  "updated_at": "2026-10-27T01:00:28.407Z",
+  "date": "2026-10-27",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月26日",
-    "items": [],
-    "raw_text": "",
-    "tasks": [],
-    "raw_tasks_text": ""
+    "date": "10月27日",
+    "items": [
+      {
+        "text": "看一下练习普通话的视频，纠正普通话发音",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "登录公众号，把最近的文章都定时发布",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理我喜欢的穿搭风格投喂给ChatGPT",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "录2个随手po视频-拉屎小包、收纳包包、马来西亚特产",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇 IP 号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_text": "1.看一下练习普通话的视频，纠正普通话发音\n2.学英语1小时\n3.运动1小时\n4.登录公众号，把最近的文章都定时发布\n5.整理我喜欢的穿搭风格投喂给ChatGPT\n6.录2个随手po视频-拉屎小包、收纳包包、马来西亚特产\n7.写1篇 IP 号笔记",
+    "tasks": [
+      {
+        "text": "看一下练习普通话的视频，纠正普通话发音",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "登录公众号，把最近的文章都定时发布",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理我喜欢的穿搭风格投喂给ChatGPT",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "录2个随手po视频-拉屎小包、收纳包包、马来西亚特产",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇 IP 号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_tasks_text": "1.看一下练习普通话的视频，纠正普通话发音\n2.学英语1小时\n3.运动1小时\n4.登录公众号，把最近的文章都定时发布\n5.整理我喜欢的穿搭风格投喂给ChatGPT\n6.录2个随手po视频-拉屎小包、收纳包包、马来西亚特产\n7.写1篇 IP 号笔记"
   },
   "inspirations": {
     "items": [
