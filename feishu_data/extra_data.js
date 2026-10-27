@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "屋外是一排排常绿不拘秋夏冬、居安镇守的香樟树；屋内是年少不更事、兵荒马乱的芳心暗渡 。",
-  "source": "暗格里的秘密"
+  "content": "我为我喜爱的东西大费周章，所以我才能快乐如斯。",
+  "source": "太阳照常升起"
 };
 window.updated = {
   "name": "嗨咻",
