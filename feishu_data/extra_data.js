@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep101 | 亲人离世后，为什么我们有那么复杂的情绪？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "新竹高于旧竹枝，全凭老干为扶持。",
-  "source": "新竹"
+  "content": "繁花血景在那一赛季达到巅峰，却也止于巅峰。",
+  "source": "全职高手"
 };
 window.updated = {
   "name": "嗨咻",
