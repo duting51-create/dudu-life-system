@@ -3066,7 +3066,7 @@
         const priority = t.priority;
         const isDaily = priority === 'low';
         return `<div class="todo-item">
-          <div class="todo-check ${t.done ? 'done' : ''}" data-index="${i}" onclick="toggleTask(this, ${i})"></div>
+          <div class="todo-check ${t.done ? 'done' : ''}" data-index="${i}" data-sid="${encodeURIComponent(t.sourceId || '')}" data-txt="${encodeURIComponent(taskTextKey(t) || '')}" onclick="toggleTask(this)"></div>
           <div class="todo-type-dot ${type}"></div>
           <div style="flex:1">
             <p class="todo-text ${t.done ? 'done' : ''}"
@@ -3204,13 +3204,28 @@
       if (window.CloudSync) window.CloudSync.saveNow();
     }
 
-    function toggleTask(el, index) {
-      if (!window.TASKS_DATA?.items?.[index]) return;
-      const task = window.TASKS_DATA.items[index];
+    // 🔥 10/28 修复：勾选按任务身份(sourceId / 归一化文本)定位，不再用数组下标。
+    // 原因：initializeTasksForToday / 云端 reconcile 会在加载后频繁重建并重新渲染整个
+    // items 数组，数组顺序一旦变化，旧的下标会指到别的任务——表现为「点运动1小时，
+    // 一秒后勾却跑到别的项上」。按身份定位则无论数组怎么重建都不会打错对象。
+    function toggleTask(el) {
+      if (!el || !window.TASKS_DATA?.items) return;
+      const items = window.TASKS_DATA.items;
+      const sid = el.dataset.sid ? decodeURIComponent(el.dataset.sid) : '';
+      const txt = el.dataset.txt ? decodeURIComponent(el.dataset.txt) : '';
+      let idx = -1;
+      if (sid) idx = items.findIndex(t => t && t.sourceId === sid);
+      if (idx < 0 && txt) idx = items.findIndex(t => t && taskTextKey(t) === txt);
+      if (idx < 0) {
+        const list = el.closest && el.closest('#today-tasks-list');
+        if (list) idx = Array.prototype.indexOf.call(list.querySelectorAll('.todo-check'), el);
+      }
+      if (idx < 0 || !items[idx]) return;
+      const task = items[idx];
       task.done = !task.done;
       task.updatedAt = Date.now();   // 只刷新被改动这一条的时间戳（per-task last-write-wins）
       el.classList.toggle('done', task.done);
-      const textEl = el.closest('.todo-item')?.querySelector('.todo-text');
+      const textEl = el.closest('.todo-item') && el.closest('.todo-item').querySelector('.todo-text');
       if (textEl) textEl.classList.toggle('done', task.done);
       persistTaskOperation();
       updateTodoProgress();
@@ -5045,7 +5060,7 @@
             // 保留本地保存任务的 done / updatedAt / sourceId，避免 feed 重建时丢失 per-task 时间戳，
             // 否则跨设备合并会退化成「全员同戳」，重新出现互相覆盖。
             // 8/17 加固：文本始终以 feed 为准，防止本地脏数据（如被截断的"定价为"）覆盖正确文本。
-            return { ...task, text: task.text, done: Boolean(sv.done), updatedAt: sv.updatedAt || task.updatedAt, sourceId: task.sourceId || sv.sourceId };
+            return { ...task, text: task.text, done: Boolean(sv.done), updatedAt: Math.max(Number(sv.updatedAt) || 0, Number(task.updatedAt) || 0) || sv.updatedAt || task.updatedAt, sourceId: task.sourceId || sv.sourceId };
           }
           return task;
         });
