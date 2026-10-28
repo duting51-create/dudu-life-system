@@ -1,12 +1,12 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-27T01:00:28.407Z",
-  "date": "2026-10-27",
+  "updated_at": "2026-10-28T01:00:51.308Z",
+  "date": "2026-10-28",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月27日",
+    "date": "10月28日",
     "items": [
       {
-        "text": "看一下练习普通话的视频，纠正普通话发音",
+        "text": "登录公众号，把最近的文章都定时发布",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -24,34 +24,22 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "登录公众号，把最近的文章都定时发布",
+        "text": "写3篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "整理我喜欢的穿搭风格投喂给ChatGPT",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "录2个随手po视频-拉屎小包、收纳包包、马来西亚特产",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇 IP 号笔记",
+        "text": "录3个随手po视频-拉屎小包、收纳包包、马来西亚特产",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.看一下练习普通话的视频，纠正普通话发音\n2.学英语1小时\n3.运动1小时\n4.登录公众号，把最近的文章都定时发布\n5.整理我喜欢的穿搭风格投喂给ChatGPT\n6.录2个随手po视频-拉屎小包、收纳包包、马来西亚特产\n7.写1篇 IP 号笔记",
+    "raw_text": "1.登录公众号，把最近的文章都定时发布\n2.学英语1小时\n3.运动1小时\n4.写3篇 IP 号笔记\n5.录3个随手po视频-拉屎小包、收纳包包、马来西亚特产",
     "tasks": [
       {
-        "text": "看一下练习普通话的视频，纠正普通话发音",
+        "text": "登录公众号，把最近的文章都定时发布",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -69,31 +57,19 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "登录公众号，把最近的文章都定时发布",
+        "text": "写3篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "整理我喜欢的穿搭风格投喂给ChatGPT",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "录2个随手po视频-拉屎小包、收纳包包、马来西亚特产",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇 IP 号笔记",
+        "text": "录3个随手po视频-拉屎小包、收纳包包、马来西亚特产",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.看一下练习普通话的视频，纠正普通话发音\n2.学英语1小时\n3.运动1小时\n4.登录公众号，把最近的文章都定时发布\n5.整理我喜欢的穿搭风格投喂给ChatGPT\n6.录2个随手po视频-拉屎小包、收纳包包、马来西亚特产\n7.写1篇 IP 号笔记"
+    "raw_tasks_text": "1.登录公众号，把最近的文章都定时发布\n2.学英语1小时\n3.运动1小时\n4.写3篇 IP 号笔记\n5.录3个随手po视频-拉屎小包、收纳包包、马来西亚特产"
   },
   "inspirations": {
     "items": [
@@ -338,6 +314,16 @@ window.DAILY_BOARD = {
   "memos": {
     "items": [
       {
+        "date": "46323",
+        "text": "我需要学习一下文生图、文生视频的技能，不单单是模仿别人的图片，而是生成自己想要的图片",
+        "id": "memo_113_0"
+      },
+      {
+        "date": "46322",
+        "text": "我身上可提炼的标签：30+久备不孕、存款七位数、妹宝女、爱吃辣的湖北女孩、宅女很爱待在家、喜欢写东西",
+        "id": "memo_112_0"
+      },
+      {
         "date": "46317",
         "text": "目前的账号三个选题方向-备孕情绪、备孕生活plog、情绪图鉴，再增加一个备孕干货，这个方向做爆款选题，用来涨粉",
         "id": "memo_109_0"
@@ -376,16 +362,6 @@ window.DAILY_BOARD = {
         "date": "46262",
         "text": "怀孕后开始写「孕期周记」",
         "id": "memo_65_0"
-      },
-      {
-        "date": "46258",
-        "text": "好物账号发布时间：工作日下午 4-6 点、晚上 8 点、上午10-11点",
-        "id": "memo_61_0"
-      },
-      {
-        "date": "46251",
-        "text": "拆解博主不是目的是工具，最终是要做好物博主",
-        "id": "memo_54_0"
       }
     ],
     "total": 10
