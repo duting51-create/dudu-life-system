@@ -1,26 +1,26 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-28",
+  "updated": "2026-10-29",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "113. 关于我的选择，问点难的"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "头回当妈通勤俱乐部03. 玩耍竟然也需要学习 如何陪孩子玩？"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "人类为什么会有性愉悦？| 有点小事72"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep101 | 亲人离世后，为什么我们有那么复杂的情绪？"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-28",
+  "updated": "2026-10-29",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "所以人生是在痛苦和无聊之间像钟摆一样的来回摆动着；事实上痛苦和无聊两者也就是人生的两种最后成分。",
+  "source": "作为意志和表象的世界"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
