@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "所以人生是在痛苦和无聊之间像钟摆一样的来回摆动着；事实上痛苦和无聊两者也就是人生的两种最后成分。",
-  "source": "作为意志和表象的世界"
+  "content": "为什么我眼睛一睁开，你就不是我的了。",
+  "source": "被偷走的那五年"
 };
 window.updated = {
   "name": "嗨咻",
