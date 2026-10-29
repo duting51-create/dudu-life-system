@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "117 2岁+绘本书单：相比知识与打卡，我们更想把阅读的主动权归还孩子"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "为什么我眼睛一睁开，你就不是我的了。",
-  "source": "被偷走的那五年"
+  "content": "等待而已，也叫努力？是在等别人离开，还是在等自己放弃？",
+  "source": "云边有个小卖部"
 };
 window.updated = {
   "name": "嗨咻",
