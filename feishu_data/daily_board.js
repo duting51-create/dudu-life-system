@@ -1,75 +1,39 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-28T01:00:51.308Z",
-  "date": "2026-10-28",
+  "updated_at": "2026-10-29T01:00:31.074Z",
+  "date": "2026-10-29",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月28日",
+    "date": "10月29日",
     "items": [
       {
-        "text": "登录公众号，把最近的文章都定时发布",
+        "text": "上午收东西，下午回武汉",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学英语1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "运动1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写3篇 IP 号笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "录3个随手po视频-拉屎小包、收纳包包、马来西亚特产",
+        "text": "飞机上看书写东西拍拍素材",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.登录公众号，把最近的文章都定时发布\n2.学英语1小时\n3.运动1小时\n4.写3篇 IP 号笔记\n5.录3个随手po视频-拉屎小包、收纳包包、马来西亚特产",
+    "raw_text": "1.上午收东西，下午回武汉\n2.飞机上看书写东西拍拍素材",
     "tasks": [
       {
-        "text": "登录公众号，把最近的文章都定时发布",
+        "text": "上午收东西，下午回武汉",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学英语1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "运动1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写3篇 IP 号笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "录3个随手po视频-拉屎小包、收纳包包、马来西亚特产",
+        "text": "飞机上看书写东西拍拍素材",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.登录公众号，把最近的文章都定时发布\n2.学英语1小时\n3.运动1小时\n4.写3篇 IP 号笔记\n5.录3个随手po视频-拉屎小包、收纳包包、马来西亚特产"
+    "raw_tasks_text": "1.上午收东西，下午回武汉\n2.飞机上看书写东西拍拍素材"
   },
   "inspirations": {
     "items": [
