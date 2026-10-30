@@ -1,39 +1,39 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-29T01:00:31.074Z",
-  "date": "2026-10-29",
+  "updated_at": "2026-10-30T01:00:42.946Z",
+  "date": "2026-10-30",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月29日",
+    "date": "10月30日",
     "items": [
       {
-        "text": "上午收东西，下午回武汉",
+        "text": "上午去万和看一下房子，下午回鸦鹊岭",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "飞机上看书写东西拍拍素材",
+        "text": "拍一些素材",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.上午收东西，下午回武汉\n2.飞机上看书写东西拍拍素材",
+    "raw_text": "1.上午去万和看一下房子，下午回鸦鹊岭\n2.拍一些素材",
     "tasks": [
       {
-        "text": "上午收东西，下午回武汉",
+        "text": "上午去万和看一下房子，下午回鸦鹊岭",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "飞机上看书写东西拍拍素材",
+        "text": "拍一些素材",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.上午收东西，下午回武汉\n2.飞机上看书写东西拍拍素材"
+    "raw_tasks_text": "1.上午去万和看一下房子，下午回鸦鹊岭\n2.拍一些素材"
   },
   "inspirations": {
     "items": [
