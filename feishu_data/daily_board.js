@@ -1,39 +1,63 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-10-30T01:00:42.946Z",
-  "date": "2026-10-30",
+  "updated_at": "2026-11-02T01:00:59.240Z",
+  "date": "2026-11-02",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "10月30日",
+    "date": "11月2日",
     "items": [
       {
-        "text": "上午去万和看一下房子，下午回鸦鹊岭",
+        "text": "学英语1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍一些素材",
+        "text": "运动看情况",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.上午去万和看一下房子，下午回鸦鹊岭\n2.拍一些素材",
+    "raw_text": "1.学英语1小时\n2.运动看情况\n3.研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片\n4.写1篇 IP 号笔记",
     "tasks": [
       {
-        "text": "上午去万和看一下房子，下午回鸦鹊岭",
+        "text": "学英语1小时",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍一些素材",
+        "text": "运动看情况",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇 IP 号笔记",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.上午去万和看一下房子，下午回鸦鹊岭\n2.拍一些素材"
+    "raw_tasks_text": "1.学英语1小时\n2.运动看情况\n3.研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片\n4.写1篇 IP 号笔记"
   },
   "inspirations": {
     "items": [
