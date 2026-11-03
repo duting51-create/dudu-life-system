@@ -1,9 +1,9 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-02T01:00:59.240Z",
-  "date": "2026-11-02",
+  "updated_at": "2026-11-03T01:00:58.879Z",
+  "date": "2026-11-03",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月2日",
+    "date": "11月3日",
     "items": [
       {
         "text": "学英语1小时",
@@ -12,25 +12,25 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "运动看情况",
+        "text": "整理上官钮祜禄诺这类博主（生活碎片视频+配音）的脚本，分析提炼写法，写我想分享的其他视频脚本",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "用chatcut 自动剪辑随手 po好物视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇 IP 号笔记",
+        "text": "试试提取我的音色，让 AI给好物视频配音，不然我的口音太明显了",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.学英语1小时\n2.运动看情况\n3.研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片\n4.写1篇 IP 号笔记",
+    "raw_text": "1.学英语1小时\n2.整理上官钮祜禄诺这类博主（生活碎片视频+配音）的脚本，分析提炼写法，写我想分享的其他视频脚本\n3.用chatcut 自动剪辑随手 po好物视频\n4.试试提取我的音色，让 AI给好物视频配音，不然我的口音太明显了",
     "tasks": [
       {
         "text": "学英语1小时",
@@ -39,25 +39,25 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "运动看情况",
+        "text": "整理上官钮祜禄诺这类博主（生活碎片视频+配音）的脚本，分析提炼写法，写我想分享的其他视频脚本",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "用chatcut 自动剪辑随手 po好物视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇 IP 号笔记",
+        "text": "试试提取我的音色，让 AI给好物视频配音，不然我的口音太明显了",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.学英语1小时\n2.运动看情况\n3.研究柿柿糕糕的账号，找 AI 给到类似图片的提示词，用ChatGPT来做一下AI好物图片\n4.写1篇 IP 号笔记"
+    "raw_tasks_text": "1.学英语1小时\n2.整理上官钮祜禄诺这类博主（生活碎片视频+配音）的脚本，分析提炼写法，写我想分享的其他视频脚本\n3.用chatcut 自动剪辑随手 po好物视频\n4.试试提取我的音色，让 AI给好物视频配音，不然我的口音太明显了"
   },
   "inspirations": {
     "items": [
