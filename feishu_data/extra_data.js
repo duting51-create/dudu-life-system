@@ -1,14 +1,14 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-10-29",
+  "updated": "2026-11-04",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "113. 关于我的选择，问点难的"
+      "latest": "114. 和严艺家聊天｜为什么总爱上同一类人？有些心动只是熟悉的痛"
     },
     {
       "name": "头回当妈",
-      "latest": "头回当妈通勤俱乐部03. 玩耍竟然也需要学习 如何陪孩子玩？"
+      "latest": "106. 孩子的第一次搬家：爱上新家前，先陪他好好说再见"
     },
     {
       "name": "畅所育言",
@@ -16,11 +16,11 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "人类为什么会有性愉悦？| 有点小事72"
+      "latest": "生三胎？这位患者的故事令我百感交集！| 有点小事73"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep101 | 亲人离世后，为什么我们有那么复杂的情绪？"
+      "latest": "ep102 哀悼如何撕裂关系，我们如何面对其中的冲突和疏远？"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-10-29",
+  "updated": "2026-11-04",
   "list": [
     {
       "name": "爽",
