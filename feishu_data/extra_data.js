@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep102 哀悼如何撕裂关系，我们如何面对其中的冲突和疏远？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "那是因为我应星不信天不信地，向来只信自己的心。",
-  "source": "他皈依月（崩坏：星穹铁道同人）"
+  "content": "道生之，德蓄之，物形之，势成之。",
+  "source": "道德经"
 };
 window.updated = {
   "name": "嗨咻",
