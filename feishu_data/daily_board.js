@@ -1,39 +1,99 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-04T01:00:58.630Z",
-  "date": "2026-11-04",
+  "updated_at": "2026-11-05T01:00:04.865Z",
+  "date": "2026-11-05",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月4日",
+    "date": "11月5日",
     "items": [
       {
-        "text": "整理中医教材，传到workbuddy，完善工作台，再调整配色",
+        "text": "整理好物分享的场景图，至少 5 张模板图",
         "done": false,
         "cancelled": false,
         "priority": "mid"
       },
       {
-        "text": "开始学DeepSeek给的经济学学习计划",
+        "text": "看大众点评怎么写点评赚钱",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看数据标注员怎么做",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写2篇小红书笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "编辑定时2篇公众号文章",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.整理中医教材，传到workbuddy，完善工作台，再调整配色\n2.开始学DeepSeek给的经济学学习计划",
+    "raw_text": "1.整理好物分享的场景图，至少 5 张模板图\n2.看大众点评怎么写点评赚钱\n3.看数据标注员怎么做\n4.写2篇小红书笔记\n5.运动1小时\n6.学英语1小时\n7.编辑定时2篇公众号文章",
     "tasks": [
       {
-        "text": "整理中医教材，传到workbuddy，完善工作台，再调整配色",
+        "text": "整理好物分享的场景图，至少 5 张模板图",
         "done": false,
         "cancelled": false,
         "priority": "mid"
       },
       {
-        "text": "开始学DeepSeek给的经济学学习计划",
+        "text": "看大众点评怎么写点评赚钱",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看数据标注员怎么做",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写2篇小红书笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "运动1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "学英语1小时",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "编辑定时2篇公众号文章",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.整理中医教材，传到workbuddy，完善工作台，再调整配色\n2.开始学DeepSeek给的经济学学习计划"
+    "raw_tasks_text": "1.整理好物分享的场景图，至少 5 张模板图\n2.看大众点评怎么写点评赚钱\n3.看数据标注员怎么做\n4.写2篇小红书笔记\n5.运动1小时\n6.学英语1小时\n7.编辑定时2篇公众号文章"
   },
   "inspirations": {
     "items": [
