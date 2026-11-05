@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep102 哀悼如何撕裂关系，我们如何面对其中的冲突和疏远？"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "愿人们的爱恨为你加冕",
-  "source": "郭敬明"
+  "content": "YOU SHALL NOT PASS!!!",
+  "source": "魔戒第二卷"
 };
 window.updated = {
   "name": "嗨咻",
