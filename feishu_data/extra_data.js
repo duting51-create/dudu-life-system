@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "114. 和严艺家聊天｜为什么总爱上同一类人？有些心动只是熟悉的痛"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "生三胎？这位患者的故事令我百感交集！| 有点小事73"
+      "latest": "共读《无条件养育》：夸赞、惩罚、冷处理，都是在悄悄撤回「爱」| Vol.185"
     },
     {
       "name": "Alison Yu心理",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "黑色世界唯有东方的曙光。",
-  "source": "Bilibili"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
