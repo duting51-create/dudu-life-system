@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "枝上柳绵吹又少。天涯何处无芳草。",
-  "source": "蝶恋花·春景"
+  "content": "before was was was, was was is.",
+  "source": "网络"
 };
 window.updated = {
   "name": "嗨咻",
