@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "114. 和严艺家聊天｜为什么总爱上同一类人？有些心动只是熟悉的痛"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "以有涯随无涯，殆已！已而为知者，殆而已矣！",
-  "source": "庄子"
+  "content": "死亡不是生命的终点，遗忘才是。",
+  "source": "寻梦环游记"
 };
 window.updated = {
   "name": "嗨咻",
