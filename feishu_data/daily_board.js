@@ -1,35 +1,11 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-05T01:00:04.865Z",
-  "date": "2026-11-05",
+  "updated_at": "2026-11-06T01:00:05.014Z",
+  "date": "2026-11-06",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月5日",
+    "date": "11月6日",
     "items": [
       {
-        "text": "整理好物分享的场景图，至少 5 张模板图",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "看大众点评怎么写点评赚钱",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看数据标注员怎么做",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写2篇小红书笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
         "text": "运动1小时",
         "done": false,
         "cancelled": false,
@@ -42,39 +18,39 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
+        "text": "做3篇 IP 号笔记的配图，编辑到草稿箱",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理好物分享的场景图，至少 5 张模板图",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
         "text": "编辑定时2篇公众号文章",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看完爱野佩佩的文档",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.整理好物分享的场景图，至少 5 张模板图\n2.看大众点评怎么写点评赚钱\n3.看数据标注员怎么做\n4.写2篇小红书笔记\n5.运动1小时\n6.学英语1小时\n7.编辑定时2篇公众号文章",
+    "raw_text": "1.运动1小时\n2.学英语1小时\n3.做3篇 IP 号笔记的配图，编辑到草稿箱\n4.整理好物分享的场景图，至少 5 张模板图\n5.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）\n6.编辑定时2篇公众号文章\n7.看完爱野佩佩的文档",
     "tasks": [
       {
-        "text": "整理好物分享的场景图，至少 5 张模板图",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "看大众点评怎么写点评赚钱",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看数据标注员怎么做",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写2篇小红书笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
         "text": "运动1小时",
         "done": false,
         "cancelled": false,
@@ -87,13 +63,37 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
+        "text": "做3篇 IP 号笔记的配图，编辑到草稿箱",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理好物分享的场景图，至少 5 张模板图",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
         "text": "编辑定时2篇公众号文章",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看完爱野佩佩的文档",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.整理好物分享的场景图，至少 5 张模板图\n2.看大众点评怎么写点评赚钱\n3.看数据标注员怎么做\n4.写2篇小红书笔记\n5.运动1小时\n6.学英语1小时\n7.编辑定时2篇公众号文章"
+    "raw_tasks_text": "1.运动1小时\n2.学英语1小时\n3.做3篇 IP 号笔记的配图，编辑到草稿箱\n4.整理好物分享的场景图，至少 5 张模板图\n5.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）\n6.编辑定时2篇公众号文章\n7.看完爱野佩佩的文档"
   },
   "inspirations": {
     "items": [
