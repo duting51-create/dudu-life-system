@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "114. 和严艺家聊天｜为什么总爱上同一类人？有些心动只是熟悉的痛"
     },
     {
       "name": "头回当妈",
