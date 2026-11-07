@@ -1,99 +1,39 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-06T01:00:05.014Z",
-  "date": "2026-11-06",
+  "updated_at": "2026-11-07T01:00:04.973Z",
+  "date": "2026-11-07",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月6日",
+    "date": "11月7日",
     "items": [
       {
-        "text": "运动1小时",
+        "text": "实操不吃奶糕的AI带货视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学英语1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做3篇 IP 号笔记的配图，编辑到草稿箱",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理好物分享的场景图，至少 5 张模板图",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "编辑定时2篇公众号文章",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看完爱野佩佩的文档",
+        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.运动1小时\n2.学英语1小时\n3.做3篇 IP 号笔记的配图，编辑到草稿箱\n4.整理好物分享的场景图，至少 5 张模板图\n5.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）\n6.编辑定时2篇公众号文章\n7.看完爱野佩佩的文档",
+    "raw_text": "1.实操不吃奶糕的AI带货视频\n2.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
     "tasks": [
       {
-        "text": "运动1小时",
+        "text": "实操不吃奶糕的AI带货视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "学英语1小时",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做3篇 IP 号笔记的配图，编辑到草稿箱",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理好物分享的场景图，至少 5 张模板图",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "编辑定时2篇公众号文章",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看完爱野佩佩的文档",
+        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.运动1小时\n2.学英语1小时\n3.做3篇 IP 号笔记的配图，编辑到草稿箱\n4.整理好物分享的场景图，至少 5 张模板图\n5.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）\n6.编辑定时2篇公众号文章\n7.看完爱野佩佩的文档"
+    "raw_tasks_text": "1.实操不吃奶糕的AI带货视频\n2.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡"
   },
   "inspirations": {
     "items": [
@@ -332,7 +272,9 @@ window.DAILY_BOARD = {
       "task:买手机壳和洗衣液": true,
       "task:解决配图费时间的问题，调整做图风格，让文案变成主体，图片能包含更多文案。": true,
       "task:用一下黄油相机的【贴图】功能，压字的时候就可以用一块纯色透明边框": true,
-      "task:整理/处理一下可用的图片": true
+      "task:整理/处理一下可用的图片": true,
+      "task:分析我的账号价值和运营策略": true,
+      "task:帮杜爽爽解决职场小人问题": true
     }
   },
   "memos": {
