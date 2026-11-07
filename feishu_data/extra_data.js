@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "114. 和严艺家聊天｜为什么总爱上同一类人？有些心动只是熟悉的痛"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep102 哀悼如何撕裂关系，我们如何面对其中的冲突和疏远？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "你所浪费的今天，是昨日死去之人苦苦奢望的明天；你所厌恶的现在，是未来的你再也回不去的曾经。",
+  "source": "查理九世"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
