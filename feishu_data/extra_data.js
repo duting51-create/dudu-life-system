@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep102 哀悼如何撕裂关系，我们如何面对其中的冲突和疏远？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "竹外桃花三两枝，春江水暖鸭先知。",
+  "source": "惠崇春江晚景 / 惠崇春江晓景"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
