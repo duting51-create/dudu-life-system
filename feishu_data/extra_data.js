@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-07",
+  "updated": "2026-11-08",
   "list": [
     {
       "name": "嗨咻",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep102 哀悼如何撕裂关系，我们如何面对其中的冲突和疏远？"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-07",
+  "updated": "2026-11-08",
   "list": [
     {
       "name": "爽",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "竹外桃花三两枝，春江水暖鸭先知。",
-  "source": "惠崇春江晚景 / 惠崇春江晓景"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
