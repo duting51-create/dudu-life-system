@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人们宁愿去关心一个蹩脚电影演员的吃喝拉撒和鸡毛蒜皮，而不愿了解一个普通人波涛汹涌的内心世界。",
-  "source": "平凡的世界"
+  "content": "想带你去看电影，明天你就不是我女朋友了。",
+  "source": "撒哈拉的故事"
 };
 window.updated = {
   "name": "嗨咻",
