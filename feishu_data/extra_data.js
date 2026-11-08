@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "极霸矛，湘阿痕响啊。",
-  "source": "中华inm"
+  "content": "假如有人问我烦扰的缘故，我不敢说出你的名字。",
+  "source": "烦忧"
 };
 window.updated = {
   "name": "嗨咻",
