@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-08",
+  "updated": "2026-11-09",
   "list": [
     {
       "name": "嗨咻",
@@ -8,7 +8,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "头回当妈",
-      "latest": "106. 孩子的第一次搬家：爱上新家前，先陪他好好说再见"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "畅所育言",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "共读《无条件养育》：夸赞、惩罚、冷处理，都是在悄悄撤回「爱」| Vol.185"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-08",
+  "updated": "2026-11-09",
   "list": [
     {
       "name": "爽",
