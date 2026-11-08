@@ -1,39 +1,27 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-07T01:00:04.973Z",
-  "date": "2026-11-07",
+  "updated_at": "2026-11-08T01:00:32.190Z",
+  "date": "2026-11-08",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月7日",
+    "date": "11月8日",
     "items": [
       {
-        "text": "实操不吃奶糕的AI带货视频",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
+        "text": "看爱野佩佩的文档——100个一人生意案例",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.实操不吃奶糕的AI带货视频\n2.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
+    "raw_text": "1.看爱野佩佩的文档——100个一人生意案例",
     "tasks": [
       {
-        "text": "实操不吃奶糕的AI带货视频",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
+        "text": "看爱野佩佩的文档——100个一人生意案例",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.实操不吃奶糕的AI带货视频\n2.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡"
+    "raw_tasks_text": "1.看爱野佩佩的文档——100个一人生意案例"
   },
   "inspirations": {
     "items": [
