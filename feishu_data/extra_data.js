@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "假如有人问我烦扰的缘故，我不敢说出你的名字。",
-  "source": "烦忧"
+  "content": "You complete me !",
+  "source": "黑暗骑士"
 };
 window.updated = {
   "name": "嗨咻",
