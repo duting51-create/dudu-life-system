@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep102 哀悼如何撕裂关系，我们如何面对其中的冲突和疏远？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人们不能抗拒死亡，但人们却能选择死亡的方式，高贵或者卑贱，全在一念之间。",
-  "source": "紫川"
+  "content": "人们宁愿去关心一个蹩脚电影演员的吃喝拉撒和鸡毛蒜皮，而不愿了解一个普通人波涛汹涌的内心世界。",
+  "source": "平凡的世界"
 };
 window.updated = {
   "name": "嗨咻",
