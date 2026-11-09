@@ -1,27 +1,63 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-08T01:00:32.190Z",
-  "date": "2026-11-08",
+  "updated_at": "2026-11-09T01:00:30.797Z",
+  "date": "2026-11-09",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月8日",
+    "date": "11月9日",
     "items": [
       {
-        "text": "看爱野佩佩的文档——100个一人生意案例",
+        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "实操不吃奶糕的AI带货视频",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.看爱野佩佩的文档——100个一人生意案例",
+    "raw_text": "1.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡\n2.实操不吃奶糕的AI带货视频\n3.看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章\n4.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
     "tasks": [
       {
-        "text": "看爱野佩佩的文档——100个一人生意案例",
+        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "实操不吃奶糕的AI带货视频",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.看爱野佩佩的文档——100个一人生意案例"
+    "raw_tasks_text": "1.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡\n2.实操不吃奶糕的AI带货视频\n3.看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章\n4.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）"
   },
   "inspirations": {
     "items": [
@@ -279,7 +315,7 @@ window.DAILY_BOARD = {
       },
       {
         "date": "46317",
-        "text": "目前的账号三个选题方向-备孕情绪、备孕生活plog、情绪图鉴，再增加一个备孕干货，这个方向做爆款选题，用来涨粉",
+        "text": "目前母婴账号的7个选题方向——备孕心事（情绪关系）、备孕日常（生活 Plog）、情绪图鉴（ChatGPT出图）、互动笔记、备孕好物（产品向）、备孕攻略（干货内容）、月度复盘",
         "id": "memo_109_0"
       },
       {
