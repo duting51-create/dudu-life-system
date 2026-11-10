@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜真正的阶级壁垒，藏在学不会的松弛里"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "夜雨声烦以极其强硬的姿态，骑士般地护卫在了索克萨身前。",
-  "source": "全职高手"
+  "content": "All is well!",
+  "source": "三傻大闹宝莱坞"
 };
 window.updated = {
   "name": "嗨咻",
