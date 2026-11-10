@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "休对故人思故国，且将新火试新茶。诗酒趁年华。",
-  "source": "望江南·超然台作"
+  "content": "夜雨声烦以极其强硬的姿态，骑士般地护卫在了索克萨身前。",
+  "source": "全职高手"
 };
 window.updated = {
   "name": "嗨咻",
