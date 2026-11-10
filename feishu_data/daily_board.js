@@ -1,63 +1,13 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-09T01:00:30.797Z",
-  "date": "2026-11-09",
+  "updated_at": "2026-11-10T01:00:30.528Z",
+  "date": "2026-11-10",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月9日",
-    "items": [
-      {
-        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "实操不吃奶糕的AI带货视频",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_text": "1.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡\n2.实操不吃奶糕的AI带货视频\n3.看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章\n4.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
-    "tasks": [
-      {
-        "text": "做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "实操不吃奶糕的AI带货视频",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_tasks_text": "1.做备孕搭子的小程序试试看，这个其实是可以帮助大家来一起备孕互相监督打卡\n2.实操不吃奶糕的AI带货视频\n3.看Obsidian总结的微信读书笔记，是否可以作为选题或者其他用途，比如更新到棕熊姐姐的公众号文章\n4.用chatcut 自动剪辑随手 po好物视频（ok就可以继续录视频让AI剪辑）"
+    "date": "11月10日",
+    "items": [],
+    "raw_text": "",
+    "tasks": [],
+    "raw_tasks_text": ""
   },
   "inspirations": {
     "items": [
