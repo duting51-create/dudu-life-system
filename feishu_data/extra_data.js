@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "有些意外是意料之中，有些意外是意料之外，而你，就是我意料之外的意外。",
-  "source": "撒野"
+  "content": "真金未必闪亮，浪子未必迷途。",
+  "source": "魔戒"
 };
 window.updated = {
   "name": "嗨咻",
