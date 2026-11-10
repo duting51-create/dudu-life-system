@@ -1,26 +1,26 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-09",
+  "updated": "2026-11-10",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜真正的阶级壁垒，藏在学不会的松弛里"
     },
     {
       "name": "头回当妈",
-      "latest": "最新单集加载中…"
+      "latest": "107. 双11拔草大会: 养娃6年, 哪些真值得买, 哪些是智商税？"
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
     },
     {
       "name": "当个事儿",
-      "latest": "最新单集加载中…"
+      "latest": "共读《无条件养育》：夸赞、惩罚、冷处理，都是在悄悄撤回「爱」| Vol.185"
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-09",
+  "updated": "2026-11-10",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "有些意外是意料之中，有些意外是意料之外，而你，就是我意料之外的意外。",
+  "source": "撒野"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
