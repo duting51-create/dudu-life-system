@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "真金未必闪亮，浪子未必迷途。",
-  "source": "魔戒"
+  "content": "混乱本来是我们最害怕的，但我逐渐相信，这也可能是我们最想要的。",
+  "source": "生活成本"
 };
 window.updated = {
   "name": "嗨咻",
