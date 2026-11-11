@@ -1,6 +1,6 @@
 // 豆瓣观影清单（由 feishu_sync.py fetch_douban() 生成）
 window.DOUBAN_DATA = {
-  "updated": "2026-11-04",
+  "updated": "2026-11-11",
   "wish": [
     {
       "title": "戏梦巴黎",
@@ -340,6 +340,12 @@ window.DOUBAN_DATA = {
     }
   ],
   "collect": [
+    {
+      "title": "完美的日子",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35902857/"
+    },
     {
       "title": "好朋友们",
       "year": "",
@@ -693,12 +699,6 @@ window.DOUBAN_DATA = {
       "year": "",
       "rating": "",
       "link": "https://movie.douban.com/subject/1291868/"
-    },
-    {
-      "title": "达尔瓦",
-      "year": "",
-      "rating": "",
-      "link": "https://movie.douban.com/subject/35354592/"
     }
   ]
 };
