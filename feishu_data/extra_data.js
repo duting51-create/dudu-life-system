@@ -1,6 +1,6 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "list": [
     {
       "name": "嗨咻",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "共读《无条件养育》：夸赞、惩罚、冷处理，都是在悄悄撤回「爱」| Vol.185"
+      "latest": "阴道瓣（处女膜）到底有何意义？| 有点小事74"
     },
     {
       "name": "Alison Yu心理",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-10",
+  "updated": "2026-11-11",
   "list": [
     {
       "name": "爽",
