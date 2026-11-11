@@ -16,6 +16,7 @@ from io import StringIO
 from datetime import datetime, timedelta
 
 WORKSPACE = os.path.dirname(os.path.abspath(__file__))
+# 🔥 2026-11-11: 抓取范围由 125 行扩大到 500 行（每日安排表每日新增一行，125 已越界）
 
 # ── GitHub Gist 配置（用于数据-UI 分离：网站前端从 Gist 动态读取数据） ──
 GIST_ID = '7ac2c821c9a34056192c3fc598f6635a'
@@ -215,7 +216,7 @@ def fetch_today_tasks_and_memos():
         'lark-cli', 'sheets', '+csv-get',
         '--url', 'https://my.feishu.cn/sheets/TnOCsqGGVhgjRyt5Jj3cV9FFnhg',
         '--sheet-id', 'e7d0c4',
-        '--range', 'A1:G125'
+        '--range', 'A1:G500'
     ])
 
     # CSV 只返回文本，不包含删除线；单独读取 D 列富文本样式。
@@ -223,7 +224,7 @@ def fetch_today_tasks_and_memos():
         'lark-cli', 'sheets', '+cells-get',
         '--url', 'https://my.feishu.cn/sheets/TnOCsqGGVhgjRyt5Jj3cV9FFnhg',
         '--sheet-id', 'e7d0c4',
-        '--range', 'D2:D125',
+        '--range', 'D2:D500',
         '--include', 'value,style',
         '--max-chars', '500000'
     ])
@@ -362,7 +363,7 @@ def _read_strike_map():
                 'lark-cli', 'sheets', '+cells-get',
                 '--url', sheet_url,
                 '--sheet-id', sheet_id,
-                '--range', f'{col}1:{col}125',
+                '--range', f'{col}1:{col}500',
                 '--include', 'style',
                 '--format', 'json'
             ])
@@ -442,7 +443,7 @@ def _find_row_by_date(date_str):
         'lark-cli', 'sheets', '+cells-get',
         '--url', SHEET_URL,
         '--sheet-id', SHEET_ID,
-        '--range', 'A1:A125',
+        '--range', 'A1:A500',
         '--format', 'json'
     ])
     if not stdout:
@@ -527,7 +528,7 @@ def _read_strike_lines_map():
                 'lark-cli', 'sheets', '+cells-get',
                 '--url', SHEET_URL,
                 '--sheet-id', SHEET_ID,
-                '--range', f'{col}1:{col}125',
+                '--range', f'{col}1:{col}500',
                 '--include', 'style',
                 '--format', 'json'
             ])
@@ -671,7 +672,7 @@ def _find_cell_with_text(col, text):
         'lark-cli', 'sheets', '+cells-get',
         '--url', SHEET_URL,
         '--sheet-id', SHEET_ID,
-        '--range', f'{col}1:{col}125',
+        '--range', f'{col}1:{col}500',
         '--include', 'style',
         '--format', 'json'
     ])
@@ -718,7 +719,7 @@ def fetch_inspirations():
         'lark-cli', 'sheets', '+csv-get',
         '--url', 'https://my.feishu.cn/sheets/TnOCsqGGVhgjRyt5Jj3cV9FFnhg',
         '--sheet-id', 'e7d0c4',
-        '--range', 'A1:G125'
+        '--range', 'A1:G500'
     ])
 
     inspirations = {'items': [], 'last_updated': '', 'today_updated': False, 'done_map': {}}
