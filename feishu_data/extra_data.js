@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "纵有千古，横有八方；前途似海，来日方长。",
-  "source": "少年中国说"
+  "content": "曾记否，到中流击水，浪遏飞舟。",
+  "source": "沁园春.长沙"
 };
 window.updated = {
   "name": "嗨咻",
