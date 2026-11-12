@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "有志者，事竟成。",
-  "source": "后汉书·耿弇传"
+  "content": "纵有千古，横有八方；前途似海，来日方长。",
+  "source": "少年中国说"
 };
 window.updated = {
   "name": "嗨咻",
