@@ -38,7 +38,11 @@
     'dudu_mortgage_balance',
     'dudu_movies_wish',
     'dudu_movies_collect',
-    'dudu_deleted_feishu_text'
+    'dudu_deleted_feishu_text',
+    // 🔥 11/12 v2 小巴提醒：逐条分诊动作必须跨设备，否则手机处理完电脑又弹一遍
+    'dudu_reminder_item_actions',
+    'dudu_reminder_seen_date',
+    'dudu_reminder_dismiss_date'
   ];
   var SYNC_PREFIXES = ['exercise_checked_'];
   var pendingKeyPromise = null;
@@ -667,6 +671,33 @@
           return;
         }
 
+        if (key === 'dudu_reminder_item_actions') {
+          // 小巴提醒的逐条分诊（本次关掉 / 暂时搁置 / 永久放弃 / 撤销墓碑）。
+          // 绝不能走默认「本地整对象覆盖云端」：新设备本地是空对象，会把另一台
+          // 设备刚点的「永久放弃」全部冲掉。按指纹并集，冲突取 updatedAt 较新的一侧。
+          var cloudActs = (cloudValue && typeof cloudValue === 'object' && !Array.isArray(cloudValue)) ? cloudValue : {};
+          var localActs = (localValue && typeof localValue === 'object' && !Array.isArray(localValue)) ? localValue : {};
+          var actKeys = {};
+          Object.keys(cloudActs).concat(Object.keys(localActs)).forEach(function (k) { actKeys[k] = true; });
+          var mergedActs = {};
+          Object.keys(actKeys).forEach(function (k) {
+            var cv = cloudActs[k], lv = localActs[k];
+            if (cv && typeof cv === 'object' && lv && typeof lv === 'object') {
+              mergedActs[k] = Number(lv.updatedAt || 0) >= Number(cv.updatedAt || 0) ? lv : cv;
+            } else {
+              mergedActs[k] = lv || cv;
+            }
+          });
+          merged[key] = mergedActs;
+          return;
+        }
+
+        if (key === 'dudu_reminder_seen_date' || key === 'dudu_reminder_dismiss_date') {
+          // 按天标量：取较新的日期，避免本地昨天的值把云端今天的静音顶掉
+          merged[key] = String(cloudValue || '') >= String(localValue || '') ? cloudValue : localValue;
+          return;
+        }
+
         if (key === 'dudu_movies_wish' || key === 'dudu_movies_collect') {
           var norm = function (t) { return String(t || '').replace(/\s+/g, '').toLowerCase(); };
           // 过滤空标题与 UTF-8 误读乱码（Ã/Â/�/C1 控制字符等）
@@ -930,6 +961,16 @@
       try { if (typeof renderSleep === 'function') renderSleep(); } catch (error) {}
       try { if (typeof window.renderMonthlyGoals === 'function') window.renderMonthlyGoals(); } catch (error) {}
       try { if (typeof window.renderDashboard === 'function') window.renderDashboard(); } catch (error) {}
+      // 云端合并后提醒角标要跟着变（另一次跨设备点的「永久放弃」此刻才落到本地）
+      try {
+        if (window.DuduReminder && typeof window.DuduReminder.refresh === 'function') {
+          window.DuduReminder.refresh();
+        } else {
+          setTimeout(function () {
+            try { if (window.DuduReminder) window.DuduReminder.refresh(); } catch (e) {}
+          }, 1500);
+        }
+      } catch (error) {}
     }
   };
 
