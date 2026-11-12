@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "世界上只有一种英雄主义,就是看清生活的真相之后依然热爱生活。",
-  "source": "名人名言"
+  "content": "春风得意马蹄疾，一日看尽长安花。",
+  "source": "登科后"
 };
 window.updated = {
   "name": "嗨咻",
