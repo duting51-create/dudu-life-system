@@ -43,20 +43,20 @@ window.MORTGAGE_DATA = {
   "anchor_date": "2026-08-01"
 };
 window.INVEST_DATA = {
-  "updated": "2026-09-17",
+  "updated": "2026-11-12",
   "gold": false,
   "accounts": [
     {
       "name": "股票账户杜",
       "total": 380956.03,
-      "today": -2958.0,
-      "hold": -54372.61
+      "today": -7150.0,
+      "hold": -71531.0
     },
     {
       "name": "股票账户赵",
       "total": 429811.7,
-      "today": -3922.0,
-      "hold": -46971.19
+      "today": -10350.0,
+      "hold": -12163.28
     }
   ]
 };
