@@ -1,5 +1,7 @@
 const FEISHU_API = "https://open.feishu.cn/open-apis";
-const SHEET_RANGE = "A1:G125";
+// 🔥 11/12: 表格每天新增一行，6/19 起算到 11/10 恰好第 125 行；11/11 起新行
+// 被原 A1:G125 截断 → findTodayRow 抛错、/api/inspirations 报错、daily_board 停更。
+const SHEET_RANGE = "A1:G500";
 const STATE_KEY = "dudu-user-state";
 const MAX_STATE_BYTES = 100 * 1024;
 
@@ -649,6 +651,16 @@ function parseTasksJs(value) {
 
 // 把日期单元格归一化为「M月D日」（与 feishu_sync 的 clean_date 输出格式一致）
 function cleanDateJs(value) {
+  // 🔥 11/12: 飞书 Sheets v2 API 对「日期格式」单元格返回 Excel 序列号（如 46232），
+  // 之前直接 cellText 得到 "46232"，导致 daily_board.js 里的 date 全是序列号、
+  // 前端 isToday 匹配全部失败。这里按 1899-12-30 基准还原成真实日历日。
+  if (typeof value === "number" || (typeof value === "string" && /^\d{5}$/.test(value.trim()))) {
+    const serial = Number(value);
+    if (Number.isFinite(serial) && serial > 20000 && serial < 80000) {
+      const d = new Date(Date.UTC(1899, 11, 30 + Math.trunc(serial)));
+      return `${d.getUTCMonth() + 1}月${d.getUTCDate()}日`;
+    }
+  }
   const text = cellText(value);
   let m = text.match(/(\d{1,2})月(\d{1,2})[日号]?/);
   if (m) return `${Number(m[1])}月${Number(m[2])}日`;
@@ -689,9 +701,11 @@ function buildInspirationsJs(rows, today) {
 
     items.push({ date: dateStr, inspiration, harvest, task, mood });
   }
+  // 🔥 11/12: 原 slice(0,30) 取最旧 30 条，新行累积后被挤掉；改为取最近 60 条，
+  // 与主脚本 feishu_sync.py 的 [-60:] 保持一致。
   return {
-    items: items.slice(0, 30),
-    last_updated: items.length ? items[0].date : "",
+    items: items.slice(-60),
+    last_updated: items.length ? items[items.length - 1].date : "",
     today_updated: items.some((it) => it.date === todayStr),
     done_map,
   };
