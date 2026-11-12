@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -43,20 +43,20 @@ window.MORTGAGE_DATA = {
   "anchor_date": "2026-08-01"
 };
 window.INVEST_DATA = {
-  "updated": "2026-11-12",
+  "updated": "2026-09-17",
   "gold": false,
   "accounts": [
     {
       "name": "股票账户杜",
       "total": 380956.03,
-      "today": -7150.0,
-      "hold": -71531.0
+      "today": -2958.0,
+      "hold": -54372.61
     },
     {
       "name": "股票账户赵",
       "total": 429811.7,
-      "today": -10350.0,
-      "hold": -12163.28
+      "today": -3922.0,
+      "hold": -46971.19
     }
   ]
 };
