@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "因为不可能，所以才值得相信。",
-  "source": "浮士德"
+  "content": "长恨此身非我有，何时忘却营营。",
+  "source": "临江仙·夜饮东坡醒复醉"
 };
 window.updated = {
   "name": "嗨咻",
