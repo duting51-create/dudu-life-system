@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人生就像一块画布，由自己来勾勒出美丽的画笔，充实自己的生命，相信自己的颜色最鲜艳。",
-  "source": "我的治愈系游戏"
+  "content": "因为不可能，所以才值得相信。",
+  "source": "浮士德"
 };
 window.updated = {
   "name": "嗨咻",
