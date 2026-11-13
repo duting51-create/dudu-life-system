@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261113-1130" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261113-1130" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261113-1223" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261113-1223" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2271,44 +2271,52 @@
       <div class="section-header reveal">
         <span class="section-number">👩‍💼 07</span>
         <h2 class="section-title">一人公司 · 经营仪表盘</h2>
-        <p class="section-sub">数据来源：飞书多维表格 · 已发布笔记实时统计</p>
+        <p class="section-sub">数据来源：飞书多维表格 · IP 号笔记自 2026/8/6 起统计</p>
       </div>
       <div class="stat-cards reveal">
         <div class="stat-card green">
           <div class="stat-card-icon">💰</div>
-          <div class="stat-card-num green" id="biz-revenue">¥179</div>
-          <div class="stat-card-label">总营收</div>
-          <div class="stat-card-sub">孕期知识库 + 恢复指南</div>
+          <div class="stat-card-num green" id="biz-revenue">¥310</div>
+          <div class="stat-card-label">虚拟电商总营收</div>
+          <div class="stat-card-sub">已收官 · 累计</div>
         </div>
         <div class="stat-card pink">
-          <div class="stat-card-icon">📦</div>
-          <div class="stat-card-num pink" id="biz-orders">9</div>
-          <div class="stat-card-label">总订单数</div>
-          <div class="stat-card-sub">起步阶段 · 持续增长中</div>
+          <div class="stat-card-icon">📒</div>
+          <div class="stat-card-num pink" id="biz-ip-notes">50</div>
+          <div class="stat-card-label">母婴自媒体笔记</div>
+          <div class="stat-card-sub">IP 号 · 8/6 起</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card-icon">🧠</div>
-          <div class="stat-card-num purple">2</div>
-          <div class="stat-card-label">在售产品</div>
-          <div class="stat-card-sub">孕期知识库 · 恢复指南</div>
+          <div class="stat-card-icon">🌱</div>
+          <div class="stat-card-num purple" id="biz-self-revenue">¥0</div>
+          <div class="stat-card-label">自媒体变现</div>
+          <div class="stat-card-sub">暂未变现 · 记录中</div>
         </div>
         <div class="stat-card yellow">
-          <div class="stat-card-icon">📒</div>
-          <div class="stat-card-num yellow" id="biz-notes">101</div>
-          <div class="stat-card-label">已发布笔记</div>
-          <div class="stat-card-sub">小红书选题库统计</div>
+          <div class="stat-card-icon">🧭</div>
+          <div class="stat-card-num yellow">—</div>
+          <div class="stat-card-label">其他尝试</div>
+          <div class="stat-card-sub">还未开始</div>
         </div>
       </div>
       <div class="card-grid-2 reveal">
         <div class="product-rank">
-          <h4>🏆 产品销量排名</h4>
-          <div class="rank-item"><span class="rank-pos gold">1</span><span class="rank-name">孕期安心知识库</span><span class="rank-sales">¥39.9</span></div>
-          <div class="rank-item"><span class="rank-pos silver">2</span><span class="rank-name">产后恢复指南</span><span class="rank-sales">¥9.9</span></div>
+          <h4>🏆 收入来源排名</h4>
+          <div id="biz-revenue-sources">
+            <div class="rank-item"><span class="rank-pos gold">1</span><span class="rank-name">小红书虚拟电商<small style="display:block;color:var(--ink-faint);font-size:.68rem;margin-top:2px;">已收官 · 累计</small></span><span class="rank-sales">¥310</span></div>
+            <div class="rank-item"><span class="rank-pos silver">2</span><span class="rank-name">母婴自媒体<small style="display:block;color:var(--ink-faint);font-size:.68rem;margin-top:2px;">尚未变现</small></span><span class="rank-sales">¥0</span></div>
+            <div class="rank-item"><span class="rank-pos bronze">3</span><span class="rank-name">其他尝试<small style="display:block;color:var(--ink-faint);font-size:.68rem;margin-top:2px;">还未开始</small></span><span class="rank-sales">¥0</span></div>
+          </div>
         </div>
         <div class="bar-chart">
-          <h4>📈 周营收趋势</h4>
-          <div class="bars" id="biz-revenue-bars">
-            <!-- Dynamically populated -->
+          <h4>📈 IP 号笔记周更数量</h4>
+          <div class="bars" id="biz-ip-bars">
+            <div class="bar-col"><span class="bar-val">1 篇</span><div class="bar-fill purple" style="height:16px;"></div><span class="bar-label">10/5</span></div>
+            <div class="bar-col"><span class="bar-val">3 篇</span><div class="bar-fill purple" style="height:48px;"></div><span class="bar-label">10/12</span></div>
+            <div class="bar-col"><span class="bar-val">4 篇</span><div class="bar-fill purple" style="height:64px;"></div><span class="bar-label">10/19</span></div>
+            <div class="bar-col"><span class="bar-val">5 篇</span><div class="bar-fill pink" style="height:80px;"></div><span class="bar-label">10/26</span></div>
+            <div class="bar-col"><span class="bar-val">5 篇</span><div class="bar-fill pink" style="height:80px;"></div><span class="bar-label">11/2</span></div>
+            <div class="bar-col"><span class="bar-val">3 篇</span><div class="bar-fill green" style="height:48px;"></div><span class="bar-label">11/9</span></div>
           </div>
         </div>
       </div>
@@ -2481,10 +2489,10 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20261113-1130" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20261113-1130" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20261113-1130" defer></script>
-  <script src="reminder.js?v=remind-20261113-1130" defer></script>
+  <script src="cloud-sync.js?v=sync-20261113-1223" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20261113-1223" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20261113-1223" defer></script>
+  <script src="reminder.js?v=remind-20261113-1223" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -4107,33 +4115,46 @@
     function renderOneCompany() {
       const data = window.ONE_COMPANY_DATA || {};
       if (!Object.keys(data).length) return;
+      const setText = (id, value) => {
+        if (value === undefined || value === null) return;
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
 
-      // Update section stats
-      if (data.total_revenue) document.getElementById('biz-revenue').textContent = data.total_revenue;
-      if (data.total_orders) document.getElementById('biz-orders').textContent = data.total_orders;
-      if (data.total_published_notes !== undefined) document.getElementById('biz-notes').textContent = data.total_published_notes;
+      // 4 张卡：虚拟电商营收（已收官）/ IP 号笔记 / 自媒体变现 / 其他尝试
+      setText('biz-revenue', data.ecommerce_revenue || data.total_revenue);
+      setText('biz-ip-notes', data.ip_notes_total);
+      setText('biz-self-revenue', data.self_media_revenue);
+      // 首页概览继续显示总营收与历史订单
+      setText('hero-revenue', data.ecommerce_revenue || data.total_revenue);
+      setText('hero-orders', data.total_orders);
 
-      // Update hero stats too
-      if (data.total_orders) document.getElementById('hero-orders').textContent = data.total_orders;
-      if (data.total_revenue) document.getElementById('hero-revenue').textContent = data.total_revenue;
+      // 收入来源排名
+      const srcBox = document.getElementById('biz-revenue-sources');
+      if (srcBox && Array.isArray(data.revenue_sources) && data.revenue_sources.length) {
+        srcBox.innerHTML = data.revenue_sources.map((s, i) => {
+          const pos = ['gold', 'silver', 'bronze'][i] || 'bronze';
+          const note = s.note
+            ? `<small style="display:block;color:var(--ink-faint);font-size:.68rem;margin-top:2px;">${s.note}</small>`
+            : '';
+          return `<div class="rank-item"><span class="rank-pos ${pos}">${i + 1}</span>` +
+            `<span class="rank-name">${s.name}${note}</span>` +
+            `<span class="rank-sales">${s.amount}</span></div>`;
+        }).join('');
+      }
 
-      // Render revenue bars
-      const barsContainer = document.getElementById('biz-revenue-bars');
-      const revenueTrend = (Array.isArray(data.weekly_revenue) && data.weekly_revenue.length)
-        ? data.weekly_revenue
-        : (Array.isArray(data.monthly_revenue) ? data.monthly_revenue : []);
-      if (barsContainer && revenueTrend.length) {
-        const maxRev = Math.max(...revenueTrend.map(item => Number(item.revenue) || 0), 1);
+      // IP 号笔记周更数量（最近 6 周）
+      const bars = document.getElementById('biz-ip-bars');
+      const weekly = Array.isArray(data.ip_weekly) ? data.ip_weekly : [];
+      if (bars && weekly.length) {
+        const max = Math.max(...weekly.map(x => Number(x.count) || 0), 1);
         const colors = ['purple', 'purple', 'purple', 'pink', 'pink', 'green', 'yellow'];
-        barsContainer.innerHTML = revenueTrend.map((item, i) => {
-          const revenue = Number(item.revenue) || 0;
-          const label = item.label || item.week || item.month || '';
-          const h = Math.max(3, (revenue / maxRev) * 80);
-          return `<div class="bar-col">
-            <span class="bar-val">¥${revenue}</span>
-            <div class="bar-fill ${colors[i % colors.length]}" style="height:${h}px;"></div>
-            <span class="bar-label">${label}</span>
-          </div>`;
+        bars.innerHTML = weekly.map((x, i) => {
+          const n = Number(x.count) || 0;
+          const h = Math.max(3, (n / max) * 80);
+          return `<div class="bar-col"><span class="bar-val">${n} 篇</span>` +
+            `<div class="bar-fill ${colors[i % colors.length]}" style="height:${h}px;"></div>` +
+            `<span class="bar-label">${x.label || ''}</span></div>`;
         }).join('');
       }
     }
