@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "内心湛然，则无往而不乐。",
-  "source": "人生不过如此"
+  "content": "人生就像一块画布，由自己来勾勒出美丽的画笔，充实自己的生命，相信自己的颜色最鲜艳。",
+  "source": "我的治愈系游戏"
 };
 window.updated = {
   "name": "嗨咻",
