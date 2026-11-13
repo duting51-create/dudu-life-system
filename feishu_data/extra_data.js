@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "必须在敌军还分散的时候，出其不意地袭击他们。",
-  "source": "弗拉基米尔·伊里奇·列宁"
+  "content": "人类把最精密的保密系统，都用在了自我毁灭上。",
+  "source": "流浪地球2"
 };
 window.updated = {
   "name": "嗨咻",
