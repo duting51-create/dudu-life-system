@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -16,7 +16,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "当个事儿",
-      "latest": "阴道瓣（处女膜）到底有何意义？| 有点小事74"
+      "latest": "女性财产权：一场千年的「牺牲」与「交换」| Vol.186"
     },
     {
       "name": "Alison Yu心理",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "馀情渺渺，茂林觞咏如今悄。",
-  "source": "南浦·春水"
+  "content": "内心湛然，则无往而不乐。",
+  "source": "人生不过如此"
 };
 window.updated = {
   "name": "嗨咻",
