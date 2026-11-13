@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人类把最精密的保密系统，都用在了自我毁灭上。",
-  "source": "流浪地球2"
+  "content": "停留是刹那，转身即天涯。",
+  "source": "你若安好 便是晴天"
 };
 window.updated = {
   "name": "嗨咻",
