@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "118 杀鱼、月经、膝内扣、练半马：一些鸡毛蒜皮，一些人生顿悟"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "停留是刹那，转身即天涯。",
-  "source": "你若安好 便是晴天"
+  "content": "馀情渺渺，茂林觞咏如今悄。",
+  "source": "南浦·春水"
 };
 window.updated = {
   "name": "嗨咻",
