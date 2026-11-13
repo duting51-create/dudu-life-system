@@ -1,24 +1,42 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-12T03:31:36.059Z",
-  "date": "2026-11-12",
+  "updated_at": "2026-11-13T01:00:44.077Z",
+  "date": "2026-11-13",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月12日",
+    "date": "11月13日",
     "items": [
       {
-        "text": "实操不吃奶糕的AI带货视频",
+        "text": "写3条随手po脚本",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做好4篇IP号的笔记配图",
+        "text": "拍3条随后po视频（待定）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "投喂爱野佩佩的文章给ChatGPT、WorkBuddy、DeepSeek做分析",
+        "text": "回听许天写作课",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看1688货源和选供货商的原则",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理一个小红书实体电商文档，随时记录问题",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "小红书实体电商的选品策略、一件代发地址问题",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -30,28 +48,46 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "听写作课",
+        "text": "实操不吃奶糕的AI带货视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.实操不吃奶糕的AI带货视频\n2.做好4篇IP号的笔记配图\n3.投喂爱野佩佩的文章给ChatGPT、WorkBuddy、DeepSeek做分析\n4.回看爱野佩佩的引流课程\n5.听写作课",
+    "raw_text": "1.写3条随手po脚本\n2.拍3条随后po视频（待定）\n3.回听许天写作课\n4.看1688货源和选供货商的原则\n5.整理一个小红书实体电商文档，随时记录问题\n6.小红书实体电商的选品策略、一件代发地址问题\n7.回看爱野佩佩的引流课程\n8.实操不吃奶糕的AI带货视频",
     "tasks": [
       {
-        "text": "实操不吃奶糕的AI带货视频",
+        "text": "写3条随手po脚本",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做好4篇IP号的笔记配图",
+        "text": "拍3条随后po视频（待定）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "投喂爱野佩佩的文章给ChatGPT、WorkBuddy、DeepSeek做分析",
+        "text": "回听许天写作课",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看1688货源和选供货商的原则",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理一个小红书实体电商文档，随时记录问题",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "小红书实体电商的选品策略、一件代发地址问题",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -63,13 +99,13 @@ window.DAILY_BOARD = {
         "priority": "low"
       },
       {
-        "text": "听写作课",
+        "text": "实操不吃奶糕的AI带货视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.实操不吃奶糕的AI带货视频\n2.做好4篇IP号的笔记配图\n3.投喂爱野佩佩的文章给ChatGPT、WorkBuddy、DeepSeek做分析\n4.回看爱野佩佩的引流课程\n5.听写作课"
+    "raw_tasks_text": "1.写3条随手po脚本\n2.拍3条随后po视频（待定）\n3.回听许天写作课\n4.看1688货源和选供货商的原则\n5.整理一个小红书实体电商文档，随时记录问题\n6.小红书实体电商的选品策略、一件代发地址问题\n7.回看爱野佩佩的引流课程\n8.实操不吃奶糕的AI带货视频"
   },
   "inspirations": {
     "items": [
@@ -495,7 +531,7 @@ window.DAILY_BOARD = {
       }
     ],
     "last_updated": "11月12日",
-    "today_updated": true,
+    "today_updated": false,
     "done_map": {
       "inspiration:ima 知识库，一个共享知识库里的内容，是否可以部分开放？比如有人买读书笔记，我就只开放这几个文件夹📂，有人买产后恢复运动，我就开放相应的文件——不能隐藏文件夹，只能隐藏单个文件": true,
       "inspiration:3️⃣自己制作一套提示词/skills，这个要实操一下": true,
