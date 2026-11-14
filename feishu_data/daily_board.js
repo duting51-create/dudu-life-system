@@ -1,111 +1,51 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-13T01:00:44.077Z",
-  "date": "2026-11-13",
+  "updated_at": "2026-11-14T01:00:44.095Z",
+  "date": "2026-11-14",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月13日",
+    "date": "11月14日",
     "items": [
       {
-        "text": "写3条随手po脚本",
+        "text": "看球赛",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍3条随后po视频（待定）",
+        "text": "去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "回听许天写作课",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看1688货源和选供货商的原则",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理一个小红书实体电商文档，随时记录问题",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "小红书实体电商的选品策略、一件代发地址问题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "回看爱野佩佩的引流课程",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "实操不吃奶糕的AI带货视频",
+        "text": "赏秋",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.写3条随手po脚本\n2.拍3条随后po视频（待定）\n3.回听许天写作课\n4.看1688货源和选供货商的原则\n5.整理一个小红书实体电商文档，随时记录问题\n6.小红书实体电商的选品策略、一件代发地址问题\n7.回看爱野佩佩的引流课程\n8.实操不吃奶糕的AI带货视频",
+    "raw_text": "1.看球赛\n2.去医院\n3.赏秋",
     "tasks": [
       {
-        "text": "写3条随手po脚本",
+        "text": "看球赛",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "拍3条随后po视频（待定）",
+        "text": "去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "回听许天写作课",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看1688货源和选供货商的原则",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理一个小红书实体电商文档，随时记录问题",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "小红书实体电商的选品策略、一件代发地址问题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "回看爱野佩佩的引流课程",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "实操不吃奶糕的AI带货视频",
+        "text": "赏秋",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.写3条随手po脚本\n2.拍3条随后po视频（待定）\n3.回听许天写作课\n4.看1688货源和选供货商的原则\n5.整理一个小红书实体电商文档，随时记录问题\n6.小红书实体电商的选品策略、一件代发地址问题\n7.回看爱野佩佩的引流课程\n8.实操不吃奶糕的AI带货视频"
+    "raw_tasks_text": "1.看球赛\n2.去医院\n3.赏秋"
   },
   "inspirations": {
     "items": [
@@ -526,7 +466,7 @@ window.DAILY_BOARD = {
         "date": "11月12日",
         "inspiration": "",
         "harvest": "",
-        "task": "AI博主讲干货时的小头用的什么软件？\n是否可以做一些小产品，做个人售卖，参考那个做日记模板的博主？\n要不要买那个158的实物电商文档呢？\n深度思考一下到底是做好物图文、随手po、AI图文带货还是实体电商，选定一个方向去尝试，这样是最好的！",
+        "task": "1.AI博主讲干货时的小头用的什么软件？——cap、screenstudio\n2.是否可以做一些小产品，做个人售卖，参考那个做日记模板的博主？\n3.要不要买那个158的实物电商文档呢？——暂时不买后面再说\n4.深度思考一下到底是做好物图文、随手po、AI图文带货还是实体电商，选定一个方向去尝试，这样是最好的！——AI自媒体和随手po",
         "mood": ""
       }
     ],
@@ -556,7 +496,8 @@ window.DAILY_BOARD = {
       "task:用一下黄油相机的【贴图】功能，压字的时候就可以用一块纯色透明边框": true,
       "task:整理/处理一下可用的图片": true,
       "task:分析我的账号价值和运营策略": true,
-      "task:帮杜爽爽解决职场小人问题": true
+      "task:帮杜爽爽解决职场小人问题": true,
+      "task:是否可以做一些小产品，做个人售卖，参考那个做日记模板的博主？": true
     }
   },
   "memos": {
