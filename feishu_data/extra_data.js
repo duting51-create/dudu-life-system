@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "云母屏风烛影深，长河渐落晓星沉。",
-  "source": "嫦娥"
+  "content": "喜欢上你，是良性的破窗效应。",
+  "source": "原创"
 };
 window.updated = {
   "name": "嗨咻",
