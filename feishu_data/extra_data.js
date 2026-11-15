@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们的情人，不过是随便借个名字，用幻想吹出来的肥皂泡。",
-  "source": "大鼻子情圣"
+  "content": "别问我的心里有没有你，我余光中都是你。",
+  "source": "乡愁"
 };
 window.updated = {
   "name": "嗨咻",
