@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "什么叫正义，正义就是那些赢家所说的冠冕堂皇的话，如果你是个输家，就没什么正义！",
+  "source": "铠甲勇士"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
