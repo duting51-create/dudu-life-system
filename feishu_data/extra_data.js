@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "银烛秋光冷画屏，轻罗小扇扑流萤。",
-  "source": "秋夕"
+  "content": "知识改变命运，可是没有告诉她，什么样的命运才算好。",
+  "source": "这么多年"
 };
 window.updated = {
   "name": "嗨咻",
