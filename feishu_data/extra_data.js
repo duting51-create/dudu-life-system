@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "休对故人思故国，且将新火试新茶。诗酒趁年华。",
-  "source": "望江南·超然台作"
+  "content": "那意识是什么呢？是权宜之计，躲闪托词，脱困之法，虚晃一枪，所谓（只是“所谓”！）的最高上诉法庭。",
+  "source": "恕不侍奉"
 };
 window.updated = {
   "name": "嗨咻",
