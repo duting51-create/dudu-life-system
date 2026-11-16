@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "流出的血无法收回，倒下的人无法重生，恶魔即使放下手中的利刃，泣血般忏悔着，依然得不到上帝的宽恕。",
-  "source": "查理九世-海龟岛狩猎者"
+  "content": "死亡是所有人的共同幸福。",
+  "source": "最不幸的人"
 };
 window.updated = {
   "name": "嗨咻",
