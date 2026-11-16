@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "多情却被无情恼，今夜还如昨夜长。",
-  "source": "鹧鸪天·候馆灯昏雨送凉"
+  "content": "不敢言提笔出砚，倚马千言。亦必愿衣袂胜仙，惊才绝艳。",
+  "source": "转竹林深处残碑小筑"
 };
 window.updated = {
   "name": "嗨咻",
