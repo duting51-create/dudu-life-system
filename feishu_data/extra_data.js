@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "不敢言提笔出砚，倚马千言。亦必愿衣袂胜仙，惊才绝艳。",
-  "source": "转竹林深处残碑小筑"
+  "content": "与人和者，谓之人乐；与天和者，谓之天乐。",
+  "source": "庄子·天道"
 };
 window.updated = {
   "name": "嗨咻",
