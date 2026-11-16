@@ -1,14 +1,14 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
-      "latest": "107. 双11拔草大会: 养娃6年, 哪些真值得买, 哪些是智商税？"
+      "latest": "108.当年逃补习班的我，现在逃得过“鸡娃”吗？"
     },
     {
       "name": "畅所育言",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep103 | 复杂性哀悼：当一段关系留下未愈合的伤口"
+      "latest": "ep104 | 我们付出那么多的爱，为何没能抵达对方？"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "“你最可爱”，我说时来不及思索，而思索之后，还是这样说。",
+  "source": "你多么可爱"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
