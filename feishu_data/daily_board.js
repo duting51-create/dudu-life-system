@@ -1,51 +1,63 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-14T01:00:44.095Z",
-  "date": "2026-11-14",
+  "updated_at": "2026-11-16T01:00:45.206Z",
+  "date": "2026-11-16",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月14日",
+    "date": "11月16日",
     "items": [
       {
-        "text": "看球赛",
+        "text": "调研AI博主，看内容形式和选题，下载她们的爆款视频，投喂给AI",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "去医院",
+        "text": "3篇随手po脚本+拍摄3篇视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "赏秋",
+        "text": "确定好我的AI选题",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写第1篇 AI口播视频（新账号）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.看球赛\n2.去医院\n3.赏秋",
+    "raw_text": "1.调研AI博主，看内容形式和选题，下载她们的爆款视频，投喂给AI\n2.3篇随手po脚本+拍摄3篇视频\n3.确定好我的AI选题\n4.写第1篇 AI口播视频（新账号）",
     "tasks": [
       {
-        "text": "看球赛",
+        "text": "调研AI博主，看内容形式和选题，下载她们的爆款视频，投喂给AI",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "去医院",
+        "text": "3篇随手po脚本+拍摄3篇视频",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "赏秋",
+        "text": "确定好我的AI选题",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写第1篇 AI口播视频（新账号）",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.看球赛\n2.去医院\n3.赏秋"
+    "raw_tasks_text": "1.调研AI博主，看内容形式和选题，下载她们的爆款视频，投喂给AI\n2.3篇随手po脚本+拍摄3篇视频\n3.确定好我的AI选题\n4.写第1篇 AI口播视频（新账号）"
   },
   "inspirations": {
     "items": [
