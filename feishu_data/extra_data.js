@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "知识改变命运，可是没有告诉她，什么样的命运才算好。",
-  "source": "这么多年"
+  "content": "平生不会相思，才会相思，便害相思。",
+  "source": "折桂令·春情"
 };
 window.updated = {
   "name": "嗨咻",
