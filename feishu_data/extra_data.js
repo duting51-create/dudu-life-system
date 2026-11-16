@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "总有一天你会笑着说出曾经令你痛苦的事情。",
-  "source": "肖申克的救赎"
+  "content": "银烛秋光冷画屏，轻罗小扇扑流萤。",
+  "source": "秋夕"
 };
 window.updated = {
   "name": "嗨咻",
