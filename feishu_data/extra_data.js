@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "“你最可爱”，我说时来不及思索，而思索之后，还是这样说。",
-  "source": "你多么可爱"
+  "content": "总有一天你会笑着说出曾经令你痛苦的事情。",
+  "source": "肖申克的救赎"
 };
 window.updated = {
   "name": "嗨咻",
