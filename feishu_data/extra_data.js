@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "死亡是所有人的共同幸福。",
-  "source": "最不幸的人"
+  "content": "休对故人思故国，且将新火试新茶。诗酒趁年华。",
+  "source": "望江南·超然台作"
 };
 window.updated = {
   "name": "嗨咻",
