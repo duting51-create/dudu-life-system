@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "隔岸无旧情，姑苏有钟声。",
-  "source": "地尽头"
+  "content": "隔着人潮呼救像只困兽，呼吸颤抖去泪流，去相拥。",
+  "source": "不痛"
 };
 window.updated = {
   "name": "嗨咻",
