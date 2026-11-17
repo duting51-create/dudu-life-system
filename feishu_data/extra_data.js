@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "世间情动，不过盛夏白瓷梅子汤，碎冰碰壁当啷响。",
-  "source": "穆玄英挂帅"
+  "content": "卧看满天云不动，不知云与我俱东。",
+  "source": "襄邑道中"
 };
 window.updated = {
   "name": "嗨咻",
