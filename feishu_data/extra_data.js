@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "隔着人潮呼救像只困兽，呼吸颤抖去泪流，去相拥。",
-  "source": "不痛"
+  "content": "天堂不过是轻信和胆小之人的幻想，我可以给你地图，索引地狱的所在。",
+  "source": "神探夏洛克"
 };
 window.updated = {
   "name": "嗨咻",
