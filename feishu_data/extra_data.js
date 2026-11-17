@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "没有值不值得，只有愿不愿意。",
-  "source": "择天记"
+  "content": "就像是一场华尔街的阴谋，透露着优雅的杀戮。",
+  "source": "神探夏洛克"
 };
 window.updated = {
   "name": "嗨咻",
