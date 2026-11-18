@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep104 | 我们付出那么多的爱，为何没能抵达对方？"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "所谓的时间，是不为人的意愿而转移的事物，最是残酷，又最是公平。",
-  "source": "诸神眷恋与遗忘的幻想乡"
+  "content": "世界上只有一种英雄主义,就是看清生活的真相之后依然热爱生活。",
+  "source": "名人名言"
 };
 window.updated = {
   "name": "嗨咻",
