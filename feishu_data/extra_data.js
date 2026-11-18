@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "讨厌你和别人说话，讨厌你对别人笑。",
-  "source": "请和这样的我恋爱吧(17秒片段)"
+  "content": "所谓的时间，是不为人的意愿而转移的事物，最是残酷，又最是公平。",
+  "source": "诸神眷恋与遗忘的幻想乡"
 };
 window.updated = {
   "name": "嗨咻",
