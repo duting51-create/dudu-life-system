@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "May the force be with you.",
-  "source": "星球大战"
+  "content": "慎终如始，则无败事。",
+  "source": "道德经"
 };
 window.updated = {
   "name": "嗨咻",
