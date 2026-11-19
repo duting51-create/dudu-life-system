@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "远望如梯步步高，身临谷底进岩槽。",
-  "source": "过三峡五级船闸"
+  "content": "黑色世界唯有东方的曙光。",
+  "source": "Bilibili"
 };
 window.updated = {
   "name": "嗨咻",
