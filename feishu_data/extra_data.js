@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "爸爸我也不是一生下来就是爸爸，爸爸也是头一次当爸爸。",
-  "source": "请回答1988"
+  "content": "May the force be with you.",
+  "source": "星球大战"
 };
 window.updated = {
   "name": "嗨咻",
