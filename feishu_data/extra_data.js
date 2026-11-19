@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "顺为凡，逆为仙，只在中间颠倒颠。",
-  "source": "无根树"
+  "content": "方寸之间，深不见底啊。",
+  "source": "三体"
 };
 window.updated = {
   "name": "嗨咻",
