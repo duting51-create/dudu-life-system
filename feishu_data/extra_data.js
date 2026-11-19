@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "如果一个人表现得粗鲁、没有礼貌，那他就像脱光了衣服，赤身裸体地出现在人前。",
-  "source": "人生的智慧"
+  "content": "人能够能动地认识世界；人能够能动地改造世界。",
+  "source": "主观能动性"
 };
 window.updated = {
   "name": "嗨咻",
