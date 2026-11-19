@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "慎终如始，则无败事。",
-  "source": "道德经"
+  "content": "玲珑骰子安红豆，入骨相思知不知。",
+  "source": "南歌子词二首"
 };
 window.updated = {
   "name": "嗨咻",
