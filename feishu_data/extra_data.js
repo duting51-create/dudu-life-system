@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "地球不需要被拯救，需要被拯救的是人类自己。",
-  "source": "柴静专访"
+  "content": "远望如梯步步高，身临谷底进岩槽。",
+  "source": "过三峡五级船闸"
 };
 window.updated = {
   "name": "嗨咻",
