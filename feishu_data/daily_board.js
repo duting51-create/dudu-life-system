@@ -1,87 +1,63 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-18T01:00:44.540Z",
-  "date": "2026-11-18",
+  "updated_at": "2026-11-19T01:00:45.178Z",
+  "date": "2026-11-19",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月18日",
+    "date": "11月19日",
     "items": [
       {
-        "text": "去医院做B 超",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看看是否去一趟朝阳大悦城",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
         "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "上架3个新品到店铺",
+        "text": "写2篇IP 号笔记，做好图片，编辑到草稿箱",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "整理商品笔记的写法",
+        "text": "录1个 AI口播视频，找到录视频的感觉和方法",
         "done": false,
         "cancelled": false,
-        "priority": "mid"
+        "priority": "low"
       },
       {
-        "text": "整理爆品下面的晒图，看看怎么用AI二创成为我的图",
+        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记",
         "done": false,
         "cancelled": false,
-        "priority": "mid"
+        "priority": "low"
       }
     ],
-    "raw_text": "1.去医院做B 超\n2.看看是否去一趟朝阳大悦城\n3.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n4.上架3个新品到店铺\n5.整理商品笔记的写法\n6.整理爆品下面的晒图，看看怎么用AI二创成为我的图",
+    "raw_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.写2篇IP 号笔记，做好图片，编辑到草稿箱\n3.录1个 AI口播视频，找到录视频的感觉和方法\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记",
     "tasks": [
       {
-        "text": "去医院做B 超",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看看是否去一趟朝阳大悦城",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
         "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "上架3个新品到店铺",
+        "text": "写2篇IP 号笔记，做好图片，编辑到草稿箱",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "整理商品笔记的写法",
+        "text": "录1个 AI口播视频，找到录视频的感觉和方法",
         "done": false,
         "cancelled": false,
-        "priority": "mid"
+        "priority": "low"
       },
       {
-        "text": "整理爆品下面的晒图，看看怎么用AI二创成为我的图",
+        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记",
         "done": false,
         "cancelled": false,
-        "priority": "mid"
+        "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去医院做B 超\n2.看看是否去一趟朝阳大悦城\n3.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n4.上架3个新品到店铺\n5.整理商品笔记的写法\n6.整理爆品下面的晒图，看看怎么用AI二创成为我的图"
+    "raw_tasks_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.写2篇IP 号笔记，做好图片，编辑到草稿箱\n3.录1个 AI口播视频，找到录视频的感觉和方法\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记"
   },
   "inspirations": {
     "items": [
