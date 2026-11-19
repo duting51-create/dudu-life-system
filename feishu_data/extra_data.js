@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "玲珑骰子安红豆，入骨相思知不知。",
-  "source": "南歌子词二首"
+  "content": "Brainy is the new sexy.",
+  "source": "神探夏洛克"
 };
 window.updated = {
   "name": "嗨咻",
