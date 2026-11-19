@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "黑色世界唯有东方的曙光。",
-  "source": "Bilibili"
+  "content": "天生万物以养人，人无一德以报天。",
+  "source": "七杀碑"
 };
 window.updated = {
   "name": "嗨咻",
