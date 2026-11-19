@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep104 | 《无声告白》：我们付出那么多的爱，为何没能抵达对方？"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "清风明月无人管，并作南楼一味凉。",
-  "source": "鄂州南楼书事"
+  "content": "我明白你会来，所以我等。",
+  "source": "雨后"
 };
 window.updated = {
   "name": "嗨咻",
