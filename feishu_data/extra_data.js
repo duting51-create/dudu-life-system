@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "明月清风晓星尘，傲雪凌霜宋子琛",
-  "source": "魔道祖师"
+  "content": "选择你所喜欢的，爱你所选择的。",
+  "source": "托尔斯泰"
 };
 window.updated = {
   "name": "嗨咻",
