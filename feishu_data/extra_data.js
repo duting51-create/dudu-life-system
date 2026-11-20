@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "空山新雨后，天气晚来秋。",
-  "source": "山居秋暝"
+  "content": "每一个在地球上活过的人，在这个宇宙上都有一颗对应的星星在闪烁。",
+  "source": "2001太空漫游"
 };
 window.updated = {
   "name": "嗨咻",
