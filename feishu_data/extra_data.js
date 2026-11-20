@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep104 | 《无声告白》：我们付出那么多的爱，为何没能抵达对方？"
     }
   ]
 };
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "冬天之所以那么冷是为了告诉大家身边人的温暖有多重要。",
-  "source": "熔炉"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
