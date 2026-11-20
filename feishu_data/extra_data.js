@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "时人不识凌云木，直待凌云始道高。",
-  "source": "小松"
+  "content": "空山新雨后，天气晚来秋。",
+  "source": "山居秋暝"
 };
 window.updated = {
   "name": "嗨咻",
