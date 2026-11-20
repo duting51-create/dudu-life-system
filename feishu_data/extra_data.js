@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "千古兴亡多少事？悠悠。不尽长江滚滚流。",
-  "source": "南乡子·登京口北固亭有怀"
+  "content": "时人不识凌云木，直待凌云始道高。",
+  "source": "小松"
 };
 window.updated = {
   "name": "嗨咻",
