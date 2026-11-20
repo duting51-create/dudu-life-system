@@ -1,73 +1,90 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-19T01:00:45.178Z",
-  "date": "2026-11-19",
+  "updated_at": "2026-11-20T01:00:44.247Z",
+  "date": "2026-11-20",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月19日",
+    "date": "11月20日",
     "items": [
       {
+        "text": "用ChatGPT创作4篇笔记的配图，编辑到草稿箱",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
         "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇IP 号笔记，做好图片，编辑到草稿箱",
+        "text": "和ChatGPT构图磨合找到做商品笔记配图的形式",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "录1个 AI口播视频，找到录视频的感觉和方法",
+        "text": "看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记",
+        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看别人的商品详情图，做好3个产品的详情页图，上架产品",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.写2篇IP 号笔记，做好图片，编辑到草稿箱\n3.录1个 AI口播视频，找到录视频的感觉和方法\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记",
+    "raw_text": "1.用ChatGPT创作4篇笔记的配图，编辑到草稿箱\n2.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n3.和ChatGPT构图磨合找到做商品笔记配图的形式\n3.看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记\n5.看别人的商品详情图，做好3个产品的详情页图，上架产品",
     "tasks": [
       {
+        "text": "用ChatGPT创作4篇笔记的配图，编辑到草稿箱",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
         "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "写2篇IP 号笔记，做好图片，编辑到草稿箱",
+        "text": "和ChatGPT构图磨合找到做商品笔记配图的形式",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "录1个 AI口播视频，找到录视频的感觉和方法",
+        "text": "看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记",
+        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看别人的商品详情图，做好3个产品的详情页图，上架产品",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.写2篇IP 号笔记，做好图片，编辑到草稿箱\n3.录1个 AI口播视频，找到录视频的感觉和方法\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记"
+    "raw_tasks_text": "1.用ChatGPT创作4篇笔记的配图，编辑到草稿箱\n2.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n3.和ChatGPT构图磨合找到做商品笔记配图的形式\n3.看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记\n5.看别人的商品详情图，做好3个产品的详情页图，上架产品"
   },
   "inspirations": {
     "items": [
-      {
-        "date": "6月22日",
-        "inspiration": "",
-        "harvest": "",
-        "task": "",
-        "mood": ""
-      },
       {
         "date": "6月23日",
         "inspiration": "",
@@ -480,9 +497,16 @@ window.DAILY_BOARD = {
         "harvest": "",
         "task": "1.把账号信息和数据整理到表格，每周进行数据分析，当成工作来做\n2.备忘录的灵感，分类做一下整理\n3.灵感记录，可以搭建一个工作台，便于 AI 帮我串联所有素材\n4.做一个备孕工作台，目前的功课希望有打卡和备孕知识",
         "mood": ""
+      },
+      {
+        "date": "11月19日",
+        "inspiration": "",
+        "harvest": "",
+        "task": "学习别人的自媒体工作台，打通小红书收藏夹或者说飞书多维表格，来做选题分析",
+        "mood": ""
       }
     ],
-    "last_updated": "11月16日",
+    "last_updated": "11月19日",
     "today_updated": false,
     "done_map": {
       "inspiration:ima 知识库，一个共享知识库里的内容，是否可以部分开放？比如有人买读书笔记，我就只开放这几个文件夹📂，有人买产后恢复运动，我就开放相应的文件——不能隐藏文件夹，只能隐藏单个文件": true,
