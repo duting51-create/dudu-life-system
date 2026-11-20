@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "选择你所喜欢的，爱你所选择的。",
-  "source": "托尔斯泰"
+  "content": "Yes, minister.",
+  "source": "是，大臣"
 };
 window.updated = {
   "name": "嗨咻",
