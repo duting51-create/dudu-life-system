@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "月有盈亏花有开谢，想人生最苦离别。",
-  "source": "普天乐·咏世"
+  "content": "明月清风晓星尘，傲雪凌霜宋子琛",
+  "source": "魔道祖师"
 };
 window.updated = {
   "name": "嗨咻",
