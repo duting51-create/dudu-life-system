@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人民，只有人民，才是创造世界历史的动力。",
-  "source": "论联合政府"
+  "content": "千古兴亡多少事？悠悠。不尽长江滚滚流。",
+  "source": "南乡子·登京口北固亭有怀"
 };
 window.updated = {
   "name": "嗨咻",
