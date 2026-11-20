@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "有志者，事竟成。",
-  "source": "后汉书·耿弇传"
+  "content": "人民，只有人民，才是创造世界历史的动力。",
+  "source": "论联合政府"
 };
 window.updated = {
   "name": "嗨咻",
