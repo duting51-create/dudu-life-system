@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "冬青树上挂凌霄，岁晏花凋树不凋。",
-  "source": "行路难三首"
+  "content": "人能够能动地认识世界；人能够能动地改造世界。",
+  "source": "主观能动性"
 };
 window.updated = {
   "name": "嗨咻",
