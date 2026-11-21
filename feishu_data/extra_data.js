@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "list": [
     {
       "name": "爽",
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "冬青树上挂凌霄，岁晏花凋树不凋。",
+  "source": "行路难三首"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
