@@ -1,97 +1,54 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-20T01:00:44.247Z",
-  "date": "2026-11-20",
+  "updated_at": "2026-11-21T01:00:44.727Z",
+  "date": "2026-11-21",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月20日",
+    "date": "11月21日",
     "items": [
       {
-        "text": "用ChatGPT创作4篇笔记的配图，编辑到草稿箱",
+        "text": "产品到了后对比质量，看看用哪个供应渠道",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
+        "text": "拍一些实拍图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "和ChatGPT构图磨合找到做商品笔记配图的形式",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看别人的商品详情图，做好3个产品的详情页图，上架产品",
+        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.用ChatGPT创作4篇笔记的配图，编辑到草稿箱\n2.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n3.和ChatGPT构图磨合找到做商品笔记配图的形式\n3.看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记\n5.看别人的商品详情图，做好3个产品的详情页图，上架产品",
+    "raw_text": "1.产品到了后对比质量，看看用哪个供应渠道\n2.拍一些实拍图\n3.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
     "tasks": [
       {
-        "text": "用ChatGPT创作4篇笔记的配图，编辑到草稿箱",
+        "text": "产品到了后对比质量，看看用哪个供应渠道",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
+        "text": "拍一些实拍图",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "和ChatGPT构图磨合找到做商品笔记配图的形式",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看别人的商品详情图，做好3个产品的详情页图，上架产品",
+        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.用ChatGPT创作4篇笔记的配图，编辑到草稿箱\n2.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n3.和ChatGPT构图磨合找到做商品笔记配图的形式\n3.看爆款笔记，用关键词搜索看看是不是这个话题就比较火，确定好我的5-10个AI选题\n4.制作不需要实拍图的电商笔记，每一个品做5篇笔记，一共15篇笔记\n5.看别人的商品详情图，做好3个产品的详情页图，上架产品"
+    "raw_tasks_text": "1.产品到了后对比质量，看看用哪个供应渠道\n2.拍一些实拍图\n3.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样"
   },
   "inspirations": {
     "items": [
-      {
-        "date": "6月23日",
-        "inspiration": "",
-        "harvest": "",
-        "task": "",
-        "mood": ""
-      },
       {
         "date": "6月24日",
         "inspiration": "",
@@ -504,9 +461,16 @@ window.DAILY_BOARD = {
         "harvest": "",
         "task": "学习别人的自媒体工作台，打通小红书收藏夹或者说飞书多维表格，来做选题分析",
         "mood": ""
+      },
+      {
+        "date": "11月20日",
+        "inspiration": "",
+        "harvest": "",
+        "task": "1.把 QQ 空间的照片都整理到百度网盘",
+        "mood": ""
       }
     ],
-    "last_updated": "11月19日",
+    "last_updated": "11月20日",
     "today_updated": false,
     "done_map": {
       "inspiration:ima 知识库，一个共享知识库里的内容，是否可以部分开放？比如有人买读书笔记，我就只开放这几个文件夹📂，有人买产后恢复运动，我就开放相应的文件——不能隐藏文件夹，只能隐藏单个文件": true,
@@ -539,6 +503,11 @@ window.DAILY_BOARD = {
   },
   "memos": {
     "items": [
+      {
+        "date": "11月20日",
+        "text": "【汪崽小杜】封面点击率依次是求助帖、图鉴、流产、之前那版和最新版本，先尝试流产那版和纯图片看看效果",
+        "id": "memo_134_0"
+      },
       {
         "date": "10月28日",
         "text": "我需要学习一下文生图、文生视频的技能，不单单是模仿别人的图片，而是生成自己想要的图片",
@@ -583,11 +552,6 @@ window.DAILY_BOARD = {
         "date": "9月2日",
         "text": "每次做选题，最多10条，太多了后面都会变化没必要，可以收集但是没必要一下子做太多。",
         "id": "memo_68_0"
-      },
-      {
-        "date": "8月28日",
-        "text": "怀孕后开始写「孕期周记」",
-        "id": "memo_65_0"
       }
     ],
     "total": 10
