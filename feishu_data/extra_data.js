@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人能够能动地认识世界；人能够能动地改造世界。",
-  "source": "主观能动性"
+  "content": "如果很长时间不见面，就连我们最好的朋友也会在时间的流逝中逐渐变成抽象的概念。",
+  "source": "人生的智慧"
 };
 window.updated = {
   "name": "嗨咻",
