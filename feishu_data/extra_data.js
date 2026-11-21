@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "I'll do anything to get back what I lost.",
-  "source": "The Flash"
+  "content": "忘记了过去，就意味着背叛！",
+  "source": "弗拉基米尔·伊里奇·列宁"
 };
 window.updated = {
   "name": "嗨咻",
