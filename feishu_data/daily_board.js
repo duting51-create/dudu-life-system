@@ -1,51 +1,13 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-21T01:00:44.727Z",
-  "date": "2026-11-21",
+  "updated_at": "2026-11-22T01:00:43.952Z",
+  "date": "2026-11-22",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月21日",
-    "items": [
-      {
-        "text": "产品到了后对比质量，看看用哪个供应渠道",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍一些实拍图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_text": "1.产品到了后对比质量，看看用哪个供应渠道\n2.拍一些实拍图\n3.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
-    "tasks": [
-      {
-        "text": "产品到了后对比质量，看看用哪个供应渠道",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "拍一些实拍图",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      }
-    ],
-    "raw_tasks_text": "1.产品到了后对比质量，看看用哪个供应渠道\n2.拍一些实拍图\n3.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样"
+    "date": "11月22日",
+    "items": [],
+    "raw_text": "",
+    "tasks": [],
+    "raw_tasks_text": ""
   },
   "inspirations": {
     "items": [
