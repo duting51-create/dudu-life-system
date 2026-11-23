@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "最新单集加载中…"
+      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
     },
     {
       "name": "当个事儿",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "举世皆浊我独清，众人皆醉我独醒。",
-  "source": "楚辞·渔父"
+  "content": "你是故意找茬是不是？",
+  "source": "征服"
 };
 window.updated = {
   "name": "嗨咻",
