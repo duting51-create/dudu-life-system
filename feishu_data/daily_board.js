@@ -1,13 +1,135 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-22T01:00:43.952Z",
-  "date": "2026-11-22",
+  "updated_at": "2026-11-23T01:00:45.025Z",
+  "date": "2026-11-23",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月22日",
-    "items": [],
-    "raw_text": "",
-    "tasks": [],
-    "raw_tasks_text": ""
+    "date": "11月23日",
+    "items": [
+      {
+        "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "上架3个新品到店铺",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "制作15篇电商笔记，每一个品做5篇笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "确定5-10个AI选题",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "让AI整理我的选题表，总结选题和各方面内容",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "用加宁的skill做 AI账号的定位规划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇视频脚本，主要是开头，已经怎么把内容讲清楚",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.上架3个新品到店铺\n4.制作15篇电商笔记，每一个品做5篇笔记\n5.确定5-10个AI选题\n6.确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看\n7.让AI整理我的选题表，总结选题和各方面内容\n8.用加宁的skill做 AI账号的定位规划\n9.写1篇视频脚本，主要是开头，已经怎么把内容讲清楚\n10.看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了",
+    "tasks": [
+      {
+        "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "上架3个新品到店铺",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "制作15篇电商笔记，每一个品做5篇笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "确定5-10个AI选题",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "让AI整理我的选题表，总结选题和各方面内容",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "用加宁的skill做 AI账号的定位规划",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "写1篇视频脚本，主要是开头，已经怎么把内容讲清楚",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      }
+    ],
+    "raw_tasks_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.上架3个新品到店铺\n4.制作15篇电商笔记，每一个品做5篇笔记\n5.确定5-10个AI选题\n6.确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看\n7.让AI整理我的选题表，总结选题和各方面内容\n8.用加宁的skill做 AI账号的定位规划\n9.写1篇视频脚本，主要是开头，已经怎么把内容讲清楚\n10.看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了"
   },
   "inspirations": {
     "items": [
