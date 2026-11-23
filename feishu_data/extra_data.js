@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们必须知道，我们终会知道。",
-  "source": "退休演讲"
+  "content": "没有人的文明毫无意义。",
+  "source": "流浪地球2"
 };
 window.updated = {
   "name": "嗨咻",
