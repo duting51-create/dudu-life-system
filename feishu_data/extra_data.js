@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "没有人的文明毫无意义。",
-  "source": "流浪地球2"
+  "content": "举世皆浊我独清，众人皆醉我独醒。",
+  "source": "楚辞·渔父"
 };
 window.updated = {
   "name": "嗨咻",
