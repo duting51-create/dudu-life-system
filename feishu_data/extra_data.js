@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "115. 和蒙克聊天｜出身决定多少，努力又能改变什么？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -12,7 +12,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "畅所育言",
-      "latest": "119 从双十一囤货到人生操作系统：我们买的是产品，还是向往的生活？"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "当个事儿",
@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep105 | 如何理解创伤留下的地图，打破亲密关系中的无意识重复"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-23",
+  "updated": "2026-11-24",
   "list": [
     {
       "name": "爽",
