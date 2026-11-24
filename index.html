@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261124-1613" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261124-1613" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261124-1653" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261124-1653" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -752,6 +752,14 @@
       font-size: 0.62rem; color: #8A6E9E;
       display: inline-block; margin-top: 2px;
     }
+    /* 灵感/任务「已放几天」徽章：3天起显示，越久越醒目 */
+    .inspire-age {
+      display:inline-block;font-size:.64rem;font-weight:600;line-height:1.4;
+      padding:1px 7px;margin-left:7px;border-radius:10px;vertical-align:middle;
+      white-space:nowrap;background:#F3EDF6;color:#9A7FB0;
+    }
+    .inspire-age.warm { background:#FBEEDC;color:#B9822F; }
+    .inspire-age.hot  { background:#FBE4EC;color:#C4456F; }
     .inspire-check-actions {
       display: flex; gap: 4px; align-items: center;
       flex-shrink: 0; opacity: 0;
@@ -2489,10 +2497,10 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20261124-1613" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20261124-1613" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20261124-1613" defer></script>
-  <script src="reminder.js?v=remind-20261124-1613" defer></script>
+  <script src="cloud-sync.js?v=sync-20261124-1653" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20261124-1653" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20261124-1653" defer></script>
+  <script src="reminder.js?v=remind-20261124-1653" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3598,6 +3606,23 @@
       const container = document.getElementById('inspirationContainer');
       if (!container) return;
 
+      // 「已放几天」：复用提醒弹窗口径（中文日期/ISO 都认，未来日期自动归去年）
+      function _ageDays(dateStr) {
+        if (!dateStr) return null;
+        var s=String(dateStr).trim(), y=new Date().getFullYear(), mo, da;
+        var m2=s.match(/(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/), m1=s.match(/(\d{1,2})月(\d{1,2})/);
+        if (m2) { y=+m2[1]; mo=+m2[2]; da=+m2[3]; }
+        else if (m1) { mo=+m1[1]; da=+m1[2]; }
+        else return null;
+        if (mo<1||mo>12||da<1||da>31) return null;
+        var p=function(n){return String(n).padStart(2,'0');};
+        var iso=y+'-'+p(mo)+'-'+p(da), d=new Date();
+        var tISO=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+        var u=function(x){return Date.parse(x+'T00:00:00Z');};
+        if (u(iso)>u(tISO)+86400000) iso=(y-1)+'-'+p(mo)+'-'+p(da);
+        return Math.round((u(tISO)-u(iso))/86400000);
+      }
+
       // Combine Feishu data + local jot data
       let items = [];
       const today = new Date();
@@ -3791,13 +3816,17 @@
             (item.text && (item.text.includes('✅') || item.text.includes('~~')));
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
+          // 未划掉的任务/灵感才显示放置天数；收获/情绪是当天快照，不显示
+          const _age = (!isStruck && isToggle) ? _ageDays(item.date) : null;
+          const _ageHtml = (_age !== null && _age >= 3)
+            ? `<span class="inspire-age${_age>=7?' hot':(_age>=5?' warm':'')}" title="从第一次写下那天算起">⏳ 已放 ${_age} 天</span>` : '';
           const checkHtml = isToggle
             ? `<div class="inspire-check ${isStruck ? 'done' : ''}" onclick='toggleInspireCheck(${JSON.stringify(item.id)}, ${JSON.stringify(item.fp)}, ${JSON.stringify(item.type)}, ${JSON.stringify(item.text)}, ${JSON.stringify(item.date)})'></div>`
             : `<div class="inspire-check" style="visibility:hidden"></div>`;
           return `<div class="inspire-check-item ${isStruck ? 'struck' : ''}" data-id="${item.id}" data-type="${item.type}">
             ${checkHtml}
             <div class="inspire-check-body">
-              <div class="inspire-check-text ${isStruck ? 'done' : ''}">${item.text}</div>
+              <div class="inspire-check-text ${isStruck ? 'done' : ''}">${item.text}${_ageHtml}</div>
             </div>
             <div class="inspire-check-actions">
               <div class="reclassify-menu" style="display:none;position:absolute;bottom:100%;right:0;background:white;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.15);padding:8px;z-index:10;gap:4px;flex-wrap:wrap;max-width:200px;">

@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep105 | 择偶：如何理解创伤留下的地图，打破亲密关系中的无意识重复"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "内心湛然，则无往而不乐。",
-  "source": "人生不过如此"
+  "content": "穷在闹市无人问，富在深山有远亲。不信且看宴中酒，杯杯先敬富贵人。",
+  "source": "增广贤文"
 };
 window.updated = {
   "name": "嗨咻",
