@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "生命中曾拥有过的灿烂，原来终究，都需要用孤独去偿还。",
-  "source": "百年孤独"
+  "content": "内心湛然，则无往而不乐。",
+  "source": "人生不过如此"
 };
 window.updated = {
   "name": "嗨咻",
