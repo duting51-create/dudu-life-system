@@ -1,145 +1,30 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-23T01:00:45.025Z",
-  "date": "2026-11-23",
+  "updated_at": "2026-11-24T01:00:44.138Z",
+  "date": "2026-11-24",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月23日",
+    "date": "11月24日",
     "items": [
       {
-        "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "上架3个新品到店铺",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "制作15篇电商笔记，每一个品做5篇笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "确定5-10个AI选题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "让AI整理我的选题表，总结选题和各方面内容",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "用加宁的skill做 AI账号的定位规划",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇视频脚本，主要是开头，已经怎么把内容讲清楚",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了",
+        "text": "去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.上架3个新品到店铺\n4.制作15篇电商笔记，每一个品做5篇笔记\n5.确定5-10个AI选题\n6.确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看\n7.让AI整理我的选题表，总结选题和各方面内容\n8.用加宁的skill做 AI账号的定位规划\n9.写1篇视频脚本，主要是开头，已经怎么把内容讲清楚\n10.看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了",
+    "raw_text": "1.去医院",
     "tasks": [
       {
-        "text": "备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "上架3个新品到店铺",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "制作15篇电商笔记，每一个品做5篇笔记",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "确定5-10个AI选题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "让AI整理我的选题表，总结选题和各方面内容",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "用加宁的skill做 AI账号的定位规划",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写1篇视频脚本，主要是开头，已经怎么把内容讲清楚",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了",
+        "text": "去医院",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.备孕五剑客：测体温+跳绳+泡脚+热敷+晒背+吃叶酸钙片\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.上架3个新品到店铺\n4.制作15篇电商笔记，每一个品做5篇笔记\n5.确定5-10个AI选题\n6.确定我的拍摄工具环境和方式、封面风格、剪辑字幕等等维度的内容，拍一个试试看\n7.让AI整理我的选题表，总结选题和各方面内容\n8.用加宁的skill做 AI账号的定位规划\n9.写1篇视频脚本，主要是开头，已经怎么把内容讲清楚\n10.看完所有的AI爆款选题，快速过一遍视频，没必要一个个看完了，太耽误时间了"
+    "raw_tasks_text": "1.去医院"
   },
   "inspirations": {
     "items": [
-      {
-        "date": "6月24日",
-        "inspiration": "",
-        "harvest": "",
-        "task": "",
-        "mood": "test full range"
-      },
       {
         "date": "6月25日",
         "inspiration": "",
@@ -552,9 +437,16 @@ window.DAILY_BOARD = {
         "harvest": "",
         "task": "1.把 QQ 空间的照片都整理到百度网盘",
         "mood": ""
+      },
+      {
+        "date": "11月23日",
+        "inspiration": "",
+        "harvest": "",
+        "task": "1.做一个教程HTML，用于后面 AI 账号做内容讲解时的展示",
+        "mood": ""
       }
     ],
-    "last_updated": "11月20日",
+    "last_updated": "11月23日",
     "today_updated": false,
     "done_map": {
       "inspiration:ima 知识库，一个共享知识库里的内容，是否可以部分开放？比如有人买读书笔记，我就只开放这几个文件夹📂，有人买产后恢复运动，我就开放相应的文件——不能隐藏文件夹，只能隐藏单个文件": true,
@@ -582,7 +474,8 @@ window.DAILY_BOARD = {
       "task:分析我的账号价值和运营策略": true,
       "task:帮杜爽爽解决职场小人问题": true,
       "task:把账号信息和数据整理到表格，每周进行数据分析，当成工作来做": true,
-      "task:备忘录的灵感，分类做一下整理": true
+      "task:备忘录的灵感，分类做一下整理": true,
+      "task:做一个教程HTML，用于后面 AI 账号做内容讲解时的展示": true
     }
   },
   "memos": {
