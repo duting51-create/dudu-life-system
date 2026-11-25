@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "旁观者清，千秋功罪，可真的有人评说了。",
-  "source": "三体II: 黑暗森林"
+  "content": "本世纪大部分哲学辩论其实在反对辩论。",
+  "source": "肉身的逻各斯 ——赫尔曼•施密茨的相遇哲学"
 };
 window.updated = {
   "name": "嗨咻",
