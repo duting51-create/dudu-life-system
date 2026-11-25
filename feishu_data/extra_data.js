@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "ep105 | 择偶：如何理解创伤留下的地图，打破亲密关系中的无意识重复"
+      "latest": "最新单集加载中…"
     }
   ]
 };
@@ -171,7 +171,10 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = null;
+window.DAILY_QUOTE = {
+  "content": "缺月挂疏桐，漏断人初静。",
+  "source": "卜算子·黄州定慧院寓居作"
+};
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
