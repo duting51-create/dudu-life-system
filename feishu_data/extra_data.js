@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "经不经典这种事，每个人本来就不一样嘛。因为，你有你的回忆，我有我的传记，只要感动，都是经典。",
-  "source": "五月天人生无限公司"
+  "content": "我寻找大海的尽头，却忽略蜿蜒的河流，当我逆水行舟，你在我左右，推着我走。",
+  "source": "没离开过"
 };
 window.updated = {
   "name": "嗨咻",
