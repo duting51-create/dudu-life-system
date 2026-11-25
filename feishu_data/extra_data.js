@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "看看人间的苦难，听听人民的呐喊！",
-  "source": "悲惨世界"
+  "content": "我只希望我的死，比我的生更有意义。",
+  "source": "小丑"
 };
 window.updated = {
   "name": "嗨咻",
