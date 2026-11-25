@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "我们没有永恒的朋友，也没有永恒的敌人，只有永恒的利益。",
-  "source": "亨利·坦普尔"
+  "content": "日日思君不见君，共饮长江水。",
+  "source": "卜算子·我住长江头"
 };
 window.updated = {
   "name": "嗨咻",
