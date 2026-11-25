@@ -1,27 +1,75 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-24T01:00:44.138Z",
-  "date": "2026-11-24",
+  "updated_at": "2026-11-25T01:00:45.459Z",
+  "date": "2026-11-25",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月24日",
+    "date": "11月25日",
     "items": [
       {
-        "text": "去医院",
+        "text": "写4-5篇 IP 号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "研究怎么才能用AI批量快速生图",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做完三个产品的上架图",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "上架3个新品，打通好代发系统，下单后可以直接代发",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.去医院",
+    "raw_text": "1.写4-5篇 IP 号笔记\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.研究怎么才能用AI批量快速生图\n4.做完三个产品的上架图\n5.上架3个新品，打通好代发系统，下单后可以直接代发",
     "tasks": [
       {
-        "text": "去医院",
+        "text": "写4-5篇 IP 号笔记",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "研究怎么才能用AI批量快速生图",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "做完三个产品的上架图",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "上架3个新品，打通好代发系统，下单后可以直接代发",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.去医院"
+    "raw_tasks_text": "1.写4-5篇 IP 号笔记\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.研究怎么才能用AI批量快速生图\n4.做完三个产品的上架图\n5.上架3个新品，打通好代发系统，下单后可以直接代发"
   },
   "inspirations": {
     "items": [
