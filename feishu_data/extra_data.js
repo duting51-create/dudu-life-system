@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "日日思君不见君，共饮长江水。",
-  "source": "卜算子·我住长江头"
+  "content": "经不经典这种事，每个人本来就不一样嘛。因为，你有你的回忆，我有我的传记，只要感动，都是经典。",
+  "source": "五月天人生无限公司"
 };
 window.updated = {
   "name": "嗨咻",
