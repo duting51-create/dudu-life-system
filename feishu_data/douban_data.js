@@ -1,6 +1,6 @@
 // 豆瓣观影清单（由 feishu_sync.py fetch_douban() 生成）
 window.DOUBAN_DATA = {
-  "updated": "2026-11-18",
+  "updated": "2026-11-25",
   "wish": [
     {
       "title": "戏梦巴黎",
@@ -91,9 +91,261 @@ window.DOUBAN_DATA = {
       "year": "",
       "rating": "",
       "link": "https://movie.douban.com/subject/34963356/"
+    },
+    {
+      "title": "我最喜欢的蛋糕",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35740381/"
+    },
+    {
+      "title": "首尔之春",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35712804/"
+    },
+    {
+      "title": "迷失东京",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1291835/"
+    },
+    {
+      "title": "还有明天",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36445098/"
+    },
+    {
+      "title": "某种物质",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35882838/"
+    },
+    {
+      "title": "隔壁房间",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36687720/"
+    },
+    {
+      "title": "大象席地而坐",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/27172891/"
+    },
+    {
+      "title": "她不知道名字的那些鸟儿",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/26928304/"
+    },
+    {
+      "title": "扶桑花女孩",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1788940/"
+    },
+    {
+      "title": "蜂蜜与四叶草",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1796053/"
+    },
+    {
+      "title": "关于莉莉周的一切",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1292219/"
+    },
+    {
+      "title": "在水中",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36219938/"
+    },
+    {
+      "title": "金的音像店",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36181567/"
+    },
+    {
+      "title": "利益区域",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35169716/"
+    },
+    {
+      "title": "家庭合影",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36470104/"
+    },
+    {
+      "title": "一级恐惧",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1296217/"
+    },
+    {
+      "title": "伦敦生活 第一季",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/26838164/"
+    },
+    {
+      "title": "我看见两朵一样的云",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35211447/"
+    },
+    {
+      "title": "沉默笔录",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/30396283/"
+    },
+    {
+      "title": "保你平安",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35457272/"
+    },
+    {
+      "title": "银色·性·男女",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1297833/"
+    },
+    {
+      "title": "推手",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1306939/"
+    },
+    {
+      "title": "这时对，那时错",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/26297388/"
+    },
+    {
+      "title": "堕落天使",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1298112/"
+    },
+    {
+      "title": "布达佩斯大饭店",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/11525673/"
+    },
+    {
+      "title": "光阴的故事",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1308146/"
+    },
+    {
+      "title": "青梅竹马",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1305327/"
+    },
+    {
+      "title": "冬冬的假期",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1299103/"
+    },
+    {
+      "title": "恐怖分子",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1305261/"
+    },
+    {
+      "title": "我们的世界",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/26616436/"
+    },
+    {
+      "title": "独立时代",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1304476/"
+    },
+    {
+      "title": "薄荷糖",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1303145/"
+    },
+    {
+      "title": "偶然与想象",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35360296/"
+    },
+    {
+      "title": "铃芽之旅",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35371261/"
+    },
+    {
+      "title": "肖申克的救赎",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1292052/"
+    },
+    {
+      "title": "神奇动物在哪里",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/25726614/"
+    },
+    {
+      "title": "驯兔记",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/30232270/"
+    },
+    {
+      "title": "莫里斯",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1293456/"
+    },
+    {
+      "title": "寂静人生",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/10755367/"
+    },
+    {
+      "title": "小武",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1291851/"
+    },
+    {
+      "title": "处子之山",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/26304901/"
     }
   ],
   "collect": [
+    {
+      "title": "黑球",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/37215318/"
+    },
     {
       "title": "初吻",
       "year": "",
@@ -363,6 +615,90 @@ window.DOUBAN_DATA = {
       "year": "",
       "rating": "",
       "link": "https://movie.douban.com/subject/36195543/"
+    },
+    {
+      "title": "善意的竞争 第一季",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36782612/"
+    },
+    {
+      "title": "苦尽柑来遇见你",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36053256/"
+    },
+    {
+      "title": "国色芳华",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36126283/"
+    },
+    {
+      "title": "爱很美味",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35297263/"
+    },
+    {
+      "title": "今夜一起为爱鼓掌",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36247292/"
+    },
+    {
+      "title": "异人之下",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35228399/"
+    },
+    {
+      "title": "六姊妹",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36449294/"
+    },
+    {
+      "title": "乔妍的心事",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36289576/"
+    },
+    {
+      "title": "人生大事",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35460157/"
+    },
+    {
+      "title": "钢琴教师",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/1306730/"
+    },
+    {
+      "title": "狗神",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/35736202/"
+    },
+    {
+      "title": "芭比",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/4058939/"
+    },
+    {
+      "title": "封神第一部：朝歌风云",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/10604086/"
+    },
+    {
+      "title": "长安三万里",
+      "year": "",
+      "rating": "",
+      "link": "https://movie.douban.com/subject/36035676/"
     }
   ]
 };
