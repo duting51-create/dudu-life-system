@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "116. 和张家诚聊天 ｜ 别把我想得太窄，我不觉得“俗”丢人"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "本世纪大部分哲学辩论其实在反对辩论。",
-  "source": "肉身的逻各斯 ——赫尔曼•施密茨的相遇哲学"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
