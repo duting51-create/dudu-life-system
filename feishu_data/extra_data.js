@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "116. 和张家诚聊天 ｜ 别把我想得太窄，我不觉得“俗”丢人"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "人们总会习惯性地高估自己的自控力。",
-  "source": "精准努力：刘媛媛的逆袭课"
+  "content": "我们所爱之物昭示着我们究竟是谁。",
+  "source": "托马斯·阿奎纳"
 };
 window.updated = {
   "name": "嗨咻",
