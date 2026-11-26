@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "在最平常的事情中都可以显示出一个人人格的伟大来！",
-  "source": "平凡的世界"
+  "content": "美术之为物，欲者不观，观者不欲。",
+  "source": "美学三境"
 };
 window.updated = {
   "name": "嗨咻",
