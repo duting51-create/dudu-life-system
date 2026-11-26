@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "谎言重复一千遍就成了真理。",
-  "source": "纳粹德国宣传部长"
+  "content": "所有的元素被电离，发出闪耀的光芒时，我们就会在这道璀璨的星风中再次相逢。",
+  "source": "战区先锋"
 };
 window.updated = {
   "name": "嗨咻",
