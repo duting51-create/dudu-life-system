@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "所有的元素被电离，发出闪耀的光芒时，我们就会在这道璀璨的星风中再次相逢。",
-  "source": "战区先锋"
+  "content": "人们总会习惯性地高估自己的自控力。",
+  "source": "精准努力：刘媛媛的逆袭课"
 };
 window.updated = {
   "name": "嗨咻",
