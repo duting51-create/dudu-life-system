@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261126-2023" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261126-2023" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261126-2102" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261126-2102" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2513,10 +2513,10 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20261126-2023" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20261126-2023" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20261126-2023" defer></script>
-  <script src="reminder.js?v=remind-20261126-2023" defer></script>
+  <script src="cloud-sync.js?v=sync-20261126-2102" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20261126-2102" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20261126-2102" defer></script>
+  <script src="reminder.js?v=remind-20261126-2102" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3812,6 +3812,26 @@
         return false;                                      // 隔天且非今天划掉 → 消失
       });
 
+      // 「冒泡」排序：未划掉的任务/灵感按停留天数从久到新排前面，躺得久的每天一开网站就撞进眼里。
+      // 已划掉的沉底；收获/情绪是当天快照，排在未划掉的任务/灵感之后。
+      items.sort(function (a, b) {
+        var isToggle = function (it) { return it.type === 'task' || it.type === 'inspiration'; };
+        var isStruck = function (it) {
+          return (it.fp && doneMap[it.fp] === true) || doneMap[it.id] === true || it.done === true ||
+            (it.text && (it.text.includes('✅') || it.text.includes('~~')));
+        };
+        var sa = isStruck(a), sb = isStruck(b);
+        if (sa !== sb) return sa ? 1 : -1;                 // 划掉的沉底
+        if (sa && sb) return 0;
+        if (isToggle(a) && isToggle(b)) {
+          var aa = _ageDays(a.date), bb = _ageDays(b.date);
+          return (bb === null ? -1 : bb) - (aa === null ? -1 : aa);  // 躺得久的排前
+        }
+        if (isToggle(a)) return -1;
+        if (isToggle(b)) return 1;
+        return 0;
+      });
+
       const typeLabelMap = {
         'task':       '📋 任务',
         'inspiration':'💡 灵感',
@@ -3835,7 +3855,7 @@
           // 未划掉的任务/灵感才显示放置天数；收获/情绪是当天快照，不显示
           const _age = (!isStruck && isToggle) ? _ageDays(item.date) : null;
           const _ageHtml = (_age !== null && _age >= 3)
-            ? `<span class="inspire-age${_age>=7?' hot':(_age>=5?' warm':'')}" title="从第一次写下那天算起">⏳ 已放 ${_age} 天</span>` : '';
+            ? `<span class="inspire-age${_age>=30?' hot':(_age>=7?' warm':'')}" title="从第一次写下那天算起">⏳ 已放 ${_age} 天</span>` : '';
           const checkHtml = isToggle
             ? `<div class="inspire-check ${isStruck ? 'done' : ''}" onclick='toggleInspireCheck(${JSON.stringify(item.id)}, ${JSON.stringify(item.fp)}, ${JSON.stringify(item.type)}, ${JSON.stringify(item.text)}, ${JSON.stringify(item.date)})'></div>`
             : `<div class="inspire-check" style="visibility:hidden"></div>`;

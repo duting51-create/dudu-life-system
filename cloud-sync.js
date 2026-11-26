@@ -1048,8 +1048,24 @@
   }
 
   var FeishuSync = {
+    // 🔥 11/26 修复：原本这里是空壳，从不读飞书实时数据。前端 renderInspirations 一直在读
+    // window.LIVE_INSPIRATIONS_DATA，但全项目没有一处给它赋值 —— 网站只能显示静态
+    // dashboard_data.js（每次 auto_sync 才更新）+ 本地 localStorage。结果：飞书/Worker 里有
+    // 的新条目，若晚于上次同步、且本机没存过，就永远显示不出来（「飞书写上了网站不显示」）。
+    // 现在真正从 Worker 拉取实时条目并赋值，触发灵感宝箱与提醒重渲染。
     refresh: function (notify) {
-      return Promise.resolve({ status: 'ok', items: [] });
+      return _workerFeishu('GET', null).then(function (res) {
+        if (!res.ok) return { status: 'ok', items: [], degraded: true };
+        var items = (res.data && Array.isArray(res.data.items)) ? res.data.items : [];
+        // API 明确返回成功（哪怕空列表）才覆盖，确保删除最后一条也能同步；
+        // 网络/解析失败走 catch，保留已有数据不被冲掉。
+        window.LIVE_INSPIRATIONS_DATA = { items: items };
+        try { if (typeof window.renderInspirations === 'function') window.renderInspirations(); } catch (e) {}
+        try { if (window.DuduReminder && typeof window.DuduReminder.refresh === 'function') window.DuduReminder.refresh(); } catch (e) {}
+        return { status: 'ok', items: items, via: 'worker' };
+      }).catch(function () {
+        return { status: 'ok', items: [], degraded: true };
+      });
     },
     mutate: function (payload) {
       var action = (payload && payload.action) || 'create';
