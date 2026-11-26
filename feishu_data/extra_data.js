@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "“你最可爱”，我说时来不及思索，而思索之后，还是这样说。",
-  "source": "你多么可爱"
+  "content": "谎言重复一千遍就成了真理。",
+  "source": "纳粹德国宣传部长"
 };
 window.updated = {
   "name": "嗨咻",
