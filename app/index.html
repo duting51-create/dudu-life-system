@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20261126-2102" as="script">
-  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20261126-2102" as="script">
+  <link rel="preload" href="../feishu_data/dashboard_data.js?v=data-20261126-2113" as="script">
+  <link rel="preload" href="../feishu_data/extra_data.js?v=extra-20261126-2113" as="script">
   <link rel="preload" href="../feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -138,6 +138,25 @@
       opacity: 1;
       pointer-events: all;
     }
+
+    /* 有躺过一周的未完成时，侧栏保持可见，让角标真正「常驻」而不随滚动消失 */
+    @media (min-width: 821px) {
+      .side-nav.has-stale {
+        transform: translateY(-50%) translateX(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+    .side-nav-item .stale-badge {
+      position: absolute; top: 2px; right: 1px; z-index: 2;
+      min-width: 17px; height: 17px; padding: 0 4px;
+      border-radius: 9px; background: #E8B24C; color: #fff;
+      font-size: .62rem; font-weight: 800; line-height: 17px; text-align: center;
+      box-shadow: 0 1px 5px rgba(180,120,30,.35);
+      pointer-events: none;
+    }
+    .side-nav-item .stale-badge.hot { background: #C4456F; box-shadow: 0 1px 5px rgba(196,69,111,.4); }
+    .side-nav-item.active .stale-badge { background: #fff; color: #C4456F; }
     .side-nav-item {
       width: 46px; height: 46px;
       border-radius: 12px;
@@ -1458,6 +1477,18 @@
     .weather-hilo { font-size: .8rem; color: var(--ink-faint); margin-top: 4px; }
 
     /* Dashboard 中部：今日计划 + 进度环 */
+    .stale-card { background: linear-gradient(135deg, rgba(251,228,236,.82), rgba(253,248,242,.92)); border-radius: 18px; padding: 15px 18px; margin-bottom: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
+    .stale-card-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+    .stale-card-title { font-size: .92rem; font-weight: 800; color: #B95078; }
+    .stale-card-hint { margin-left: auto; font-size: .72rem; color: var(--ink-faint); }
+    .stale-row { display: flex; align-items: center; gap: 8px; padding: 6px 2px; font-size: .8rem; cursor: pointer; border-top: 1px dashed rgba(45,45,58,.08); border-radius: 8px; }
+    .stale-row:hover { background: rgba(255,255,255,.55); }
+    .stale-txt { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .stale-days { flex: 0 0 auto; font-size: .7rem; font-weight: 700; color: #B9822F; background: #FBEEDC; padding: 2px 8px; border-radius: 10px; }
+    .stale-days.hot { color: #C4456F; background: #FBE4EC; }
+    .stale-more { font-size: .72rem; color: #B95078; padding: 7px 2px 1px; cursor: pointer; font-weight: 600; }
+    .stale-focus { animation: duduStaleFlash 2.6s ease; border-radius: 10px; }
+    @keyframes duduStaleFlash { 0%, 65% { background: rgba(232,115,155,.2); } 100% { background: transparent; } }
     .dash-mid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 18px; }
     .today-plan-card { background: rgba(244,194,194,0.22); border-radius: 18px; padding: 18px; box-shadow: 0 6px 20px rgba(0,0,0,.06); border: 1px solid var(--border); }
     .today-plan-title { font-weight: 700; margin-bottom: 10px; color: var(--ink); }
@@ -1710,6 +1741,7 @@
       .side-nav-item .nav-label { opacity: 1; font-size: 0.98rem; font-family: 'Noto Sans SC', sans-serif; color: var(--ink); white-space: nowrap; }
       .side-nav-item.active .nav-label { color: #fff; opacity: 1; }
       .side-nav-item .dot { top: 50%; right: auto; left: 46px; transform: translateY(-50%); }
+      .side-nav-item .stale-badge { top: 50%; right: 16px; left: auto; transform: translateY(-50%); }
       /* 顶部 header 居中 */
       .top-header { justify-content: center; padding: 12px 14px; }
       .top-header .logo { max-width: 100%; }
@@ -1757,7 +1789,7 @@
       <span class="dot"></span><span class="nav-icon">📋</span><span class="nav-label">计划中心</span>
     </button>
       <button class="side-nav-item" data-tab="s2" title="灵感宝箱">
-        <span class="dot"></span><span class="nav-icon">💡</span><span class="nav-label">灵感宝箱</span>
+        <span class="dot"></span><span class="stale-badge" id="navStaleBadge" style="display:none"></span><span class="nav-icon">💡</span><span class="nav-label">灵感宝箱</span>
     </button>
     <button class="side-nav-item" data-tab="s3" title="信息雷达">
       <span class="dot"></span><span class="nav-icon">🔥</span><span class="nav-label">信息雷达</span>
@@ -1870,6 +1902,12 @@
       </div>
 
       <!-- 今日计划摘要 + 进度环 -->
+      <!-- 陈旧事项常驻提醒：躺两周以上的事，一眼就能看到 -->
+      <div class="stale-card reveal" id="staleCard" style="display:none">
+        <div class="stale-card-head"><span class="stale-card-title">⏳ 该处理了</span><span class="stale-card-hint" id="staleCardHint"></span></div>
+        <div id="staleCardList"></div>
+      </div>
+
       <div class="dash-mid reveal">
         <div class="today-plan-card">
           <div class="today-plan-title">📋 今日计划摘要</div>
@@ -2509,10 +2547,10 @@
     </div>
   </section>
 
-  <script src="../cloud-sync.js?v=sync-20261126-2102" defer></script>
-  <script src="../feishu_data/dashboard_data.js?v=data-20261126-2102" defer></script>
-  <script src="../feishu_data/extra_data.js?v=extra-20261126-2102" defer></script>
-  <script src="../reminder.js?v=remind-20261126-2102" defer></script>
+  <script src="../cloud-sync.js?v=sync-20261126-2113" defer></script>
+  <script src="../feishu_data/dashboard_data.js?v=data-20261126-2113" defer></script>
+  <script src="../feishu_data/extra_data.js?v=extra-20261126-2113" defer></script>
+  <script src="../reminder.js?v=remind-20261126-2113" defer></script>
   <script src="../feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3002,6 +3040,7 @@
       ].forEach(function (renderer) {
         try { renderer(); } catch (error) { console.warn('render failed:', renderer && renderer.name, error); }
       });
+      if (window.DuduStale) window.DuduStale.refresh();
     }
 
     // ====== TASKS RENDERING ======
@@ -3853,6 +3892,7 @@
         }
       }
       renderInspirations();
+      if (window.DuduStale) window.DuduStale.refresh();
     }
 
     function findInspireItemById(id) {
@@ -6293,6 +6333,100 @@
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initVoice);
     else initVoice();
   })();
+  </script>
+<script>
+    /* ====== 陈旧事项常驻提醒 · 侧栏角标 + 首页卡片 ======
+     * 数据直接复用 DuduReminder.sections()（已按划掉/删除/逐条分诊过滤），
+     * 不碰数据层、不重复实现日期算法。角标 ≥7 天计数，首页卡片列 ≥14 天。
+     */
+    (function () {
+      'use strict';
+      function staleItems() {
+        try {
+          var secs = (window.DuduReminder && window.DuduReminder.sections) ? window.DuduReminder.sections() : [];
+          for (var i = 0; i < secs.length; i++) if (secs[i].key === 'stale') return secs[i].items || [];
+        } catch (e) {}
+        return [];
+      }
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+      function goToInspiration(text) {
+        var nav = document.querySelector('.side-nav-item[data-tab="s2"]');
+        if (nav) nav.click();                       // 复用现有导航：桌面滚动 / 手机切视图
+        setTimeout(function () {
+          var nodes = document.querySelectorAll('.inspire-check-item');
+          for (var i = 0; i < nodes.length; i++) {
+            if (text && nodes[i].textContent && nodes[i].textContent.indexOf(text) !== -1) {
+              nodes[i].classList.add('stale-focus');
+              if (nodes[i].scrollIntoView) nodes[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+              (function (el) { setTimeout(function () { el.classList.remove('stale-focus'); }, 2800); })(nodes[i]);
+              break;
+            }
+          }
+        }, 450);
+      }
+      function refresh() {
+        var all = staleItems();
+        var seven = all.filter(function (it) { return it.days >= 7; });
+        var older = all.filter(function (it) { return it.days >= 14; });
+        var hot = all.some(function (it) { return it.days >= 30; });
+
+        // ① 侧栏角标：有陈旧项就让侧栏保持可见，数字常亮
+        var nav = document.getElementById('sideNav');
+        if (nav) nav.classList.toggle('has-stale', seven.length > 0);
+        var badge = document.getElementById('navStaleBadge');
+        if (badge) {
+          if (seven.length) {
+            badge.style.display = '';
+            badge.textContent = seven.length > 99 ? '99+' : String(seven.length);
+            badge.classList.toggle('hot', hot);
+            badge.title = seven.length + ' 件事躺了一周以上，点开看看';
+          } else {
+            badge.style.display = 'none';
+            badge.title = '';
+          }
+        }
+
+        // ② 首页卡片：≥14 天，最多 5 条 + 查看全部
+        var card = document.getElementById('staleCard');
+        if (!card) return;
+        if (!older.length) { card.style.display = 'none'; return; }
+        card.style.display = '';
+        var hint = document.getElementById('staleCardHint');
+        if (hint) hint.textContent = older.length + ' 件躺了两周以上';
+        var list = document.getElementById('staleCardList');
+        if (!list) return;
+        var show = older.slice(0, 5);
+        var html = show.map(function (it) {
+          return '<div class="stale-row" data-text="' + esc(it.text) + '">' +
+            '<span>' + (it.type === 'task' ? '📋' : '💡') + '</span>' +
+            '<span class="stale-txt">' + esc(it.text) + '</span>' +
+            '<span class="stale-days' + (it.days >= 30 ? ' hot' : '') + '">' + it.days + ' 天</span></div>';
+        }).join('');
+        if (older.length > show.length) {
+          html += '<div class="stale-more" id="staleShowAll">查看全部 ' + older.length + ' 件 →</div>';
+        }
+        list.innerHTML = html;
+      }
+      document.addEventListener('click', function (e) {
+        if (!e.target) return;
+        var row = e.target.closest ? e.target.closest('.stale-row') : null;
+        if (row) { goToInspiration(row.getAttribute('data-text') || ''); return; }
+        if (e.target.id === 'staleShowAll') goToInspiration('');
+      });
+      window.DuduStale = { refresh: refresh, items: staleItems };
+      function boot() {
+        refresh();
+        setTimeout(refresh, 1600);      // 等 DuduReminder / 飞书数据就绪
+        setTimeout(refresh, 4200);      // 等云端合并完成
+        setInterval(refresh, 10 * 60 * 1000);
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+      else boot();
+    })();
   </script>
 </body>
 </html>
