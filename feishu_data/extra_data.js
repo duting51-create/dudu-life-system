@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "最新单集加载中…"
+      "latest": "116. 和张家诚聊天 ｜ 别把我想得太窄，我不觉得“俗”丢人"
     },
     {
       "name": "头回当妈",
