@@ -1,75 +1,75 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-25T01:00:45.459Z",
-  "date": "2026-11-25",
+  "updated_at": "2026-11-26T01:00:45.707Z",
+  "date": "2026-11-26",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月25日",
+    "date": "11月26日",
     "items": [
       {
-        "text": "写4-5篇 IP 号笔记",
+        "text": "生成4篇 IP 号的图，编辑到草稿箱",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
+        "text": "下载我觉得不错的AI口播视频，投喂给AI学习",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "研究怎么才能用AI批量快速生图",
+        "text": "让AI写3篇口播稿，我来润色优化",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做完三个产品的上架图",
+        "text": "做好电商账号排期，开始做图片和文案",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "上架3个新品，打通好代发系统，下单后可以直接代发",
+        "text": "继续寻找AI批量快速生图/视频的方法",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_text": "1.写4-5篇 IP 号笔记\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.研究怎么才能用AI批量快速生图\n4.做完三个产品的上架图\n5.上架3个新品，打通好代发系统，下单后可以直接代发",
+    "raw_text": "1.生成4篇 IP 号的图，编辑到草稿箱\n2.下载我觉得不错的AI口播视频，投喂给AI学习\n3.让AI写3篇口播稿，我来润色优化\n4.做好电商账号排期，开始做图片和文案\n5.继续寻找AI批量快速生图/视频的方法",
     "tasks": [
       {
-        "text": "写4-5篇 IP 号笔记",
+        "text": "生成4篇 IP 号的图，编辑到草稿箱",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样",
+        "text": "下载我觉得不错的AI口播视频，投喂给AI学习",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "研究怎么才能用AI批量快速生图",
+        "text": "让AI写3篇口播稿，我来润色优化",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "做完三个产品的上架图",
+        "text": "做好电商账号排期，开始做图片和文案",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "上架3个新品，打通好代发系统，下单后可以直接代发",
+        "text": "继续寻找AI批量快速生图/视频的方法",
         "done": false,
         "cancelled": false,
         "priority": "low"
       }
     ],
-    "raw_tasks_text": "1.写4-5篇 IP 号笔记\n2.AI博主视频里有钩子的都去领一下，看看她们做的成果是什么样\n3.研究怎么才能用AI批量快速生图\n4.做完三个产品的上架图\n5.上架3个新品，打通好代发系统，下单后可以直接代发"
+    "raw_tasks_text": "1.生成4篇 IP 号的图，编辑到草稿箱\n2.下载我觉得不错的AI口播视频，投喂给AI学习\n3.让AI写3篇口播稿，我来润色优化\n4.做好电商账号排期，开始做图片和文案\n5.继续寻找AI批量快速生图/视频的方法"
   },
   "inspirations": {
     "items": [
