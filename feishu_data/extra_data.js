@@ -171,10 +171,7 @@ window.IMPORTANT_DATES_DATA = {
     }
   ]
 };
-window.DAILY_QUOTE = {
-  "content": "仿佛这一瞬间，火光也照亮了他同驹子共同度过的岁月。这当中也充满一种说不出的苦痛和悲哀。",
-  "source": "雪国"
-};
+window.DAILY_QUOTE = null;
 window.updated = {
   "name": "嗨咻",
   "latest": "100. 为什么越想表现自己，越容易在社交中露怯？"
