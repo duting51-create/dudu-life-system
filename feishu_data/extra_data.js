@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "还君明珠双泪垂，恨不相逢未嫁时。",
-  "source": "节妇吟·寄东平李司空师道"
+  "content": "磨盘战地人犹识，磷火常同日色鲜。",
+  "source": "读残明漫记四首"
 };
 window.updated = {
   "name": "嗨咻",
