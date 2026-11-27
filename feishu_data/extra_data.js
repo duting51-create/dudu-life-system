@@ -1,10 +1,10 @@
 // 新增模块静态数据（由 feishu_sync.py 生成 / 手动维护）
 window.PODCASTS_DATA = {
-  "updated": "2026-11-26",
+  "updated": "2026-11-27",
   "list": [
     {
       "name": "嗨咻",
-      "latest": "116. 和张家诚聊天 ｜ 别把我想得太窄，我不觉得“俗”丢人"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -61,7 +61,7 @@ window.INVEST_DATA = {
   ]
 };
 window.IMPORTANT_DATES_DATA = {
-  "updated": "2026-11-26",
+  "updated": "2026-11-27",
   "list": [
     {
       "name": "爽",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "远离亲人，我很遗憾，但这是我不得不做的事情。",
-  "source": "流浪地球2"
+  "content": "那不是山，是巨浪。",
+  "source": "星际穿越"
 };
 window.updated = {
   "name": "嗨咻",
