@@ -1,30 +1,18 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-26T01:00:45.707Z",
-  "date": "2026-11-26",
+  "updated_at": "2026-11-27T01:00:43.813Z",
+  "date": "2026-11-27",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月26日",
+    "date": "11月27日",
     "items": [
       {
-        "text": "生成4篇 IP 号的图，编辑到草稿箱",
+        "text": "录制1条口播视频，看看会遇到哪些问题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "下载我觉得不错的AI口播视频，投喂给AI学习",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "让AI写3篇口播稿，我来润色优化",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做好电商账号排期，开始做图片和文案",
+        "text": "研究我的封面模板，先定1.0的封面风格",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -34,30 +22,36 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "写30篇小红书商品笔记，找批量出文案的方法",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理一下各个微信群和收藏夹散落的信息",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
       }
     ],
-    "raw_text": "1.生成4篇 IP 号的图，编辑到草稿箱\n2.下载我觉得不错的AI口播视频，投喂给AI学习\n3.让AI写3篇口播稿，我来润色优化\n4.做好电商账号排期，开始做图片和文案\n5.继续寻找AI批量快速生图/视频的方法",
+    "raw_text": "1.录制1条口播视频，看看会遇到哪些问题\n2.研究我的封面模板，先定1.0的封面风格\n3.继续寻找AI批量快速生图/视频的方法\n4.写30篇小红书商品笔记，找批量出文案的方法\n5.整理一下各个微信群和收藏夹散落的信息\n6.看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案",
     "tasks": [
       {
-        "text": "生成4篇 IP 号的图，编辑到草稿箱",
+        "text": "录制1条口播视频，看看会遇到哪些问题",
         "done": false,
         "cancelled": false,
         "priority": "low"
       },
       {
-        "text": "下载我觉得不错的AI口播视频，投喂给AI学习",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "让AI写3篇口播稿，我来润色优化",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "做好电商账号排期，开始做图片和文案",
+        "text": "研究我的封面模板，先定1.0的封面风格",
         "done": false,
         "cancelled": false,
         "priority": "low"
@@ -67,26 +61,30 @@ window.DAILY_BOARD = {
         "done": false,
         "cancelled": false,
         "priority": "low"
+      },
+      {
+        "text": "写30篇小红书商品笔记，找批量出文案的方法",
+        "done": false,
+        "cancelled": false,
+        "priority": "low"
+      },
+      {
+        "text": "整理一下各个微信群和收藏夹散落的信息",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
+      },
+      {
+        "text": "看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案",
+        "done": false,
+        "cancelled": false,
+        "priority": "mid"
       }
     ],
-    "raw_tasks_text": "1.生成4篇 IP 号的图，编辑到草稿箱\n2.下载我觉得不错的AI口播视频，投喂给AI学习\n3.让AI写3篇口播稿，我来润色优化\n4.做好电商账号排期，开始做图片和文案\n5.继续寻找AI批量快速生图/视频的方法"
+    "raw_tasks_text": "1.录制1条口播视频，看看会遇到哪些问题\n2.研究我的封面模板，先定1.0的封面风格\n3.继续寻找AI批量快速生图/视频的方法\n4.写30篇小红书商品笔记，找批量出文案的方法\n5.整理一下各个微信群和收藏夹散落的信息\n6.看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案"
   },
   "inspirations": {
     "items": [
-      {
-        "date": "6月25日",
-        "inspiration": "",
-        "harvest": "",
-        "task": "",
-        "mood": ""
-      },
-      {
-        "date": "6月28日",
-        "inspiration": "",
-        "harvest": "",
-        "task": "",
-        "mood": ""
-      },
       {
         "date": "6月29日",
         "inspiration": "",
@@ -492,10 +490,24 @@ window.DAILY_BOARD = {
         "harvest": "",
         "task": "1.做一个教程HTML，用于后面 AI 账号做内容讲解时的展示",
         "mood": ""
+      },
+      {
+        "date": "11月26日",
+        "inspiration": "",
+        "harvest": "",
+        "task": "1.整理一下各个微信群的信息\n2.买一 次 性 手 套 和 烧 烤 空 气 炸 锅 烧 纸\n3.明 天 洗 一 下 空 气 炸 锅\n4.看一下备孕相关的关键词，找一找爆款选题，得出爆款涨粉呀！",
+        "mood": ""
+      },
+      {
+        "date": "11月27日",
+        "inspiration": "",
+        "harvest": "",
+        "task": "1.完善我的自媒体工作台，学习那两个 AI 博主的分享，做一下选题库、封面制作专家，尤其选题库",
+        "mood": ""
       }
     ],
-    "last_updated": "11月23日",
-    "today_updated": false,
+    "last_updated": "11月27日",
+    "today_updated": true,
     "done_map": {
       "inspiration:ima 知识库，一个共享知识库里的内容，是否可以部分开放？比如有人买读书笔记，我就只开放这几个文件夹📂，有人买产后恢复运动，我就开放相应的文件——不能隐藏文件夹，只能隐藏单个文件": true,
       "inspiration:3️⃣自己制作一套提示词/skills，这个要实操一下": true,
