@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "会当凌绝顶，一览众山小。",
-  "source": "望岳"
+  "content": "恐惧，是弱点劫持了，你身体里的驾驶舱。",
+  "source": "A Minecraft movie"
 };
 window.updated = {
   "name": "嗨咻",
