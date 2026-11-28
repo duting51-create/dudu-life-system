@@ -1,87 +1,13 @@
 window.DAILY_BOARD = {
-  "updated_at": "2026-11-27T01:00:43.813Z",
-  "date": "2026-11-27",
+  "updated_at": "2026-11-28T01:00:44.331Z",
+  "date": "2026-11-28",
   "source": "cloudflare-worker",
   "tasks": {
-    "date": "11月27日",
-    "items": [
-      {
-        "text": "录制1条口播视频，看看会遇到哪些问题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "研究我的封面模板，先定1.0的封面风格",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "继续寻找AI批量快速生图/视频的方法",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写30篇小红书商品笔记，找批量出文案的方法",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理一下各个微信群和收藏夹散落的信息",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      }
-    ],
-    "raw_text": "1.录制1条口播视频，看看会遇到哪些问题\n2.研究我的封面模板，先定1.0的封面风格\n3.继续寻找AI批量快速生图/视频的方法\n4.写30篇小红书商品笔记，找批量出文案的方法\n5.整理一下各个微信群和收藏夹散落的信息\n6.看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案",
-    "tasks": [
-      {
-        "text": "录制1条口播视频，看看会遇到哪些问题",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "研究我的封面模板，先定1.0的封面风格",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "继续寻找AI批量快速生图/视频的方法",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "写30篇小红书商品笔记，找批量出文案的方法",
-        "done": false,
-        "cancelled": false,
-        "priority": "low"
-      },
-      {
-        "text": "整理一下各个微信群和收藏夹散落的信息",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      },
-      {
-        "text": "看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案",
-        "done": false,
-        "cancelled": false,
-        "priority": "mid"
-      }
-    ],
-    "raw_tasks_text": "1.录制1条口播视频，看看会遇到哪些问题\n2.研究我的封面模板，先定1.0的封面风格\n3.继续寻找AI批量快速生图/视频的方法\n4.写30篇小红书商品笔记，找批量出文案的方法\n5.整理一下各个微信群和收藏夹散落的信息\n6.看好物博主和爆款笔记关于类似品类的描述，整理下来，投喂给AI来调教它写电商文案"
+    "date": "11月28日",
+    "items": [],
+    "raw_text": "",
+    "tasks": [],
+    "raw_tasks_text": ""
   },
   "inspirations": {
     "items": [
@@ -502,12 +428,12 @@ window.DAILY_BOARD = {
         "date": "11月27日",
         "inspiration": "",
         "harvest": "",
-        "task": "1.完善我的自媒体工作台，学习那两个 AI 博主的分享，做一下选题库、封面制作专家，尤其选题库",
+        "task": "1.完善我的自媒体工作台，学习那两个 AI 博主的分享，做一下选题库、封面制作专家，尤其选题库\n2.完善一下人生系统skill的使用规则，和日常对话进行联动和分析\n3.有时间看【抹茶冰冰！】的视频，学习一下电商思路",
         "mood": ""
       }
     ],
     "last_updated": "11月27日",
-    "today_updated": true,
+    "today_updated": false,
     "done_map": {
       "inspiration:ima 知识库，一个共享知识库里的内容，是否可以部分开放？比如有人买读书笔记，我就只开放这几个文件夹📂，有人买产后恢复运动，我就开放相应的文件——不能隐藏文件夹，只能隐藏单个文件": true,
       "inspiration:3️⃣自己制作一套提示词/skills，这个要实操一下": true,
@@ -535,7 +461,9 @@ window.DAILY_BOARD = {
       "task:帮杜爽爽解决职场小人问题": true,
       "task:把账号信息和数据整理到表格，每周进行数据分析，当成工作来做": true,
       "task:备忘录的灵感，分类做一下整理": true,
-      "task:做一个教程HTML，用于后面 AI 账号做内容讲解时的展示": true
+      "task:做一个教程HTML，用于后面 AI 账号做内容讲解时的展示": true,
+      "task:整理一下各个微信群的信息": true,
+      "task:买一 次 性 手 套 和 烧 烤 空 气 炸 锅 烧 纸": true
     }
   },
   "memos": {
