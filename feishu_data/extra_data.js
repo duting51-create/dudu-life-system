@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "一个细胞里，却分裂出了两种截然不同的命运。",
-  "source": "法医秦明"
+  "content": "凡心所向，素履可往，生如逆旅，一苇以航。",
+  "source": "尘曲"
 };
 window.updated = {
   "name": "嗨咻",
