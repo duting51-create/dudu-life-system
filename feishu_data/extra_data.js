@@ -20,7 +20,7 @@ window.PODCASTS_DATA = {
     },
     {
       "name": "Alison Yu心理",
-      "latest": "最新单集加载中…"
+      "latest": "ep105 | 择偶：如何理解创伤留下的地图，打破亲密关系中的无意识重复"
     }
   ]
 };
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "认真的思索，真诚的明辨是非，有这种态度，大概可算是善良吧。",
-  "source": "沉默的大多数"
+  "content": "时间差不多咯。",
+  "source": "周处除三害"
 };
 window.updated = {
   "name": "嗨咻",
