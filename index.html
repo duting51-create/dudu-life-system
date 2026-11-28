@@ -23,8 +23,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://dudu-life-sync.duting51.workers.dev">
   <link rel="dns-prefetch" href="https://dudu-life-sync.duting51.workers.dev">
-  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261128-1040" as="script">
-  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261128-1040" as="script">
+  <link rel="preload" href="feishu_data/dashboard_data.js?v=data-20261128-1051" as="script">
+  <link rel="preload" href="feishu_data/extra_data.js?v=extra-20261128-1051" as="script">
   <link rel="preload" href="feishu_data/douban_data.js?v=douban-48faeaf-2" as="script">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700;1,9..144,900&family=Fredoka:wght@400;500;600;700&family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet"></noscript>
@@ -2551,10 +2551,10 @@
     </div>
   </section>
 
-  <script src="cloud-sync.js?v=sync-20261128-1040" defer></script>
-  <script src="feishu_data/dashboard_data.js?v=data-20261128-1040" defer></script>
-  <script src="feishu_data/extra_data.js?v=extra-20261128-1040" defer></script>
-  <script src="reminder.js?v=remind-20261128-1040" defer></script>
+  <script src="cloud-sync.js?v=sync-20261128-1051" defer></script>
+  <script src="feishu_data/dashboard_data.js?v=data-20261128-1051" defer></script>
+  <script src="feishu_data/extra_data.js?v=extra-20261128-1051" defer></script>
+  <script src="reminder.js?v=remind-20261128-1051" defer></script>
   <script src="feishu_data/douban_data.js?v=douban-48faeaf-2" defer></script>
   <script>
     // 全局错误兜底：任何脚本运行时错误都显示可见错误条，并强制显示所有内容，避免移动端白屏「打不开」
@@ -3678,6 +3678,34 @@
         return Math.round((u(tISO)-u(iso))/86400000);
       }
 
+      // 「首次写下日期」回溯表：Worker 把昨天未划掉的延续项 date 改写成今天，
+      // 直接算天数会变 0。这里从静态历史行按文本找回最早日期，仅用于天数显示。
+      function _normAgeKey(x) {
+        return String(x || '').trim().replace(/\s+/g, ' ').replace(/[~✅]/g, '').replace(/^\d+[.、：:）)\-]\s*/, '');
+      }
+      const _originDate = {};
+      (function buildOriginDate() {
+        const rows = (window.INSPIRATIONS_DATA && window.INSPIRATIONS_DATA.items) || [];
+        rows.forEach(function (row) {
+          if (!row || !row.date) return;
+          ['task', 'inspiration'].forEach(function (k) {
+            try {
+              splitJotText(row[k] || '', k).forEach(function (part) {
+                const key = _normAgeKey(part);
+                if (!key) return;
+                const oldAge = _originDate[key] ? _ageDays(_originDate[key]) : null;
+                const newAge = _ageDays(row.date);
+                if (oldAge === null || (newAge !== null && newAge > oldAge)) _originDate[key] = row.date;
+              });
+            } catch (e) {}
+          });
+        });
+      })();
+      function _firstDate(dateStr, text) {
+        const key = _normAgeKey(text);
+        return (key && _originDate[key]) || dateStr;
+      }
+
       // Combine Feishu data + local jot data
       let items = [];
       const today = new Date();
@@ -3706,7 +3734,7 @@
             if (t === 'harvest' || t === 'mood') {
               if (isToday) items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, ts: i.ts, fp: fp });
             } else {
-              items.push({ id: i.id || `live_${di}`, date: i.date, type: t, text: txt, done: i.done, ts: i.ts, fp: fp });
+              items.push({ id: i.id || `live_${di}`, date: i.date, ageDate: _firstDate(i.date, txt), type: t, text: txt, done: i.done, ts: i.ts, fp: fp });
             }
             return;
           }
@@ -3892,7 +3920,7 @@
           // 任务 / 灵感带可点击的「划掉」勾选框；收获 / 情绪不遵从划掉逻辑，用隐藏占位保持布局对齐
           const isToggle = (item.type === 'task' || item.type === 'inspiration');
           // 未划掉的任务/灵感：次日起显示放置天数（当天=0不显示）；收获/情绪是当天快照，不显示
-          const _age = (!isStruck && isToggle) ? _ageDays(item.date) : null;
+          const _age = (!isStruck && isToggle) ? _ageDays(item.ageDate || item.date) : null;
           const _ageHtml = (_age !== null && _age >= 1)
             ? `<span class="inspire-age${_age>=30?' hot':(_age>=7?' warm':'')}" title="从第一次写下那天算起">⏳ 已放 ${_age} 天</span>` : '';
           const checkHtml = isToggle
