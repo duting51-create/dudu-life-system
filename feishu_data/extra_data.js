@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "凡心所向，素履可往，生如逆旅，一苇以航。",
-  "source": "尘曲"
+  "content": "一个女孩知道了怎么去模仿女人，并不代表她真的准备好做女人了。",
+  "source": "水果硬糖"
 };
 window.updated = {
   "name": "嗨咻",
