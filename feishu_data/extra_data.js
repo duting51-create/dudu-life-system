@@ -4,7 +4,7 @@ window.PODCASTS_DATA = {
   "list": [
     {
       "name": "嗨咻",
-      "latest": "116. 和张家诚聊天 ｜ 别把我想得太窄，我不觉得“俗”丢人"
+      "latest": "最新单集加载中…"
     },
     {
       "name": "头回当妈",
@@ -172,8 +172,8 @@ window.IMPORTANT_DATES_DATA = {
   ]
 };
 window.DAILY_QUOTE = {
-  "content": "壶穴清幽人忘返,云峰瑰丽鸟来归。痴梦几多回！",
-  "source": "忆江南·铜铃山"
+  "content": "如同这雨，生于天，死于地，这中间的便是人生。",
+  "source": "仙逆"
 };
 window.updated = {
   "name": "嗨咻",
